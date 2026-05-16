@@ -2,13 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "neuralhorizons-ai",
   "compatibility_date": "2026-05-16",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
   "observability": {
     "enabled": true
-  },
-  "assets": {
-    "directory": "dist"
-  },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  }
 }
