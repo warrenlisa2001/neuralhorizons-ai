@@ -4,3 +4,7 @@ node_modules/
 .env.local
 *.log
 .wrangler/
+
+.dev.vars*
+!.dev.vars.example
+!.env.example
