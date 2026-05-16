@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Execution Gap — Executive Briefing | 3rd June 2026 | Neural Horizons AI</title>
+<meta name="description" content="Join Lisa Warren, Dr Patrick McCrudden and Keith Elliot for an executive briefing on AI governance, operational architecture and enterprise readiness. Wednesday 3rd June — 3PM Dubai · 12PM UK · 1PM CET.">
+<link rel="canonical" href="https://www.neuralhorizonsai.com/webinar/">
+<meta property="og:title" content="The AI Execution Gap — Executive Briefing | 3rd June 2026">
+<meta property="og:description" content="Why AI projects fail commercially — and what leaders must do before scaling. Join us Wednesday 3rd June.">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/assets/ai-execution-gap-header.png">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/webinar/">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#060611;color:#e2e8f0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.6;}
+a{color:#3b82f6;text-decoration:none;}
+
+/* NAV */
+.sitenav{background:rgba(6,6,17,0.97);border-bottom:1px solid #1e2a4a;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+.sitenav .logo{font-size:1rem;font-weight:800;color:#fff;}
+.sitenav .logo span{color:#3b82f6;}
+.sitenav .links{display:flex;align-items:center;gap:24px;}
+.sitenav .links a{color:#9ca3af;font-size:0.875rem;}
+.sitenav .links a:hover{color:#fff;}
+.sitenav .cta{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff !important;padding:10px 22px;border-radius:6px;font-weight:700;}
+
+/* URGENCY BAR */
+.ubar{background:linear-gradient(135deg,#0f1a3d,#1a1a3e);border-bottom:1px solid #1e2a4a;padding:12px 24px;text-align:center;}
+.ubar p{font-size:0.78rem;color:#3b82f6;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;}
+
+/* HERO IMAGE */
+.hero-img{width:100%;display:block;max-height:500px;object-fit:cover;object-position:top;}
+
+/* PAGE WRAP */
+.page{max-width:960px;margin:0 auto;padding:0 24px;}
+
+/* INTRO */
+.intro{padding:56px 0 40px;}
+.intro .eyebrow{font-size:0.72rem;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:#3b82f6;margin-bottom:16px;}
+.intro h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.2;color:#fff;margin-bottom:20px;}
+.intro h1 em{font-style:normal;background:linear-gradient(135deg,#3b82f6,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.intro .lead{font-size:1.05rem;color:#94a3b8;line-height:1.8;max-width:720px;}
+.intro .lead strong{color:#e2e8f0;}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,#1e2a4a,transparent);margin:44px 0;}
+
+/* TWO COLUMN */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-bottom:56px;align-items:start;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+
+/* FORM */
+.form-box{background:linear-gradient(135deg,#0f1a3d,#0d0d1a);border:1px solid #3b82f6;border-radius:12px;padding:32px;}
+.form-box h2{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:6px;}
+.form-box .sub{font-size:0.85rem;color:#94a3b8;margin-bottom:24px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;background:#08081a;border:1px solid #1e2a4a;border-radius:6px;color:#fff;font-size:0.9rem;font-family:inherit;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#3b82f6;}
+.field select option{background:#08081a;}
+.field textarea{resize:vertical;min-height:72px;}
+.btn-reg{width:100%;padding:15px;background:linear-gradient(135deg,#3b82f6,#7c3aed);border:none;border-radius:8px;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;margin-top:6px;}
+.btn-reg:hover{opacity:0.9;}
+.btn-reg:disabled{opacity:0.5;cursor:not-allowed;}
+.form-note{font-size:0.75rem;color:#475569;margin-top:10px;text-align:center;}
+.success-msg{display:none;text-align:center;padding:32px 16px;}
+.success-msg .tick{font-size:2.5rem;margin-bottom:12px;}
+.success-msg h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.success-msg p{font-size:0.9rem;color:#94a3b8;}
+
+/* EVENT DETAILS */
+.event-box{background:#0d0d1a;border:1px solid #1e2a4a;border-radius:12px;padding:28px;}
+.event-box h2{font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:20px;}
+.erow{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #111827;}
+.erow:last-child{border-bottom:none;padding-bottom:0;}
+.erow .icon{font-size:1rem;flex-shrink:0;padding-top:1px;width:22px;}
+.erow .elabel{font-size:0.7rem;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.erow .evalue{font-size:0.9rem;color:#e2e8f0;line-height:1.5;}
+.free-badge{color:#4ade80;font-weight:700;}
+
+/* TOPICS */
+.topics-wrap{margin-top:28px;}
+.topics-eyebrow{font-size:0.7rem;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:#3b82f6;margin-bottom:12px;}
+.topic-item{background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);border-radius:8px;padding:12px 14px;margin-bottom:8px;}
+.topic-item .tlabel{font-size:0.68rem;color:#3b82f6;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.topic-item .ttext{font-size:0.85rem;color:#e2e8f0;}
+
+/* AGENDA */
+.agenda-section{padding-bottom:48px;}
+.section-eyebrow{font-size:0.72rem;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:#3b82f6;margin-bottom:20px;}
+.agenda-item{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid #111827;}
+.agenda-item:last-child{border-bottom:none;}
+.agenda-arrow{color:#3b82f6;font-size:1rem;flex-shrink:0;margin-top:2px;}
+.agenda-item p{font-size:0.95rem;color:#e2e8f0;line-height:1.6;}
+.agenda-item p strong{color:#fff;}
+
+/* SPEAKERS */
+.speakers-section{padding-bottom:56px;}
+.speaker-card{background:#0d0d1a;border:1px solid #1e2a4a;border-radius:10px;padding:24px;margin-bottom:14px;}
+.speaker-tag{display:inline-block;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);color:#3b82f6;font-size:0.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:4px;margin-bottom:10px;}
+.speaker-name{font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px;}
+.speaker-role{font-size:0.8rem;color:#3b82f6;margin-bottom:10px;}
+.speaker-bio{font-size:0.875rem;color:#94a3b8;line-height:1.7;}
+
+/* BOTTOM CTA */
+.bottom-cta{text-align:center;padding:16px 0 60px;}
+.bottom-cta p{font-size:1rem;color:#e2e8f0;margin-bottom:8px;font-weight:600;}
+.bottom-cta .sub{font-size:0.9rem;color:#94a3b8;margin-bottom:24px;}
+.bottom-cta a{display:inline-block;padding:14px 34px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:700;border-radius:8px;}
+
+/* QUOTE */
+.quote-section{background:#040408;border-top:1px solid #1e2a4a;border-bottom:1px solid #1e2a4a;padding:40px 24px;text-align:center;}
+.quote-section blockquote{max-width:680px;margin:0 auto;font-size:1rem;color:#94a3b8;font-style:italic;line-height:1.8;}
+.quote-section cite{display:block;margin-top:10px;font-size:0.8rem;color:#475569;font-style:normal;font-weight:600;}
+
+/* FOOTER */
+footer{background:#040408;padding:28px 24px;text-align:center;border-top:1px solid #111827;}
+footer p{font-size:0.78rem;color:#475569;}
+footer a{color:#475569;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="sitenav">
+  <a href="/" class="logo">Neural<span>Horizons</span> AI</a>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/services/">Services</a>
+    <a href="/halu/">HALU™</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about/">About</a>
+    <a href="#register" class="cta">⚡ Register Now</a>
+  </div>
+</div>
+
+<!-- URGENCY BAR -->
+<div class="ubar">
+  <p>⚡ Wednesday 3rd June 2026 &nbsp;·&nbsp; 3PM Dubai &nbsp;·&nbsp; 12PM UK &nbsp;·&nbsp; 1PM CET &nbsp;·&nbsp; Free &nbsp;·&nbsp; Limited Spots</p>
+</div>
+
+<!-- HERO IMAGE -->
+<img src="/assets/ai-execution-gap-header.png"
+     alt="The AI Execution Gap — Executive Briefing | Wednesday 3rd June 2026"
+     class="hero-img">
+
+<div class="page">
+
+  <!-- INTRO -->
+  <section class="intro">
+    <p class="eyebrow">Executive Briefing</p>
+    <h1>The <em>AI Execution Gap</em> is costing businesses more than they realise.</h1>
+    <p class="lead">
+      Most AI projects don't fail because of technology. They fail because the business wasn't operationally ready to run them.<br><br>
+      The gap between <strong>adopting AI</strong> and <strong>executing with AI</strong> is widening — and that gap is where revenue leaks, competitive advantage disappears, and transformation programmes quietly stall.<br><br>
+      This briefing is for leaders who are responsible for turning AI into measurable business results. We're not going to talk about potential. <strong>We're going to talk about execution.</strong>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FORM + EVENT DETAILS -->
+  <div class="two-col" id="register">
+
+    <!-- LEFT: FORM -->
+    <div>
+      <div class="form-box">
+        <h2>Reserve Your Spot</h2>
+        <p class="sub">Spots are limited. Intimate executive format — not a webinar of hundreds.</p>
+
+        <div id="reg-form">
+          <div class="field"><label>First Name *</label><input type="text" id="w-firstname" placeholder="Your first name"></div>
+          <div class="field"><label>Last Name</label><input type="text" id="w-lastname" placeholder="Your last name"></div>
+          <div class="field"><label>Work Email *</label><input type="email" id="w-email" placeholder="your@company.com"></div>
+          <div class="field"><label>Company *</label><input type="text" id="w-company" placeholder="Company name"></div>
+          <div class="field"><label>Your Role</label><input type="text" id="w-jobtitle" placeholder="e.g. CEO, COO, Head of Digital"></div>
+          <div class="field">
+            <label>Company Size</label>
+            <select id="w-size">
+              <option value="">Select…</option>
+              <option value="11-50">11–50 employees</option>
+              <option value="51-200">51–200 employees</option>
+              <option value="201-500">201–500 employees</option>
+              <option value="500+">500+ employees</option>
+            </select>
+          </div>
+          <div class="field"><label>Biggest AI challenge right now?</label><textarea id="w-challenge" placeholder="Optional — helps us tailor the content"></textarea></div>
+          <button class="btn-reg" id="w-submit-btn" onclick="registerWebinar(event)">⚡ Reserve My Spot — 3rd June</button>
+          <p class="form-note">Free to attend · No sales pitch · Executive format</p>
+        </div>
+
+        <div class="success-msg" id="reg-success">
+          <div class="tick">✅</div>
+          <h3>You're registered!</h3>
+          <p>We'll send joining details shortly.<br><br>
+          Meanwhile, take our free <a href="/ai-audit/">AI Readiness Audit</a> to benchmark your organisation before the briefing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: EVENT DETAILS + TOPICS -->
+    <div>
+      <div class="event-box">
+        <h2>Event Details</h2>
+        <div class="erow">
+          <div class="icon">📅</div>
+          <div><div class="elabel">Date</div><div class="evalue">Wednesday, 3rd June 2026</div></div>
+        </div>
+        <div class="erow">
+          <div class="icon">🕐</div>
+          <div><div class="elabel">Time</div><div class="evalue">3:00 PM Dubai (GST)<br>12:00 PM London (BST)<br>1:00 PM Central Europe (CET)</div></div>
+        </div>
+        <div class="erow">
+          <div class="icon">💻</div>
+          <div><div class="elabel">Format</div><div class="evalue">Online · Zoom<br><span style="font-size:0.8rem;color:#64748b;">Joining link sent on registration</span></div></div>
+        </div>
+        <div class="erow">
+          <div class="icon">👥</div>
+          <div><div class="elabel">Audience</div><div class="evalue">C-Suite &amp; Senior Leaders responsible for AI execution</div></div>
+        </div>
+        <div class="erow">
+          <div class="icon">🎟</div>
+          <div><div class="elabel">Cost</div><div class="evalue free-badge">Free to attend</div></div>
+        </div>
+      </div>
+
+      <div class="topics-wrap">
+        <p class="topics-eyebrow">Topics Covered</p>
+        <div class="topic-item"><div class="tlabel">Governance</div><div class="ttext">Turning governance into infrastructure</div></div>
+        <div class="topic-item"><div class="tlabel">Operations</div><div class="ttext">Designing systems that scale AI impact</div></div>
+        <div class="topic-item"><div class="tlabel">Risk</div><div class="ttext">Managing risk in the age of agentic AI</div></div>
+        <div class="topic-item"><div class="tlabel">Readiness</div><div class="ttext">What to audit before scaling AI</div></div>
+        <div class="topic-item"><div class="tlabel">Strategy</div><div class="ttext">From AI tools to AI operating models</div></div>
+        <div class="topic-item"><div class="tlabel">Execution</div><div class="ttext">Why AI projects fail commercially</div></div>
+      </div>
+    </div>
+
+  </div><!-- end two-col -->
+
+  <div class="divider"></div>
+
+  <!-- AGENDA -->
+  <section class="agenda-section">
+    <p class="section-eyebrow">Full Agenda</p>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>Why AI projects fail commercially</strong> — the real reasons transformation programmes stall and what to do instead</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>The operational gaps AI is exposing</strong> — what broken processes, disconnected systems and manual workflows are costing you now</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>Why governance is becoming infrastructure</strong> — not a compliance checkbox, but a core part of how you operate at scale</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>From AI tools to AI operating models</strong> — what the shift actually means for your organisation's structure and leadership</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>Execution risk in the age of agentic AI</strong> — what leaders must understand before deploying autonomous AI systems</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>What businesses should audit before scaling AI</strong> — a practical framework you can apply immediately</p></div>
+    <div class="agenda-item"><div class="agenda-arrow">→</div><p><strong>The next competitive divide in enterprise AI</strong> — which businesses will pull ahead in H2 2026 and why</p></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SPEAKERS -->
+  <section class="speakers-section">
+    <p class="section-eyebrow">Your Speakers</p>
+
+    <div class="speaker-card">
+      <div class="speaker-tag">Host</div>
+      <div class="speaker-name">Lisa Warren</div>
+      <div class="speaker-role">Founder &amp; CEO, Neural Horizons AI</div>
+      <div class="speaker-bio">20+ years in data analytics, digital transformation, and AI strategy. Generated AED 9M+ in additional revenue for organisations across MENA, Europe and Asia. Named "One to Watch in 2026" by The Prime Today. Board Member, Green Economy Partnership.</div>
+    </div>
+
+    <div class="speaker-card">
+      <div class="speaker-tag">Speaker</div>
+      <div class="speaker-name">Dr Patrick McCrudden, PhD</div>
+      <div class="speaker-role">AI Governance, Institutional Transformation &amp; Emerging Technology Risk</div>
+      <div class="speaker-bio">Strategic leader with deep expertise in AI governance frameworks, institutional risk, and the regulatory landscape shaping how organisations must operate in an AI-first world.</div>
+    </div>
+
+    <div class="speaker-card">
+      <div class="speaker-tag">Speaker</div>
+      <div class="speaker-name">Keith Elliot</div>
+      <div class="speaker-role">Workplace Strategy &amp; AI-Ready Organisational Design</div>
+      <div class="speaker-bio">Specialist in building AI-ready teams, operational alignment, and the structural changes organisations need to execute with AI rather than simply adopt it.</div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <p>Ready to close your AI Execution Gap?</p>
+    <p class="sub">Or take our free AI Readiness Audit to benchmark your organisation before the briefing.</p>
+    <a href="/ai-audit/?utm_source=webinarpage&utm_medium=cta&utm_campaign=ai-execution-gap">⚡ Take Free AI Readiness Audit</a>
+  </div>
+
+</div><!-- end page -->
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <blockquote>
+    "The companies pulling ahead in 2026 won't be the ones adopting AI fastest. They'll be the ones rebuilding their operational architecture around it."
+    <cite>— Lisa Warren, Founder, Neural Horizons AI</cite>
+  </blockquote>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong style="color:#94a3b8;">Neural Horizons AI</strong> · Dubai, UAE · <a href="mailto:support@neuralhorizonsai.com">support@neuralhorizonsai.com</a> · <a href="/">neuralhorizonsai.com</a></p>
+  <p style="margin-top:6px;">© 2026 Neural Horizons AI. All rights reserved.</p>
+</footer>
+
+<script>
+async function registerWebinar(e) {
+  e.preventDefault();
+  const btn = document.getElementById('w-submit-btn');
+  const firstname = document.getElementById('w-firstname').value.trim();
+  const email = document.getElementById('w-email').value.trim();
+  const company = document.getElementById('w-company').value.trim();
+
+  if (!firstname || !email || !company) { alert('Please fill in your name, email and company.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+
+  btn.textContent = 'Reserving your spot…';
+  btn.disabled = true;
+
+  if (window.gtag) gtag('event','webinar_registration',{event_category:'conversion',event_label:'AI Execution Gap'});
+
+  try {
+    const res = await fetch('https://warrenlisa2001-2954b599-9515-vm.azure.gensparkclaw.com/nh-api/capture-lead', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        email, firstname,
+        lastname: document.getElementById('w-lastname').value.trim(),
+        company,
+        jobtitle: document.getElementById('w-jobtitle').value.trim(),
+        company_size_band: document.getElementById('w-size').value,
+        biggest_challenge: document.getElementById('w-challenge').value.trim(),
+        audit_status: 'webinar_registered',
+        lead_source_page: '/webinar/',
+        hs_lead_status: 'NEW',
+        zonar_score: '20'
+      })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('reg-success').style.display = 'block';
+    } else { throw new Error('API error'); }
+  } catch(err) {
+    document.getElementById('reg-form').style.display = 'none';
+    document.getElementById('reg-success').style.display = 'block';
+  }
+}
+document.querySelectorAll('a[href="#register"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('register').scrollIntoView({behavior:'smooth'});
+    setTimeout(() => document.getElementById('w-firstname').focus(), 500);
+  });
+});
+</script>
+</body>
+</html>

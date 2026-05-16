@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-369867907');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HALU™ Live Demo — See It In Action | Neural Horizons AI</title>
+<meta name="description" content="See HALU™ in action — the autonomous cross-department intelligence agent that monitors your business 24/7, flags revenue leaks, and generates action items automatically. Free guided tour + live sandbox access.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.neuralhorizonsai.com/halu/demo/">
+<meta property="og:title" content="HALU™ Live Demo — See the Autonomous AI Agent in Action">
+<meta property="og:description" content="Watch HALU™ connect your departments, flag revenue leaks, and generate action items in real time. Guided tour + live sandbox access.">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/halu/demo/">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--green:#00FF88;--blue:#3b82f6;--purple:#7c3aed;--dark:#0a0a0a;--card:#111;--border:rgba(255,255,255,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--dark);color:#e5e7eb;font-family:'Inter',-apple-system,sans-serif;line-height:1.6;}
+a{color:var(--blue);text-decoration:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo img{height:44px;width:auto;display:block;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{color:#9ca3af;font-size:.9rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:#fff;}
+.nav-cta{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff!important;padding:8px 20px;border-radius:6px;font-weight:600;font-size:.85rem;}
+.mob-btn{display:none;background:none;border:1px solid rgba(255,255,255,0.15);color:#fff;padding:8px 10px;border-radius:6px;cursor:pointer;}
+@media(max-width:768px){.nav-links{display:none;}.mob-btn{display:block;}}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#050510 0%,#0d0d2b 50%,#050510 100%);padding:80px 24px 64px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(124,58,237,0.2);}
+.hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:300px;background:radial-gradient(ellipse,rgba(124,58,237,0.2) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.25);color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px;}
+.hero-badge .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;}
+.hero h1 span{background:linear-gradient(135deg,var(--green),#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{font-size:1.1rem;color:#9ca3af;max-width:600px;margin:0 auto 36px;line-height:1.7;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:700;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;}
+.btn-primary:hover{opacity:.9;transform:translateY(-2px);color:#fff;}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#e5e7eb;font-weight:600;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:all .2s;}
+.btn-secondary:hover{border-color:var(--green);color:var(--green);}
+
+/* STATS BAR */
+.stats-bar{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);padding:20px 24px;}
+.stats-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+.stat-item{text-align:center;}
+.stat-item .n{font-size:1.5rem;font-weight:800;color:#fff;}
+.stat-item .l{font-size:.75rem;color:#6b7280;margin-top:2px;}
+
+/* TOUR */
+.tour{max-width:1100px;margin:0 auto;padding:80px 24px;}
+.section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:12px;}
+.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff;margin-bottom:12px;}
+.section-sub{color:#9ca3af;font-size:1rem;margin-bottom:56px;max-width:600px;}
+
+/* STEP CARDS */
+.steps{display:flex;flex-direction:column;gap:80px;}
+.step{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.step.reverse{direction:rtl;}
+.step.reverse>*{direction:ltr;}
+@media(max-width:768px){.step,.step.reverse{grid-template-columns:1fr;direction:ltr;}}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:8px;font-size:.85rem;font-weight:800;color:#fff;margin-bottom:16px;}
+.step h3{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;}
+.step p{color:#9ca3af;font-size:.95rem;line-height:1.75;margin-bottom:20px;}
+.step-points{list-style:none;padding:0;margin:0;}
+.step-points li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:#d1d5db;margin-bottom:10px;}
+.step-points li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* MOCK UI SCREENS */
+.mock-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.4);}
+.mock-topbar{background:#0d0d0d;border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:8px;}
+.mock-dot{width:10px;height:10px;border-radius:50%;}
+.mock-title{font-size:.75rem;color:#6b7280;margin-left:8px;}
+.mock-body{padding:20px;}
+
+/* Dashboard mock */
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.dash-card{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:14px;}
+.dash-card .dc-label{font-size:.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.dash-card .dc-val{font-size:1.3rem;font-weight:800;color:#fff;}
+.dash-card .dc-sub{font-size:.68rem;margin-top:4px;}
+.dash-card .dc-sub.up{color:#34d399;}
+.dash-card .dc-sub.warn{color:#fbbf24;}
+.dash-card .dc-sub.alert{color:#f87171;}
+.alert-list{display:flex;flex-direction:column;gap:8px;}
+.alert-item{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;align-items:center;gap:12px;}
+.alert-item .ai-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.alert-item .ai-icon.red{background:rgba(239,68,68,0.15);}
+.alert-item .ai-icon.amber{background:rgba(251,191,36,0.15);}
+.alert-item .ai-icon.green{background:rgba(0,255,136,0.1);}
+.alert-item .ai-text{flex:1;}
+.alert-item .ai-text .at-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.alert-item .ai-text .at-sub{font-size:.7rem;color:#6b7280;margin-top:2px;}
+.alert-item .ai-badge{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+.badge-red{background:rgba(239,68,68,0.15);color:#f87171;}
+.badge-amber{background:rgba(251,191,36,0.15);color:#fbbf24;}
+.badge-green{background:rgba(0,255,136,0.1);color:var(--green);}
+
+/* Thread mock */
+.thread-list{display:flex;flex-direction:column;gap:8px;}
+.thread-item{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:12px;}
+.thread-dept{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;flex-shrink:0;}
+.thread-content{flex:1;}
+.thread-content .tc-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.thread-content .tc-sub{font-size:.7rem;color:#6b7280;margin-top:2px;}
+.thread-meta{font-size:.65rem;color:#4b5563;text-align:right;}
+.thread-meta .tm-time{display:block;}
+.thread-meta .tm-badge{display:inline-block;margin-top:3px;padding:2px 6px;border-radius:3px;font-weight:700;}
+
+/* Action items mock */
+.action-list{display:flex;flex-direction:column;gap:8px;}
+.action-item{background:#0d0d0d;border-left:3px solid;border-radius:0 8px 8px 0;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.action-item.p1{border-color:#ef4444;}
+.action-item.p2{border-color:#fbbf24;}
+.action-item.p3{border-color:#3b82f6;}
+.action-item .ac-text{flex:1;}
+.action-item .ac-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.action-item .ac-who{font-size:.68rem;color:#6b7280;margin-top:3px;}
+.action-chip{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+
+/* Metrics mock */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.metric-card{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:14px;}
+.metric-card .mc-label{font-size:.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.metric-bar-wrap{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:6px;}
+.metric-bar{height:100%;border-radius:3px;}
+.metric-val{font-size:.78rem;font-weight:700;color:#fff;}
+
+/* TIMELINE */
+.timeline{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:40px;margin:80px 0;}
+.timeline h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:8px;text-align:center;}
+.timeline-sub{color:#9ca3af;font-size:.95rem;text-align:center;margin-bottom:40px;}
+.tl-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;}
+.tl-item{text-align:center;}
+.tl-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));font-size:1rem;font-weight:800;color:#fff;margin-bottom:12px;}
+.tl-item h4{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;}
+.tl-item p{font-size:.8rem;color:#6b7280;line-height:1.5;}
+
+/* GATE CTA */
+.gate{background:linear-gradient(135deg,rgba(0,255,136,0.06),rgba(59,130,246,0.06));border:1px solid rgba(0,255,136,0.2);border-radius:20px;padding:64px 40px;text-align:center;margin:0 0 80px;}
+.gate h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#fff;margin-bottom:12px;}
+.gate p{color:#9ca3af;font-size:1.05rem;max-width:540px;margin:0 auto 16px;line-height:1.7;}
+.gate-note{font-size:.82rem;color:#4b5563;margin-bottom:32px;}
+.gate-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.gate-login{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--green),#00cc6e);color:#000;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;}
+.gate-login:hover{opacity:.9;transform:translateY(-2px);color:#000;}
+.gate-audit{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#e5e7eb;font-weight:600;font-size:1rem;padding:16px 36px;border-radius:8px;text-decoration:none;transition:all .2s;}
+.gate-audit:hover{border-color:var(--blue);color:var(--blue);}
+
+footer{background:#050505;border-top:1px solid var(--border);padding:32px 24px;text-align:center;}
+footer p{color:#4b5563;font-size:.82rem;}
+footer a{color:#6b7280;}
+footer a:hover{color:var(--green);}
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="/images/logo.jpg" alt="Neural Horizons AI"></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/halu/">HALU™</a>
+      <a href="/zonar-os/">Zonar OS™</a>
+      <a href="/platform/">Platform</a>
+      <a href="/blog/">Blog</a>
+      <a href="/ai-audit/" class="nav-cta">⚡ Free Audit</a>
+    </div>
+    <button class="mob-btn" onclick="document.getElementById('mob').style.display=document.getElementById('mob').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+  <div id="mob" style="display:none;flex-direction:column;gap:12px;padding:16px 24px 24px;border-top:1px solid rgba(255,255,255,0.08);">
+    <a href="/halu/" style="color:#9ca3af;">HALU™</a>
+    <a href="/zonar-os/" style="color:#9ca3af;">Zonar OS™</a>
+    <a href="/blog/" style="color:#9ca3af;">Blog</a>
+    <a href="/ai-audit/" style="display:inline-block;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 20px;border-radius:6px;font-weight:700;">⚡ Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Live Product Tour</div>
+  <h1>See <span>HALU™</span> In Action</h1>
+  <p>Your autonomous AI agent — connecting every department, monitoring in real time, flagging revenue leaks before they cost you. Here's exactly what it looks like inside.</p>
+  <div class="hero-btns">
+    <a href="#live-demo" class="btn-primary"><i class="fas fa-play-circle"></i> Watch the Tour</a>
+    <a href="/members/?demo=halu" class="btn-secondary"><i class="fas fa-desktop"></i> Access Live Sandbox</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="n">24/7</div><div class="l">Autonomous monitoring</div></div>
+    <div class="stat-item"><div class="n">48h</div><div class="l">From signup to first insight</div></div>
+    <div class="stat-item"><div class="n">6+</div><div class="l">Departments connected</div></div>
+    <div class="stat-item"><div class="n">AED 8,500</div><div class="l">Per month — no setup fee</div></div>
+  </div>
+</div>
+
+<!-- GUIDED TOUR -->
+<div class="tour" id="live-demo">
+  <div class="section-label">Guided Tour</div>
+  <div class="section-title">5 screens. Everything you need to know.</div>
+  <p class="section-sub">This is the actual HALU™ Command Centre. Real UI. Real data structure. See what your team would see from day one.</p>
+
+  <div class="steps">
+
+    <!-- STEP 1 — Dashboard -->
+    <div class="step">
+      <div class="step-text">
+        <div class="step-num">1</div>
+        <h3>The Command Centre Dashboard</h3>
+        <p>The first thing you see every morning. HALU™ has been running overnight — monitoring every department, cross-referencing data, flagging anything that needs attention. No chasing. No reports. Just clarity.</p>
+        <ul class="step-points">
+          <li>Revenue health score updated in real time</li>
+          <li>Active alerts ranked by business impact</li>
+          <li>Cross-department pipeline status at a glance</li>
+          <li>Your team's open action items — who owns what</li>
+        </ul>
+      </div>
+      <div class="mock-screen">
+        <div class="mock-topbar">
+          <div class="mock-dot" style="background:#ef4444;"></div>
+          <div class="mock-dot" style="background:#fbbf24;"></div>
+          <div class="mock-dot" style="background:#34d399;"></div>
+          <span class="mock-title">HALU™ Command Centre — Dashboard</span>
+        </div>
+        <div class="mock-body">
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dc-label">Revenue Health</div>
+              <div class="dc-val">74<span style="font-size:.9rem;color:#9ca3af;">/100</span></div>
+              <div class="dc-sub warn">⚠ 2 leaks detected</div>
+            </div>
+            <div class="dash-card">
+              <div class="dc-label">Active Alerts</div>
+              <div class="dc-val">7</div>
+              <div class="dc-sub alert">3 need action today</div>
+            </div>
+            <div class="dash-card">
+              <div class="dc-label">Depts Connected</div>
+              <div class="dc-val">6</div>
+              <div class="dc-sub up">✓ All syncing</div>
+            </div>
+          </div>
+          <div class="alert-list">
+            <div class="alert-item">
+              <div class="ai-icon red"><i class="fas fa-exclamation-triangle" style="color:#f87171;"></i></div>
+              <div class="ai-text">
+                <div class="at-title">Sales pipeline stalled — 12 deals &gt;21 days no contact</div>
+                <div class="at-sub">Sales · Flagged 2h ago · AED 340,000 at risk</div>
+              </div>
+              <span class="ai-badge badge-red">URGENT</span>
+            </div>
+            <div class="alert-item">
+              <div class="ai-icon amber"><i class="fas fa-clock" style="color:#fbbf24;"></i></div>
+              <div class="ai-text">
+                <div class="at-title">Finance approval bottleneck — 8 invoices &gt;14 days</div>
+                <div class="at-sub">Finance · Flagged 5h ago · Cash flow impact</div>
+              </div>
+              <span class="ai-badge badge-amber">REVIEW</span>
+            </div>
+            <div class="alert-item">
+              <div class="ai-icon green"><i class="fas fa-check-circle" style="color:#00FF88;"></i></div>
+              <div class="ai-text">
+                <div class="at-title">Marketing campaign ROI 3.2× — above target</div>
+                <div class="at-sub">Marketing · Updated 1h ago</div>
+              </div>
+              <span class="ai-badge badge-green">ON TRACK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 — Threads -->
+    <div class="step reverse">
+      <div class="step-text">
+        <div class="step-num">2</div>
+        <h3>Cross-Department Intelligence Threads</h3>
+        <p>HALU™ doesn't just monitor one department — it surfaces the connections between them. When sales is stalling because finance is slow, HALU™ sees it. When marketing spend isn't converting because ops is backlogged, HALU™ flags it.</p>
+        <ul class="step-points">
+          <li>Every department connected in one feed</li>
+          <li>HALU™ identifies cross-department blockers automatically</li>
+          <li>Full conversation thread per issue — full context, no back-and-forth</li>
+          <li>Escalates to the right person automatically</li>
+        </ul>
+      </div>
+      <div class="mock-screen">
+        <div class="mock-topbar">
+          <div class="mock-dot" style="background:#ef4444;"></div>
+          <div class="mock-dot" style="background:#fbbf24;"></div>
+          <div class="mock-dot" style="background:#34d399;"></div>
+          <span class="mock-title">HALU™ — Intelligence Threads</span>
+        </div>
+        <div class="mock-body">
+          <div class="thread-list">
+            <div class="thread-item">
+              <div class="thread-dept" style="background:linear-gradient(135deg,#ef4444,#dc2626);">S</div>
+              <div class="thread-content">
+                <div class="tc-title">Pipeline gap: Q2 target at risk — root cause identified</div>
+                <div class="tc-sub">Sales × Finance × Ops · 3 departments involved</div>
+              </div>
+              <div class="thread-meta"><span class="tm-time">2h ago</span><span class="tm-badge badge-red">OPEN</span></div>
+            </div>
+            <div class="thread-item">
+              <div class="thread-dept" style="background:linear-gradient(135deg,#f59e0b,#d97706);">M</div>
+              <div class="thread-content">
+                <div class="tc-title">Lead quality drop — attribution gap between CRM and ads</div>
+                <div class="tc-sub">Marketing × Sales · Campaign spend vs conversion mismatch</div>
+              </div>
+              <div class="thread-meta"><span class="tm-time">4h ago</span><span class="tm-badge badge-amber">REVIEW</span></div>
+            </div>
+            <div class="thread-item">
+              <div class="thread-dept" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">O</div>
+              <div class="thread-content">
+                <div class="tc-title">Delivery SLA breach pattern — 3 clients flagged</div>
+                <div class="tc-sub">Operations × Client Success · Escalation recommended</div>
+              </div>
+              <div class="thread-meta"><span class="tm-time">6h ago</span><span class="tm-badge badge-amber">REVIEW</span></div>
+            </div>
+            <div class="thread-item">
+              <div class="thread-dept" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">H</div>
+              <div class="thread-content">
+                <div class="tc-title">Resource allocation optimised — 2 team bottlenecks cleared</div>
+                <div class="tc-sub">HR × Operations · Resolved automatically</div>
+              </div>
+              <div class="thread-meta"><span class="tm-time">Yesterday</span><span class="tm-badge badge-green">RESOLVED</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 — Action Items -->
+    <div class="step">
+      <div class="step-text">
+        <div class="step-num">3</div>
+        <h3>Auto-Generated Action Items</h3>
+        <p>HALU™ doesn't just identify problems — it tells you exactly what to do about them. Every alert generates a prioritised action item, assigned to the right person, with a clear deadline. No interpretation needed.</p>
+        <ul class="step-points">
+          <li>P1/P2/P3 priority ranking — based on revenue impact</li>
+          <li>Assigned to specific team members automatically</li>
+          <li>Deadline set based on urgency and business context</li>
+          <li>Status tracked — HALU™ follows up if overdue</li>
+        </ul>
+      </div>
+      <div class="mock-screen">
+        <div class="mock-topbar">
+          <div class="mock-dot" style="background:#ef4444;"></div>
+          <div class="mock-dot" style="background:#fbbf24;"></div>
+          <div class="mock-dot" style="background:#34d399;"></div>
+          <span class="mock-title">HALU™ — Action Items</span>
+        </div>
+        <div class="mock-body">
+          <div class="action-list">
+            <div class="action-item p1">
+              <div class="ac-text">
+                <div class="ac-title">Contact 12 stalled deals — personalised follow-up sequence</div>
+                <div class="ac-who">→ Sarah (Sales Lead) · Due today · AED 340K at risk</div>
+              </div>
+              <span class="action-chip badge-red">P1 · TODAY</span>
+            </div>
+            <div class="action-item p1">
+              <div class="ac-text">
+                <div class="ac-title">Escalate 3 overdue invoices to Finance Director</div>
+                <div class="ac-who">→ Ahmed (Finance) · Due today · Cash flow impact</div>
+              </div>
+              <span class="action-chip badge-red">P1 · TODAY</span>
+            </div>
+            <div class="action-item p2">
+              <div class="ac-text">
+                <div class="ac-title">Review lead attribution — align CRM tags with ad campaigns</div>
+                <div class="ac-who">→ Marketing team · Due this week</div>
+              </div>
+              <span class="action-chip badge-amber">P2 · THIS WEEK</span>
+            </div>
+            <div class="action-item p2">
+              <div class="ac-text">
+                <div class="ac-title">Client SLA review — update delivery timelines for 3 accounts</div>
+                <div class="ac-who">→ Client Success · Due this week</div>
+              </div>
+              <span class="action-chip badge-amber">P2 · THIS WEEK</span>
+            </div>
+            <div class="action-item p3">
+              <div class="ac-text">
+                <div class="ac-title">Resource reallocation — move 2 FTEs from backlog project</div>
+                <div class="ac-who">→ Operations · Due next week</div>
+              </div>
+              <span class="action-chip" style="background:rgba(59,130,246,0.15);color:#93c5fd;">P3 · NEXT WEEK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 — Zonar Metrics -->
+    <div class="step reverse">
+      <div class="step-text">
+        <div class="step-num">4</div>
+        <h3>Zonar Metrics — Business Health Over Time</h3>
+        <p>HALU™ tracks your business health score across every dimension — revenue, operations, people, and growth. You see the trend over time, not just a snapshot. It's the difference between reacting and leading.</p>
+        <ul class="step-points">
+          <li>Revenue health tracked week-over-week</li>
+          <li>Operational efficiency score — rising or falling</li>
+          <li>People & capacity — burnout risk flagged early</li>
+          <li>Growth pipeline score — momentum indicator</li>
+        </ul>
+      </div>
+      <div class="mock-screen">
+        <div class="mock-topbar">
+          <div class="mock-dot" style="background:#ef4444;"></div>
+          <div class="mock-dot" style="background:#fbbf24;"></div>
+          <div class="mock-dot" style="background:#34d399;"></div>
+          <span class="mock-title">HALU™ — Zonar Metrics</span>
+        </div>
+        <div class="mock-body">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="mc-label">Revenue Health</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:74%;background:linear-gradient(90deg,#3b82f6,#7c3aed);"></div></div>
+              <div class="metric-val">74 / 100 <span style="color:#fbbf24;font-size:.7rem;">▼ -3 this week</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="mc-label">Operational Efficiency</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:81%;background:linear-gradient(90deg,#00FF88,#3b82f6);"></div></div>
+              <div class="metric-val">81 / 100 <span style="color:#34d399;font-size:.7rem;">▲ +5 this week</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="mc-label">People & Capacity</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:68%;background:linear-gradient(90deg,#fbbf24,#f59e0b);"></div></div>
+              <div class="metric-val">68 / 100 <span style="color:#fbbf24;font-size:.7rem;">⚠ Monitor</span></div>
+            </div>
+            <div class="metric-card">
+              <div class="mc-label">Growth Pipeline</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:88%;background:linear-gradient(90deg,#7c3aed,#3b82f6);"></div></div>
+              <div class="metric-val">88 / 100 <span style="color:#34d399;font-size:.7rem;">▲ Strong</span></div>
+            </div>
+          </div>
+          <div style="margin-top:14px;padding:12px;background:#0d0d0d;border-radius:8px;border:1px solid var(--border);">
+            <div style="font-size:.7rem;color:#6b7280;margin-bottom:6px;">HALU™ WEEKLY INSIGHT</div>
+            <div style="font-size:.78rem;color:#e5e7eb;line-height:1.5;">Revenue health dipped this week due to sales pipeline stall. Growth pipeline is strong — convert the 12 stalled deals and you recover 8+ points. Recommend P1 action today.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 — HALU Agent Chat -->
+    <div class="step">
+      <div class="step-text">
+        <div class="step-num">5</div>
+        <h3>Ask HALU™ Anything</h3>
+        <p>HALU™ isn't just a dashboard — it's a conversational agent. Ask it why revenue dipped last week. Ask it which client is most at risk of churn. Ask it what your team should focus on today. It knows your entire business.</p>
+        <ul class="step-points">
+          <li>Natural language — no training needed</li>
+          <li>Answers grounded in your actual data</li>
+          <li>Proactively surfaces what you didn't think to ask</li>
+          <li>Available 24/7 — your always-on business analyst</li>
+        </ul>
+      </div>
+      <div class="mock-screen">
+        <div class="mock-topbar">
+          <div class="mock-dot" style="background:#ef4444;"></div>
+          <div class="mock-dot" style="background:#fbbf24;"></div>
+          <div class="mock-dot" style="background:#34d399;"></div>
+          <span class="mock-title">HALU™ Agent</span>
+        </div>
+        <div class="mock-body">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#9ca3af;flex-shrink:0;">You</div>
+              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#e5e7eb;max-width:80%;">Why is our revenue health score down this week?</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;flex-direction:row-reverse;">
+              <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#fff;flex-shrink:0;">H</div>
+              <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px 0 8px 8px;padding:12px 14px;font-size:.8rem;color:#e5e7eb;max-width:85%;line-height:1.6;">Your revenue health dropped 3 points this week. The primary cause is 12 deals in Sales that have had no contact in 21+ days — these represent AED 340,000 in potential revenue. Secondary factor: 8 invoices stuck in Finance approval are creating a cash flow lag. I've generated P1 action items for both. Want me to draft the follow-up sequence for the stalled deals?</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#9ca3af;flex-shrink:0;">You</div>
+              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#e5e7eb;max-width:80%;">Yes please</div>
+            </div>
+            <div style="text-align:center;padding:8px;">
+              <span style="font-size:.7rem;color:#4b5563;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.1);padding:4px 12px;border-radius:12px;">HALU™ is drafting 12 personalised follow-up emails...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end steps -->
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <h2>What happens in your first 48 hours</h2>
+    <p class="timeline-sub">From signup to first revenue insight — here's the exact sequence.</p>
+    <div class="tl-items">
+      <div class="tl-item">
+        <div class="tl-num">1</div>
+        <h4>Hour 1 — Onboarding call</h4>
+        <p>30-minute setup call. We connect your existing tools — CRM, finance, ops.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">2</div>
+        <h4>Hour 4 — First sync</h4>
+        <p>HALU™ ingests your data and runs its first cross-department analysis.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">3</div>
+        <h4>Hour 24 — First alerts</h4>
+        <p>Your first revenue leak flagged. Your first action items generated.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">4</div>
+        <h4>Hour 48 — First insight report</h4>
+        <p>HALU™ delivers your first weekly business health summary. Your team has a baseline.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GATE CTA -->
+  <div class="gate">
+    <h2>Ready to see it with your own data?</h2>
+    <p>Access the live HALU™ sandbox — pre-loaded with demo data so you can explore every screen yourself. No sales call required.</p>
+    <p class="gate-note">Takes 60 seconds to register. Sandbox access is immediate.</p>
+    <div class="gate-btns">
+      <a href="/members/?demo=halu&utm_source=halu-demo&utm_medium=page&utm_content=gate-cta" class="gate-login"><i class="fas fa-desktop"></i> Access Live Sandbox →</a>
+      <a href="/ai-audit/?utm_source=halu-demo&utm_medium=page&utm_content=audit-cta" class="gate-audit">⚡ Take the Free AI Audit instead</a>
+    </div>
+  </div>
+
+</div><!-- end tour -->
+
+<footer>
+  <p style="margin-bottom:8px;"><a href="/">Home</a> · <a href="/halu/">HALU™</a> · <a href="/zonar-os/">Zonar OS™</a> · <a href="/ai-audit/">Free Audit</a> · <a href="/about/">About</a></p>
+  <p>© 2026 Neural Horizons AI · <a href="mailto:support@neuralhorizonsai.com">support@neuralhorizonsai.com</a></p>
+</footer>
+
+</body>
+</html>
