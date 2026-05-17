@@ -652,11 +652,24 @@ function submitAuditForm(e) {
   var revKey = data.annual_revenue ? (revMap[data.annual_revenue] || '') : '';
   if (revKey) contactProps.annual_revenue_band = revKey;
 
-  fetch('https://warrenlisa2001-2954b599-9515-vm.azure.gensparkclaw.com/nh-api/capture-lead', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(contactProps)
-  }).catch(function(){});
+  // Submit to HubSpot Forms API
+  (function(){
+    var HUBSPOT_FORM_ID = '6e0b4cd9-eded-4874-bc0d-28f839a3403d';  // Set this once short-form HubSpot form is created
+    if (!HUBSPOT_FORM_ID || HUBSPOT_FORM_ID.indexOf('REPLACE') === 0) return;
+    var hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1] || '';
+    var fields = Object.keys(contactProps).filter(function(k){ return contactProps[k]; }).map(function(k){
+      return { objectTypeId: '0-1', name: k, value: contactProps[k] };
+    });
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/146667855/' + HUBSPOT_FORM_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        submittedAt: Date.now(),
+        fields: fields,
+        context: { hutk: hutk, pageUri: window.location.href, pageName: 'AI Audit - Short Form' }
+      })
+    }).catch(function(){});
+  })();
 
   // Redirect to full questionnaire
   setTimeout(function() {
