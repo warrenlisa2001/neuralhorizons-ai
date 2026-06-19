@@ -5,7 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Friday AI Roundup — June 19, 2026 | Neural Horizons AI</title>
 <meta name="description" content="The week that rewired the game: UAE creates Federal AI Authority, Saudi's Year of AI accelerates, OpenAI & Anthropic file for IPO, US export controls target AI models.">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1120;--navy-light:#151E32;--navy-lighter:#1E293B;--slate:#334155;--slate-light:#64748B;--muted:#94A3B8;--off-white:#F1F5F9;--white:#FFFFFF;--accent:#38BDF8;--accent-glow:rgba(56,189,248,0.15);--gradient-start:#38BDF8;--gradient-end:#818CF8;--border:rgba(148,163,184,0.12);--radius:12px;--radius-sm:8px;--max-width:800px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--navy);color:var(--off-white);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,17,32,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;font-size:16px;font-family:'Space Grotesk',sans-serif}
+.nav-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--navy)}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.hero{padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;padding:8px 16px;border-radius:100px;margin-bottom:28px}
+.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:20px;letter-spacing:-0.02em}
+.gradient{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 28px;line-height:1.6}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--slate-light)}
+.hero-meta .date{color:var(--accent);font-weight:600}
+.hero-meta .tag{background:var(--navy-lighter);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
+.article{padding-bottom:80px}
+.article h2{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--white);margin:56px 0 20px;line-height:1.3;letter-spacing:-0.01em}
+.article h3{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:var(--white);margin:40px 0 16px}
+.article p{margin-bottom:20px;color:var(--off-white)}
+.article strong{color:var(--white);font-weight:600}
+.highlight{background:var(--navy-light);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:24px 28px;margin:28px 0}
+.highlight-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:10px}
+.highlight p{margin:0;font-size:16px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:28px 0}
+.stat{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.stat-desc{font-size:13px;color:var(--muted);line-height:1.5}
+.implications{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin:28px 0}
+.impl-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:20px}
+.impl-item{display:flex;gap:14px;margin-bottom:16px}
+.impl-item:last-child{margin-bottom:0}
+.impl-bullet{width:8px;height:8px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:50%;margin-top:8px;flex-shrink:0}
+.impl-text{font-size:15px;line-height:1.7;color:var(--off-white)}
+.impl-text span{color:var(--muted)}
+.watch-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px}
+.watch-table thead{background:var(--navy-light)}
+.watch-table th{text-align:left;padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);border-bottom:1px solid var(--border)}
+.watch-table td{padding:16px;border-bottom:1px solid var(--border);color:var(--off-white);vertical-align:top}
+.watch-table tr:hover{background:rgba(56,189,248,0.03)}
+.takeaways{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin-top:48px}
+.takeaways h2{margin-top:0!important;margin-bottom:28px!important}
+.tk-item{display:flex;gap:16px;margin-bottom:20px}
+.tk-item:last-child{margin-bottom:0}
+.tk-num{width:28px;height:28px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--navy);flex-shrink:0;margin-top:2px}
+.tk-text{font-size:15px;line-height:1.7;color:var(--off-white)}
+.cta-section{background:linear-gradient(135deg,var(--navy-light),var(--navy));border-top:1px solid var(--border);padding:64px 24px;text-align:center}
+.cta-section h3{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:16px}
+.cta-section p{color:var(--muted);max-width:560px;margin:0 auto 28px;font-size:16px;line-height:1.7}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:100px;transition:transform .2s,box-shadow .2s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(56,189,248,0.3)}
+.footer{border-top:1px solid var(--border);padding:40px 24px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{display:flex;align-items:center;gap:10px;color:var(--white);font-weight:700;font-size:15px;font-family:'Space Grotesk',sans-serif}
+.footer-logo{width:28px;height:28px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--navy)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{color:var(--slate-light);text-decoration:none;font-size:14px;transition:color .2s}
+.footer-links a:hover{color:var(--white)}
+@media(max-width:640px){.hero{padding:60px 20px 40px}.hero h1{font-size:32px}.hero-sub{font-size:16px}.article h2{font-size:24px}.stats{grid-template-columns:repeat(2,1fr)}.stat-num{font-size:24px}.watch-table{font-size:13px}.watch-table th,.watch-table td{padding:10px}.nav-links{display:none}.footer-inner{flex-direction:column;gap:20px}.takeaways,.implications,.highlight{padding:20px}}
+</style>
 </head>
 <body>
 
