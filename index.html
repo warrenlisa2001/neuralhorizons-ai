@@ -1,368 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friday AI Roundup — June 19, 2026 | Neural Horizons AI</title>
-<meta name="description" content="The week that rewired the game: UAE creates Federal AI Authority, Saudi's Year of AI accelerates, OpenAI & Anthropic file for IPO, US export controls hit Anthropic's frontier models.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--navy:#0B1120;--navy-light:#151E32;--navy-lighter:#1E293B;--slate:#334155;--slate-light:#64748B;--muted:#94A3B8;--off-white:#F1F5F9;--white:#FFFFFF;--accent:#38BDF8;--accent-glow:rgba(56,189,248,0.15);--gradient-start:#38BDF8;--gradient-end:#818CF8;--border:rgba(148,163,184,0.12);--radius:12px;--radius-sm:8px;--max-width:800px}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--navy);color:var(--off-white);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:rgba(11,17,32,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:700;font-size:16px;font-family:'Space Grotesk',sans-serif}
-.nav-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--navy)}
-.nav-links{display:flex;gap:32px}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.hero{padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;padding:8px 16px;border-radius:100px;margin-bottom:28px}
-.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:20px;letter-spacing:-0.02em}
-.gradient{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 28px;line-height:1.6}
-.hero-meta{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--slate-light)}
-.hero-meta .date{color:var(--accent);font-weight:600}
-.hero-meta .tag{background:var(--navy-lighter);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
-.article{padding-bottom:80px}
-.article h2{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--white);margin:56px 0 20px;line-height:1.3;letter-spacing:-0.01em}
-.article h3{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:var(--white);margin:40px 0 16px}
-.article p{margin-bottom:20px;color:var(--off-white)}
-.article strong{color:var(--white);font-weight:600}
-.highlight{background:var(--navy-light);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:24px 28px;margin:28px 0}
-.highlight-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:10px}
-.highlight p{margin:0;font-size:16px;line-height:1.7}
-.highlight p+p{margin-top:12px}
-.source-note{font-size:12px;color:var(--slate-light);margin-top:10px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:28px 0}
-.stat{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
-.stat-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.stat-desc{font-size:13px;color:var(--muted);line-height:1.5}
-.implications{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin:28px 0}
-.impl-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:20px}
-.impl-item{display:flex;gap:14px;margin-bottom:16px}
-.impl-item:last-child{margin-bottom:0}
-.impl-bullet{width:8px;height:8px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:50%;margin-top:8px;flex-shrink:0}
-.impl-text{font-size:15px;line-height:1.7;color:var(--off-white)}
-.impl-text span{color:var(--muted)}
-.watch-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px}
-.watch-table thead{background:var(--navy-light)}
-.watch-table th{text-align:left;padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);border-bottom:1px solid var(--border)}
-.watch-table td{padding:16px;border-bottom:1px solid var(--border);color:var(--off-white);vertical-align:top}
-.watch-table tr:hover{background:rgba(56,189,248,0.03)}
-.takeaways{background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin-top:48px}
-.takeaways h2{margin-top:0!important;margin-bottom:28px!important}
-.tk-item{display:flex;gap:16px;margin-bottom:20px}
-.tk-item:last-child{margin-bottom:0}
-.tk-num{width:28px;height:28px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--navy);flex-shrink:0;margin-top:2px}
-.tk-text{font-size:15px;line-height:1.7;color:var(--off-white)}
-.cta-section{background:linear-gradient(135deg,var(--navy-light),var(--navy));border-top:1px solid var(--border);padding:64px 24px;text-align:center}
-.cta-section h3{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:16px}
-.cta-section p{color:var(--muted);max-width:560px;margin:0 auto 28px;font-size:16px;line-height:1.7}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:var(--navy);text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:100px;transition:transform .2s,box-shadow .2s}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(56,189,248,0.3)}
-.footer{border-top:1px solid var(--border);padding:40px 24px}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.footer-brand{display:flex;align-items:center;gap:10px;color:var(--white);font-weight:700;font-size:15px;font-family:'Space Grotesk',sans-serif}
-.footer-logo{width:28px;height:28px;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--navy)}
-.footer-links{display:flex;gap:28px}
-.footer-links a{color:var(--slate-light);text-decoration:none;font-size:14px;transition:color .2s}
-.footer-links a:hover{color:var(--white)}
-@media(max-width:640px){.hero{padding:60px 20px 40px}.hero h1{font-size:32px}.hero-sub{font-size:16px}.article h2{font-size:24px}.stats{grid-template-columns:repeat(2,1fr)}.stat-num{font-size:24px}.watch-table{font-size:13px}.watch-table th,.watch-table td{padding:10px}.nav-links{display:none}.footer-inner{flex-direction:column;gap:20px}.takeaways,.implications,.highlight{padding:20px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Strategy | Neural Horizons AI — UAE & MENA</title>
+  <meta name="description" content="Build your AI operating model for the autonomous era. Neural Horizons AI designs AGI-ready strategy and agentic roadmaps for businesses across UAE and MENA." />
+  <meta name="robots" content="index,follow" />
+  <meta name="google-site-verification" content="ELlr5Y0mz6u5CGxtY5AZyL0VM_sdjuKSYjucWFtDTpk" />
+  <meta name="msvalidate.01" content="0DF985EB4023CF2522679038D9299517" />
+  <meta property="og:title" content="AI Strategy | Neural Horizons AI — UAE & MENA" />
+  <meta property="og:description" content="Build your AI operating model for the autonomous era. Neural Horizons AI designs AGI-ready strategy and agentic roadmaps for businesses across UAE and MENA." />
+  <meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-home.jpg" />
+  <meta property="og:url" content="https://www.neuralhorizonsai.com/services/ai-strategy/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Neural Horizons AI" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#00FF88" />
+  <link rel="canonical" href="https://www.neuralhorizonsai.com/services/ai-strategy/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0A0A0F;
+      --surface: #0F0F1A;
+      --surface2: #13131F;
+      --border: rgba(255,255,255,0.07);
+      --green: #00FF88;
+      --purple: #8A2BE2;
+      --green-dim: rgba(0,255,136,0.12);
+      --green-glow: rgba(0,255,136,0.06);
+      --text: #F0F0F0;
+      --text-muted: rgba(240,240,240,0.55);
+      --text-dim: rgba(240,240,240,0.35);
+      --font: 'Manrope', sans-serif;
+      --max: 1120px;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo img { height: 36px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--green); color: #000 !important; padding: 8px 18px; border-radius: 6px; font-weight: 700 !important; font-size: 13px !important; transition: opacity .2s !important; }
+    .nav-cta:hover { opacity: 0.88; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 0; min-width: 260px; box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 10px 20px; color: var(--text-muted); font-size: 13px; font-weight: 500; text-decoration: none; transition: all .15s; }
+    .dropdown-menu a:hover { color: var(--green); background: var(--green-glow); }
+    .dropdown-label { padding: 8px 20px 4px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
+
+    /* ── HERO ── */
+    .hero { position: relative; min-height: 88vh; display: flex; align-items: center; overflow: hidden; padding: 80px 24px; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(0,255,136,0.06) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(138,43,226,0.05) 0%, transparent 60%); pointer-events: none; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .hero-inner { position: relative; max-width: var(--max); margin: 0 auto; width: 100%; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid rgba(0,255,136,0.2); color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 32px; }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+    .hero h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; max-width: 820px; margin-bottom: 28px; }
+    .hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--green), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(17px, 2vw, 20px); color: var(--text-muted); max-width: 560px; line-height: 1.65; margin-bottom: 44px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #000; font-family: var(--font); font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: all .2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,255,136,0.3); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text); font-family: var(--font); font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; transition: all .2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num { font-size: 32px; font-weight: 800; background: linear-gradient(135deg, var(--green), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 13px; color: var(--text-dim); font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 24px; }
+    .section-inner { max-width: var(--max); margin: 0 auto; }
+    .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 20px; }
+    .section-sub { font-size: 18px; color: var(--text-muted); max-width: 560px; line-height: 1.65; }
+
+    /* ── REALITY BLOCK ── */
+    .reality { background: var(--surface); }
+    .reality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 56px; }
+    .reality-statement { font-size: clamp(22px, 3vw, 34px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
+    .reality-statement em { font-style: normal; color: var(--green); }
+    .reality-points { display: flex; flex-direction: column; gap: 20px; }
+    .reality-point { display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); }
+    .reality-point .icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .reality-point strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .reality-point p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── WHAT WE BUILD ── */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .pillar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: border-color .2s, transform .2s; position: relative; overflow: hidden; }
+    .pillar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green), var(--purple)); opacity: 0; transition: opacity .2s; }
+    .pillar:hover { border-color: rgba(0,255,136,0.2); transform: translateY(-3px); }
+    .pillar:hover::before { opacity: 1; }
+    .pillar-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--green); margin-bottom: 16px; }
+    .pillar h3 { font-size: 19px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em; }
+    .pillar p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── FOR YOU ── */
+    .foryou { background: var(--surface); }
+    .foryou-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+    .foryou-item { display: flex; gap: 14px; align-items: flex-start; padding: 22px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
+    .foryou-item .arrow { color: var(--green); font-size: 18px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+    .foryou-item p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+    .foryou-item p strong { color: var(--text); font-weight: 600; }
+
+    /* ── PROCESS ── */
+    .process-track { margin-top: 56px; display: flex; flex-direction: column; gap: 0; position: relative; }
+    .process-track::before { content: ''; position: absolute; left: 31px; top: 32px; bottom: 32px; width: 1px; background: linear-gradient(to bottom, var(--green), var(--purple)); opacity: 0.3; }
+    .process-step { display: flex; gap: 32px; align-items: flex-start; padding: 32px 0; border-bottom: 1px solid var(--border); position: relative; }
+    .process-step:last-child { border-bottom: none; }
+    .step-dot { width: 64px; height: 64px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--green); flex-shrink: 0; letter-spacing: .06em; }
+    .step-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .step-content .step-label { font-size: 12px; color: var(--text-dim); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+    .step-content p { font-size: 15px; color: var(--text-muted); line-height: 1.65; max-width: 600px; }
+
+    /* ── AGI HORIZON ── */
+    .agi-horizon { background: var(--surface); }
+    .agi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 48px; }
+    .agi-text p { font-size: 16px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+    .agi-text p:last-child { margin-bottom: 0; }
+    .agi-callouts { display: flex; flex-direction: column; gap: 16px; }
+    .agi-callout { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 20px 24px; }
+    .agi-callout strong { display: block; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .agi-callout p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; background: none; border: none; color: var(--text); font-family: var(--font); font-size: 16px; font-weight: 600; text-align: left; padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-q .chevron { color: var(--green); font-size: 18px; transition: transform .2s; flex-shrink: 0; }
+    .faq-a { font-size: 15px; color: var(--text-muted); line-height: 1.7; padding-bottom: 24px; display: none; max-width: 720px; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .chevron { transform: rotate(45deg); }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--surface); }
+    .cta-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .cta-inner h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 20px; }
+    .cta-inner h2 em { font-style: normal; background: linear-gradient(135deg, var(--green), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .cta-inner p { font-size: 17px; color: var(--text-muted); line-height: 1.65; margin-bottom: 36px; }
+    .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 20px; font-size: 13px; color: var(--text-dim); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 64px 24px 40px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 16px 0 24px; max-width: 260px; }
+    .footer-brand img { height: 32px; }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 14px; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; transition: color .15s; }
+    .footer-col a:hover { color: var(--green); }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; text-decoration: none; transition: all .15s; }
+    .footer-social a:hover { border-color: var(--green); color: var(--green); }
+    .footer-bottom { max-width: var(--max); margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 13px; color: var(--text-dim); }
+    .footer-bottom a { color: var(--text-dim); text-decoration: none; transition: color .15s; }
+    .footer-bottom a:hover { color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .reality-grid, .agi-grid, .foryou-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 28px; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .process-track::before { display: none; }
+    }
+  </style>
 </head>
 <body>
+<!-- GTM noscript -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<nav class="nav">
+<!-- NAV -->
+<nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <div class="nav-logo-icon">NH</div>
-      Neural Horizons AI
-    </a>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/services/">Services</a>
-      <a href="/contact/">Contact</a>
-    </div>
+    <a href="https://www.neuralhorizonsai.com/" class="nav-logo"><img src="https://www.neuralhorizonsai.com/images/logo.jpg" alt="Neural Horizons AI" /></a>
+    <ul class="nav-links">
+      <li><a href="https://www.neuralhorizonsai.com/">Home</a></li>
+      <li><a href="https://www.neuralhorizonsai.com/zonar-os">Zonar OS™</a></li>
+      <li class="nav-dropdown">
+        <a href="https://www.neuralhorizonsai.com/services">Services ↓</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-label">Tier 1 — Audit & Consultation</div>
+          <a href="https://www.neuralhorizonsai.com/ai-audit">⬡ AI Audit</a>
+          <a href="https://www.neuralhorizonsai.com/services/consultation">⬡ Consultation</a>
+          <div class="dropdown-label">Tier 2 — Strategy & Transformation</div>
+          <a href="https://www.neuralhorizonsai.com/services/ai-strategy">⬡ AI Strategy</a>
+          <a href="https://www.neuralhorizonsai.com/services/digital-transformation">⬡ Digital Transformation</a>
+          <div class="dropdown-label">Tier 3 — Build & Implementation</div>
+          <a href="https://www.neuralhorizonsai.com/agentic-ai">⬡ Agentic AI Build</a>
+          <a href="https://www.neuralhorizonsai.com/zonar-os">⬡ Zonar OS™ Implementation</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="https://www.neuralhorizonsai.com/case-studies">Resources ↓</a>
+        <div class="dropdown-menu">
+          <a href="https://www.neuralhorizonsai.com/case-studies">⬡ Case Studies</a>
+          <a href="https://www.neuralhorizonsai.com/blog">⬡ Blog & Insights</a>
+          <a href="https://www.neuralhorizonsai.com/playbooks">⬡ Playbooks & Members</a>
+        </div>
+      </li>
+      <li><a href="https://www.neuralhorizonsai.com/about">About</a></li>
+      <li><a href="https://www.neuralhorizonsai.com/faq">FAQ</a></li>
+      <li><a href="https://www.neuralhorizonsai.com/members/" style="color:var(--text-muted)">Client Login</a></li>
+      <li><a href="https://www.neuralhorizonsai.com/ai-audit" class="nav-cta">⚡ Take Free Audit</a></li>
+    </ul>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="container">
-    <div class="hero-badge">
-      <span class="dot"></span>
-      Weekly Intelligence Briefing
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Tier 2 — AI Strategy & Advisory</div>
+    <h1>Your Business Needs a Strategy<br>Built for the <em>Autonomous Era.</em></h1>
+    <p class="hero-sub">We are moving from AI that assists to AI that acts — autonomously, continuously, at scale. Most organisations are still planning for yesterday. We build strategy for what's coming: agentic systems, AGI-adjacent capabilities, and operating models that compound.</p>
+    <div class="hero-actions">
+      <a href="https://www.neuralhorizonsai.com/ai-audit/" class="btn-primary">⚡ Book a Strategy Call</a>
+      <a href="https://wa.me/971585697562" class="btn-secondary">WhatsApp Us</a>
     </div>
-    <h1>Friday AI Roundup<br><span class="gradient">The Week That Rewired the Game</span></h1>
-    <p class="hero-sub">The briefing that keeps you ahead of the AI curve across UAE, GCC, and the globe.</p>
-    <div class="hero-meta">
-      <span class="date">June 19, 2026</span>
-      <span class="tag">Week 25</span>
-      <span class="author">By Neural Horizons AI Intelligence Team</span>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">AED 9M+</span><span class="stat-label">Revenue generated for clients</span></div>
+      <div class="stat-item"><span class="stat-num">98%</span><span class="stat-label">Client satisfaction rate</span></div>
+      <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">Active clients globally</span></div>
+      <div class="stat-item"><span class="stat-num">15+</span><span class="stat-label">Years in AI & transformation</span></div>
     </div>
-  </div>
-</header>
-
-<article class="article">
-  <div class="container">
-
-    <h2>⚡ The Lead: UAE Creates a Federal AI Authority</h2>
-
-    <p>On June 14, 2026, Sheikh Mohammed bin Rashid Al Maktoum didn't just announce a new agency. He announced that the UAE government is <strong>rewriting its own operating system.</strong></p>
-
-    <p>The <strong>Federal Authority for Artificial Intelligence and Data</strong> consolidates the AI Office, the Information and Digital Government Sector within the Telecommunications and Digital Government Regulatory Authority, and the Emirates Data Office under one command — reporting directly to the UAE Cabinet and led by Omar Sultan Al Olama, Minister of State for Artificial Intelligence.</p>
-
-    <div class="highlight">
-      <div class="highlight-label">Headline Number</div>
-      <p><strong>50%</strong> of government services and operations are targeted to transition to Agentic AI within two years. Not automated. Not digitized. <strong>Agentic</strong> — systems that plan, execute, and adapt with limited human intervention.</p>
-    </div>
-
-    <p>To fuel this, the UAE government launched a strategic knowledge partnership with MBZUAI in May to train more than <strong>80,000 federal employees</strong> as Agentic AI experts, spanning leadership, technical, specialist, general workforce, and trainer categories.</p>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For vendors:</strong> <span>Government RFPs will increasingly want to see agentic architecture, not just dashboards bolted onto existing workflows. The UAE is signalling it wants AI-native capability, not AI-washed consulting.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For enterprises:</strong> <span>If your competitors are agentic-ready and you're still automating workflows, you risk looking structurally behind how the region's largest buyer now operates.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For talent:</strong> <span>80,000 government employees trained in Agentic AI is a meaningful shift in where regional AI fluency concentrates — and a signal of how seriously the public sector is treating implementation, not just strategy decks.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For the region:</strong> <span>This is among the most aggressive government restructurings for AI announced anywhere this year. Other GCC states will be watching closely to see whether the rollout delivers.</span></div>
-      </div>
-    </div>
-
-    <h2>🏗️ GCC Power Moves: Saudi Arabia's Year of AI Hits Warp Speed</h2>
-
-    <p>While the UAE reorganized its government, Saudi Arabia continued executing on its <strong>2026 Year of AI</strong> declaration, with infrastructure and capital deployment moving at pace.</p>
-
-    <p><strong>What we're watching:</strong> Humain, Saudi's national AI company, has been at the center of major capital commitments tied to AI infrastructure and compute, reinforcing the Kingdom's push to build sovereign AI capacity rather than rent it.</p>
-
-    <p>The <strong>Global AI Show Riyadh 2026</strong> (June 29-30) is now 10 days away. If you're building in MENA and not on the ground in Riyadh, you're not just missing the conversation — you're missing the deal flow.</p>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For infrastructure players:</strong> <span>Saudi is moving from planning to deployment faster than most peer markets. The constraint is increasingly who can operationalize compute, not whether capacity exists.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For AI services firms:</strong> <span>The Kingdom needs deployment expertise, not slide decks. Firms that can operationalize agentic systems on sovereign infrastructure will command premium pricing.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For investors:</strong> <span>Sovereign AI capital in the Gulf is increasingly programmatic rather than one-off, which tends to create more predictable, multi-year revenue streams for the firms that win this business.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For regional competitors:</strong> <span>If you're not in Riyadh on June 29, your competitors are building relationships you can't replicate from a Zoom call.</span></div>
-      </div>
-    </div>
-
-    <h2>🌍 Global Headlines: The IPO Stampede, Export Controls, and the Architecture Wars</h2>
-
-    <h3>🚀 The AI IPO Wave Is Here — And the Gulf Is the Gatekeeper</h3>
-
-    <p>SpaceX went public in June, among the largest IPOs on record. But the real signal for this audience: both <strong>OpenAI and Anthropic confidentially filed for IPOs</strong> with the SEC in early June. Anthropic filed on June 1, reportedly at a valuation near <strong>$965 billion</strong>, following its $65 billion Series H round. OpenAI followed about a week later, said to be targeting somewhere in the <strong>$730–850 billion</strong> range. Both companies remain private for now — confidential filings don't guarantee a public listing follows.</p>
-
-    <div class="highlight">
-      <div class="highlight-label">Worth Remembering</div>
-      <p>Gulf capital's role in frontier AI isn't new context, but it's the backdrop to this IPO wave. In a leaked internal message reported by Wired in mid-2025, Anthropic CEO Dario Amodei told staff "there is a truly giant amount of capital in the Middle East, easily $100B or more," arguing the company needed that access to stay competitive. That reasoning has only become more relevant as MGX, QIA, and PIF-linked vehicles have taken larger, more active positions across the sector since.</p>
-      <p class="source-note">Quote originally reported by Wired (July 2025); included here for context, not as new commentary.</p>
-    </div>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For Gulf investors:</strong> <span>These IPOs, if completed, would create liquidity events and valuation benchmarks that could ripple through MENA tech markets, with Gulf vehicles among the best-positioned to act on them.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For global AI firms:</strong> <span>Access to Gulf capital is increasingly a competitive factor rather than a side conversation, particularly for firms racing to fund frontier compute.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For regional tech ecosystems:</strong> <span>Expect continued interest from regional investors in earlier-stage MENA AI exposure as the large players' valuations climb out of easy reach.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For enterprise buyers:</strong> <span>A public OpenAI or Anthropic would eventually mean more disclosed financials and more regulatory scrutiny than today's private-market opacity allows.</span></div>
-      </div>
-    </div>
-
-    <h3>🚫 US Export Controls Hit Anthropic's Most Capable Models</h3>
-
-    <p>On June 12, the US Commerce Department issued an export control directive covering Anthropic's <strong>Claude Fable 5 and Claude Mythos 5</strong> models, requiring Anthropic to suspend access for foreign nationals — including its own foreign-national employees, regardless of location. Anthropic said it had no practical way to comply short of disabling both models for all customers, which it did the same evening. Access to other Claude models, including Claude Opus 4.8, was unaffected. Reporting indicates the action followed concerns that Fable 5's safeguards around cybersecurity capabilities could be bypassed; Anthropic said it believed the issue was narrower than the government's response implied.</p>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For Gulf partnerships:</strong> <span>UAE and Saudi entities have built deep dependencies on US AI infrastructure. An action like this is a reminder that access to frontier models can change with little warning, which strengthens the case for sovereign AI capacity as risk mitigation, not just ambition.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For Stargate UAE:</strong> <span>Large domestic compute commitments increasingly read as insurance against this kind of policy volatility, alongside their economic rationale.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For global AI governance:</strong> <span>Treating specific models, not just companies or chips, as export-controlled assets is a meaningful precedent. Expect more nations to accelerate sovereign AI programs in response.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For enterprises using US-hosted AI:</strong> <span>If core operations depend on models that could face export restrictions, a sovereign or multi-vendor AI continuity plan is worth revisiting now rather than after the next directive.</span></div>
-      </div>
-    </div>
-
-    <h3>🔬 Google's "Memory Caching" Paper — A Real Step for RNNs, Not a Transformer Killer</h3>
-
-    <p>In early 2026, Google Research published <strong>"Memory Caching: RNNs with Growing Memory,"</strong> from the team behind the Titans and MIRAS research lines. The technique lets recurrent models cache memory checkpoints across segments of a sequence, narrowing — though not closing — the gap with Transformers on recall-heavy, long-context tasks, while keeping RNN-style efficiency. It's worth being precise about what the paper actually shows: Transformers still post the best accuracy on the hardest retrieval benchmarks, and the experiments are at academic scale (up to 1.3 billion parameters), so it's an open question whether the gains hold at frontier scale. This is incremental architecture research, not evidence that Transformers are being displaced.</p>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For the Gulf's data center investments:</strong> <span>Even if more efficient architectures mature, nations are likely to keep building sovereign AI infrastructure for control reasons as much as cost reasons.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For AI startups:</strong> <span>Cheaper long-context inference, if it scales, lowers the barrier for smaller teams to compete on specific tasks without billion-dollar compute budgets.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For infrastructure providers:</strong> <span>Worth tracking, not over-reacting to. Architecture research like this typically takes years to show up in deployed frontier systems, if it does at all.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For enterprise buyers:</strong> <span>The practical takeaway is unchanged: evaluate models on benchmarks relevant to your use case, not on architecture headlines.</span></div>
-      </div>
-    </div>
-
-    <h2>🤖 The Agentic Economy: Real Revenue, Real Failure Rates</h2>
-
-    <p>This week reinforces a pattern that's been building all year in <strong>agentic AI</strong> — autonomous systems that plan, execute, and adapt with reduced human direction.</p>
-
-    <p><strong>Salesforce's Agentforce</strong> has scaled to roughly <strong>$1.2 billion in ARR</strong> across 18,500 customers as of its most recent disclosures, up sharply from $540 million in Q3 FY26 and $800 million in Q4 — a trajectory that underlines real enterprise pull, not just pilot enthusiasm. At the same time, Gartner has forecast that a substantial share of agentic AI projects will be cancelled before reaching production, underscoring the gap between pilots and durable deployments. The data discipline and process clarity an organization brings to a rollout still matters more than which model it picks.</p>
-
-    <div class="implications">
-      <div class="impl-title">The Implications</div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For enterprises:</strong> <span>High project cancellation rates point to an implementation problem more than a technology one. Clean data governance and clearly defined processes tend to separate the agentic projects that survive from the ones that don't.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For AI vendors:</strong> <span>The market is splitting between vendors who can get agents into production at scale — Salesforce's ARR trajectory being the clearest example — and vendors stuck in pilot purgatory. Implementation methodology is becoming the real differentiator.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For CIOs:</strong> <span>2026 is shaping up as the year agentic ROI needs to show up in the numbers, or budget attention shifts to the next priority.</span></div>
-      </div>
-      <div class="impl-item">
-        <div class="impl-bullet"></div>
-        <div class="impl-text"><strong>For the workforce:</strong> <span>Agentforce's ARR growth represents tasks increasingly handled without direct human execution. The displacement conversation is showing up in vendor earnings calls now, not just in forecasts.</span></div>
-      </div>
-    </div>
-
-    <h2>📅 What to Watch Next Week</h2>
-
-    <table class="watch-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Event</th>
-          <th>Why It Matters</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>June 29-30</td>
-          <td><strong>Global AI Show Riyadh</strong></td>
-          <td>Saudi's flagship AI summit — sovereign AI, infrastructure, and the agentic economy. If you're not there, your competitors are.</td>
-        </tr>
-        <tr>
-          <td>June 29-30</td>
-          <td><strong>Data Centre Infrastructure Summit UAE</strong></td>
-          <td>Next-gen data center buildout — relevant for regional compute capacity and partnership opportunities.</td>
-        </tr>
-        <tr>
-          <td>Ongoing</td>
-          <td><strong>Stargate UAE buildout</strong></td>
-          <td>The first international Stargate deployment continues to be the benchmark watch item for sovereign AI infrastructure in the region.</td>
-        </tr>
-        <tr>
-          <td>2H 2026</td>
-          <td><strong>OpenAI / Anthropic IPO timelines</strong></td>
-          <td>Both companies have filed confidentially; timing and final valuations remain unconfirmed and worth tracking as disclosures emerge.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="takeaways">
-      <h2>🎯 Key Takeaways for Decision Makers</h2>
-      <div class="tk-item">
-        <div class="tk-num">1</div>
-        <div class="tk-text"><strong>The UAE's Federal AI Authority changes the procurement conversation.</strong> Government RFPs are likely to increasingly favour demonstrable agentic capability over conventional automation. If you sell to federal or local entities, your architecture story needs to keep up.</div>
-      </div>
-      <div class="tk-item">
-        <div class="tk-num">2</div>
-        <div class="tk-text"><strong>Saudi is executing, not just planning.</strong> Capital deployment and infrastructure buildout are moving fast, creating a seller's market for firms with genuine AI deployment expertise rather than strategy alone.</div>
-      </div>
-      <div class="tk-item">
-        <div class="tk-num">3</div>
-        <div class="tk-text"><strong>The IPO window is open, but nothing is final.</strong> OpenAI and Anthropic's confidential filings signal intent, not certainty. Gulf capital's role in frontier AI funding is well-established context, not breaking news this week — but it remains central to how this story plays out.</div>
-      </div>
-      <div class="tk-item">
-        <div class="tk-num">4</div>
-        <div class="tk-text"><strong>Export controls are now a live policy tool, applied to specific models.</strong> The Anthropic action is a reminder that frontier model access can change abruptly. Sovereign AI capacity is increasingly framed as insurance against that volatility, not just an efficiency play.</div>
-      </div>
-      <div class="tk-item">
-        <div class="tk-num">5</div>
-        <div class="tk-text"><strong>Agentic AI revenue is real, and so is implementation risk.</strong> Salesforce's ARR growth proves enterprise demand exists. High project cancellation rates prove getting from pilot to production is still genuinely hard. The winners will be organizations that fix data discipline before deploying autonomy.</div>
-      </div>
-    </div>
-
-  </div>
-</article>
-
-<section class="cta-section">
-  <div class="container">
-    <h3>Move from Headlines to Implementation</h3>
-    <p>If your organisation is trying to make sense of where AI is really heading — beyond hype, beyond tools, and into strategy, risk, governance, and operational advantage — the next step is not more noise. It is a framework.</p>
-    <a href="/contact/" class="cta-btn">Book an AI Readiness Assessment →</a>
   </div>
 </section>
 
-<footer class="footer">
+<!-- REALITY CHECK -->
+<section class="reality">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Honest Picture</p>
+    <div class="reality-grid">
+      <div>
+        <h2 class="reality-statement">Most AI strategies are already <em>obsolete</em> before they're delivered.</h2>
+        <p style="margin-top:20px;font-size:16px;color:var(--text-muted);line-height:1.75;">The gap between organisations that get this right and those that don't is widening every quarter. AGI-capable systems are entering the enterprise. Agentic workflows are replacing entire job functions. The question is no longer <em>whether</em> to act — it's whether your strategy is built for the world that's arriving, not the one that's already gone.</p>
+      </div>
+      <div class="reality-points">
+        <div class="reality-point">
+          <div class="icon">⚠️</div>
+          <div><strong>Tool-First, Strategy-Never</strong><p>Most organisations buy AI tools before defining what outcomes they need. The result: expensive subscriptions, no ROI, and a leadership team that loses confidence in AI entirely.</p></div>
+        </div>
+        <div class="reality-point">
+          <div class="icon">⚠️</div>
+          <div><strong>Generative AI Ceiling</strong><p>ChatGPT and copilots are the starting line, not the finish line. Companies treating generative AI as the endgame will be structurally outcompeted by those deploying agentic and autonomous systems.</p></div>
+        </div>
+        <div class="reality-point">
+          <div class="icon">⚠️</div>
+          <div><strong>No Board Mandate</strong><p>Without a credible, financially-grounded AI strategy, AI initiatives stall in middle management and never reach the investment scale needed to transform.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">What's Included</p>
+    <h2 class="section-title">Everything You Need to Lead<br>with Autonomous AI</h2>
+    <p class="section-sub">Not a slide deck. Not a generic framework. A living strategic architecture — built for agentic AI, ready for AGI-adjacent capabilities, measurable from day one.</p>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01 — FOUNDATION</div>
+        <h3>Agentic Readiness Audit</h3>
+        <p>A forensic assessment of your data infrastructure, automation maturity, and organisational capability — scored against what agentic AI actually requires to function at scale. Not where you are today. Where you need to be.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02 — ARCHITECTURE</div>
+        <h3>Autonomous AI Roadmap</h3>
+        <p>A phased implementation plan that moves you from reactive AI use to proactive, self-directed agent systems — with ROI milestones, tooling decisions, integration points, and a clear build sequence your team can execute against.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03 — GOVERNANCE</div>
+        <h3>AGI Risk & Opportunity Framework</h3>
+        <p>The transition to AGI-adjacent systems carries both competitive opportunity and governance risk. We map both: where autonomous AI creates defensible advantage, and where your organisation needs controls, oversight, and ethical guardrails.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04 — INVESTMENT</div>
+        <h3>Board-Level Business Case</h3>
+        <p>Executive-ready documentation that makes autonomous AI investable at board level — with financial modelling, scenario analysis, risk frameworks, and competitive benchmarking that holds up to CFO and investor scrutiny.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">05 — ALIGNMENT</div>
+        <h3>Organisational Design for AI</h3>
+        <p>Agentic AI changes how teams should be structured. We map the functions that will be transformed, augmented, or replaced — and design the human-AI collaboration model that maximises performance without cultural disruption.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">06 — CONTINUITY</div>
+        <h3>Competitive Intelligence & Benchmarking</h3>
+        <p>Where are your competitors right now, and where will they be in 18 months? We benchmark your AI position against sector peers globally, identify the gaps that matter, and build the strategic response before they do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR YOU -->
+<section class="foryou">
+  <div class="section-inner">
+    <p class="section-eyebrow">Is This For You</p>
+    <h2 class="section-title">Built for Leaders Who Know<br>the Window Is Closing</h2>
+    <div class="foryou-grid">
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>You're a CEO who knows AI is strategic</strong> but your organisation is running isolated experiments with no architecture connecting them — and no board mandate to scale.</p></div>
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>You've heard about agentic AI and AGI</strong> but don't have a clear picture of what they mean for your specific sector, operating model, or competitive position in the next 24 months.</p></div>
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>Your leadership team is split</strong> — some want to move fast, others are risk-averse. You need a single, credible strategic view that aligns the executive team and creates permission to invest.</p></div>
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>You've invested in AI tools</strong> but can't point to measurable business outcomes. You need a strategy that reverses that — starting with what's actually broken and what's worth fixing first.</p></div>
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>You're preparing for a major AI investment</strong> and need the due diligence, financial modelling, and board-ready documentation to get approval and execute with confidence.</p></div>
+      <div class="foryou-item"><div class="arrow">→</div><p><strong>You want to position your business</strong> as an AI-native operator — attracting talent, investors, and enterprise clients who expect AI capability as a baseline, not a differentiator.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">The Process</p>
+    <h2 class="section-title">How We Build Your<br>AI Operating Strategy</h2>
+    <div class="process-track">
+      <div class="process-step">
+        <div class="step-dot">01</div>
+        <div class="step-content">
+          <div class="step-label">Week 1–2 · Discovery</div>
+          <h3>Stakeholder Intelligence & Systems Mapping</h3>
+          <p>We conduct structured interviews with your executive team, audit your current tech stack, map your data flows, and score your AI readiness across six dimensions — people, process, data, infrastructure, governance, and culture. We enter your world before we prescribe anything.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-dot">02</div>
+        <div class="step-content">
+          <div class="step-label">Week 2–4 · Architecture</div>
+          <h3>Autonomous AI Strategy Design</h3>
+          <p>We design your bespoke AI operating model — identifying where agentic systems can replace manual execution, where LLM-powered intelligence augments decision-making, and where autonomous workflows create compounding advantage. Every recommendation is sequenced by commercial impact.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-dot">03</div>
+        <div class="step-content">
+          <div class="step-label">Week 4–6 · Modelling</div>
+          <h3>Financial Modelling & Risk Framework</h3>
+          <p>We build the financial model for your AI programme — cost-to-deploy, expected ROI, time-to-value, and payback period. We also map the governance architecture: what oversight mechanisms, human-in-the-loop controls, and risk frameworks you need as your AI capability scales toward autonomy.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-dot">04</div>
+        <div class="step-content">
+          <div class="step-label">Week 6+ · Delivery</div>
+          <h3>Board Presentation & Implementation Handover</h3>
+          <p>You receive a complete board-ready strategy deck, a phased implementation plan your team can execute, vendor and tooling recommendations, and a dedicated handover session with your leadership team. Not a document that sits in a drawer — a plan with an owner and a timeline.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGI HORIZON -->
+<section class="agi-horizon">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Horizon</p>
+    <h2 class="section-title">We Are Not Planning for AI.<br>We're Planning for AGI.</h2>
+    <div class="agi-grid">
+      <div class="agi-text">
+        <p>Artificial General Intelligence — systems that can reason, plan, and execute across domains without human direction — is no longer a distant theoretical prospect. The leading AI labs are publishing AGI timelines of 2–5 years. Enterprise-grade agentic systems that operate autonomously across complex workflows are available today.</p>
+        <p>Every strategy we build accounts for this horizon. We don't design for the AI landscape of 2023 — we design for the capability environment of 2026 and beyond. That means your roadmap includes the transition from supervised AI use to autonomous AI operation, with the governance structures and organisational design to match.</p>
+        <p>The organisations that will win are the ones that build their AI infrastructure now — so that when AGI-adjacent capabilities become commercially accessible, they are already positioned to absorb and deploy them, rather than scrambling to catch up.</p>
+      </div>
+      <div class="agi-callouts">
+        <div class="agi-callout">
+          <strong>Agentic AI — Now</strong>
+          <p>Autonomous agents that execute multi-step tasks, make decisions, and operate across systems without human involvement. Deployable today.</p>
+        </div>
+        <div class="agi-callout">
+          <strong>Narrow AGI — Emerging</strong>
+          <p>Domain-specific systems that match or exceed human expert performance. Already live in legal research, financial analysis, and software development.</p>
+        </div>
+        <div class="agi-callout">
+          <strong>General AGI — The Horizon</strong>
+          <p>Cross-domain reasoning, planning, and execution without human direction. The organisations building now will be the ones who benefit when it arrives.</p>
+        </div>
+        <div class="agi-callout" style="border-left-color: var(--purple);">
+          <strong>Your Position</strong>
+          <p>We assess where your organisation sits on this spectrum and design the roadmap that moves you forward — at a pace and risk level your business can sustain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">Common Questions</p>
+    <h2 class="section-title">Frequently Asked</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does an AI strategy engagement take? <span class="chevron">+</span></button>
+        <div class="faq-a">Engagements typically run 4–6 weeks from kickoff to board deck delivery. Timeline depends on organisational size, complexity, and how quickly stakeholders are available for interviews. Enterprise engagements with multi-department scope are scoped individually.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need a technical background to benefit from this? <span class="chevron">+</span></button>
+        <div class="faq-a">No. Our AI strategy work is designed for business leaders, not engineers. We translate AI capability — including agentic systems, autonomous workflows, and AGI-adjacent tools — into plain-language business decisions, ROI models, and board-ready documentation that any executive can act on and defend.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's the difference between your approach and a traditional management consultancy? <span class="chevron">+</span></button>
+        <div class="faq-a">Traditional consultancies hire generalists who research AI between client calls. We are AI specialists — practitioners who build agentic systems, deploy autonomous workflows, and track AGI developments in real time. Our strategy work is grounded in what actually works in production, not what looks good in a framework deck.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What industries do you work with? <span class="chevron">+</span></button>
+        <div class="faq-a">We work across professional services, financial services, FMCG, retail, healthcare, cybersecurity, real estate, SaaS, and franchise operations — primarily in UAE, GCC, and MENA, with global clients in the UK, Europe, US, and Asia-Pacific. Our methodology adapts to your sector; we don't apply cookie-cutter frameworks.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can you also build the AI systems you recommend? <span class="chevron">+</span></button>
+        <div class="faq-a">Yes. Strategy and implementation are separate engagements but designed to connect. Many clients move from AI Strategy directly to our Agentic AI Build service, where we design and deploy the autonomous systems identified in the strategy phase. We can also bundle both for a discount — ask us about it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="cta-inner">
+      <h2>Ready to Build Your<br><em>Autonomous AI Strategy?</em></h2>
+      <p>Book a free discovery call. We'll assess where you are, where the opportunity is, and what a credible AI operating strategy looks like for your business — before you commit to anything.</p>
+      <div class="cta-actions">
+        <a href="https://www.neuralhorizonsai.com/ai-audit/" class="btn-primary">⚡ Take Free Audit</a>
+        <a href="https://wa.me/971585697562" class="btn-secondary">WhatsApp Us</a>
+      </div>
+      <p class="cta-note">Free · No pitch call · Response within 24 hours</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">NH</div>
-      Neural Horizons AI
+      <img src="https://www.neuralhorizonsai.com/images/logo.jpg" alt="Neural Horizons AI" />
+      <p>Specialist AI & digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
+      <a href="https://www.neuralhorizonsai.com/ai-audit" class="btn-primary" style="font-size:13px;padding:10px 20px;display:inline-flex;">⚡ Take Free Audit</a>
     </div>
-    <div class="footer-links">
-      <a href="/">Home</a>
-      <a href="/blog/">Blog</a>
-      <a href="/services/">Services</a>
-      <a href="/contact/">Contact</a>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="https://www.neuralhorizonsai.com/">Home</a>
+      <a href="https://www.neuralhorizonsai.com/about">About</a>
+      <a href="https://www.neuralhorizonsai.com/zonar-os">Zonar OS™</a>
+      <a href="https://www.neuralhorizonsai.com/case-studies">Use Cases</a>
+      <a href="https://www.neuralhorizonsai.com/blog">Insights / Blog</a>
+      <a href="https://www.neuralhorizonsai.com/playbooks">Playbooks & Members</a>
+      <a href="https://www.neuralhorizonsai.com/faq">FAQ</a>
     </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="https://www.neuralhorizonsai.com/ai-audit">AI Audit</a>
+      <a href="https://www.neuralhorizonsai.com/services/consultation">Consultation</a>
+      <a href="https://www.neuralhorizonsai.com/services/ai-strategy">AI Strategy</a>
+      <a href="https://www.neuralhorizonsai.com/services/digital-transformation">Digital Transformation</a>
+      <a href="https://www.neuralhorizonsai.com/agentic-ai">Agentic AI Build</a>
+      <a href="https://www.neuralhorizonsai.com/zonar-os">Zonar OS™ Implementation</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/liwarren1/" title="LinkedIn">in</a>
+        <a href="https://www.facebook.com/profile.php?id=61579054417326" title="Facebook">f</a>
+        <a href="https://www.instagram.com/lisa.warren.638471/" title="Instagram">ig</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Neural Horizons AI. All Rights Reserved.</p>
+    <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
   </div>
 </footer>
 
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
 </body>
 </html>
