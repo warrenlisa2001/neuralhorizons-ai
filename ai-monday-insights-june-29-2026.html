@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Monday Insights — 29 June 2026 | Neural Horizons AI</title>
+<meta name="description" content="This week's AI Monday Insights: Anthropic accuses Alibaba of the largest AI theft in history, OpenAI unveils its first custom chip, GPT-5 cracks a medical mystery, and the Agentjacking attack every enterprise needs to know about." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #12121A;
+    --border: #1E1E2E;
+    --text: #E8E8F0;
+    --muted: #8888A8;
+    --green: #00FF88;
+    --purple: #8A2BE2;
+    --gradient: linear-gradient(135deg, #00FF88, #8A2BE2);
+    --font: 'Manrope', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  .post-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 28px;
+  }
+  .post-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--green);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post-meta {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 48px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .lead {
+    font-size: 1.18rem;
+    font-weight: 400;
+    color: #C0C0D8;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    padding-left: 20px;
+    border-left: 3px solid var(--green);
+  }
+
+  .story { margin-bottom: 52px; }
+
+  .story-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: #F0F0FA;
+  }
+
+  p { margin-bottom: 18px; color: #C0C0D8; }
+  p:last-child { margin-bottom: 0; }
+
+  .insight-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-top: 22px;
+    font-size: 0.95rem;
+  }
+  .insight-box strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .insight-box p { margin: 0; color: var(--text); }
+
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 48px 0;
+  }
+  .stat-cell {
+    background: var(--surface);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat-cell .num {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    display: block;
+  }
+  .stat-cell .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+    display: block;
+  }
+
+  .cta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 36px 32px;
+    text-align: center;
+    margin-top: 64px;
+  }
+  .cta-block p { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--gradient);
+    color: #000;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .author-line {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gradient);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    color: #000;
+  }
+  .author-info { font-size: 14px; color: var(--muted); }
+  .author-info strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
+
+  @media (max-width: 600px) {
+    .stats-strip { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="post-label">AI Monday Insights</div>
+
+  <h1>The Week AI Went to War — With Itself</h1>
+
+  <div class="post-meta">
+    <span>29 June 2026</span>
+    <span>·</span>
+    <span>Lisa Warren</span>
+
+  </div>
+
+  <p class="lead">In the seven days to 29 June, Anthropic accused Alibaba of the largest AI capability theft on record, OpenAI unveiled its first custom silicon to break free from Nvidia, a new attack class called Agentjacking hit 2,388 organisations, GPT-5 solved a three-year immunology mystery, and the US confirmed it will gate frontier model releases at the federal level. This is the week that defined the new rules of the AI industry. Here is what every enterprise leader needs to understand.</p>
+
+  <hr class="divider" />
+
+  <!-- STORY 1 -->
+  <div class="story">
+    <div class="story-tag">AI Geopolitics · Confirmed 25 June</div>
+    <h2>Anthropic Accuses Alibaba of Running 29 Million Fake Queries to Clone Claude</h2>
+    <p>On 25 June, Bloomberg and CNBC confirmed the contents of a letter Anthropic sent to US Senators Tim Scott and Elizabeth Warren on 10 June. The allegation: operators linked to Alibaba's Qwen AI lab used approximately 25,000 fraudulent accounts to run 28.8 million exchanges with Claude between 22 April and 5 June 2026. Anthropic called it the largest known distillation attack against the company to date — and took the evidence directly to the White House and Congress.</p>
+    <p>Distillation is a technique where a company sends thousands of carefully crafted prompts to a competitor's model, harvests all the outputs, and uses that data to train its own model. No passwords stolen. No firewalls breached. The attackers simply used Claude exactly as any legitimate user would — at industrial scale, through fake accounts. According to Anthropic's letter, the campaign specifically targeted Claude's most strategically valuable capabilities: agentic reasoning, software engineering proficiency, and long-horizon task completion. The capabilities that enterprises are paying the most for.</p>
+    <p>The scale dwarfs anything seen before. In February, Anthropic had named three other Chinese labs — DeepSeek, Moonshot, and MiniMax — for collectively running 16 million exchanges through 24,000 fraudulent accounts. Alibaba's alleged campaign exceeded all three combined in six weeks. Alibaba has not publicly responded. Its shares fell approximately 3% on the news.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>The agentic reasoning capabilities being targeted are exactly the capabilities enterprises are building competitive advantage on right now. This is not an abstract IP dispute between labs. It is a signal that the most valuable AI capabilities — the ones that differentiate your business — are the primary target. If your AI strategy depends on exclusive access to frontier reasoning, your risk register needs to account for the fact that those capabilities are being actively harvested at industrial scale by well-resourced competitors.</p>
+    </div>
+  </div>
+
+  <!-- STORY 2 -->
+  <div class="story">
+    <div class="story-tag">AI Hardware · 24 June</div>
+    <h2>OpenAI Unveils Jalapeño — Its First Custom Inference Chip, Built With Broadcom</h2>
+    <p>On 24 June, OpenAI and Broadcom physically unveiled Jalapeño, OpenAI's first custom AI inference processor. The chip was designed from scratch in nine months — roughly half the typical ASIC development timeline — and is purpose-built for large language model inference, not training. Early testing shows substantially better performance-per-watt than current state-of-the-art GPU alternatives, with early reports suggesting approximately 50% lower inference cost versus mainstream AI GPUs.</p>
+    <p>The strategic intent is clear. Inference — running a trained model in response to user requests — is where AI costs are crushing margins. Every ChatGPT answer, every Codex task, every API call burns inference cycles. OpenAI has been entirely dependent on Nvidia GPUs for inference to this point, putting it at a structural cost disadvantage against Google, which uses its own TPUs, and Amazon, which uses Trainium. Jalapeño is the first step toward closing that gap. Deployment at Microsoft Azure and partner data centres is targeted for end of 2026, with volume production planned for 2027.</p>
+    <p>GPT-5.6 also entered the picture this week — but with a government complication. On 27 June, Reuters confirmed that OpenAI delayed the full public rollout of GPT-5.6 at the request of the Office of the National Cyber Director and the Office of Science and Technology Policy. It marks the first time the US government has formally staged a frontier model release for national security review. Developers and enterprise teams expecting access now face a case-by-case federal approval process.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>Two things happened in the same week: OpenAI built a chip to reduce its dependency on Nvidia, and the US government confirmed it can gate access to frontier models at will. For enterprises building on top of any single AI provider's infrastructure, both events reinforce the same conclusion. Vendor concentration in AI is a strategic liability. Model-agnostic architecture is not an engineering preference — it is a business continuity requirement.</p>
+    </div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-cell">
+      <span class="num">28.8M</span>
+      <span class="label">Claude exchanges in Alibaba's alleged distillation campaign</span>
+    </div>
+    <div class="stat-cell">
+      <span class="num">~50%</span>
+      <span class="label">Claimed inference cost reduction from OpenAI's Jalapeño chip</span>
+    </div>
+    <div class="stat-cell">
+      <span class="num">85%</span>
+      <span class="label">Exploitation rate of the new Agentjacking attack class</span>
+    </div>
+    <div class="stat-cell">
+      <span class="num">2,388</span>
+      <span class="label">Organisations affected by Agentjacking at disclosure</span>
+    </div>
+  </div>
+
+  <!-- STORY 3 -->
+  <div class="story">
+    <div class="story-tag">Agentic Security · Week of 22 June</div>
+    <h2>Agentjacking: The New Attack Class Targeting Your AI Coding Agents</h2>
+    <p>A new attack class called Agentjacking was disclosed this week and is directly relevant to any enterprise running Claude Code, Cursor, or OpenAI Codex. The attack works through fake Sentry error reports that contain markdown injection. When an AI coding agent reads the injected error report — which it is designed to do as part of debugging — it interprets the injected instructions as legitimate guidance and executes malicious commands. The attack achieved an 85% exploitation rate and had already affected 2,388 organisations at the time of disclosure.</p>
+    <p>The reason this is significant beyond the raw numbers: developers have trained themselves to trust their coding agents. When Claude Code identifies an error and recommends a fix, you act on it. That trust is the attack surface Agentjacking exploits. The mitigation is straightforward but requires a deliberate habit change: all output from error-tracking platforms must be treated as untrusted input before being passed to an AI coding agent. The agent should never automatically execute instructions that originate from external monitoring tools without human review of the original source.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>Agentjacking illustrates the core governance gap in most enterprise agentic deployments: agents are granted implicit trust in data sources they were not designed to be sceptical of. Your AI governance framework needs to define, explicitly, which data sources an agent is permitted to act on autonomously and which require human confirmation. This is not a security team problem. It is an agentic architecture decision that should be made before deployment, not after the first incident.</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- STORY 4 -->
+  <div class="story">
+    <div class="story-tag">AI in Science · 24 June</div>
+    <h2>GPT-5 Pro Cracked a Three-Year Immunology Mystery — and Predicted an Unpublished Result</h2>
+    <p>On 24 June, OpenAI published the account of immunologist Dr. Derya Unutmaz, who used GPT-5 Pro to revisit a three-year-old puzzle about how glucose affects T cell development — immune cells that fight viruses, cancer, and autoimmune disease. The finding had stalled because the data was too complex to synthesise manually across hundreds of intersecting papers. GPT-5 Pro identified the mechanism within a single research session.</p>
+    <p>The more striking result: GPT-5 Pro correctly predicted the outcome of an experiment Unutmaz had already conducted but not yet published. The model could not have found the result through web search — it did not exist publicly. The implication is that frontier models have now reached a level of scientific understanding that allows them to reason predictively about experimental outcomes in specialised domains, not merely retrieve and summarise existing knowledge. Unutmaz described the models as functioning more like research collaborators than search tools.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>The shift from AI as a retrieval tool to AI as a reasoning collaborator in specialised domains is the inflection point that reframes every enterprise AI use case. If a frontier model can predict the outcome of an unpublished experiment in immunology, the question for your organisation is not what tasks AI can assist with — it is what decisions your domain experts are currently making that AI should already be a mandatory input to.</p>
+    </div>
+  </div>
+
+  <!-- STORY 5 -->
+  <div class="story">
+    <div class="story-tag">AI Regulation · 29 June</div>
+    <h2>Colorado's AI Act Is Effectively Dead — and That Tells You Everything About US AI Regulation</h2>
+    <p>Today, 30 June, was the original effective date of the Colorado AI Act — the first comprehensive US state AI law, enacted in 2024. It never took effect. Governor Polis signed a replacement bill (SB 26-189) on 14 May 2026, repealing the original framework entirely and pushing the new, significantly narrower law to January 1, 2027. The duty of care standard, mandatory risk management programmes, annual impact assessments, and algorithmic discrimination obligations are all gone. The replacement focuses on disclosure and transparency requirements only.</p>
+    <p>The story behind the collapse is instructive. xAI filed a constitutional challenge in April 2026. The DOJ intervened to support the challenge. The Colorado Attorney General stipulated to a stay. A federal magistrate judge issued an injunction. The White House issued executive orders seeking to preempt state AI laws at the national level. What was positioned as the landmark US state AI framework — the one that was supposed to set the standard for the rest of the country — was dismantled under coordinated federal pressure within months of its effective date. The US regulatory posture is now clearly converging on transparency and disclosure, not the substantive risk management model Europe adopted.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>For MENA enterprises looking at the global regulatory picture: the US and EU are now on fundamentally divergent paths. The US is moving toward federal preemption and disclosure-light frameworks. The EU AI Act's risk-based obligations remain in force. For organisations operating across both jurisdictions — and most serious enterprises do — your AI governance architecture needs to be built to the higher standard by design. Compliance arbitrage between jurisdictions is a short-term play. Governance that survives both environments is a durable competitive asset.</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- UAE SPOTLIGHT -->
+  <div class="story">
+    <div class="story-tag">UAE Spotlight · 23 June</div>
+    <h2>Abu Dhabi's MGX Closes a $50 Billion AI Fund — The Largest of Its Kind</h2>
+    <p>On 23 June, Bloomberg confirmed that MGX — Abu Dhabi's state-backed AI investment firm, chaired by UAE National Security Adviser Sheikh Tahnoon bin Zayed Al Nahyan — has raised close to $50 billion from regional sovereign wealth funds, global pension funds, and large institutional investors. The fund has already begun deploying capital. The minimum LP ticket stood at $500 million, making this exclusively institutional-grade capital at a scale that has no precedent in dedicated AI investment.</p>
+    <p>The strategic significance goes beyond the number. MGX is currently the only investor globally with active stakes in all three frontier AI labs — OpenAI, Anthropic, and xAI — alongside major infrastructure partnerships with BlackRock, Microsoft, and Nvidia. It was also a founding partner in the $500 billion Stargate Project and co-led the $40 billion acquisition of Aligned Data Centers in October 2025, the largest data centre deal ever recorded. The $50 billion raise widens MGX's capacity to pursue deals that state capital alone could not support, and signals that global institutional investors — Western pension funds included — are now prepared to put long-duration capital behind Abu Dhabi's AI infrastructure agenda at global scale.</p>
+    <p>For context: MGX is targeting over $100 billion in total assets under management and has signalled deployment of up to $10 billion annually in AI investments going forward. Abu Dhabi is not positioning itself as a passive capital exporter. It is positioning itself as an active builder and co-owner of the infrastructure that will run frontier AI for the next decade.</p>
+    <div class="insight-box">
+      <strong>Neural Horizons Perspective</strong>
+      <p>The $50 billion MGX raise is the clearest signal yet that the Gulf's AI ambition has moved from policy statements to structural ownership of global AI infrastructure. For enterprises in the UAE and MENA: the capital environment for AI deployment here is unlike anywhere else in the world right now. The question for regional business leaders is not whether the infrastructure will be built — it will. The question is whether your organisation is building the internal capability to leverage it before your competitors do.</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="story">
+    <div class="story-tag">This Week's Signal</div>
+    <h2>What the Week Means for Enterprise AI Leaders</h2>
+    <p>Five stories. One coherent signal. The rules governing who can build AI, who can access it, who can copy it, and who can attack it are being rewritten in real time — and they are not being written by the technology teams. They are being written in congressional hearing rooms, federal courtrooms, chip fabrication plants, and government export control offices.</p>
+    <p>The enterprises that will lead in this environment are not the ones with the fastest AI adoption. They are the ones with the most resilient AI architecture: model-agnostic, governance-first, with human oversight built into every high-stakes agentic workflow. The capability race is real. The infrastructure and governance race is the one that determines who stays in it.</p>
+  </div>
+
+  <div class="author-line">
+    <div class="author-avatar">LW</div>
+    <div class="author-info">
+      <strong>Lisa Warren</strong>
+      Founder & CEO, Neural Horizons AI · Agentic AI Strategist · Dubai, UAE<br />
+      One to Watch 2026 · Board Member, Green Economy Partnership
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <p>Building agentic AI in a week like this one requires more than a proof of concept. It requires architecture that survives the environment. Neural Horizons AI works with MENA enterprises to design, deploy, and govern autonomous systems built to last.</p>
+    <a class="cta-btn" href="https://calendly.com/neuralhorizonsai-support">Book a Strategy Call</a>
+  </div>
+
+</div>
+</body>
+</html>
