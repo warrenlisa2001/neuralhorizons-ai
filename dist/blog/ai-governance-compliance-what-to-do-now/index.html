@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Governance & Compliance: What Every Company Needs to Do Now — Neural Horizons AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --bg:#0A0A0F;
+    --cloud:#EDEFF7;
+    --smoke:#D3D6E0;
+    --steel:#BCBFCC;
+    --space:#9DA2B3;
+    --graphite:#6E7180;
+    --arsenic:#40424D;
+    --phantom:#1E1E24;
+    --black:#000000;
+    --grad: linear-gradient(90deg,#00FF88 0%, #1E90FF 50%, #8A2BE2 100%);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--cloud);font-family:'Manrope',sans-serif;font-weight:400;line-height:1.7;}
+  a{color:inherit;}
+  .container{max-width:800px;margin:0 auto;padding:0 24px;}
+  .wide{max-width:1040px;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,15,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--phantom);}
+  .nav{max-width:1040px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand img{height:30px;width:auto;display:block;}
+  .brand span{font-size:17px;font-weight:700;color:var(--white);letter-spacing:-0.01em;}
+  nav.links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:500;color:var(--space);}
+  nav.links a{text-decoration:none;}
+  nav.links a:hover{color:var(--white);}
+  .cta-btn{background:var(--grad);color:#04110c;font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:100px;text-decoration:none;white-space:nowrap;}
+  @media (max-width:720px){ nav.links a:not(.cta-btn){display:none;} }
+
+  .article-head{padding:56px 0 32px;border-bottom:1px solid var(--phantom);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tag{font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 12px;border-radius:100px;border:1px solid var(--arsenic);color:var(--steel);}
+  .tag.accent{border:none;background:var(--grad);color:#04110c;}
+  h1{font-size:42px;line-height:1.14;font-weight:800;color:var(--white);letter-spacing:-0.02em;margin:0 0 18px;}
+  .dek{font-size:19px;color:var(--space);margin:0 0 28px;max-width:680px;}
+  .byline{display:flex;align-items:center;gap:12px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#04110c;flex:none;}
+  .byline .name{font-weight:700;color:var(--white);font-size:15px;}
+  .byline .meta{font-size:13.5px;color:var(--space);}
+
+  .related-strip{
+    margin-top:26px;padding:16px 18px;border:1px solid var(--arsenic);border-radius:12px;
+    display:flex;align-items:center;gap:12px;background:var(--phantom);
+  }
+  .related-strip .dot{width:8px;height:8px;border-radius:50%;background:var(--grad);flex:none;}
+  .related-strip a{font-size:14px;font-weight:600;color:var(--white);text-decoration:underline;text-decoration-color:var(--arsenic);}
+  .related-strip span.lbl{font-size:13px;color:var(--space);}
+
+  .article-body{padding:44px 0;}
+  h2{font-size:28px;font-weight:700;color:var(--white);letter-spacing:-0.01em;margin:44px 0 16px;}
+  h2:first-child{margin-top:0;}
+  h3{font-size:19px;font-weight:700;color:var(--white);margin:24px 0 12px;}
+  p{font-size:16.5px;color:var(--smoke);margin:0 0 18px;}
+  ul,ol{margin:0 0 18px;padding-left:20px;}
+  li{font-size:16px;color:var(--smoke);margin-bottom:10px;}
+  li::marker{color:#1E90FF;}
+  strong{color:var(--white);font-weight:700;}
+
+  blockquote{margin:32px 0;padding:4px 0 4px 24px;border-left:3px solid;border-image:var(--grad) 1;}
+  blockquote p{font-size:19px;color:var(--white);font-style:italic;margin:0 0 10px;line-height:1.5;}
+  blockquote cite{font-size:13.5px;color:var(--space);font-style:normal;font-weight:600;}
+
+  .callout{background:var(--phantom);border:1px solid var(--arsenic);border-radius:16px;padding:30px 30px 10px;margin:8px 0 28px;}
+  .callout ul{padding-left:0;list-style:none;margin:0;}
+  .callout li{position:relative;padding-left:26px;margin-bottom:18px;}
+  .callout li::before{content:"";position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:50%;background:var(--grad);}
+
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0 30px;}
+  @media (max-width:640px){ .stat-row{grid-template-columns:1fr;} }
+  .stat{border:1px solid var(--arsenic);border-radius:14px;padding:20px;}
+  .stat .num{font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:4px;}
+  .stat .lbl{font-size:12.5px;color:var(--space);}
+
+  .quote-box{background:var(--phantom);border:1px solid var(--arsenic);border-radius:16px;padding:32px;margin:32px 0;}
+  .quote-box p.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--space);margin:0 0 14px;}
+  .quote-box p.qtext{font-size:21px;color:var(--white);font-style:italic;line-height:1.5;margin:0 0 14px;}
+  .quote-box cite{font-size:13.5px;color:var(--space);font-style:normal;font-weight:600;}
+
+  .table-wrap{overflow-x:auto;margin:24px 0 30px;border:1px solid var(--arsenic);border-radius:14px;}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  th{background:var(--phantom);color:var(--white);text-align:left;padding:14px 16px;font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;}
+  td{padding:14px 16px;border-top:1px solid var(--phantom);color:var(--smoke);}
+  tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+
+  .checklist{background:var(--phantom);border:1px solid var(--arsenic);border-radius:16px;padding:30px 30px 10px;margin:24px 0 30px;}
+  .checklist p.label{font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--space);margin-bottom:16px;}
+  .checklist ul{padding-left:0;list-style:none;margin:0;}
+  .checklist li{position:relative;padding-left:34px;margin-bottom:18px;font-size:15.5px;}
+  .checklist li::before{
+    content:"✓";position:absolute;left:0;top:-2px;width:22px;height:22px;border-radius:6px;
+    background:var(--grad);color:#04110c;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;
+  }
+  .checklist li strong{display:block;color:var(--white);margin-bottom:2px;}
+
+  .cta-block{text-align:center;padding:52px 0;border-top:1px solid var(--phantom);border-bottom:1px solid var(--phantom);}
+  .cta-block h2{margin-top:0;}
+  .cta-block p{max-width:520px;margin:0 auto 26px;}
+  .cta-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .btn-primary{background:var(--grad);color:#04110c;font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:100px;text-decoration:none;}
+  .btn-secondary{border:1px solid var(--arsenic);color:var(--white);font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:100px;text-decoration:none;}
+  .cta-fine{font-size:13px;color:var(--graphite);margin-top:18px;margin-bottom:0;}
+
+  .sources{padding:40px 0;}
+  .sources h3{font-size:15px;letter-spacing:0.04em;text-transform:uppercase;color:var(--space);margin-bottom:16px;}
+  .sources ol{padding-left:20px;margin:0;}
+  .sources li{font-size:14px;color:var(--steel);margin-bottom:8px;}
+  .sources a{color:var(--white);text-decoration:underline;text-decoration-color:var(--arsenic);}
+
+  footer{padding:52px 0 40px;border-top:1px solid var(--phantom);}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;margin-bottom:36px;}
+  @media (max-width:720px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  .foot-grid h4{font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--space);margin:0 0 14px;}
+  .foot-grid p{font-size:14px;color:var(--graphite);margin:0;}
+  .foot-grid ul{list-style:none;padding:0;margin:0;}
+  .foot-grid li{margin-bottom:10px;}
+  .foot-grid a{font-size:14px;color:var(--steel);text-decoration:none;}
+  .foot-grid a:hover{color:var(--white);}
+  .foot-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--phantom);padding-top:24px;}
+  .foot-bottom .flogo{display:flex;align-items:center;gap:8px;}
+  .foot-bottom .flogo img{height:22px;}
+  .foot-bottom .flogo span{font-weight:700;color:var(--white);font-size:14px;}
+  .foot-bottom .copy{font-size:13px;color:var(--graphite);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="wednesday-ai-insights-15-july-2026.html">
+      <img src="neural-horizons-logo.png" alt="Neural Horizons AI logo">
+      <span>Neural Horizons AI</span>
+    </a>
+    <nav class="links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="wednesday-ai-insights-15-july-2026.html">Blog</a>
+      <a href="#">Case Studies</a>
+      <a class="cta-btn" href="#">⚡ Take Free Audit</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top" class="container article-head">
+  <div class="tag-row">
+    <span class="tag accent">AI Governance</span>
+    <span class="tag">Compliance</span>
+    <span class="tag">Risk</span>
+    <span class="tag">Regulation</span>
+    <span class="tag">Enterprise Strategy</span>
+  </div>
+  <h1>AI Governance Isn't Optional Anymore: What Every Company Needs to Do Right Now</h1>
+  <p class="dek">Only 8% of organisations have a real AI governance framework, even though 88% are already running AI in production. Here's who controls the rules, what it costs to get this wrong, and exactly what to put in place before it's your name in the headline.</p>
+  <div class="byline">
+    <div class="avatar">LW</div>
+    <div>
+      <div class="name">Lisa Warren</div>
+      <div class="meta">Founder &amp; CEO, Neural Horizons AI · July 15, 2026</div>
+    </div>
+  </div>
+  <div class="related-strip">
+    <span class="dot"></span>
+    <span class="lbl">Companion piece to</span>
+    <a href="wednesday-ai-insights-15-july-2026.html">Wednesday AI Insights — 15 July 2026: The World Starts Writing AI's Rulebook →</a>
+  </div>
+</div>
+
+<div class="container article-body">
+
+  <p>In this week's <a href="wednesday-ai-insights-15-july-2026.html">Wednesday AI Insights</a>, we flagged one stat that mattered more than any product launch: only around <strong>8% of organisations globally have a comprehensive AI governance framework</strong>, even though <strong>88% are already using AI across business functions</strong>. That gap is the story. Not the next model release, not the next chip deal — the fact that most companies are running AI in production with no one clearly accountable for how it's used, what it's trained on, or what happens when it gets something wrong.</p>
+  <p>This piece is the full breakdown: who actually controls AI governance right now, what it costs companies that get it wrong, and the concrete steps to put in place before regulators, courts, or your own employees force the issue.</p>
+
+  <h2>Who controls AI governance right now</h2>
+  <p>There is no single global authority for AI. Instead, four very different regimes are setting the rules simultaneously — and most companies operating internationally are now subject to more than one at once.</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Region</th><th>Who's in charge</th><th>Approach</th></tr>
+      <tr><td><strong>European Union</strong></td><td>EU AI Office, under the EU AI Act</td><td>Binding, risk-tiered law with the highest fines in the world for non-compliance.</td></tr>
+      <tr><td><strong>United States</strong></td><td>No single federal AI law. Sector regulators (FDA, FAA, NHTSA, EEOC, FTC) plus ~38 states with their own AI statutes.</td><td>Fragmented, sector-by-sector, enforcement-driven rather than pre-emptive.</td></tr>
+      <tr><td><strong>China</strong></td><td>Cyberspace Administration of China (CAC), with the Ministry of Science and Technology and MIIT</td><td>Content and information-security controls; generative AI and recommendation algorithms must be registered with the state.</td></tr>
+      <tr><td><strong>UAE</strong></td><td>Federal AI and Data Authority (newly consolidated, July 2026)</td><td>Centralised single authority combining AI policy, digital economy, and data governance.</td></tr>
+      <tr><td><strong>Global voluntary standards</strong></td><td>NIST (US), ISO/IEC (international)</td><td>Not law, but increasingly the reference architecture regulators and auditors expect companies to demonstrate against.</td></tr>
+    </table>
+  </div>
+
+  <p>The practical implication: if you operate across even two of these jurisdictions, you don't have one AI compliance problem — you have four, and they don't agree with each other. A system that's compliant in the US under sector-specific rules can still be a high-risk system requiring conformity assessment in the EU, and a registrable algorithm in China.</p>
+
+  <h2>The cost of getting this wrong</h2>
+  <p>This isn't theoretical. The fines and enforcement actions are already happening.</p>
+
+  <div class="stat-row">
+    <div class="stat"><span class="num">€35M / 7%</span><span class="lbl">EU AI Act max fine for prohibited AI practices — whichever is higher, of global turnover</span></div>
+    <div class="stat"><span class="num">€15M / 3%</span><span class="lbl">EU AI Act fine tier for high-risk system non-compliance</span></div>
+    <div class="stat"><span class="num">$3.5B+</span><span class="lbl">paid by major tech companies in AI governance fines and settlements in the past year alone</span></div>
+  </div>
+
+  <p>Some of the enforcement actions already on the record this year:</p>
+  <ul>
+    <li><strong>FTC v. Rite Aid</strong> — the FTC banned Rite Aid from using AI facial recognition in stores for five years, ordered deletion of all facial images collected, and mandated a full AI governance program with accuracy testing before any future AI surveillance tool can be deployed.</li>
+    <li><strong>Anthropic's $1.5B settlement</strong> — following findings that Claude was trained on pirated books, Anthropic agreed to delete the infringing datasets and shift to licensed training sources.</li>
+    <li><strong>A federal court ruling (SDNY, May 2026)</strong> — a government agency was found to have delegated a legally consequential sorting decision to ChatGPT without adequate human oversight or validation. The court was explicit: an organisation "cannot escape liability by scapegoating" the AI tool it chose to deploy.</li>
+    <li><strong>Montefiore Medical Center</strong> — covered in this week's Wednesday AI Insights: 12 nurses laid off and replaced with AI software, now a live labour grievance over contract language never updated for AI deployment.</li>
+  </ul>
+
+  <p>The pattern across every one of these: it was never really about the AI model failing. It was about the absence of a human process wrapped around it — no oversight, no documentation, no accountable owner, no plan for what happens when something goes wrong.</p>
+
+  <blockquote>
+    <p>"Every one of these cases has the same root cause. It's never really the model that fails — it's the absence of a human process wrapped around it. No owner, no oversight, no paper trail. That's not a technology gap. That's a management gap, and it's entirely fixable."</p>
+    <cite>— Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite>
+  </blockquote>
+
+  <h2>What companies need to do now</h2>
+  <p>None of this requires waiting for a mandate. The companies that will avoid becoming the next headline are putting the following in place now, not after an incident forces their hand.</p>
+
+  <div class="checklist">
+    <p class="label">The governance checklist</p>
+    <ul>
+      <li><strong>Name an accountable owner.</strong> A single person or committee responsible for AI governance — even part-time, even one person, as long as it isn't "everyone and no one."</li>
+      <li><strong>Build a live AI system inventory.</strong> Every model and AI tool in use, including ones brought in through vendors and SaaS products you didn't build yourself. You can't govern what you haven't catalogued.</li>
+      <li><strong>Classify by risk.</strong> Map each system against a recognised framework — NIST AI RMF (Govern, Map, Measure, Manage) or ISO/IEC 42001 — so "high-risk" isn't a guess, it's a documented assessment.</li>
+      <li><strong>Map every jurisdiction you operate in.</strong> UAE, US, EU, and China are four different rulebooks. A system compliant in one may not be compliant in another.</li>
+      <li><strong>Build human oversight into every consequential decision.</strong> The SDNY ruling is the clearest warning yet: "the AI did it" is not a legal defence. Every high-stakes AI output needs a documented human review step.</li>
+      <li><strong>Vet third-party and vendor AI.</strong> Most of your AI risk isn't the model you built — it's the fifteen SaaS tools your teams already use that quietly added AI features.</li>
+      <li><strong>Write the incident and grievance process before you need it.</strong> Montefiore shows what happens when AI deployment outruns internal process and existing labour agreements.</li>
+      <li><strong>Train your people.</strong> Employees are already using AI tools whether there's a policy or not. An unclear or absent AI use policy is itself a governance failure.</li>
+      <li><strong>Report to the board, on a schedule.</strong> AI governance that lives in a slide deck from six months ago isn't governance — it needs a standing cadence, like financial or security risk reporting.</li>
+    </ul>
+  </div>
+
+  <div class="quote-box">
+    <p class="eyebrow">Lisa Warren: the bottom line</p>
+    <p class="qtext">"Governance is not the tax you pay for using AI responsibly. It's the thing that lets you use AI at all, at scale, without it blowing up in your hands. The 8% of companies who've actually built this out aren't moving slower than everyone else — they're the ones who'll still be standing when the first wave of enforcement hits the other 92%."</p>
+    <cite>— Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite>
+  </div>
+
+  <h2>Why this can't wait</h2>
+  <p>The EU AI Act's highest-risk provisions are already enforceable, and its high-risk system deadlines — even after this year's delay — now sit at December 2027 and August 2028. That sounds distant until you remember that conformity assessments, technical documentation, and governance infrastructure take months to build properly, not weeks. The US patchwork of roughly 38 state AI laws means new obligations are landing on an ongoing basis, not a single fixed date. And as we covered in this week's <a href="wednesday-ai-insights-15-july-2026.html">Wednesday AI Insights</a>, China is actively positioning itself to shape global AI governance norms at this week's World AI Conference in Shanghai — whatever framework it proposes will influence how every multinational operating there has to comply.</p>
+  <p>None of these four regimes are waiting for companies to catch up. The only real choice a business has is whether it builds governance on its own terms, now, or has it imposed after an incident, a lawsuit, or a regulator does it for them.</p>
+
+</div>
+
+<div class="container cta-block">
+  <h2>Move from headlines to implementation</h2>
+  <p>If your organisation needs to move from "we use AI" to "we can prove how we govern it," the next step isn't more noise. It's a framework, built for your business.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="#">Book an AI Governance Audit</a>
+    <a class="btn-secondary" href="wednesday-ai-insights-15-july-2026.html">Read Wednesday AI Insights →</a>
+  </div>
+  <p class="cta-fine">Transparent pricing. Proven frameworks. Measurable outcomes.</p>
+</div>
+
+<div class="container sources">
+  <h3>Sources</h3>
+  <ol>
+    <li><a href="#">EU AI Act — Article 99, penalties</a></li>
+    <li><a href="#">EU AI Act 2026 compliance requirements and business risk updates</a></li>
+    <li><a href="#">China AI regulation: Cyberspace Administration of China (CAC) tracker</a></li>
+    <li><a href="#">US AI regulation landscape: federal agencies and state law tracker, 2026</a></li>
+    <li><a href="#">UAE federal AI and Data Authority consolidation</a></li>
+    <li><a href="#">Big Tech AI governance fines and settlements, $3.5B total</a></li>
+    <li><a href="#">FTC v. Rite Aid — AI facial recognition enforcement action</a></li>
+    <li><a href="#">Anthropic $1.5B copyright settlement</a></li>
+    <li><a href="#">SDNY ruling on government use of ChatGPT without human oversight</a></li>
+    <li><a href="#">Montefiore nurses replaced by AI software — NYSNA dispute</a></li>
+    <li><a href="#">Global AI governance framework adoption statistics (8%/88% gap)</a></li>
+    <li><a href="#">NIST AI Risk Management Framework</a></li>
+    <li><a href="#">ISO/IEC 42001 AI management system standard</a></li>
+  </ol>
+</div>
+
+<footer>
+  <div class="container wide">
+    <div class="foot-grid">
+      <div>
+        <h4>Neural Horizons AI</h4>
+        <p>Specialist AI &amp; digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="wednesday-ai-insights-15-july-2026.html">Blog</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">AI Audit</a></li>
+          <li><a href="#">AI Governance &amp; Compliance</a></li>
+          <li><a href="#">AI Strategy</a></li>
+          <li><a href="#">Agentic AI Build</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="flogo">
+        <img src="neural-horizons-logo.png" alt="Neural Horizons AI logo">
+        <span>Empowering Your Future with Seamless AI and Marketing Integration</span>
+      </div>
+      <div class="copy">© 2026 Neural Horizons AI. All Rights Reserved.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
