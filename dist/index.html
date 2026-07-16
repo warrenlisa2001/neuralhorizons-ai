@@ -745,93 +745,232 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 </section>
 
 <!-- PAIN POINTS -->
-<section class="py-20" id="pain-points" style="background:#FFFFFF;">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
+<section class="py-20 pp-section" id="pain-points" style="position:relative;overflow:hidden;">
+    <div class="pp-bg-mesh" aria-hidden="true"></div>
+    <div class="pp-bg-grid" aria-hidden="true"></div>
+    <div class="pp-orb pp-orb-a" aria-hidden="true"></div>
+    <div class="pp-orb pp-orb-b" aria-hidden="true"></div>
+    <div class="pp-orb pp-orb-c" aria-hidden="true"></div>
+
+    <div class="container mx-auto px-6" style="position:relative;z-index:2;">
+        <div class="text-center mb-10">
             <div style="display:inline-block;background:#FFF1F1;border:1px solid rgba(251,93,93,0.25);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
                 <span style="color:#D63C3C;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Sound familiar?</span>
             </div>
             <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;margin-top:0.5rem;margin-bottom:1rem;">The gaps costing you<br><span style="color:#05C793;">revenue right now.</span></h2>
-            <p class="text-xl max-w-2xl mx-auto" style="color:#5B6478;">Most UAE businesses aren't losing to competitors. They're losing to their own disconnected systems.</p>
+            <p class="text-xl max-w-2xl mx-auto" style="color:#5B6478;">Most UAE businesses aren&apos;t losing to competitors. They&apos;re losing to their own disconnected systems.</p>
+            <p class="pp-hint"><i class="fas fa-hand-pointer" aria-hidden="true"></i> Tap each card to watch the problem turn into the fix</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="pp-progress" role="status" aria-live="polite">
+            <div class="pp-progress-track"><span class="pp-progress-fill" id="ppProgressFill"></span></div>
+            <span class="pp-progress-label" id="ppProgressLabel">0 of 6 gaps closed &mdash; tap a card to begin</span>
+        </div>
 
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">Leads disappear between teams</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">A prospect shows interest on Tuesday. By Friday no one has followed up. Sales blames marketing. Marketing blames ops. The lead is cold — and the gap wins again.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">We implement an agentic AI layer that monitors every lead in real time — qualifying, routing, and following up automatically across every channel. No lead falls through again.</p>
+        <div class="pp-grid">
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="0" aria-label="Leads disappear between teams &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">1</span>
+                        <h3 class="pp-title">Leads disappear between teams</h3>
+                        <p class="pp-text">A prospect shows interest on Tuesday. By Friday no one has followed up. Sales blames marketing. Marketing blames ops. The lead is cold &mdash; and the gap wins again.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">We implement an agentic AI layer that monitors every lead in real time &mdash; qualifying, routing, and following up automatically across every channel. No lead falls through again.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">Your team is doing machine work</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">Copy-pasting between systems. Re-entering data. Chasing approvals manually. 30–40% of your team's day goes to tasks that should never need a human at all.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">We map every manual workflow and replace it with agentic automation. Your team stops being data-entry operators and starts doing the work only humans can do.</p>
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="1" aria-label="Your team is doing machine work &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">2</span>
+                        <h3 class="pp-title">Your team is doing machine work</h3>
+                        <p class="pp-text">Copy-pasting between systems. Re-entering data. Chasing approvals manually. 30&ndash;40% of your team&apos;s day goes to tasks that should never need a human at all.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">We map every manual workflow and replace it with agentic automation. Your team stops being data-entry operators and starts doing the work only humans can do.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">Decisions made without the full picture</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">Finance acts without ops data. Sales forecasts without the marketing pipeline. Every department has a piece of the truth — but no one can see the whole thing.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">We connect your systems with agentic AI that gives every decision-maker a unified view. Real-time. Cross-department. No more decisions made blind.</p>
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="2" aria-label="Decisions made without the full picture &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">3</span>
+                        <h3 class="pp-title">Decisions made without the full picture</h3>
+                        <p class="pp-text">Finance acts without ops data. Sales forecasts without the marketing pipeline. Every department has a piece of the truth &mdash; but no one can see the whole thing.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">We connect your systems with agentic AI that gives every decision-maker a unified view. Real-time. Cross-department. No more decisions made blind.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="3" aria-label="AI tools you paid for aren't delivering &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">4</span>
+                        <h3 class="pp-title">AI tools you paid for aren&apos;t delivering</h3>
+                        <p class="pp-text">You&apos;ve bought the subscriptions. They sit in one department, disconnected from everything else. Tools without architecture are expensive noise.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">We audit what you have, retire what isn&apos;t working, and architect the connections between tools that make the whole system actually function together.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="4" aria-label="Growth stalled despite good revenue &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">5</span>
+                        <h3 class="pp-title">Growth stalled despite good revenue</h3>
+                        <p class="pp-text">The business is making money but not scaling. The ceiling isn&apos;t the market &mdash; it&apos;s internal. Silos are quietly capping what&apos;s possible and nobody can see where.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">We run Zonar&trade; &mdash; our revenue diagnostic &mdash; to map exactly where your growth is being blocked. Then we remove the blockers with agentic AI that scales with you.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pp-card" tabindex="0" role="button" aria-pressed="false" data-pp-index="5" aria-label="12 months of AI meetings. Zero action. &mdash; tap to see the fix">
+                <div class="pp-card-inner">
+                    <div class="pp-card-face pp-card-front">
+                        <div class="pp-icon-wrap pp-icon-problem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke="#D63C3C" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke="#D63C3C" stroke-width="2" stroke-linecap="round"/></svg></div>
+                        <span class="pp-num">6</span>
+                        <h3 class="pp-title">12 months of AI meetings. Zero action.</h3>
+                        <p class="pp-text">You know AI is important. You&apos;ve been in the meetings. Nothing concrete has happened. The uncertainty is costing more than the action would.</p>
+                        <span class="pp-flip-cta pp-flip-cta-problem">Tap to see the fix <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="pp-card-face pp-card-back">
+                        <div class="pp-icon-wrap pp-icon-fixed"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="#05C793" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#05C793" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="pp-fixed-tag">How we close it</span>
+                        <p class="pp-text pp-text-fix">The Free AI Audit takes 2 minutes. You get an instant personalised report showing your #1 highest-ROI AI opportunity. That ends the uncertainty &mdash; and starts the action.</p>
+                        <span class="pp-flip-cta pp-flip-cta-fixed"><i class="fas fa-rotate-left"></i> Back to the problem</span>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
-
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">AI tools you paid for aren't delivering</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">You've bought the subscriptions. They sit in one department, disconnected from everything else. Tools without architecture are expensive noise.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">We audit what you have, retire what isn't working, and architect the connections between tools that make the whole system actually function together.</p>
-                </div>
-            </div>
-
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">Growth stalled despite good revenue</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">The business is making money but not scaling. The ceiling isn't the market — it's internal. Silos are quietly capping what's possible and nobody can see where.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">We run Zonar™ — our revenue diagnostic — to map exactly where your growth is being blocked. Then we remove the blockers with agentic AI that scales with you.</p>
-                </div>
-            </div>
-
-            <div class="service-card" style="border-radius:20px;padding:36px;">
-                <div style="font-size:2.5rem;margin-bottom:16px;">🔴</div>
-                <h3 style="font-size:1.2rem;font-weight:800;color:#12172B;margin-bottom:12px;">12 months of AI meetings. Zero action.</h3>
-                <p style="color:#5B6478;line-height:1.8;margin-bottom:20px;">You know AI is important. You've been in the meetings. Nothing concrete has happened. The uncertainty is costing more than the action would.</p>
-                <div style="background:#F2FBF8;border:1px solid rgba(5,199,147,0.25);border-radius:10px;padding:14px;">
-                    <div style="color:#0B7A5C;font-size:0.78rem;font-weight:700;margin-bottom:6px;">HOW WE CLOSE IT</div>
-                    <p style="color:#374050;font-size:0.88rem;line-height:1.7;">The Free AI Audit takes 2 minutes. You get an instant personalised report showing your #1 highest-ROI AI opportunity. That ends the uncertainty — and starts the action.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div style="text-align:center;margin-top:48px;">
+        <div style="text-align:center;margin-top:48px;position:relative;z-index:2;">
             <a href="/ai-audit" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#05C793,#7C3AED);color:#fff;padding:16px 40px;border-radius:9999px;font-weight:800;font-size:1rem;text-decoration:none;transition:opacity 0.2s,transform 0.2s;box-shadow:0 15px 40px rgba(5,199,147,0.25);" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-                ⚡ Find My Gaps — Free AI Audit
+                <i class="fas fa-bolt"></i> Find My Gaps &mdash; Free AI Audit
             </a>
-            <p style="color:#8A93A8;font-size:0.82rem;margin-top:12px;">2 minutes · Instant personalised report · No obligation</p>
+            <p style="color:#8A93A8;font-size:0.82rem;margin-top:12px;">2 minutes &middot; Instant personalised report &middot; No obligation</p>
         </div>
     </div>
 </section>
 
+
+<style>
+.pp-bg-mesh{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(1000px 600px at 15% 0%, rgba(239,68,68,0.12), transparent 60%),
+  radial-gradient(900px 650px at 85% 10%, rgba(249,115,22,0.09), transparent 60%),
+  radial-gradient(800px 600px at 50% 100%, rgba(5,199,147,0.10), transparent 60%),
+  linear-gradient(180deg,#FFFBFA 0%, #FFF5F4 30%, #FFFFFF 65%, #F2FBF8 100%);}
+.pp-bg-grid{position:absolute;inset:-40px;z-index:1;opacity:0.45;background-image:radial-gradient(rgba(18,23,43,0.08) 1px, transparent 1px);background-size:26px 26px;animation:ecojGridPan 50s linear infinite;pointer-events:none;}
+.pp-orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.5;z-index:1;pointer-events:none;animation:ecojOrbDrift 13s ease-in-out infinite;}
+.pp-orb-a{width:400px;height:400px;background:#F87171;top:-10%;left:-8%;}
+.pp-orb-b{width:440px;height:440px;background:#FB923C;top:-6%;right:-10%;animation-duration:16s;animation-delay:1s;}
+.pp-orb-c{width:420px;height:420px;background:#05C793;bottom:-18%;left:38%;animation-duration:19s;animation-delay:2s;}
+.pp-hint{color:#8A93A8;font-size:0.85rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-top:14px;}
+.pp-hint i{margin-right:6px;color:#D63C3C;}
+.pp-progress{max-width:520px;margin:0 auto 40px;position:relative;z-index:2;text-align:center;}
+.pp-progress-track{height:8px;border-radius:6px;background:rgba(18,23,43,0.08);overflow:hidden;margin-bottom:10px;}
+.pp-progress-fill{display:block;height:100%;width:0%;border-radius:6px;background:linear-gradient(90deg,#D63C3C,#FB923C,#05C793);transition:width 0.5s ease;}
+.pp-progress-label{color:#5B6478;font-size:0.85rem;font-weight:700;}
+.pp-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:1180px;margin:0 auto;}
+.pp-card{perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.pp-card-inner{position:relative;width:100%;min-height:420px;transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);transform-style:preserve-3d;}
+.pp-card.is-flipped .pp-card-inner{transform:rotateY(180deg);}
+.pp-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:34px 30px;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(18,23,43,0.07);}
+.pp-card-front{background:#ffffff;border:1px solid #FBE0E0;}
+.pp-card-back{background:linear-gradient(160deg,#F2FBF8,#E7F8F0);border:1px solid rgba(5,199,147,0.3);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;}
+.pp-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.pp-icon-problem{background:#FFF1F1;}
+.pp-icon-fixed{background:#DDF6EC;margin:0 auto 16px;}
+.pp-num{position:absolute;top:34px;right:30px;color:#FBC5C5;font-weight:900;font-size:1.6rem;}
+.pp-title{font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;line-height:1.35;padding-right:30px;}
+.pp-text{color:#5B6478;line-height:1.75;font-size:0.94rem;flex:1;}
+.pp-text-fix{color:#12172B;text-align:center;}
+.pp-fixed-tag{display:block;text-align:center;color:#0B7A5C;font-size:0.78rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+.pp-flip-cta{margin-top:16px;font-size:0.82rem;font-weight:700;color:#D63C3C;display:inline-flex;align-items:center;gap:6px;}
+.pp-flip-cta-fixed{color:#0B7A5C;justify-content:center;margin-top:18px;}
+.pp-card:hover .pp-card-face{box-shadow:0 16px 40px rgba(18,23,43,0.14);}
+.pp-card:focus-visible{outline:3px solid #7C3AED;outline-offset:4px;border-radius:20px;}
+@media (max-width:900px){
+  .pp-grid{grid-template-columns:1fr;max-width:480px;}
+  .pp-card-inner{min-height:400px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .pp-bg-grid,.pp-orb{animation:none !important;}
+  .pp-card-inner{transition:none;}
+}
+</style>
+
+<script>
+(function(){
+  var section = document.getElementById('pain-points');
+  if(!section) return;
+  var cards = section.querySelectorAll('.pp-card');
+  var fill = document.getElementById('ppProgressFill');
+  var label = document.getElementById('ppProgressLabel');
+  var total = cards.length;
+
+  function updateProgress(){
+    var flipped = section.querySelectorAll('.pp-card.is-flipped').length;
+    if(fill) fill.style.width = (flipped/total*100).toFixed(0)+'%';
+    if(label){
+      if(flipped === 0){
+        label.textContent = '0 of ' + total + ' gaps closed — tap a card to begin';
+      } else if(flipped === total){
+        label.textContent = 'All ' + total + ' gaps closed. Ready to fix yours?';
+      } else {
+        label.textContent = flipped + ' of ' + total + ' gaps closed';
+      }
+    }
+  }
+
+  function toggleCard(card){
+    var isFlipped = card.classList.toggle('is-flipped');
+    card.setAttribute('aria-pressed', isFlipped ? 'true' : 'false');
+    updateProgress();
+  }
+
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){ toggleCard(card); });
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggleCard(card);
+      }
+    });
+  });
+})();
+</script>
+
+<!-- HOW WE WORK -->
 <!-- HOW WE WORK -->
 <section class="py-20" style="background:#F7F9FC;border-top:1px solid #E7EAF3;">
     <div class="container mx-auto px-6">
