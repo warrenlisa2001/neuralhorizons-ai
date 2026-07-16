@@ -9,21 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:       #0A0A0F;
-    --bg2:      #111118;
-    --bg3:      #1A1A24;
+    --bg:       #FFFFFF;
+    --bg2:      #FFFFFF;
+    --bg3:      #F1F3F9;
     --white:    #FFFFFF;
     --cloud:    #EDEFF7;
     --smoke:    #D3D6E0;
     --steel:    #BCBFCC;
-    --space:    #9DA2B3;
+    --space:    #5B6478;
     --graphite: #6E7180;
     --arsenic:  #40424D;
-    --phantom:  #1E1E24;
-    --border:   rgba(255,255,255,0.07);
-    --border2:  rgba(255,255,255,0.12);
-    --grad-start: #00FF88;
-    --grad-end:   #8A2BE2;
+    --phantom:  #F1F3F9;
+    --border:   rgba(18,23,43,0.064);
+    --border2:  rgba(18,23,43,0.099);
+    --grad-start: #05C793;
+    --grad-end:   #7C3AED;
     --font: 'Manrope', sans-serif;
   }
 
@@ -51,8 +51,8 @@
                 linear-gradient(135deg, var(--grad-start), var(--grad-end)) border-box;
   }
   .grad-badge {
-    background: linear-gradient(135deg, rgba(0,255,136,0.15), rgba(138,43,226,0.15));
-    border: 1px solid rgba(0,255,136,0.3);
+    background: linear-gradient(135deg, rgba(5,199,147,0.15), rgba(124,58,237,0.15));
+    border: 1px solid rgba(5,199,147,0.3);
   }
 
   /* NAV */
@@ -64,7 +64,7 @@
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    background: rgba(10,10,15,0.96);
+    background: rgba(18,23,43,0.18);
     backdrop-filter: blur(12px);
     z-index: 100;
   }
@@ -106,8 +106,8 @@
     border-radius: 100px;
     margin-bottom: 1.75rem;
     color: var(--grad-start);
-    background: rgba(0,255,136,0.08);
-    border: 1px solid rgba(0,255,136,0.2);
+    background: rgba(5,199,147,0.08);
+    border: 1px solid rgba(5,199,147,0.2);
   }
   .hero h1 {
     font-size: clamp(2.4rem, 5.5vw, 3.8rem);
@@ -253,7 +253,7 @@
   }
   .wwd-bottom {
     padding: 1.75rem 2.75rem;
-    background: linear-gradient(135deg, rgba(0,255,136,0.04), rgba(138,43,226,0.04));
+    background: linear-gradient(135deg, rgba(5,199,147,0.04), rgba(124,58,237,0.04));
   }
   .wwd-bottom p {
     font-size: 0.95rem;
@@ -297,8 +297,8 @@
     margin-bottom: 1.1rem;
     width: fit-content;
   }
-  .t-badge.green { color: var(--grad-start); background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.25); }
-  .t-badge.grad { color: #fff; background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(138,43,226,0.2)); border: 1px solid rgba(138,43,226,0.3); }
+  .t-badge.green { color: var(--grad-start); background: rgba(5,199,147,0.1); border: 1px solid rgba(5,199,147,0.25); }
+  .t-badge.grad { color: #fff; background: linear-gradient(135deg, rgba(5,199,147,0.2), rgba(124,58,237,0.2)); border: 1px solid rgba(124,58,237,0.3); }
   .t-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
   .t-desc { font-size: 0.82rem; color: var(--graphite); line-height: 1.6; margin-bottom: 1.25rem; flex: 1; }
   .t-price { margin-bottom: 1.25rem; }
@@ -334,13 +334,13 @@
     background: transparent;
     margin-top: auto;
   }
-  .t-cta:hover { border-color: rgba(0,255,136,0.4); color: var(--grad-start); }
+  .t-cta:hover { border-color: rgba(5,199,147,0.4); color: var(--grad-start); }
   .t-cta.primary {
     background: linear-gradient(135deg, var(--grad-start), #00CFAA, var(--grad-end));
     border: none;
     color: #fff;
   }
-  .t-cta.primary:hover { opacity: 0.88; color: #fff; }
+  .t-cta.primary:hover { opacity: 0.88; color:#12172B; }
 
   /* PRODUCT BLOCK */
   .prod-block {
@@ -392,7 +392,7 @@
   }
   .plan-cell:last-child { border-right: none; }
   .plan-cell.hot {
-    background: linear-gradient(160deg, rgba(0,255,136,0.03), rgba(138,43,226,0.04));
+    background: linear-gradient(160deg, rgba(5,199,147,0.03), rgba(124,58,237,0.04));
     border-top: 2px solid transparent;
     background-clip: padding-box;
     position: relative;
@@ -460,13 +460,13 @@
     color: var(--white);
     transition: all 0.2s;
   }
-  .plan-link:hover { border-color: rgba(0,255,136,0.35); color: var(--grad-start); }
+  .plan-link:hover { border-color: rgba(5,199,147,0.35); color: var(--grad-start); }
   .plan-link.primary {
     background: linear-gradient(135deg, var(--grad-start), #00CFAA, var(--grad-end));
     border: none;
     color: #fff;
   }
-  .plan-link.primary:hover { opacity: 0.88; color: #fff; }
+  .plan-link.primary:hover { opacity: 0.88; color:#12172B; }
 
   /* SERVICES GRID */
   .svc-grid {
@@ -549,7 +549,7 @@
     padding: 13px 28px; border-radius: 9px; text-decoration: none;
     border: 1px solid var(--border2); transition: border-color 0.2s, color 0.2s;
   }
-  .btn-s:hover { border-color: rgba(0,255,136,0.4); color: var(--grad-start); }
+  .btn-s:hover { border-color: rgba(5,199,147,0.4); color: var(--grad-start); }
 
   /* DIVIDER */
   .divider { max-width: 1140px; margin: 0 auto 3.5rem; padding: 0 2rem; }

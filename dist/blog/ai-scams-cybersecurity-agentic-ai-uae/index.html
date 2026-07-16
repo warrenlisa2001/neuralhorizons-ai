@@ -16,7 +16,7 @@
       --muted: #475467;
       --soft: #667085;
       --line: #dbe3ee;
-      --brand: #0b1020;
+      --brand: #FFFFFF;
       --card: #ffffff;
       --green: #00f5a0;
       --green-deep: #0d5f43;
@@ -32,25 +32,25 @@
     img { max-width: 100%; display: block; }
     a { color: #0b63f3; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .topbar { background: #050b15; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .topbar { background: #050b15; color: white; border-bottom: 1px solid rgba(18,23,43,0.071); }
     .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
     .nav { display:flex; align-items:center; justify-content:space-between; padding: 16px 0; gap: 24px; }
     .brand { display:flex; align-items:center; gap: 14px; font-weight: 700; letter-spacing: -0.02em; }
     .brand img { width: 172px; height: auto; border-radius: 8px; }
     .nav a.cta { background: var(--green); color: #03140d; padding: 12px 18px; border-radius: 999px; font-weight: 700; }
 
-    .hero { background: radial-gradient(circle at top right, rgba(0,245,160,0.13), transparent 28%), linear-gradient(180deg, #07101d 0%, #0b1020 100%); color: white; padding: 48px 0 40px; }
+    .hero { background: radial-gradient(circle at top right, rgba(0,245,160,0.13), transparent 28%), linear-gradient(180deg, #07101d 0%, #FFFFFF 100%); color: white; padding: 48px 0 40px; }
     .hero-grid { display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 32px; align-items:center; }
-    .eyebrow { display:inline-flex; align-items:center; gap:10px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); color:#d8e4ff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:10px; padding: 8px 12px; border-radius: 999px; background: rgba(18,23,43,0.071); color:#d8e4ff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
     .eyebrow::before { content:''; width:8px; height:8px; border-radius:50%; background: var(--green); box-shadow: 0 0 16px var(--green); }
     h1 { margin:0 0 14px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.3rem, 5vw, 4.25rem); line-height: 1.02; letter-spacing:-0.03em; }
     .subhead { color:#c8d4e7; font-size: clamp(1.05rem, 1.8vw, 1.25rem); max-width: 720px; margin:0 0 24px; }
     .meta { display:flex; flex-wrap:wrap; gap: 12px 18px; color:#d8e4ff; font-size: 0.96rem; }
-    .meta strong { color: white; }
-    .hero-panel { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius: 22px; padding: 18px; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
+    .meta strong { color:#12172B; }
+    .hero-panel { background: rgba(18,23,43,0.057); border:1px solid rgba(18,23,43,0.085); border-radius: 22px; padding: 18px; box-shadow: 0 16px 40px rgba(18,23,43,0.08); }
     .hero-panel h3 { margin:0 0 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: .08em; color:#bcd0f4; }
     .stat-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .stat { background:#020813; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); }
+    .stat { background:#020813; border-radius: 16px; padding: 16px; border: 1px solid rgba(18,23,43,0.057); }
     .stat .num { display:block; color: var(--green); font-size: 2rem; font-weight: 800; line-height:1; margin-bottom: 6px; }
     .stat .lbl { display:block; color:#dce7f7; font-size: 0.9rem; line-height:1.35; }
 
@@ -62,7 +62,7 @@
     .sticky-nav li { display:grid; grid-template-columns: 30px 1fr; gap:10px; align-items:flex-start; }
     .sticky-nav .n { color: var(--green); font-weight: 800; }
     .sticky-nav a { color: #f8fbff; font-size: .94rem; line-height:1.35; }
-    .sticky-nav .mini { margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.08); color:#bfd0ea; font-size:.88rem; }
+    .sticky-nav .mini { margin-top:18px; padding-top:14px; border-top:1px solid rgba(18,23,43,0.071); color:#bfd0ea; font-size:.88rem; }
 
     .article { background: white; border-radius: 22px; box-shadow: var(--shadow); padding: clamp(24px, 4vw, 46px); }
     .tags { display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 18px; }
@@ -98,13 +98,13 @@
     ul.checks li { position:relative; padding-left: 28px; margin: 0 0 12px; }
     ul.checks li::before { content:'•'; position:absolute; left:8px; top:-2px; font-size: 1.4rem; color:#0b63f3; }
 
-    .cta-card { margin-top: 34px; background: linear-gradient(180deg, #08111f, #0b1020); color:white; border-radius: 20px; padding: 28px; box-shadow: var(--shadow); }
+    .cta-card { margin-top: 34px; background: linear-gradient(180deg, #08111f, #FFFFFF); color:white; border-radius: 20px; padding: 28px; box-shadow: var(--shadow); }
     .cta-card h3 { margin:0 0 10px; font-size:1.5rem; }
     .cta-card p { color:#d7e1f1; }
     .cta-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top: 18px; }
     .btn { display:inline-flex; align-items:center; justify-content:center; padding: 12px 18px; border-radius: 999px; font-weight: 700; text-decoration:none !important; }
     .btn.primary { background: var(--green); color:#03140d; }
-    .btn.secondary { border:1px solid rgba(255,255,255,0.18); color:white; }
+    .btn.secondary { border:1px solid rgba(18,23,43,0.12); color:#12172B; }
 
     .sources { margin-top: 36px; padding-top: 24px; border-top:1px solid var(--line); }
     .sources h3 { margin-top:0; }
@@ -326,7 +326,7 @@
     <div class="wrap">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;">
         <div>
-          <div style="font-weight:700;color:white;margin-bottom:6px;">Neural Horizons AI</div>
+          <div style="font-weight:700;color:#12172B;margin-bottom:6px;">Neural Horizons AI</div>
           <small>Specialist AI &amp; digital transformation consultancy. Measurable business results, operational design and defensible AI execution.</small>
         </div>
         <small>Standalone blog HTML prepared for website publishing and GitHub upload.</small>

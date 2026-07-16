@@ -16,18 +16,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #0A0A0F;
-      --bg-soft:   #111118;
-      --surface:   #16161F;
-      --surface-2: rgba(22,22,31,0.88);
-      --text:      #F0F0F5;
-      --muted:     #9DA2B3;
-      --accent:    #00FF88;
-      --accent-2:  #8A2BE2;
+      --bg:        #FFFFFF;
+      --bg-soft:   #FFFFFF;
+      --surface:   #FFFFFF;
+      --surface-2: rgba(18,23,43,0.18);
+      --text:      #12172B;
+      --muted:     #5B6478;
+      --accent:    #05C793;
+      --accent-2:  #7C3AED;
       --accent-mid:#3B82F6;
-      --line:      rgba(255,255,255,0.07);
+      --line:      rgba(18,23,43,0.064);
       --max:       860px;
-      --shadow:    0 20px 60px rgba(0,0,0,0.5);
+      --shadow:    0 20px 60px rgba(18,23,43,0.17);
       --radius:    20px;
     }
 
@@ -37,8 +37,8 @@
     body {
       font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
       background:
-        radial-gradient(ellipse at top right, rgba(0,255,136,0.07) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom left, rgba(138,43,226,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(5,199,147,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(124,58,237,0.08) 0%, transparent 50%),
         var(--bg);
       color: var(--text);
       line-height: 1.72;
@@ -61,7 +61,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10,10,15,0.85);
+      background: rgba(18,23,43,0.18);
     }
 
     .site-top .wrap {
@@ -74,7 +74,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0;
-      color: #fff;
+      color:#12172B;
       text-decoration: none;
     }
 
@@ -160,7 +160,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 10px 20px;
-      color: #9DA2B3;
+      color: #5B6478;
       font-size: 0.9rem;
       font-weight: 500;
       padding: 16px 0 24px;
@@ -189,7 +189,7 @@
 
     /* ── ARTICLE BODY ── */
     article {
-      background: linear-gradient(160deg, rgba(22,22,31,0.9), rgba(14,14,20,0.95));
+      background: linear-gradient(160deg, rgba(18,23,43,0.18), rgba(14,14,20,0.95));
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: clamp(24px, 4.5vw, 48px);
@@ -210,7 +210,7 @@
       font-size: clamp(1.3rem, 2.4vw, 1.85rem);
       line-height: 1.22;
       letter-spacing: -0.025em;
-      color: #ffffff;
+      color:#12172B;
       margin: 2.4em 0 0.75em;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
@@ -221,12 +221,12 @@
     article h3 {
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ffffff;
+      color:#12172B;
       margin: 1.8em 0 0.6em;
     }
 
     article strong {
-      color: #ffffff;
+      color:#12172B;
       font-weight: 700;
     }
 
@@ -262,7 +262,7 @@
       margin: 0;
       font-size: 1.15rem;
       line-height: 1.6;
-      color: #ffffff;
+      color:#12172B;
       font-weight: 600;
       padding-top: 16px;
     }
@@ -283,14 +283,14 @@
       font-size: 0.85em;
       padding: 1px 6px;
       border-radius: 4px;
-      background: rgba(0,255,136,0.08);
-      border: 1px solid rgba(0,255,136,0.15);
+      background: rgba(5,199,147,0.08);
+      border: 1px solid rgba(5,199,147,0.15);
       transition: background 0.2s;
       vertical-align: middle;
     }
 
     article a:hover {
-      background: rgba(0,255,136,0.18);
+      background: rgba(5,199,147,0.18);
       text-decoration: none;
     }
 

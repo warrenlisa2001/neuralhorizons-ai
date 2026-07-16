@@ -15,27 +15,27 @@
 
 <style>
 :root {
-  --green: #00FF88;
+  --green: #05C793;
   --cyan: #00e5ff;
   --purple: #a855f7;
-  --dark: #080C12;
-  --dark2: #0d1117;
-  --card: rgba(255,255,255,0.03);
-  --border: rgba(255,255,255,0.07);
+  --dark: #F7F9FC;
+  --dark2: #F7F9FC;
+  --card: rgba(18,23,43,0.036);
+  --border: rgba(18,23,43,0.064);
   --border-cyan: rgba(0,229,255,0.2);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--dark);color:#fff;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
+body{background:var(--dark);color:#12172B;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,18,0.97);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(16px)}
-.nav-logo{font-size:17px;font-weight:900;color:#fff}
+.nav-logo{font-size:17px;font-weight:900;color:#12172B}
 .nav-logo span{color:var(--green)}
 .nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{font-size:14px;color:#9ca3af;transition:color 0.2s}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:var(--green);color:#080C12;font-weight:800;padding:10px 22px;border-radius:100px;font-size:13px;transition:opacity 0.2s}
+.nav-links a{font-size:14px;color:#5B6478;transition:color 0.2s}
+.nav-links a:hover{color:#12172B}
+.nav-cta{background:var(--green);color:#12172B;font-weight:800;padding:10px 22px;border-radius:100px;font-size:13px;transition:opacity 0.2s}
 .nav-cta:hover{opacity:0.85}
 @media(max-width:700px){.nav-links{display:none}}
 
@@ -51,12 +51,12 @@ a{text-decoration:none}
 h1{font-size:clamp(36px,6.5vw,72px);font-weight:900;line-height:1.03;letter-spacing:-2.5px;margin-bottom:20px}
 h1 .hl-cyan{color:var(--cyan)}
 h1 .hl-green{color:var(--green)}
-.hero-sub{font-size:18px;color:#9ca3af;line-height:1.8;max-width:640px;margin:0 auto 36px}
+.hero-sub{font-size:18px;color:#5B6478;line-height:1.8;max-width:640px;margin:0 auto 36px}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--cyan);color:#080C12;font-weight:800;padding:15px 36px;border-radius:100px;font-size:15px;transition:opacity 0.2s;display:inline-block}
+.btn-primary{background:var(--cyan);color:#12172B;font-weight:800;padding:15px 36px;border-radius:100px;font-size:15px;transition:opacity 0.2s;display:inline-block}
 .btn-primary:hover{opacity:0.85}
-.btn-ghost{border:1px solid rgba(255,255,255,0.15);color:#d1d5db;font-weight:700;padding:15px 32px;border-radius:100px;font-size:15px;display:inline-block;transition:border-color 0.2s}
-.btn-ghost:hover{border-color:rgba(0,229,255,0.4);color:#fff}
+.btn-ghost{border:1px solid rgba(18,23,43,0.12);color:#374050;font-weight:700;padding:15px 32px;border-radius:100px;font-size:15px;display:inline-block;transition:border-color 0.2s}
+.btn-ghost:hover{border-color:rgba(0,229,255,0.4);color:#12172B}
 
 /* LIVE STATUS BAR */
 .status-bar{max-width:860px;margin:40px auto 0;padding:0 24px}
@@ -64,12 +64,12 @@ h1 .hl-green{color:var(--green)}
 .status-dot{width:9px;height:9px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
 .status-text{font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:1px;text-transform:uppercase}
 .status-pills{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
-.pill{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);border-radius:100px;padding:4px 12px;font-size:11px;color:#9ca3af;font-weight:600}
+.pill{background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);border-radius:100px;padding:4px 12px;font-size:11px;color:#5B6478;font-weight:600}
 
 /* DASHBOARD MOCKUP */
 .dash-section{max-width:1060px;margin:64px auto 0;padding:0 24px}
-.dash-frame{background:var(--dark2);border:1px solid rgba(0,229,255,0.15);border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,229,255,0.06),0 40px 80px rgba(0,0,0,0.5)}
-.dash-topbar{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px}
+.dash-frame{background:var(--dark2);border:1px solid rgba(0,229,255,0.15);border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(0,229,255,0.06),0 40px 80px rgba(18,23,43,0.17)}
+.dash-topbar{background:rgba(18,23,43,0.036);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px}
 .dash-dot{width:11px;height:11px;border-radius:50%}
 .dash-title{font-size:12px;color:#4b5563;margin-left:8px;font-weight:600;letter-spacing:0.5px}
 .dash-body{display:grid;grid-template-columns:200px 1fr}
@@ -78,24 +78,24 @@ h1 .hl-green{color:var(--green)}
 .dash-nav-item.active{background:rgba(0,229,255,0.07);color:var(--cyan);border-right:2px solid var(--cyan)}
 .dash-nav-icon{font-size:14px;width:20px;text-align:center}
 .dash-main{padding:24px}
-.dash-heading{font-size:20px;font-weight:900;color:#fff;margin-bottom:4px}
+.dash-heading{font-size:20px;font-weight:900;color:#12172B;margin-bottom:4px}
 .dash-subhead{font-size:12px;color:#4b5563;margin-bottom:20px}
-.dash-status{display:flex;align-items:center;gap:8px;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.5px;margin-bottom:20px}
+.dash-status{display:flex;align-items:center;gap:8px;background:rgba(5,199,147,0.05);border:1px solid rgba(5,199,147,0.15);border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.5px;margin-bottom:20px}
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.metric-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px}
+.metric-card{background:rgba(18,23,43,0.036);border:1px solid var(--border);border-radius:10px;padding:14px}
 .metric-label{font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:6px}
-.metric-val{font-size:28px;font-weight:900;color:#fff;line-height:1}
+.metric-val{font-size:28px;font-weight:900;color:#12172B;line-height:1}
 .metric-sub{font-size:10px;color:var(--green);margin-top:4px;font-weight:600}
-.threads-panel{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.threads-panel{background:rgba(18,23,43,0.029);border:1px solid var(--border);border-radius:10px;overflow:hidden}
 .thread-header{padding:10px 14px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:1px}
-.thread-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.03);font-size:12px}
+.thread-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(18,23,43,0.036);font-size:12px}
 .thread-row:last-child{border-bottom:none}
-.thread-dept{width:80px;color:#9ca3af;font-weight:600;font-size:11px}
-.thread-msg{flex:1;color:#d1d5db}
+.thread-dept{width:80px;color:#5B6478;font-weight:600;font-size:11px}
+.thread-msg{flex:1;color:#374050}
 .thread-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px}
 .badge-active{background:rgba(0,229,255,0.1);color:var(--cyan);border:1px solid rgba(0,229,255,0.2)}
 .badge-pending{background:rgba(255,193,7,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
-.badge-resolved{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2)}
+.badge-resolved{background:rgba(5,199,147,0.1);color:var(--green);border:1px solid rgba(5,199,147,0.2)}
 @media(max-width:700px){
   .dash-body{grid-template-columns:1fr}
   .dash-sidebar{display:none}
@@ -106,14 +106,14 @@ h1 .hl-green{color:var(--green)}
 .section{max-width:1060px;margin:80px auto;padding:0 24px}
 .section-eyebrow{font-size:10px;font-weight:700;color:#4b5563;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
 .section-title{font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:12px}
-.section-body{font-size:16px;color:#9ca3af;line-height:1.8;max-width:600px;margin-bottom:44px}
+.section-body{font-size:16px;color:#5B6478;line-height:1.8;max-width:600px;margin-bottom:44px}
 
 /* DEPT GRID */
 .dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .dept-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color 0.25s,transform 0.2s}
 .dept-card:hover{border-color:rgba(0,229,255,0.25);transform:translateY(-2px)}
 .dept-icon{font-size:26px;margin-bottom:12px}
-.dept-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px}
+.dept-name{font-size:15px;font-weight:800;color:#12172B;margin-bottom:6px}
 .dept-desc{font-size:13px;color:#6b7280;line-height:1.65}
 
 /* HOW IT WORKS */
@@ -125,47 +125,47 @@ h1 .hl-green{color:var(--green)}
 .flow-line{width:1px;flex:1;background:rgba(0,229,255,0.1);margin:6px 0}
 .flow-step:last-child .flow-line{display:none}
 .flow-content{padding-top:6px}
-.flow-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:6px}
-.flow-desc{font-size:14px;color:#9ca3af;line-height:1.7;max-width:500px}
+.flow-title{font-size:16px;font-weight:800;color:#12172B;margin-bottom:6px}
+.flow-desc{font-size:14px;color:#5B6478;line-height:1.7;max-width:500px}
 
 /* RESULTS */
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
 .result-card{background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.12);border-radius:16px;padding:28px;text-align:center}
 .result-num{font-size:42px;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:8px}
-.result-label{font-size:14px;color:#9ca3af;line-height:1.6}
+.result-label{font-size:14px;color:#5B6478;line-height:1.6}
 
 /* PRICING */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .p-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative}
 .p-card.featured{border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.03)}
-.p-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#080C12;font-size:10px;font-weight:900;padding:4px 16px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.p-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#12172B;font-size:10px;font-weight:900;padding:4px 16px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
 .p-tier{font-size:10px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
-.p-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:8px}
+.p-name{font-size:20px;font-weight:900;color:#12172B;margin-bottom:8px}
 .p-price{font-size:34px;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:4px}
 .p-price span{font-size:14px;color:#6b7280;font-weight:500}
-.p-desc{font-size:13px;color:#9ca3af;line-height:1.65;margin:12px 0 20px}
+.p-desc{font-size:13px;color:#5B6478;line-height:1.65;margin:12px 0 20px}
 .p-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
-.p-features li{font-size:13px;color:#d1d5db;display:flex;gap:8px;align-items:flex-start}
+.p-features li{font-size:13px;color:#374050;display:flex;gap:8px;align-items:flex-start}
 .p-features li::before{content:"✓";color:var(--cyan);font-weight:900;flex-shrink:0}
-.btn-cyan{display:block;background:var(--cyan);color:#080C12;font-weight:800;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:opacity 0.2s}
+.btn-cyan{display:block;background:var(--cyan);color:#12172B;font-weight:800;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:opacity 0.2s}
 .btn-cyan:hover{opacity:0.85}
-.btn-border{display:block;border:1px solid rgba(0,229,255,0.25);color:#d1d5db;font-weight:700;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:all 0.2s}
-.btn-border:hover{border-color:rgba(0,229,255,0.5);color:#fff}
+.btn-border{display:block;border:1px solid rgba(0,229,255,0.25);color:#374050;font-weight:700;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:all 0.2s}
+.btn-border:hover{border-color:rgba(0,229,255,0.5);color:#12172B}
 
 /* CHAT */
 .chat-wrap{max-width:720px;margin:0 auto;padding:0 24px}
 .chat-container{background:var(--dark2);border:1px solid rgba(0,229,255,0.2);border-radius:20px;overflow:hidden;box-shadow:0 0 40px rgba(0,229,255,0.05)}
 .chat-header{background:rgba(0,229,255,0.04);border-bottom:1px solid rgba(0,229,255,0.12);padding:16px 24px;display:flex;align-items:center;gap:14px}
 .chat-avatar{width:42px;height:42px;background:linear-gradient(135deg,#00e5ff,#a855f7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.chat-name{font-weight:800;font-size:15px;color:#fff}
+.chat-name{font-weight:800;font-size:15px;color:#12172B}
 .chat-online{font-size:12px;color:var(--cyan);display:flex;align-items:center;gap:5px}
 .chat-online-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
 .messages{height:380px;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
 .messages::-webkit-scrollbar{width:3px}
-.messages::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+.messages::-webkit-scrollbar-thumb{background:rgba(18,23,43,0.071);border-radius:2px}
 .msg{max-width:82%;padding:12px 16px;border-radius:14px;font-size:14px;line-height:1.65}
-.msg-halu{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.12);color:#e5e7eb;border-radius:4px 14px 14px 14px;align-self:flex-start}
-.msg-user{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#e5e7eb;border-radius:14px 4px 14px 14px;align-self:flex-end}
+.msg-halu{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.12);color:#12172B;border-radius:4px 14px 14px 14px;align-self:flex-start}
+.msg-user{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);color:#12172B;border-radius:14px 4px 14px 14px;align-self:flex-end}
 .msg-lbl{font-size:10px;color:#374151;font-weight:700;letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase}
 .typing{display:flex;align-items:center;gap:5px;padding:12px 16px}
 .typing span{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:typeBounce 1.2s infinite;opacity:0.4}
@@ -173,10 +173,10 @@ h1 .hl-green{color:var(--green)}
 .typing span:nth-child(3){animation-delay:.4s}
 @keyframes typeBounce{0%,80%,100%{transform:translateY(0);opacity:0.4}40%{transform:translateY(-6px);opacity:1}}
 .chat-input-row{border-top:1px solid var(--border);padding:16px 20px;display:flex;gap:12px;align-items:center}
-.chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:100px;padding:12px 20px;color:#fff;font-size:14px;outline:none;transition:border-color 0.2s}
+.chat-input{flex:1;background:rgba(18,23,43,0.05);border:1px solid var(--border);border-radius:100px;padding:12px 20px;color:#12172B;font-size:14px;outline:none;transition:border-color 0.2s}
 .chat-input:focus{border-color:rgba(0,229,255,0.35)}
 .chat-input::placeholder{color:#374151}
-.chat-send{background:var(--cyan);color:#080C12;border:none;border-radius:100px;padding:12px 22px;font-weight:800;font-size:14px;cursor:pointer;transition:opacity 0.2s;white-space:nowrap}
+.chat-send{background:var(--cyan);color:#12172B;border:none;border-radius:100px;padding:12px 22px;font-weight:800;font-size:14px;cursor:pointer;transition:opacity 0.2s;white-space:nowrap}
 .chat-send:hover{opacity:0.85}
 .chat-send:disabled{opacity:0.35;cursor:not-allowed}
 
@@ -211,9 +211,9 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 <nav class="nav">
   <a href="/" class="nav-logo">Neural Horizons <span>AI</span></a>
   <div class="nav-links">
-    <a href="/zonar-os/" style="color:#9ca3af">Zonar OS™</a>
-    <a href="/services/" style="color:#9ca3af">Services</a>
-    <a href="/about/" style="color:#9ca3af">About</a>
+    <a href="/zonar-os/" style="color:#5B6478">Zonar OS™</a>
+    <a href="/services/" style="color:#5B6478">Services</a>
+    <a href="/about/" style="color:#5B6478">About</a>
   </div>
   <a href="/ai-audit/" class="nav-cta">⚡ Free AI Audit</a>
 </nav>
@@ -230,7 +230,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   <p class="hero-sub">HALU™ connects every department in your business, monitors all activity in real time, generates action items, escalates issues and delivers results — continuously, autonomously, without anyone chasing anyone.</p>
   <div class="hero-btns">
     <a href="#talk" class="btn-primary">⚡ Talk to HALU™ Now</a>
-    <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" class="btn-ghost" style="border-color:rgba(0,255,136,0.3);color:#00FF88;">📅 Book a Call with Lisa →</a>
+    <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" class="btn-ghost" style="border-color:rgba(5,199,147,0.3);color:#05C793;">📅 Book a Call with Lisa →</a>
     <a href="#pricing" class="btn-ghost" style="font-size:13px;padding:12px 24px;">Pricing</a>
   </div>
 </section>
@@ -251,12 +251,12 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 
 <!-- PLATFORM RELATIONSHIP BAR -->
 <div style="max-width:860px;margin:20px auto 0;padding:0 24px;">
-  <div style="background:rgba(0,255,136,0.03);border:1px solid rgba(0,255,136,0.1);border-radius:12px;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#9ca3af;">
+  <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:12px;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#5B6478;">
       <span style="font-size:16px">🖥️</span>
 
       
-      <span>HALU™ runs on <strong style="color:#fff">Zonar OS™</strong> — Neural Horizons AI's AI operating platform.</span>
+      <span>HALU™ runs on <strong style="color:#12172B">Zonar OS™</strong> — Neural Horizons AI's AI operating platform.</span>
     </div>
     <a href="/platform/" style="font-size:13px;font-weight:700;color:var(--green);white-space:nowrap;">See the full platform →</a>
   </div>
@@ -502,32 +502,32 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 
   <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;">
     <div style="border-bottom:1px solid var(--border);">
-      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
+      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#12172B;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
         What is the difference between HALU™ and Zonar OS™?
         <span class="fi" style="font-size:18px;color:var(--cyan);transition:transform 0.2s;flex-shrink:0">+</span>
       </div>
-      <div style="font-size:14px;color:#9ca3af;line-height:1.75;padding:0 24px 20px;display:block;">Zonar OS™ is the AI operating platform — the infrastructure underneath your business. HALU™ is the autonomous agent that runs on Zonar OS™. Think of Zonar OS™ as the operating system and HALU™ as the intelligent app doing the work. <a href="/platform/" style="color:var(--cyan)">See the full comparison →</a></div>
+      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:block;">Zonar OS™ is the AI operating platform — the infrastructure underneath your business. HALU™ is the autonomous agent that runs on Zonar OS™. Think of Zonar OS™ as the operating system and HALU™ as the intelligent app doing the work. <a href="/platform/" style="color:var(--cyan)">See the full comparison →</a></div>
     </div>
     <div style="border-bottom:1px solid var(--border);">
-      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
+      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#12172B;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
         Can HALU™ run without Zonar OS™?
         <span class="fi" style="font-size:18px;color:var(--cyan);transition:transform 0.2s;flex-shrink:0">+</span>
       </div>
-      <div style="font-size:14px;color:#9ca3af;line-height:1.75;padding:0 24px 20px;display:none;">Yes. HALU™ deploys as a standalone agent on top of your existing CRM, analytics and communication tools. No rip-and-replace. Zonar OS™ is the enterprise upgrade that gives HALU™ deeper access and enhanced performance.</div>
+      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:none;">Yes. HALU™ deploys as a standalone agent on top of your existing CRM, analytics and communication tools. No rip-and-replace. Zonar OS™ is the enterprise upgrade that gives HALU™ deeper access and enhanced performance.</div>
     </div>
     <div style="border-bottom:1px solid var(--border);">
-      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
+      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#12172B;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
         How does HALU™ actually monitor my departments?
         <span class="fi" style="font-size:18px;color:var(--cyan);transition:transform 0.2s;flex-shrink:0">+</span>
       </div>
-      <div style="font-size:14px;color:#9ca3af;line-height:1.75;padding:0 24px 20px;display:none;">HALU™ connects to your existing data sources — CRM, email, project management, analytics — and runs a continuous monitoring loop across all departments. It doesn't wait to be asked. It proactively surfaces issues, generates action items and routes intelligence in real time.</div>
+      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:none;">HALU™ connects to your existing data sources — CRM, email, project management, analytics — and runs a continuous monitoring loop across all departments. It doesn't wait to be asked. It proactively surfaces issues, generates action items and routes intelligence in real time.</div>
     </div>
     <div>
-      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
+      <div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.querySelector('.fi').style.transform=this.nextElementSibling.style.display==='block'?'rotate(45deg)':'rotate(0)'" style="padding:20px 24px;font-size:15px;font-weight:700;color:#12172B;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;user-select:none;">
         Is HALU™ available as a white-label product?
         <span class="fi" style="font-size:18px;color:var(--cyan);transition:transform 0.2s;flex-shrink:0">+</span>
       </div>
-      <div style="font-size:14px;color:#9ca3af;line-height:1.75;padding:0 24px 20px;display:none;">Yes — on the Enterprise tier. You can license HALU™ under your own brand and sell it to your clients. Contact <a href="mailto:support@neuralhorizonsai.com" style="color:var(--cyan)">support@neuralhorizonsai.com</a> for white-label pricing.</div>
+      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:none;">Yes — on the Enterprise tier. You can license HALU™ under your own brand and sell it to your clients. Contact <a href="mailto:support@neuralhorizonsai.com" style="color:var(--cyan)">support@neuralhorizonsai.com</a> for white-label pricing.</div>
     </div>
   </div>
 </section>
@@ -598,14 +598,14 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   <div class="cta-inner">
     <div style="font-size:40px;margin-bottom:14px">⚡</div>
     <h2 style="font-size:clamp(24px,3.5vw,36px);font-weight:900;margin-bottom:12px;line-height:1.15">Ready to give your business<br>a Command Centre?</h2>
-    <p style="font-size:15px;color:#9ca3af;line-height:1.8;margin:0 auto 28px;max-width:460px">Start with the free AI audit. We'll identify your top revenue leaks and show you exactly where HALU™ delivers the fastest ROI — across every department.</p>
-    <a href="/ai-audit/" style="display:inline-block;background:var(--cyan);color:#080C12;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">⚡ <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
-  <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#080C12;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">📅 Book a Call with Lisa</a>
+    <p style="font-size:15px;color:#5B6478;line-height:1.8;margin:0 auto 28px;max-width:460px">Start with the free AI audit. We'll identify your top revenue leaks and show you exactly where HALU™ delivers the fastest ROI — across every department.</p>
+    <a href="/ai-audit/" style="display:inline-block;background:var(--cyan);color:#12172B;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">⚡ <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
+  <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#12172B;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">📅 Book a Call with Lisa</a>
   <a href="/ai-audit/" style="display:inline-block;border:1px solid rgba(0,229,255,0.3);color:var(--cyan);font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">⚡ Take Free AI Audit</a>
 </div>
 <p style="font-size:12px;color:#1f2937;margin-top:14px;">30 minutes · Free · No pressure · Lisa Warren, Founder & CEO</p>
     <p style="font-size:12px;color:#1f2937;margin-top:14px;">Free · <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;">
-      <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#080C12;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">📅 Book a Call with Lisa</a>
+      <a href="https://calendly.com/neuralhorizonsai-support" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#12172B;font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">📅 Book a Call with Lisa</a>
       <a href="/ai-audit/" style="display:inline-block;border:1px solid rgba(0,229,255,0.3);color:var(--cyan);font-weight:900;font-size:15px;padding:17px 44px;border-radius:100px;">⚡ Take Free AI Audit</a>
     </div>
     <p style="font-size:12px;color:#1f2937;margin-top:14px;">30 minutes · Free · No pressure · Lisa Warren, Founder &amp; CEO</p> · Global clients welcome</p>

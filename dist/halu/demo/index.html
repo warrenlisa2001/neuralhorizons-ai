@@ -27,9 +27,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:url" content="https://www.neuralhorizonsai.com/halu/demo/">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-:root{--green:#00FF88;--blue:#3b82f6;--purple:#7c3aed;--dark:#0a0a0a;--card:#111;--border:rgba(255,255,255,0.08);}
+:root{--green:#05C793;--blue:#3b82f6;--purple:#7c3aed;--dark:#FFFFFF;--card:#FFFFFF;--border:rgba(18,23,43,0.071);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--dark);color:#e5e7eb;font-family:'Inter',-apple-system,sans-serif;line-height:1.6;}
+body{background:var(--dark);color:#12172B;font-family:'Inter',-apple-system,sans-serif;line-height:1.6;}
 a{color:var(--blue);text-decoration:none;}
 
 /* NAV */
@@ -37,39 +37,39 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
 .nav-logo img{height:44px;width:auto;display:block;}
 .nav-links{display:flex;gap:24px;align-items:center;}
-.nav-links a{color:#9ca3af;font-size:.9rem;font-weight:500;transition:color .2s;}
-.nav-links a:hover{color:#fff;}
+.nav-links a{color:#5B6478;font-size:.9rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:#12172B;}
 .nav-cta{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff!important;padding:8px 20px;border-radius:6px;font-weight:600;font-size:.85rem;}
-.mob-btn{display:none;background:none;border:1px solid rgba(255,255,255,0.15);color:#fff;padding:8px 10px;border-radius:6px;cursor:pointer;}
+.mob-btn{display:none;background:none;border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:8px 10px;border-radius:6px;cursor:pointer;}
 @media(max-width:768px){.nav-links{display:none;}.mob-btn{display:block;}}
 
 /* HERO */
 .hero{background:linear-gradient(135deg,#050510 0%,#0d0d2b 50%,#050510 100%);padding:80px 24px 64px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(124,58,237,0.2);}
 .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:800px;height:300px;background:radial-gradient(ellipse,rgba(124,58,237,0.2) 0%,transparent 70%);pointer-events:none;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.25);color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.25);color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px;}
 .hero-badge .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:16px;}
 .hero h1 span{background:linear-gradient(135deg,var(--green),#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{font-size:1.1rem;color:#9ca3af;max-width:600px;margin:0 auto 36px;line-height:1.7;}
+.hero p{font-size:1.1rem;color:#5B6478;max-width:600px;margin:0 auto 36px;line-height:1.7;}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:700;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;}
-.btn-primary:hover{opacity:.9;transform:translateY(-2px);color:#fff;}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#e5e7eb;font-weight:600;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:all .2s;}
+.btn-primary:hover{opacity:.9;transform:translateY(-2px);color:#12172B;}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(18,23,43,0.12);color:#12172B;font-weight:600;font-size:1rem;padding:14px 32px;border-radius:8px;text-decoration:none;transition:all .2s;}
 .btn-secondary:hover{border-color:var(--green);color:var(--green);}
 
 /* STATS BAR */
-.stats-bar{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);padding:20px 24px;}
+.stats-bar{background:rgba(18,23,43,0.036);border-bottom:1px solid var(--border);padding:20px 24px;}
 .stats-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
 .stat-item{text-align:center;}
-.stat-item .n{font-size:1.5rem;font-weight:800;color:#fff;}
+.stat-item .n{font-size:1.5rem;font-weight:800;color:#12172B;}
 .stat-item .l{font-size:.75rem;color:#6b7280;margin-top:2px;}
 
 /* TOUR */
 .tour{max-width:1100px;margin:0 auto;padding:80px 24px;}
 .section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:12px;}
-.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff;margin-bottom:12px;}
-.section-sub{color:#9ca3af;font-size:1rem;margin-bottom:56px;max-width:600px;}
+.section-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#12172B;margin-bottom:12px;}
+.section-sub{color:#5B6478;font-size:1rem;margin-bottom:56px;max-width:600px;}
 
 /* STEP CARDS */
 .steps{display:flex;flex-direction:column;gap:80px;}
@@ -78,14 +78,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .step.reverse>*{direction:ltr;}
 @media(max-width:768px){.step,.step.reverse{grid-template-columns:1fr;direction:ltr;}}
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:8px;font-size:.85rem;font-weight:800;color:#fff;margin-bottom:16px;}
-.step h3{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;}
-.step p{color:#9ca3af;font-size:.95rem;line-height:1.75;margin-bottom:20px;}
+.step h3{font-size:1.4rem;font-weight:800;color:#12172B;margin-bottom:12px;}
+.step p{color:#5B6478;font-size:.95rem;line-height:1.75;margin-bottom:20px;}
 .step-points{list-style:none;padding:0;margin:0;}
-.step-points li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:#d1d5db;margin-bottom:10px;}
+.step-points li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:#374050;margin-bottom:10px;}
 .step-points li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
 
 /* MOCK UI SCREENS */
-.mock-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.4);}
+.mock-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(18,23,43,0.142);}
 .mock-topbar{background:#0d0d0d;border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:8px;}
 .mock-dot{width:10px;height:10px;border-radius:50%;}
 .mock-title{font-size:.75rem;color:#6b7280;margin-left:8px;}
@@ -95,7 +95,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
 .dash-card{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:14px;}
 .dash-card .dc-label{font-size:.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
-.dash-card .dc-val{font-size:1.3rem;font-weight:800;color:#fff;}
+.dash-card .dc-val{font-size:1.3rem;font-weight:800;color:#12172B;}
 .dash-card .dc-sub{font-size:.68rem;margin-top:4px;}
 .dash-card .dc-sub.up{color:#34d399;}
 .dash-card .dc-sub.warn{color:#fbbf24;}
@@ -105,21 +105,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .alert-item .ai-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
 .alert-item .ai-icon.red{background:rgba(239,68,68,0.15);}
 .alert-item .ai-icon.amber{background:rgba(251,191,36,0.15);}
-.alert-item .ai-icon.green{background:rgba(0,255,136,0.1);}
+.alert-item .ai-icon.green{background:rgba(5,199,147,0.1);}
 .alert-item .ai-text{flex:1;}
-.alert-item .ai-text .at-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.alert-item .ai-text .at-title{font-size:.78rem;font-weight:700;color:#12172B;}
 .alert-item .ai-text .at-sub{font-size:.7rem;color:#6b7280;margin-top:2px;}
 .alert-item .ai-badge{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
 .badge-red{background:rgba(239,68,68,0.15);color:#f87171;}
 .badge-amber{background:rgba(251,191,36,0.15);color:#fbbf24;}
-.badge-green{background:rgba(0,255,136,0.1);color:var(--green);}
+.badge-green{background:rgba(5,199,147,0.1);color:var(--green);}
 
 /* Thread mock */
 .thread-list{display:flex;flex-direction:column;gap:8px;}
 .thread-item{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:12px;}
-.thread-dept{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;flex-shrink:0;}
+.thread-dept{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#12172B;flex-shrink:0;}
 .thread-content{flex:1;}
-.thread-content .tc-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.thread-content .tc-title{font-size:.78rem;font-weight:700;color:#12172B;}
 .thread-content .tc-sub{font-size:.7rem;color:#6b7280;margin-top:2px;}
 .thread-meta{font-size:.65rem;color:#4b5563;text-align:right;}
 .thread-meta .tm-time{display:block;}
@@ -132,7 +132,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .action-item.p2{border-color:#fbbf24;}
 .action-item.p3{border-color:#3b82f6;}
 .action-item .ac-text{flex:1;}
-.action-item .ac-title{font-size:.78rem;font-weight:700;color:#e5e7eb;}
+.action-item .ac-title{font-size:.78rem;font-weight:700;color:#12172B;}
 .action-item .ac-who{font-size:.68rem;color:#6b7280;margin-top:3px;}
 .action-chip{font-size:.65rem;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
 
@@ -140,29 +140,29 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .metric-card{background:#0d0d0d;border:1px solid var(--border);border-radius:8px;padding:14px;}
 .metric-card .mc-label{font-size:.68rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
-.metric-bar-wrap{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:6px;}
+.metric-bar-wrap{height:6px;background:rgba(18,23,43,0.057);border-radius:3px;margin-bottom:6px;}
 .metric-bar{height:100%;border-radius:3px;}
-.metric-val{font-size:.78rem;font-weight:700;color:#fff;}
+.metric-val{font-size:.78rem;font-weight:700;color:#12172B;}
 
 /* TIMELINE */
-.timeline{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:40px;margin:80px 0;}
-.timeline h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:8px;text-align:center;}
-.timeline-sub{color:#9ca3af;font-size:.95rem;text-align:center;margin-bottom:40px;}
+.timeline{background:rgba(18,23,43,0.029);border:1px solid var(--border);border-radius:16px;padding:40px;margin:80px 0;}
+.timeline h2{font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:8px;text-align:center;}
+.timeline-sub{color:#5B6478;font-size:.95rem;text-align:center;margin-bottom:40px;}
 .tl-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;}
 .tl-item{text-align:center;}
 .tl-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));font-size:1rem;font-weight:800;color:#fff;margin-bottom:12px;}
-.tl-item h4{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;}
+.tl-item h4{font-size:.9rem;font-weight:700;color:#12172B;margin-bottom:6px;}
 .tl-item p{font-size:.8rem;color:#6b7280;line-height:1.5;}
 
 /* GATE CTA */
-.gate{background:linear-gradient(135deg,rgba(0,255,136,0.06),rgba(59,130,246,0.06));border:1px solid rgba(0,255,136,0.2);border-radius:20px;padding:64px 40px;text-align:center;margin:0 0 80px;}
-.gate h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#fff;margin-bottom:12px;}
-.gate p{color:#9ca3af;font-size:1.05rem;max-width:540px;margin:0 auto 16px;line-height:1.7;}
+.gate{background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(59,130,246,0.06));border:1px solid rgba(5,199,147,0.2);border-radius:20px;padding:64px 40px;text-align:center;margin:0 0 80px;}
+.gate h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#12172B;margin-bottom:12px;}
+.gate p{color:#5B6478;font-size:1.05rem;max-width:540px;margin:0 auto 16px;line-height:1.7;}
 .gate-note{font-size:.82rem;color:#4b5563;margin-bottom:32px;}
 .gate-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .gate-login{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--green),#00cc6e);color:#000;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;}
 .gate-login:hover{opacity:.9;transform:translateY(-2px);color:#000;}
-.gate-audit{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#e5e7eb;font-weight:600;font-size:1rem;padding:16px 36px;border-radius:8px;text-decoration:none;transition:all .2s;}
+.gate-audit{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(18,23,43,0.12);color:#12172B;font-weight:600;font-size:1rem;padding:16px 36px;border-radius:8px;text-decoration:none;transition:all .2s;}
 .gate-audit:hover{border-color:var(--blue);color:var(--blue);}
 
 footer{background:#050505;border-top:1px solid var(--border);padding:32px 24px;text-align:center;}
@@ -199,10 +199,10 @@ footer a:hover{color:var(--green);}
     </div>
     <button class="mob-btn" onclick="document.getElementById('mob').style.display=document.getElementById('mob').style.display==='flex'?'none':'flex'">☰</button>
   </div>
-  <div id="mob" style="display:none;flex-direction:column;gap:12px;padding:16px 24px 24px;border-top:1px solid rgba(255,255,255,0.08);">
-    <a href="/halu/" style="color:#9ca3af;">HALU™</a>
-    <a href="/zonar-os/" style="color:#9ca3af;">Zonar OS™</a>
-    <a href="/blog/" style="color:#9ca3af;">Blog</a>
+  <div id="mob" style="display:none;flex-direction:column;gap:12px;padding:16px 24px 24px;border-top:1px solid rgba(18,23,43,0.071);">
+    <a href="/halu/" style="color:#5B6478;">HALU™</a>
+    <a href="/zonar-os/" style="color:#5B6478;">Zonar OS™</a>
+    <a href="/blog/" style="color:#5B6478;">Blog</a>
     <a href="/ai-audit/" style="display:inline-block;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 20px;border-radius:6px;font-weight:700;">⚡ Free Audit</a>
   </div>
 </nav>
@@ -260,7 +260,7 @@ footer a:hover{color:var(--green);}
           <div class="dash-grid">
             <div class="dash-card">
               <div class="dc-label">Revenue Health</div>
-              <div class="dc-val">74<span style="font-size:.9rem;color:#9ca3af;">/100</span></div>
+              <div class="dc-val">74<span style="font-size:.9rem;color:#5B6478;">/100</span></div>
               <div class="dc-sub warn">⚠ 2 leaks detected</div>
             </div>
             <div class="dash-card">
@@ -292,7 +292,7 @@ footer a:hover{color:var(--green);}
               <span class="ai-badge badge-amber">REVIEW</span>
             </div>
             <div class="alert-item">
-              <div class="ai-icon green"><i class="fas fa-check-circle" style="color:#00FF88;"></i></div>
+              <div class="ai-icon green"><i class="fas fa-check-circle" style="color:#05C793;"></i></div>
               <div class="ai-text">
                 <div class="at-title">Marketing campaign ROI 3.2× — above target</div>
                 <div class="at-sub">Marketing · Updated 1h ago</div>
@@ -454,7 +454,7 @@ footer a:hover{color:var(--green);}
             </div>
             <div class="metric-card">
               <div class="mc-label">Operational Efficiency</div>
-              <div class="metric-bar-wrap"><div class="metric-bar" style="width:81%;background:linear-gradient(90deg,#00FF88,#3b82f6);"></div></div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:81%;background:linear-gradient(90deg,#05C793,#3b82f6);"></div></div>
               <div class="metric-val">81 / 100 <span style="color:#34d399;font-size:.7rem;">▲ +5 this week</span></div>
             </div>
             <div class="metric-card">
@@ -470,7 +470,7 @@ footer a:hover{color:var(--green);}
           </div>
           <div style="margin-top:14px;padding:12px;background:#0d0d0d;border-radius:8px;border:1px solid var(--border);">
             <div style="font-size:.7rem;color:#6b7280;margin-bottom:6px;">HALU™ WEEKLY INSIGHT</div>
-            <div style="font-size:.78rem;color:#e5e7eb;line-height:1.5;">Revenue health dipped this week due to sales pipeline stall. Growth pipeline is strong — convert the 12 stalled deals and you recover 8+ points. Recommend P1 action today.</div>
+            <div style="font-size:.78rem;color:#12172B;line-height:1.5;">Revenue health dipped this week due to sales pipeline stall. Growth pipeline is strong — convert the 12 stalled deals and you recover 8+ points. Recommend P1 action today.</div>
           </div>
         </div>
       </div>
@@ -499,19 +499,19 @@ footer a:hover{color:var(--green);}
         <div class="mock-body">
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:10px;align-items:flex-start;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#9ca3af;flex-shrink:0;">You</div>
-              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#e5e7eb;max-width:80%;">Why is our revenue health score down this week?</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(18,23,43,0.071);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#5B6478;flex-shrink:0;">You</div>
+              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#12172B;max-width:80%;">Why is our revenue health score down this week?</div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;flex-direction:row-reverse;">
               <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:#fff;flex-shrink:0;">H</div>
-              <div style="background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.15);border-radius:8px 0 8px 8px;padding:12px 14px;font-size:.8rem;color:#e5e7eb;max-width:85%;line-height:1.6;">Your revenue health dropped 3 points this week. The primary cause is 12 deals in Sales that have had no contact in 21+ days — these represent AED 340,000 in potential revenue. Secondary factor: 8 invoices stuck in Finance approval are creating a cash flow lag. I've generated P1 action items for both. Want me to draft the follow-up sequence for the stalled deals?</div>
+              <div style="background:rgba(5,199,147,0.05);border:1px solid rgba(5,199,147,0.15);border-radius:8px 0 8px 8px;padding:12px 14px;font-size:.8rem;color:#12172B;max-width:85%;line-height:1.6;">Your revenue health dropped 3 points this week. The primary cause is 12 deals in Sales that have had no contact in 21+ days — these represent AED 340,000 in potential revenue. Secondary factor: 8 invoices stuck in Finance approval are creating a cash flow lag. I've generated P1 action items for both. Want me to draft the follow-up sequence for the stalled deals?</div>
             </div>
             <div style="display:flex;gap:10px;align-items:flex-start;">
-              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#9ca3af;flex-shrink:0;">You</div>
-              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#e5e7eb;max-width:80%;">Yes please</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(18,23,43,0.071);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#5B6478;flex-shrink:0;">You</div>
+              <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:0 8px 8px 8px;padding:10px 14px;font-size:.8rem;color:#12172B;max-width:80%;">Yes please</div>
             </div>
             <div style="text-align:center;padding:8px;">
-              <span style="font-size:.7rem;color:#4b5563;background:rgba(0,255,136,0.05);border:1px solid rgba(0,255,136,0.1);padding:4px 12px;border-radius:12px;">HALU™ is drafting 12 personalised follow-up emails...</span>
+              <span style="font-size:.7rem;color:#4b5563;background:rgba(5,199,147,0.05);border:1px solid rgba(5,199,147,0.1);padding:4px 12px;border-radius:12px;">HALU™ is drafting 12 personalised follow-up emails...</span>
             </div>
           </div>
         </div>

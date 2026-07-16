@@ -26,7 +26,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Manrope', sans-serif;
-      background: #0A0A0F;
+      background: #FFFFFF;
       color: #FAFAFA;
       line-height: 1.6;
     }
@@ -35,8 +35,8 @@
 
     /* Nav */
     .nav {
-      background: rgba(10,10,15,0.95);
-      border-bottom: 1px solid #1E1E24;
+      background: rgba(18,23,43,0.18);
+      border-bottom: 1px solid #F1F3F9;
       padding: 16px 0;
       position: sticky; top: 0; z-index: 100;
       backdrop-filter: blur(8px);
@@ -47,9 +47,9 @@
     }
     .nav .logo { display: flex; align-items: center; gap: 10px; }
     .nav .logo-mark {
-      width: 32px; height: 32px; background: #00FF88; border-radius: 7px;
+      width: 32px; height: 32px; background: #05C793; border-radius: 7px;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 12px; color: #0A0A0F;
+      font-weight: 800; font-size: 12px; color:#12172B;
     }
     .nav .logo-text { font-weight: 700; font-size: 15px; color: #FAFAFA; }
     .nav .back-link {
@@ -57,23 +57,23 @@
       display: flex; align-items: center; gap: 6px;
       transition: color 0.2s;
     }
-    .nav .back-link:hover { color: #00FF88; }
+    .nav .back-link:hover { color: #05C793; }
 
     /* Hero */
     .hero { text-align: center; padding: 60px 0 48px; }
     .badge {
       display: inline-block; padding: 6px 14px;
-      background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2);
-      border-radius: 20px; font-size: 11px; font-weight: 700; color: #00FF88;
+      background: rgba(5,199,147,0.1); border: 1px solid rgba(5,199,147,0.2);
+      border-radius: 20px; font-size: 11px; font-weight: 700; color: #05C793;
       letter-spacing: 1px; margin-bottom: 24px; text-transform: uppercase;
     }
     .hero h1 {
       font-size: 40px; font-weight: 800; line-height: 1.12;
       letter-spacing: -0.03em; margin-bottom: 18px;
     }
-    .hero h1 span { color: #00FF88; }
+    .hero h1 span { color: #05C793; }
     .hero p {
-      font-size: 17px; color: #9DA2B3; max-width: 540px;
+      font-size: 17px; color: #5B6478; max-width: 540px;
       margin: 0 auto 36px; line-height: 1.75;
     }
     .social-bar {
@@ -82,9 +82,9 @@
     }
     .avatars { display: flex; }
     .avatar {
-      width: 34px; height: 34px; border-radius: 50%; background: #1E1E24;
-      border: 2px solid #0A0A0F; display: flex; align-items: center;
-      justify-content: center; font-size: 11px; font-weight: 700; color: #00FF88;
+      width: 34px; height: 34px; border-radius: 50%; background: #F1F3F9;
+      border: 2px solid #FFFFFF; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700; color: #05C793;
       margin-left: -8px;
     }
     .avatar:first-child { margin-left: 0; }
@@ -97,23 +97,23 @@
       padding: 20px 0 48px; flex-wrap: wrap;
     }
     .stat { text-align: center; }
-    .stat .num { font-size: 28px; font-weight: 800; color: #00FF88; }
+    .stat .num { font-size: 28px; font-weight: 800; color: #05C793; }
     .stat .lbl { font-size: 12px; color: #6E7180; margin-top: 2px; }
 
     /* Form */
     .form-card {
-      background: #1E1E24; border: 1px solid #2A2A32; border-radius: 16px;
+      background: #F1F3F9; border: 1px solid #2A2A32; border-radius: 16px;
       padding: 40px; margin-bottom: 64px;
     }
     .form-card h2 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 6px; }
     .form-card .sub { font-size: 14px; color: #6E7180; text-align: center; margin-bottom: 32px; }
     .form-group { margin-bottom: 20px; }
     .form-group label {
-      display: block; font-size: 11px; font-weight: 700; color: #9DA2B3;
+      display: block; font-size: 11px; font-weight: 700; color: #5B6478;
       text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;
     }
     .form-group input, .form-group select {
-      width: 100%; padding: 14px 16px; background: #0A0A0F;
+      width: 100%; padding: 14px 16px; background: #FFFFFF;
       border: 1px solid #2A2A32; border-radius: 10px; color: #FAFAFA;
       font-family: 'Manrope', sans-serif; font-size: 15px;
       transition: border-color 0.2s;
@@ -121,18 +121,18 @@
     }
     .form-group input::placeholder { color: #40424D; }
     .form-group input:focus, .form-group select:focus {
-      outline: none; border-color: #00FF88; box-shadow: 0 0 0 3px rgba(0,255,136,0.08);
+      outline: none; border-color: #05C793; box-shadow: 0 0 0 3px rgba(5,199,147,0.08);
     }
     .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E7180' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-    .form-group select option { background: #1E1E24; color: #FAFAFA; }
+    .form-group select option { background: #F1F3F9; color: #FAFAFA; }
     .form-group select:invalid, .form-group select option[value=""] { color: #40424D; }
     .submit-btn {
-      width: 100%; padding: 16px; background: #00FF88; color: #0A0A0F;
+      width: 100%; padding: 16px; background: #05C793; color:#12172B;
       border: none; border-radius: 10px; font-family: 'Manrope', sans-serif;
       font-size: 16px; font-weight: 800; cursor: pointer; margin-top: 8px;
       transition: all 0.2s; letter-spacing: 0.2px;
     }
-    .submit-btn:hover { background: #5FFFA8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,255,136,0.25); }
+    .submit-btn:hover { background: #5FFFA8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(5,199,147,0.25); }
     .trust-line {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       margin-top: 16px; font-size: 12px; color: #6E7180;
@@ -149,10 +149,10 @@
       border-radius: 12px; padding: 22px;
       transition: border-color 0.2s;
     }
-    .benefit:hover { border-color: rgba(0,255,136,0.2); }
+    .benefit:hover { border-color: rgba(5,199,147,0.2); }
     .benefit-icon {
       width: 46px; height: 46px; border-radius: 10px;
-      background: rgba(0,255,136,0.08); border: 1px solid rgba(0,255,136,0.15);
+      background: rgba(5,199,147,0.08); border: 1px solid rgba(5,199,147,0.15);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       font-size: 20px;
     }
@@ -161,28 +161,28 @@
 
     /* Who it's for */
     .qual-box {
-      background: #1E1E24; border: 1px solid #2A2A32; border-radius: 12px; padding: 28px;
+      background: #F1F3F9; border: 1px solid #2A2A32; border-radius: 12px; padding: 28px;
     }
     .qual-item {
       display: flex; align-items: center; gap: 14px; padding: 13px 0;
-      border-bottom: 1px solid #2A2A32; font-size: 14px; color: #D1D5DB;
+      border-bottom: 1px solid #2A2A32; font-size: 14px; color: #374050;
     }
     .qual-item:last-of-type { border-bottom: none; }
-    .check { color: #00FF88; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+    .check { color: #05C793; font-weight: 800; font-size: 16px; flex-shrink: 0; }
     .not-for-note { margin-top: 20px; padding-top: 20px; border-top: 1px solid #2A2A32; font-size: 13px; color: #6E7180; font-style: italic; }
 
     /* Testimonials */
     .tcard {
-      background: #1E1E24; border: 1px solid #2A2A32; border-radius: 12px;
+      background: #F1F3F9; border: 1px solid #2A2A32; border-radius: 12px;
       padding: 26px; margin-bottom: 16px;
     }
-    .tcard blockquote { font-size: 15px; line-height: 1.75; margin-bottom: 18px; color: #E5E7EB; }
-    .tcard blockquote strong { color: #00FF88; }
+    .tcard blockquote { font-size: 15px; line-height: 1.75; margin-bottom: 18px; color: #12172B; }
+    .tcard blockquote strong { color: #05C793; }
     .tcard .tauthor { display: flex; align-items: center; gap: 12px; }
     .tcard .tavatar {
-      width: 40px; height: 40px; border-radius: 50%; background: #00FF88;
+      width: 40px; height: 40px; border-radius: 50%; background: #05C793;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 13px; color: #0A0A0F; flex-shrink: 0;
+      font-weight: 800; font-size: 13px; color:#12172B; flex-shrink: 0;
     }
     .tcard .tname { font-weight: 700; font-size: 14px; }
     .tcard .trole { font-size: 12px; color: #6E7180; margin-top: 2px; }
@@ -190,39 +190,39 @@
     /* Final CTA */
     .final-cta {
       text-align: center; padding: 64px 0 80px;
-      border-top: 1px solid #1E1E24;
+      border-top: 1px solid #F1F3F9;
     }
     .final-cta h2 { font-size: 30px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
     .final-cta p { color: #6E7180; font-size: 15px; margin-bottom: 28px; line-height: 1.7; }
     .cta-btn {
-      display: inline-block; padding: 16px 44px; background: #00FF88;
-      color: #0A0A0F; border-radius: 10px; font-weight: 800; font-size: 16px;
+      display: inline-block; padding: 16px 44px; background: #05C793;
+      color:#12172B; border-radius: 10px; font-weight: 800; font-size: 16px;
       transition: all 0.2s; letter-spacing: 0.2px;
     }
-    .cta-btn:hover { background: #5FFFA8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,255,136,0.3); }
+    .cta-btn:hover { background: #5FFFA8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,199,147,0.3); }
 
     /* ROF Banner */
     .rof-banner {
-      background: linear-gradient(135deg, #0D1F15 0%, #0A0A0F 100%);
-      border: 1px solid rgba(0,255,136,0.2); border-radius: 16px;
+      background: linear-gradient(135deg, #0D1F15 0%, #FFFFFF 100%);
+      border: 1px solid rgba(5,199,147,0.2); border-radius: 16px;
       padding: 32px; margin: 48px 0; text-align: center;
     }
-    .rof-banner .rof-badge { font-size: 11px; font-weight: 700; color: #00FF88; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .rof-banner .rof-badge { font-size: 11px; font-weight: 700; color: #05C793; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
     .rof-banner h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
-    .rof-banner p { font-size: 14px; color: #9DA2B3; margin-bottom: 20px; line-height: 1.65; }
+    .rof-banner p { font-size: 14px; color: #5B6478; margin-bottom: 20px; line-height: 1.65; }
     .rof-btn {
       display: inline-block; padding: 12px 28px;
-      border: 1px solid rgba(0,255,136,0.4); border-radius: 8px;
-      color: #00FF88; font-weight: 700; font-size: 14px;
+      border: 1px solid rgba(5,199,147,0.4); border-radius: 8px;
+      color: #05C793; font-weight: 700; font-size: 14px;
       transition: all 0.2s;
     }
-    .rof-btn:hover { background: rgba(0,255,136,0.1); border-color: #00FF88; }
+    .rof-btn:hover { background: rgba(5,199,147,0.1); border-color: #05C793; }
 
     /* Footer */
-    .footer { text-align: center; padding: 28px 0; border-top: 1px solid #1E1E24; }
+    .footer { text-align: center; padding: 28px 0; border-top: 1px solid #F1F3F9; }
     .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
     .footer-links a { font-size: 13px; color: #6E7180; transition: color 0.2s; }
-    .footer-links a:hover { color: #00FF88; }
+    .footer-links a:hover { color: #05C793; }
     .footer p { font-size: 12px; color: #40424D; }
 
     @media (max-width: 600px) {
@@ -249,7 +249,7 @@
     .hs-form label,
     .hs-form .hs-field-desc,
     .hs-form legend {
-      color: #9DA2B3 !important;
+      color: #5B6478 !important;
       font-family: 'Manrope', sans-serif !important;
       font-size: 11px !important;
       font-weight: 700 !important;
@@ -268,7 +268,7 @@
     .hs-form select,
     .hs-form textarea {
       width: 100% !important;
-      background: #0A0A0F !important;
+      background: #FFFFFF !important;
       border: 1px solid #2A2A32 !important;
       border-radius: 10px !important;
       color: #FAFAFA !important;
@@ -290,8 +290,8 @@
     .hs-form select:focus,
     .hs-form textarea:focus {
       outline: none !important;
-      border-color: #00FF88 !important;
-      box-shadow: 0 0 0 3px rgba(0,255,136,0.08) !important;
+      border-color: #05C793 !important;
+      box-shadow: 0 0 0 3px rgba(5,199,147,0.08) !important;
     }
 
     /* Select dropdown arrow */
@@ -301,15 +301,15 @@
       background-position: right 14px center !important;
       padding-right: 40px !important;
     }
-    .hs-form select option { background: #1E1E24 !important; color: #FAFAFA !important; }
+    .hs-form select option { background: #F1F3F9 !important; color: #FAFAFA !important; }
 
     /* Submit button */
     .hs-form input[type="submit"],
     .hs-form .hs-button {
       width: 100% !important;
       padding: 16px !important;
-      background: #00FF88 !important;
-      color: #0A0A0F !important;
+      background: #05C793 !important;
+      color:#12172B !important;
       border: none !important;
       border-radius: 10px !important;
       font-family: 'Manrope', sans-serif !important;
@@ -324,7 +324,7 @@
     .hs-form .hs-button:hover {
       background: #5FFFA8 !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 6px 20px rgba(0,255,136,0.25) !important;
+      box-shadow: 0 6px 20px rgba(5,199,147,0.25) !important;
     }
 
     /* Error messages */
@@ -339,7 +339,7 @@
 
     /* Success message */
     .hs-form .submitted-message {
-      color: #00FF88 !important;
+      color: #05C793 !important;
       font-family: 'Manrope', sans-serif !important;
       font-size: 16px !important;
       font-weight: 600 !important;
@@ -351,7 +351,7 @@
     .hs-form .hs_recaptcha { margin-top: 8px !important; }
     .hs-form .actions { margin-top: 8px !important; }
     .legal-consent-container { color: #6E7180 !important; font-size: 12px !important; font-family: 'Manrope', sans-serif !important; }
-    .legal-consent-container a { color: #00FF88 !important; }
+    .legal-consent-container a { color: #05C793 !important; }
     .hs-form .hs-richtext p { color: #6E7180 !important; font-size: 13px !important; }
 
   </style>
@@ -382,7 +382,7 @@
 </script>
 </head>
 
-<body class="bg-black text-white">
+<body class="bg-white text-slate-900">
 <nav class="nav">
     <div class="inner">
       <a href="https://www.neuralhorizonsai.com" class="logo">
@@ -396,23 +396,23 @@
 <main>
 <style>
 :root {
-  --green: #00FF88;
-  --green-soft: rgba(0,255,136,0.08);
-  --green-border: rgba(0,255,136,0.2);
-  --dark: #0A0A0F;
-  --dark2: #0d0d12;
+  --green: #05C793;
+  --green-soft: rgba(5,199,147,0.08);
+  --green-border: rgba(5,199,147,0.2);
+  --dark: #FFFFFF;
+  --dark2: #f7f9fc;
   --purple: #a855f7;
   --blue: #60a5fa;
-  --border: rgba(255,255,255,0.07);
-  --border-strong: rgba(255,255,255,0.12);
+  --border: rgba(18,23,43,0.064);
+  --border-strong: rgba(18,23,43,0.099);
   --muted: #6b7280;
-  --text: #d1d5db;
+  --text: #374050;
   --white: #fff;
 }
 * { box-sizing: border-box; }
 
 .q-page {
-  background: linear-gradient(180deg,#0A0A0F 0%,#070710 100%);
+  background: linear-gradient(180deg,#FFFFFF 0%,#F7F9FC 100%);
   min-height: 100vh;
   padding: 120px 24px 80px;
 }
@@ -447,7 +447,7 @@
 }
 
 .q-sub {
-  color: #9ca3af;
+  color: #5B6478;
   font-size: 1.02rem;
   line-height: 1.6;
   margin: 0 0 2rem;
@@ -455,7 +455,7 @@
 
 /* Progress bar */
 .q-progress-wrap {
-  background: rgba(255,255,255,0.04);
+  background: rgba(18,23,43,0.043);
   border: 1px solid var(--border);
   border-radius: 9999px;
   height: 8px;
@@ -479,7 +479,7 @@
 
 /* Form card */
 .q-card {
-  background: rgba(255,255,255,0.02);
+  background: rgba(18,23,43,0.029);
   border: 1px solid var(--border-strong);
   border-radius: 20px;
   padding: 32px 28px;
@@ -503,7 +503,7 @@
   margin: 0 0 0.4rem;
 }
 .q-step-hint {
-  color: #9ca3af;
+  color: #5B6478;
   font-size: 0.9rem;
   margin: 0 0 1.5rem;
 }
@@ -526,7 +526,7 @@
 
 .q-input, .q-select, .q-textarea {
   width: 100%;
-  background: rgba(255,255,255,0.04);
+  background: rgba(18,23,43,0.043);
   border: 1px solid var(--border-strong);
   border-radius: 10px;
   padding: 13px 16px;
@@ -538,12 +538,12 @@
 }
 .q-input:focus, .q-select:focus, .q-textarea:focus {
   border-color: var(--green);
-  background: rgba(0,255,136,0.04);
+  background: rgba(5,199,147,0.04);
 }
 .q-input::placeholder, .q-textarea::placeholder { color: #4b5563; }
 .q-textarea { min-height: 110px; resize: vertical; }
 .q-select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3e%3cpath d='M2 4l4 4 4-4' stroke='%2300FF88' stroke-width='1.5' fill='none' stroke-linecap='round'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
-.q-select option { background: #1a1a2e; color: #fff; }
+.q-select option { background: #ffffff; color:#12172B; }
 
 /* Inline error */
 .q-error {
@@ -583,9 +583,9 @@
 .q-btn-primary {
   background: linear-gradient(135deg, var(--green) 0%, #00CC6A 100%);
   color: var(--dark);
-  box-shadow: 0 8px 30px rgba(0,255,136,0.25);
+  box-shadow: 0 8px 30px rgba(5,199,147,0.25);
 }
-.q-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 38px rgba(0,255,136,0.35); }
+.q-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 38px rgba(5,199,147,0.35); }
 .q-btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 .q-btn-ghost {
   background: transparent;
@@ -609,7 +609,7 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(10,10,15,0.9);
+  background: rgba(18,23,43,0.18);
   z-index: 1000;
   align-items: center;
   justify-content: center;
@@ -619,7 +619,7 @@
 .q-spinner {
   width: 56px;
   height: 56px;
-  border: 4px solid rgba(0,255,136,0.15);
+  border: 4px solid rgba(5,199,147,0.15);
   border-top-color: var(--green);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -824,8 +824,8 @@
 <div class="q-overlay" id="qOverlay">
   <div style="text-align:center;">
     <div class="q-spinner" style="margin:0 auto 16px;"></div>
-    <div style="color:#fff;font-weight:700;font-size:1rem;">Sending your audit request…</div>
-    <div style="color:#9ca3af;font-size:0.85rem;margin-top:6px;">Please don't refresh.</div>
+    <div style="color:#12172B;font-weight:700;font-size:1rem;">Sending your audit request…</div>
+    <div style="color:#5B6478;font-size:0.85rem;margin-top:6px;">Please don't refresh.</div>
   </div>
 </div>
 
@@ -1029,53 +1029,53 @@
   }
 })();
 </script>
-<footer style="background:#0d0d14;border-top:1px solid rgba(255,255,255,0.07);padding:48px 24px 28px;">
+<footer style="background:#F7F9FC;border-top:1px solid rgba(18,23,43,0.064);padding:48px 24px 28px;">
   <div style="max-width:1140px;margin:0 auto;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;margin-bottom:36px;">
 
       <div>
-        <p style="font-size:15px;font-weight:800;color:#fff;margin:0 0 10px;">Neural Horizons AI</p>
+        <p style="font-size:15px;font-weight:800;color:#12172B;margin:0 0 10px;">Neural Horizons AI</p>
         <p style="font-size:13px;color:#6b7280;line-height:1.7;margin:0 0 16px;">Specialist AI &amp; digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
         <a href="/ai-audit/" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 18px;border-radius:9999px;font-weight:800;font-size:13px;text-decoration:none;">⚡ Take Free Audit</a>
       </div>
 
       <div>
-        <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Quick Links</p>
+        <p style="font-size:13px;font-weight:700;color:#12172B;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Quick Links</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <a href="/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Home</a>
-          <a href="/about/" style="font-size:13px;color:#9ca3af;text-decoration:none;">About</a>
-          <a href="/zonar-os/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Zonar OS™</a>
-          <a href="/case-studies/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Use Cases</a>
-          <a href="/blog/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Insights / Blog</a>
-          <a href="/playbooks/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Playbooks</a>
-          <a href="/faq/" style="font-size:13px;color:#9ca3af;text-decoration:none;">FAQ</a>
+          <a href="/" style="font-size:13px;color:#5B6478;text-decoration:none;">Home</a>
+          <a href="/about/" style="font-size:13px;color:#5B6478;text-decoration:none;">About</a>
+          <a href="/zonar-os/" style="font-size:13px;color:#5B6478;text-decoration:none;">Zonar OS™</a>
+          <a href="/case-studies/" style="font-size:13px;color:#5B6478;text-decoration:none;">Use Cases</a>
+          <a href="/blog/" style="font-size:13px;color:#5B6478;text-decoration:none;">Insights / Blog</a>
+          <a href="/playbooks/" style="font-size:13px;color:#5B6478;text-decoration:none;">Playbooks</a>
+          <a href="/faq/" style="font-size:13px;color:#5B6478;text-decoration:none;">FAQ</a>
         </div>
       </div>
 
       <div>
-        <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Services</p>
+        <p style="font-size:13px;font-weight:700;color:#12172B;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Services</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <a href="/ai-audit/" style="font-size:13px;color:#9ca3af;text-decoration:none;">AI Audit</a>
-          <a href="/services/consultation/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Consultation</a>
-          <a href="/services/ai-strategy/" style="font-size:13px;color:#9ca3af;text-decoration:none;">AI Strategy</a>
-          <a href="/services/digital-transformation/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Digital Transformation</a>
-          <a href="/agentic-ai/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Agentic AI Build</a>
-          <a href="/zonar-os/" style="font-size:13px;color:#9ca3af;text-decoration:none;">Zonar OS™ Implementation</a>
+          <a href="/ai-audit/" style="font-size:13px;color:#5B6478;text-decoration:none;">AI Audit</a>
+          <a href="/services/consultation/" style="font-size:13px;color:#5B6478;text-decoration:none;">Consultation</a>
+          <a href="/services/ai-strategy/" style="font-size:13px;color:#5B6478;text-decoration:none;">AI Strategy</a>
+          <a href="/services/digital-transformation/" style="font-size:13px;color:#5B6478;text-decoration:none;">Digital Transformation</a>
+          <a href="/agentic-ai/" style="font-size:13px;color:#5B6478;text-decoration:none;">Agentic AI Build</a>
+          <a href="/zonar-os/" style="font-size:13px;color:#5B6478;text-decoration:none;">Zonar OS™ Implementation</a>
         </div>
       </div>
 
       <div>
-        <p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Connect</p>
+        <p style="font-size:13px;font-weight:700;color:#12172B;margin:0 0 12px;letter-spacing:0.05em;text-transform:uppercase;">Connect</p>
         <div style="display:flex;gap:12px;margin-bottom:16px;">
-          <a href="https://www.linkedin.com/in/liwarren1/" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(255,255,255,0.06);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">💼</a>
-          <a href="https://www.facebook.com/profile.php?id=61579054417326" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(255,255,255,0.06);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">📘</a>
-          <a href="https://www.instagram.com/lisa.warren.638471/" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(255,255,255,0.06);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">📷</a>
+          <a href="https://www.linkedin.com/in/liwarren1/" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(18,23,43,0.057);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">💼</a>
+          <a href="https://www.facebook.com/profile.php?id=61579054417326" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(18,23,43,0.057);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">📘</a>
+          <a href="https://www.instagram.com/lisa.warren.638471/" target="_blank" rel="noopener" style="width:38px;height:38px;background:rgba(18,23,43,0.057);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:15px;">📷</a>
         </div>
-        <a href="mailto:support@neuralhorizonsai.com" style="font-size:13px;color:#00FF88;text-decoration:none;">support@neuralhorizonsai.com</a>
+        <a href="mailto:support@neuralhorizonsai.com" style="font-size:13px;color:#05C793;text-decoration:none;">support@neuralhorizonsai.com</a>
       </div>
 
     </div>
-    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;text-align:center;">
+    <div style="border-top:1px solid rgba(18,23,43,0.057);padding-top:20px;text-align:center;">
       <p style="font-size:12px;color:#4b5563;margin:0;">
         &copy; 2026 Neural Horizons AI. All Rights Reserved. &nbsp;|&nbsp;
         <a href="/privacy-policy/" style="color:#6b7280;text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp;
