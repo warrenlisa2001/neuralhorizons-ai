@@ -252,55 +252,89 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
         <!-- ANIMATED JOURNEY: AI -> AGENTIC AI -> AUTONOMOUS AI -->
         <div class="ecoj-journey" id="ecojJourney">
-            <div class="ecoj-track" aria-hidden="true"><span class="ecoj-track-fill"></span></div>
+            <p class="ecoj-journey-hint"><i class="fas fa-hand-pointer"></i> Click each stop to explore</p>
+            <div class="ecoj-track" aria-hidden="true">
+                <span class="ecoj-track-fill"></span>
+                <span class="ecoj-track-flow"></span>
+            </div>
+            <div class="ecoj-journey-row">
 
-            <div class="ecoj-step" data-step="1" style="--accent:#2563EB;--accent-soft:#EFF6FF;">
-                <div class="ecoj-badge-wrap">
-                    <span class="ecoj-badge-ring" aria-hidden="true"></span>
-                    <span class="ecoj-badge">1</span>
+            <button type="button" class="ecoj-node" data-modal-target="ecojModalAi" aria-haspopup="dialog" style="--accent:#2563EB;--accent-soft:#EFF6FF;">
+                <span class="ecoj-node-ring" aria-hidden="true"></span>
+                <span class="ecoj-node-circle">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v1.1A4.5 4.5 0 0 0 5 12.4V15a4 4 0 0 0 2 3.46V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.2a4.3 4.3 0 0 0 4 0V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.14A4 4 0 0 0 19 15v-2.6a4.5 4.5 0 0 0-3-4.3V7a4 4 0 0 0-4-4Z" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h.01M15 12h.01" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg>
+                    <span class="ecoj-node-num">1</span>
+                </span>
+                <span class="ecoj-node-label">Artificial<br>Intelligence</span>
+                <span class="ecoj-node-cta">Tap to explore <i class="fas fa-arrow-right"></i></span>
+            </button>
+
+            <button type="button" class="ecoj-node ecoj-node-mid" data-modal-target="ecojModalAgentic" aria-haspopup="dialog" style="--accent:#7C3AED;--accent-soft:#F5F0FF;">
+                <span class="ecoj-node-ring" aria-hidden="true"></span>
+                <span class="ecoj-node-circle">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M9 12.5 11 14.5l4.5-5" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3.5 5 7v5c0 5 3 8.5 7 9.5 4-1 7-4.5 7-9.5V7l-7-3.5Z" stroke="#7C3AED" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                    <span class="ecoj-node-num">2</span>
+                </span>
+                <span class="ecoj-node-label">Agentic AI</span>
+                <span class="ecoj-node-cta">Tap to explore <i class="fas fa-arrow-right"></i></span>
+            </button>
+
+            <button type="button" class="ecoj-node" data-modal-target="ecojModalAutonomous" aria-haspopup="dialog" style="--accent:#05C793;--accent-soft:#F2FBF8;">
+                <span class="ecoj-node-ring" aria-hidden="true"></span>
+                <span class="ecoj-node-circle">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 5.5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11v-6L12 2Z" stroke="#05C793" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="#05C793" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="ecoj-node-num">3</span>
+                </span>
+                <span class="ecoj-node-label">Autonomous AI</span>
+                <span class="ecoj-node-cta">Tap to explore <i class="fas fa-arrow-right"></i></span>
+            </button>
+            </div>
+        </div>
+
+        <!-- POPUP MODALS -->
+        <div class="ecoj-modal-overlay" id="ecojModalOverlay">
+            <div class="ecoj-modal" id="ecojModalAi" role="dialog" aria-modal="true" aria-labelledby="ecojModalAiTitle" style="--accent:#2563EB;--accent-soft:#EFF6FF;">
+                <button type="button" class="ecoj-modal-close" aria-label="Close">&times;</button>
+                <div class="ecoj-modal-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v1.1A4.5 4.5 0 0 0 5 12.4V15a4 4 0 0 0 2 3.46V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.2a4.3 4.3 0 0 0 4 0V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.14A4 4 0 0 0 19 15v-2.6a4.5 4.5 0 0 0-3-4.3V7a4 4 0 0 0-4-4Z" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h.01M15 12h.01" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg></div>
+                <span class="ecoj-modal-tag">Step 1 of 3</span>
+                <h3 id="ecojModalAiTitle" class="ecoj-modal-title">Artificial Intelligence</h3>
+                <p class="ecoj-modal-body">Software that spots patterns in data and makes a prediction or suggestion &mdash; the same idea behind spell-check, spam filters and route planning. A tool. Not a mind of its own.</p>
+                <div class="ecoj-modal-example">
+                    <p class="ecoj-modal-example-label">In practice</p>
+                    <p class="ecoj-modal-example-text">Flags an unusual invoice before it&apos;s paid, suggests the next best action on a stalled deal, or spots a compliance document about to expire.</p>
                 </div>
-                <div class="ecoj-card">
-                    <div class="ecoj-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v1.1A4.5 4.5 0 0 0 5 12.4V15a4 4 0 0 0 2 3.46V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-.2a4.3 4.3 0 0 0 4 0V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.14A4 4 0 0 0 19 15v-2.6a4.5 4.5 0 0 0-3-4.3V7a4 4 0 0 0-4-4Z" stroke="#2563EB" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h.01M15 12h.01" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg>
-                    </div>
-                    <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin:14px 0 8px;">Artificial Intelligence</h3>
-                    <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;margin-bottom:10px;">Software that spots patterns in data and makes a prediction or suggestion &mdash; the same idea behind spell-check, spam filters and route planning. A tool. Not a mind of its own.</p>
-                    <p style="color:#2563EB;font-weight:700;font-size:0.85rem;">You&apos;ve used it safely for years without noticing.</p>
-                </div>
+                <p class="ecoj-modal-reassure">You&apos;ve used it safely for years without noticing.</p>
             </div>
 
-            <div class="ecoj-step" data-step="2" style="--accent:#7C3AED;--accent-soft:#F5F0FF;">
-                <div class="ecoj-badge-wrap">
-                    <span class="ecoj-badge-ring" aria-hidden="true"></span>
-                    <span class="ecoj-badge">2</span>
+            <div class="ecoj-modal" id="ecojModalAgentic" role="dialog" aria-modal="true" aria-labelledby="ecojModalAgenticTitle" style="--accent:#7C3AED;--accent-soft:#F5F0FF;">
+                <button type="button" class="ecoj-modal-close" aria-label="Close">&times;</button>
+                <div class="ecoj-modal-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M9 12.5 11 14.5l4.5-5" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3.5 5 7v5c0 5 3 8.5 7 9.5 4-1 7-4.5 7-9.5V7l-7-3.5Z" stroke="#7C3AED" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+                <span class="ecoj-modal-tag">Step 2 of 3</span>
+                <h3 id="ecojModalAgenticTitle" class="ecoj-modal-title">Agentic AI</h3>
+                <p class="ecoj-modal-body">AI that carries out a multi-step task for you &mdash; chasing a lead, reconciling an invoice, drafting a report &mdash; inside limits your team sets. A tireless junior colleague, not a decision-maker above you.</p>
+                <div class="ecoj-modal-example">
+                    <p class="ecoj-modal-example-label">In practice</p>
+                    <p class="ecoj-modal-example-text">Follows up a cold lead over three emails, reconciles last month&apos;s invoices against the ledger, or drafts a first version of a client report &mdash; then hands it to a teammate to approve.</p>
                 </div>
-                <div class="ecoj-card">
-                    <div class="ecoj-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M9 12.5 11 14.5l4.5-5" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3.5 5 7v5c0 5 3 8.5 7 9.5 4-1 7-4.5 7-9.5V7l-7-3.5Z" stroke="#7C3AED" stroke-width="1.6" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin:14px 0 8px;">Agentic AI</h3>
-                    <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;margin-bottom:10px;">AI that carries out a multi-step task for you &mdash; chasing a lead, reconciling an invoice, drafting a report &mdash; inside limits your team sets. A tireless junior colleague, not a decision-maker above you.</p>
-                    <p style="color:#7C3AED;font-weight:700;font-size:0.85rem;">It does the repetitive work, so your people do the judgment work.</p>
-                </div>
+                <p class="ecoj-modal-reassure">It does the repetitive work, so your people do the judgment work.</p>
             </div>
 
-            <div class="ecoj-step" data-step="3" style="--accent:#05C793;--accent-soft:#F2FBF8;">
-                <div class="ecoj-badge-wrap">
-                    <span class="ecoj-badge-ring" aria-hidden="true"></span>
-                    <span class="ecoj-badge">3</span>
+            <div class="ecoj-modal" id="ecojModalAutonomous" role="dialog" aria-modal="true" aria-labelledby="ecojModalAutonomousTitle" style="--accent:#05C793;--accent-soft:#F2FBF8;">
+                <button type="button" class="ecoj-modal-close" aria-label="Close">&times;</button>
+                <div class="ecoj-modal-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 5.5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11v-6L12 2Z" stroke="#05C793" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="#05C793" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <span class="ecoj-modal-tag">Step 3 of 3</span>
+                <h3 id="ecojModalAutonomousTitle" class="ecoj-modal-title">Autonomous AI</h3>
+                <p class="ecoj-modal-body">The system runs a defined workflow end-to-end without a click each time &mdash; always inside guardrails, with full logging and an off-switch your team controls. Autonomy of task, never autonomy from accountability.</p>
+                <div class="ecoj-modal-example">
+                    <p class="ecoj-modal-example-label">In practice</p>
+                    <p class="ecoj-modal-example-text">Runs the nightly reconciliation end-to-end, escalates only the exceptions that need a human, and logs every action for audit &mdash; with a single switch to pause it at any time.</p>
                 </div>
-                <div class="ecoj-card">
-                    <div class="ecoj-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2 4 5.5v6c0 5.2 3.4 9.9 8 11 4.6-1.1 8-5.8 8-11v-6L12 2Z" stroke="#05C793" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="#05C793" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin:14px 0 8px;">Autonomous AI</h3>
-                    <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;margin-bottom:10px;">The system runs a defined workflow end-to-end without a click each time &mdash; always inside guardrails, with full logging and an off-switch your team controls. Autonomy of task, never autonomy from accountability.</p>
-                    <p style="color:#05C793;font-weight:700;font-size:0.85rem;">Full visibility. Full control. Every time.</p>
-                </div>
+                <p class="ecoj-modal-reassure">Full visibility. Full control. Every time.</p>
             </div>
         </div>
 
         <!-- Condensed fear -> fact reassurance strip -->
+<!-- Condensed fear -> fact reassurance strip -->
         <div class="max-w-5xl mx-auto mt-10 grid md:grid-cols-3 gap-5">
             <div class="ecoj-glass-card">
                 <p style="color:#12172B;font-weight:700;font-size:0.92rem;margin-bottom:6px;">&ldquo;Will it replace my team?&rdquo;</p>
@@ -414,29 +448,59 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 @keyframes ecojRadar{0%{transform:scale(0.75);opacity:0.55;}100%{transform:scale(2);opacity:0;}}
 @keyframes ecojIconFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
-.ecoj-journey{position:relative;display:flex;align-items:flex-start;gap:28px;max-width:1100px;margin:0 auto;padding-top:6px;}
-.ecoj-track{position:absolute;top:20px;left:70px;right:70px;height:4px;background:rgba(18,23,43,0.08);border-radius:4px;overflow:hidden;z-index:0;}
-.ecoj-track-fill{position:absolute;inset:0;background:linear-gradient(90deg,transparent,#2563EB,#7C3AED,#05C793,transparent);background-size:220% 100%;animation:ecojShimmer 4s linear infinite;}
-.ecoj-step{flex:1 1 0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;opacity:0;transform:translateY(36px);transition:opacity 0.7s ease, transform 0.7s ease;}
-.ecoj-step.ecoj-visible{opacity:1;transform:translateY(0);}
-.ecoj-step[data-step="2"]{transition-delay:0.15s;}
-.ecoj-step[data-step="3"]{transition-delay:0.3s;}
-.ecoj-badge-wrap{position:relative;width:40px;height:40px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;}
-.ecoj-badge{position:relative;z-index:2;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:1.05rem;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(18,23,43,0.22);}
-.ecoj-badge-ring{position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--accent);opacity:0.55;animation:ecojRadar 2.6s ease-out infinite;}
-.ecoj-card{background:rgba(255,255,255,0.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.7);border-top:4px solid var(--accent);border-radius:18px;padding:26px 24px;box-shadow:0 10px 30px rgba(18,23,43,0.08);width:100%;max-width:320px;transition:transform 0.25s ease, box-shadow 0.25s ease;will-change:transform;}
-.ecoj-card:hover{box-shadow:0 22px 44px rgba(18,23,43,0.16);}
-.ecoj-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin:0 auto;animation:ecojIconFloat 3.6s ease-in-out infinite;}
+.ecoj-journey{position:relative;max-width:980px;margin:0 auto;padding:56px 20px 10px;opacity:0;transform:translateY(30px);transition:opacity 0.8s ease, transform 0.8s ease;}
+.ecoj-journey.ecoj-visible{opacity:1;transform:translateY(0);}
+.ecoj-journey-hint{position:absolute;top:8px;left:50%;transform:translateX(-50%);color:#8A93A8;font-size:0.78rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;}
+.ecoj-journey-hint i{margin-right:6px;color:#7C3AED;animation:ecojHandTap 1.6s ease-in-out infinite;}
+.ecoj-track{position:absolute;top:98px;left:80px;right:80px;height:10px;border-radius:8px;overflow:hidden;z-index:0;box-shadow:inset 0 1px 3px rgba(18,23,43,0.15);}
+.ecoj-track-fill{position:absolute;inset:0;background:linear-gradient(90deg,#2563EB,#7C3AED,#05C793);}
+.ecoj-track-flow{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg, rgba(255,255,255,0.9) 0 8px, transparent 8px 22px);animation:ecojFlowMove 1.4s linear infinite;}
+.ecoj-journey-row{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;z-index:1;}
+.ecoj-node{position:relative;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1 1 0;padding:0;font-family:inherit;-webkit-tap-highlight-color:transparent;}
+.ecoj-node:nth-child(1){margin-top:0;}
+.ecoj-node:nth-child(2){margin-top:-22px;}
+.ecoj-node:nth-child(3){margin-top:22px;}
+.ecoj-node-ring{position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:80px;border-radius:50%;border:3px solid var(--accent);opacity:0.45;animation:ecojRadar2 2.2s ease-out infinite;}
+.ecoj-node-circle{position:relative;width:80px;height:80px;border-radius:50%;background:#fff;border:3px solid var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(18,23,43,0.18);transition:transform 0.25s ease, box-shadow 0.25s ease;}
+.ecoj-node:hover .ecoj-node-circle,.ecoj-node:focus-visible .ecoj-node-circle{transform:scale(1.1);box-shadow:0 18px 36px rgba(18,23,43,0.28);}
+.ecoj-node-num{position:absolute;bottom:-6px;right:-2px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:0.78rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(18,23,43,0.28);}
+.ecoj-node-label{margin-top:14px;font-weight:800;color:#12172B;font-size:1rem;line-height:1.3;}
+.ecoj-node-cta{margin-top:6px;font-size:0.76rem;font-weight:700;color:var(--accent);opacity:0.9;display:inline-flex;align-items:center;gap:4px;}
+.ecoj-node-cta i{transition:transform 0.2s ease;font-size:0.7rem;}
+.ecoj-node:hover .ecoj-node-cta i{transform:translateX(3px);}
 .ecoj-glass-card{background:rgba(255,255,255,0.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.7);border-radius:14px;padding:18px 20px;box-shadow:0 6px 18px rgba(18,23,43,0.06);position:relative;z-index:1;}
+
+.ecoj-modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,10,20,0.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;}
+.ecoj-modal-overlay.ecoj-modal-open{display:flex;}
+.ecoj-modal{display:none;position:relative;background:#fff;border-radius:22px;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;padding:36px 32px;box-shadow:0 30px 80px rgba(0,0,0,0.4);border-top:6px solid var(--accent);transform:scale(0.92) translateY(10px);opacity:0;transition:transform 0.25s ease, opacity 0.25s ease;}
+.ecoj-modal.ecoj-modal-active{display:block;}
+.ecoj-modal.ecoj-modal-show{transform:scale(1) translateY(0);opacity:1;}
+.ecoj-modal-close{position:absolute;top:16px;right:18px;background:#F7F9FC;border:none;width:34px;height:34px;border-radius:50%;font-size:1.4rem;line-height:1;color:#5B6478;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.ecoj-modal-close:hover{background:#E7EAF3;color:#12172B;}
+.ecoj-modal-icon{width:64px;height:64px;border-radius:16px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.ecoj-modal-tag{display:inline-block;color:var(--accent);font-weight:800;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+.ecoj-modal-title{font-size:1.5rem;font-weight:900;color:#12172B;margin-bottom:14px;}
+.ecoj-modal-body{color:#5B6478;line-height:1.75;margin-bottom:18px;font-size:0.98rem;}
+.ecoj-modal-example{background:#F7F9FC;border:1px solid #E7EAF3;border-radius:14px;padding:16px 18px;margin-bottom:16px;}
+.ecoj-modal-example-label{color:#8A93A8;font-size:0.72rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;}
+.ecoj-modal-example-text{color:#12172B;font-size:0.9rem;line-height:1.65;margin:0;}
+.ecoj-modal-reassure{color:var(--accent);font-weight:800;font-size:0.92rem;margin:0;}
+
+@keyframes ecojFlowMove{from{background-position:0 0;}to{background-position:-30px 0;}}
+@keyframes ecojRadar2{0%{transform:translateX(-50%) scale(0.85);opacity:0.5;}100%{transform:translateX(-50%) scale(1.5);opacity:0;}}
+@keyframes ecojHandTap{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-2px) rotate(-8deg);}}
+
 @media (max-width:900px){
-  .ecoj-journey{flex-direction:column;align-items:center;gap:12px;}
+  .ecoj-journey-row{flex-direction:column;align-items:center;gap:36px;}
   .ecoj-track{display:none;}
-  .ecoj-step{padding-bottom:20px;}
-  .ecoj-step:not(:last-child)::after{content:'';position:absolute;bottom:-2px;left:50%;width:2px;height:22px;background:linear-gradient(to bottom, var(--accent), transparent);}
+  .ecoj-node:nth-child(1),.ecoj-node:nth-child(2),.ecoj-node:nth-child(3){margin-top:0;}
+  .ecoj-node:not(:last-child)::after{content:'';position:absolute;bottom:-24px;left:50%;width:2px;height:24px;background:linear-gradient(to bottom, var(--accent), transparent);}
+  .ecoj-journey{padding-top:44px;}
 }
 @media (prefers-reduced-motion: reduce){
-  .ecoj-bg-grid,.ecoj-orb,.ecoj-track-fill,.ecoj-badge-ring,.ecoj-icon,.ecoj-section [style*="ecojDotPulse"],.ecoj-section [style*="ecojBounceDown"]{animation:none !important;}
-  .ecoj-step{transition:none;opacity:1;transform:none;}
+  .ecoj-bg-grid,.ecoj-orb,.ecoj-track-flow,.ecoj-node-ring,.ecoj-journey-hint i{animation:none !important;}
+  .ecoj-journey{transition:none;opacity:1;transform:none;}
+  .ecoj-modal{transition:none;}
 }
 </style>
 
@@ -444,45 +508,77 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 (function(){
   var section = document.querySelector('.ecoj-section');
   if(!section) return;
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-  var steps = section.querySelectorAll('.ecoj-step');
-  if('IntersectionObserver' in window){
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('ecoj-visible'); }
-      });
-    }, {threshold:0.25});
-    steps.forEach(function(s){ obs.observe(s); });
-  } else {
-    steps.forEach(function(s){ s.classList.add('ecoj-visible'); });
+  var journey = document.getElementById('ecojJourney');
+  if(journey){
+    if('IntersectionObserver' in window){
+      var jObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('ecoj-visible'); } });
+      }, {threshold:0.15});
+      jObs.observe(journey);
+    } else {
+      journey.classList.add('ecoj-visible');
+    }
   }
 
   var spot = document.getElementById('ecojSpotlight');
   if(spot && canHover){
     section.addEventListener('mousemove', function(e){
       var r = section.getBoundingClientRect();
-      var x = ((e.clientX - r.left)/r.width*100).toFixed(2)+'%';
-      var y = ((e.clientY - r.top)/r.height*100).toFixed(2)+'%';
-      spot.style.setProperty('--mx', x);
-      spot.style.setProperty('--my', y);
+      spot.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100).toFixed(2)+'%');
+      spot.style.setProperty('--my', ((e.clientY - r.top)/r.height*100).toFixed(2)+'%');
       spot.style.opacity = '1';
     });
     section.addEventListener('mouseleave', function(){ spot.style.opacity = '0'; });
   }
 
-  if(!reduceMotion && canHover){
-    section.querySelectorAll('.ecoj-card').forEach(function(card){
-      card.addEventListener('mousemove', function(e){
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left)/r.width - 0.5;
-        var py = (e.clientY - r.top)/r.height - 0.5;
-        card.style.transform = 'perspective(700px) rotateX('+(-py*8).toFixed(2)+'deg) rotateY('+(px*10).toFixed(2)+'deg) translateY(-4px)';
-      });
-      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+  var overlay = document.getElementById('ecojModalOverlay');
+  var nodes = section.querySelectorAll('.ecoj-node');
+  var lastTrigger = null;
+
+  function openModal(targetId, trigger){
+    var modal = document.getElementById(targetId);
+    if(!modal || !overlay) return;
+    lastTrigger = trigger;
+    overlay.querySelectorAll('.ecoj-modal').forEach(function(m){ m.classList.remove('ecoj-modal-active','ecoj-modal-show'); });
+    overlay.classList.add('ecoj-modal-open');
+    modal.classList.add('ecoj-modal-active');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ modal.classList.add('ecoj-modal-show'); });
+    });
+    var closeBtn = modal.querySelector('.ecoj-modal-close');
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function closeModal(){
+    if(!overlay) return;
+    overlay.querySelectorAll('.ecoj-modal').forEach(function(m){ m.classList.remove('ecoj-modal-show'); });
+    document.body.style.overflow = '';
+    setTimeout(function(){
+      overlay.classList.remove('ecoj-modal-open');
+      overlay.querySelectorAll('.ecoj-modal').forEach(function(m){ m.classList.remove('ecoj-modal-active'); });
+    }, 220);
+    if(lastTrigger){ lastTrigger.focus(); lastTrigger = null; }
+  }
+
+  nodes.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      openModal(btn.getAttribute('data-modal-target'), btn);
+    });
+  });
+  if(overlay){
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay) closeModal();
+    });
+    overlay.querySelectorAll('.ecoj-modal-close').forEach(function(btn){
+      btn.addEventListener('click', closeModal);
     });
   }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay && overlay.classList.contains('ecoj-modal-open')) closeModal();
+  });
 })();
 </script>
 
