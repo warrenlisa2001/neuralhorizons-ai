@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your AI Audit Report | Neural Horizons AI</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://www.neuralhorizonsai.com/ai-audit/thank-you/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');gtag('event','audit_report_viewed',{event_category:'conversion',value:100});</script>
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/146667855.js"></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --green:#05C793;--dark:#FFFFFF;--dark2:#F7F9FC;
+      --border:rgba(18,23,43,0.064);--muted:#6b7280;--text:#374050;
+      --cyan:#00e5ff;
+    }
+    body{font-family:'Manrope',sans-serif;background:var(--dark);color:#12172B;line-height:1.6;min-height:100vh;}
+    a{text-decoration:none;color:inherit;}
+
+    /* Nav */
+    .nav{background:rgba(18,23,43,0.18);border-bottom:1px solid #F1F3F9;padding:16px 24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;gap:10px;}
+    .nav-logo-mark{width:32px;height:32px;background:var(--green);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#12172B;}
+    .nav-logo-text{font-weight:700;font-size:15px;color:#12172B;}
+    .nav-cta{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:8px 18px;border-radius:9999px;font-weight:700;font-size:0.82rem;}
+
+    /* Loading state */
+    .loading-screen{max-width:640px;margin:0 auto;padding:100px 24px;text-align:center;}
+    .loading-icon{width:80px;height:80px;border-radius:50%;background:rgba(5,199,147,0.08);border:2px solid rgba(5,199,147,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:2rem;}
+    .loading-title{font-size:1.6rem;font-weight:900;color:#12172B;margin-bottom:12px;}
+    .loading-sub{color:#5B6478;font-size:0.95rem;margin-bottom:40px;line-height:1.7;}
+    .progress-wrap{background:rgba(18,23,43,0.05);border-radius:20px;height:6px;overflow:hidden;max-width:400px;margin:0 auto 16px;}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--green),#00cc6a);border-radius:20px;width:0%;transition:width 0.5s ease;}
+    .progress-label{font-size:0.8rem;color:#6b7280;min-height:20px;}
+    .loading-steps{display:flex;flex-direction:column;gap:8px;max-width:380px;margin:32px auto 0;text-align:left;}
+    .lstep{display:flex;align-items:center;gap:10px;font-size:0.85rem;color:#6b7280;transition:color 0.3s;}
+    .lstep.active{color:var(--green);}
+    .lstep.done{color:#5B6478;}
+    .lstep-icon{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.6rem;}
+    .lstep.active .lstep-icon{background:rgba(5,199,147,0.1);animation:pulse 1s infinite;}
+    .lstep.done .lstep-icon{background:rgba(5,199,147,0.15);border-color:var(--green);}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+    /* Report */
+    .report-wrap{max-width:800px;margin:0 auto;padding:48px 24px 80px;display:none;}
+
+    /* Report header */
+    .report-header{text-align:center;margin-bottom:48px;}
+    .report-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.72rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;}
+    .report-header h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:12px;}
+    .report-header h1 span{color:var(--green);}
+    .report-header p{color:#5B6478;font-size:1rem;max-width:560px;margin:0 auto;}
+
+    /* Score card */
+    .score-card{background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(5,199,147,0.02));border:1px solid rgba(5,199,147,0.25);border-radius:20px;padding:32px;margin-bottom:32px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;}
+    .score-ring{width:100px;height:100px;flex-shrink:0;}
+    .score-ring svg{width:100%;height:100%;}
+    .score-info h3{font-size:1rem;font-weight:700;color:#5B6478;margin-bottom:4px;}
+    .score-info .score-num{font-size:2.5rem;font-weight:900;color:var(--green);line-height:1;}
+    .score-info .score-label{font-size:0.85rem;color:#6b7280;margin-top:6px;}
+
+    /* Report sections */
+    .report-section{margin-bottom:32px;}
+    .section-label{font-size:0.7rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .section-label::after{content:'';flex:1;height:1px;background:rgba(5,199,147,0.15);}
+
+    /* Opportunity cards */
+    .opp-grid{display:flex;flex-direction:column;gap:16px;}
+    .opp-card{background:rgba(18,23,43,0.029);border:1px solid var(--border);border-radius:14px;padding:24px;transition:border-color 0.2s;}
+    .opp-card:hover{border-color:rgba(5,199,147,0.2);}
+    .opp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px;}
+    .opp-rank{width:32px;height:32px;border-radius:8px;background:rgba(5,199,147,0.1);border:1px solid rgba(5,199,147,0.2);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--green);font-size:0.85rem;flex-shrink:0;}
+    .opp-title{font-size:1rem;font-weight:800;color:#12172B;flex:1;}
+    .opp-impact{font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+    .impact-high{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#f87171;}
+    .impact-med{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#fbbf24;}
+    .impact-quick{background:rgba(5,199,147,0.1);border:1px solid rgba(5,199,147,0.25);color:var(--green);}
+    .opp-body{color:#5B6478;font-size:0.88rem;line-height:1.75;margin-bottom:12px;}
+    .opp-action{font-size:0.82rem;font-weight:700;color:var(--green);display:flex;align-items:center;gap:6px;}
+
+    /* Roadmap */
+    .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .roadmap-phase{background:rgba(18,23,43,0.029);border:1px solid var(--border);border-radius:12px;padding:20px;}
+    .phase-label{font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;}
+    .phase-title{font-weight:800;color:#12172B;font-size:0.9rem;margin-bottom:8px;}
+    .phase-items{display:flex;flex-direction:column;gap:6px;}
+    .phase-item{font-size:0.82rem;color:#5B6478;display:flex;align-items:flex-start;gap:6px;}
+    .phase-item::before{content:'→';color:var(--green);flex-shrink:0;font-weight:700;}
+
+    /* Revenue estimate */
+    .rev-card{background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(124,58,237,0.02));border:1px solid rgba(124,58,237,0.2);border-radius:14px;padding:24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;}
+    .rev-item .rev-num{font-size:1.6rem;font-weight:900;color:#a855f7;}
+    .rev-item .rev-lbl{font-size:0.75rem;color:#6b7280;margin-top:4px;line-height:1.4;}
+
+    /* AI generated text content */
+    .ai-content{color:#374050;font-size:0.92rem;line-height:1.8;}
+    .ai-content p{margin-bottom:12px;}
+    .ai-content strong{color:#12172B;}
+    .ai-content ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+    .ai-content ul li{display:flex;align-items:flex-start;gap:8px;}
+    .ai-content ul li::before{content:'→';color:var(--green);font-weight:700;flex-shrink:0;}
+
+    /* Streaming cursor */
+    .cursor{display:inline-block;width:2px;height:1em;background:var(--green);margin-left:2px;animation:blink 0.7s step-end infinite;vertical-align:text-bottom;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(124,58,237,0.05));border:1px solid rgba(59,130,246,0.2);border-radius:20px;padding:40px;text-align:center;margin-top:40px;}
+    .cta-section h2{font-size:1.6rem;font-weight:900;margin-bottom:12px;}
+    .cta-section p{color:#5B6478;font-size:0.95rem;max-width:500px;margin:0 auto 28px;line-height:1.75;}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-book{background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:16px 36px;border-radius:9999px;font-weight:900;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
+    .btn-book:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,0.4);}
+    .btn-halu{background:linear-gradient(135deg,var(--cyan),#0099cc);color:#12172B;padding:16px 36px;border-radius:9999px;font-weight:900;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
+    .btn-halu:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,229,255,0.4);}
+
+    /* Error */
+    .error-box{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:24px;text-align:center;color:#f87171;font-size:0.9rem;}
+
+    @media(max-width:640px){
+      .roadmap{grid-template-columns:1fr;}
+      .rev-card{grid-template-columns:1fr;}
+      .score-card{grid-template-columns:1fr;text-align:center;}
+      .cta-buttons{flex-direction:column;align-items:center;}
+    }
+  </style>
+<!-- LinkedIn Insight Tag -->
+<script type="text/javascript">
+_linkedin_partner_id = "515546251";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<script>
+window.lintrk('track', { conversion_id: 'AI_AUDIT_COMPLETE' });
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=515546251&fmt=gif" />
+</noscript>
+<!-- End LinkedIn Insight Tag --></head>
+<body>
+
+<nav class="nav">
+  <a href="https://www.neuralhorizonsai.com" class="nav-logo">
+    <div class="nav-logo-mark">NH</div>
+    <div class="nav-logo-text">Neural Horizons AI</div>
+  </a>
+  <a href="https://calendly.com/neuralhorizonsai-support" class="nav-cta">⚡ Book Consultation</a>
+</nav>
+
+<!-- Loading screen -->
+<div class="loading-screen" id="loading-screen">
+  <div class="loading-icon">🔍</div>
+  <h2 class="loading-title">Generating Your AI Audit Report</h2>
+  <p class="loading-sub" id="loading-name">Zonar™ is analysing your business profile and generating a personalised report. This takes about 15 seconds.</p>
+  <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+  <p class="progress-label" id="progress-label">Initialising Zonar™ engine...</p>
+  <div class="loading-steps">
+    <div class="lstep" id="step-1"><div class="lstep-icon">1</div>Mapping revenue leakage patterns</div>
+    <div class="lstep" id="step-2"><div class="lstep-icon">2</div>Identifying your top AI opportunities</div>
+    <div class="lstep" id="step-3"><div class="lstep-icon">3</div>Building your 90-day roadmap</div>
+    <div class="lstep" id="step-4"><div class="lstep-icon">4</div>Calculating ROI estimates</div>
+    <div class="lstep" id="step-5"><div class="lstep-icon">✓</div>Compiling your final report</div>
+  </div>
+</div>
+
+<!-- Report -->
+<div class="report-wrap" id="report-wrap">
+
+  <div class="report-header">
+    <div class="report-badge"><i class="fas fa-bolt"></i> Powered by Zonar™ · Generated instantly</div>
+    <h1 id="report-headline">Your AI Audit Report is<br><span>Ready.</span></h1>
+    <p id="report-subline">Here is your personalised AI revenue diagnostic — built specifically for your business.</p>
+  </div>
+
+  <!-- Score -->
+  <div class="score-card" id="score-card">
+    <svg class="score-ring" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(18,23,43,0.05)" stroke-width="8"/>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#05C793" stroke-width="8"
+        stroke-dasharray="264" stroke-dashoffset="80" stroke-linecap="round"
+        transform="rotate(-90 50 50)" id="score-circle"/>
+      <text x="50" y="54" text-anchor="middle" fill="#05C793" font-size="22" font-weight="900" font-family="Manrope,sans-serif" id="score-text">–</text>
+    </svg>
+    <div class="score-info">
+      <h3>AI Revenue Opportunity Score</h3>
+      <div class="score-num" id="score-display">–</div>
+      <div class="score-label" id="score-desc">Calculating...</div>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="report-section">
+    <div class="section-label">Executive Summary</div>
+    <div class="ai-content" id="exec-summary"><span class="cursor"></span></div>
+  </div>
+
+  <!-- Top 3 Opportunities -->
+  <div class="report-section">
+    <div class="section-label">Your 3 Highest-ROI AI Opportunities</div>
+    <div class="opp-grid" id="opportunities-container"></div>
+  </div>
+
+  <!-- Revenue Estimate -->
+  <div class="report-section">
+    <div class="section-label">Revenue Impact Estimate</div>
+    <div class="rev-card" id="rev-card">
+      <div class="rev-item"><div class="rev-num" id="rev-1">–</div><div class="rev-lbl">Estimated annual revenue<br>currently at risk</div></div>
+      <div class="rev-item"><div class="rev-num" id="rev-2">–</div><div class="rev-lbl">Recoverable within<br>90 days with AI</div></div>
+      <div class="rev-item"><div class="rev-num" id="rev-3">–</div><div class="rev-lbl">Projected ROI in<br>first 12 months</div></div>
+    </div>
+  </div>
+
+  <!-- 90-Day Roadmap -->
+  <div class="report-section">
+    <div class="section-label">Your 90-Day Implementation Roadmap</div>
+    <div class="roadmap" id="roadmap-container"></div>
+  </div>
+
+  <!-- Detailed AI Analysis -->
+  <div class="report-section">
+    <div class="section-label">Detailed Analysis</div>
+    <div class="ai-content" id="detailed-analysis"><span class="cursor"></span></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Ready to Act on This Report?</h2>
+    <p>Book a free 30-minute call with Lisa Warren to walk through your audit, prioritise the opportunities, and map out exactly what to build first.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/neuralhorizonsai-support" class="btn-book">
+        <i class="fas fa-calendar-check"></i> Book Free Consultation
+      </a>
+      <a href="https://www.neuralhorizonsai.com/halu/" class="btn-halu">
+        <i class="fas fa-bolt"></i> Deploy HALU™ Now
+      </a>
+    </div>
+    <p style="margin-top:16px;font-size:0.8rem;color:#4b5563;">30 minutes · Free · No obligation · Lisa Warren, Founder &amp; CEO</p>
+  </div>
+
+</div>
+
+<script>
+// ── Parse URL params ──────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const fn = params.get('fn') || 'there';
+const co = params.get('co') || 'your business';
+const ch = params.get('ch') || 'slow_growth';
+const sz = params.get('sz') || '11-50';
+const rv = params.get('rv') || '2m-8m-aed';
+
+// Personalise loading screen
+document.getElementById('loading-name').textContent =
+  `Zonar™ is analysing ${co}'s business profile and generating a personalised report. This takes about 15 seconds.`;
+
+// ── Challenge labels ──────────────────────────────────────────────
+const challengeLabels = {
+  no_leads:     'Not enough qualified leads coming in',
+  manual_work:  'Too much manual, repetitive work',
+  slow_growth:  'Growth has stalled',
+  ai_starting:  'Ready for AI but don\'t know where to start',
+  tool_underuse:'Have AI tools but not getting results',
+  silos:        'Teams disconnected — losing deals in the gaps'
+};
+const revenueLabels = {
+  'under-2m-aed':   'Under AED 2M',
+  '2m-8m-aed':      'AED 2M–8M',
+  '8m-35m-aed':     'AED 8M–35M',
+  '35m-180m-aed':   'AED 35M–180M',
+  '180m-plus-aed':  'AED 180M+'
+};
+
+// ── Loading animation ─────────────────────────────────────────────
+const steps = ['step-1','step-2','step-3','step-4','step-5'];
+const labels = [
+  'Mapping revenue leakage patterns...',
+  'Identifying your top AI opportunities...',
+  'Building your 90-day roadmap...',
+  'Calculating ROI estimates...',
+  'Compiling your final report...'
+];
+let currentStep = 0;
+const progressBar = document.getElementById('progress-bar');
+const progressLabel = document.getElementById('progress-label');
+
+function advanceStep() {
+  if (currentStep < steps.length) {
+    if (currentStep > 0) document.getElementById(steps[currentStep-1]).classList.remove('active');
+    if (currentStep > 0) document.getElementById(steps[currentStep-1]).classList.add('done');
+    document.getElementById(steps[currentStep]).classList.add('active');
+    progressLabel.textContent = labels[currentStep];
+    progressBar.style.width = ((currentStep+1)/steps.length * 85) + '%';
+    currentStep++;
+  }
+}
+
+const stepInterval = setInterval(() => {
+  advanceStep();
+  if (currentStep >= steps.length) clearInterval(stepInterval);
+}, 2500);
+
+// ── Generate report with Claude API ──────────────────────────────
+async function generateReport() {
+  const prompt = `You are Zonar™, Neural Horizons AI's AI revenue diagnostic engine. Generate a detailed, specific AI audit report for the following business.
+
+Business Profile:
+- Contact: ${fn}
+- Company: ${co}
+- Company Size: ${sz} employees
+- Biggest Challenge: ${challengeLabels[ch] || ch}
+- Annual Revenue: ${revenueLabels[rv] || rv}
+- Location: UAE/MENA region
+
+Generate a JSON response with this exact structure (no markdown, no code blocks, pure JSON):
+{
+  "score": <number 1-100 representing AI revenue opportunity score>,
+  "score_label": "<2-3 word description like 'High Potential' or 'Critical Gaps'>",
+  "exec_summary": "<3-4 sentences executive summary specific to their challenge and size. Be direct and specific. Reference their company size and challenge explicitly.>",
+  "opportunities": [
+    {
+      "rank": 1,
+      "title": "<specific opportunity title>",
+      "impact": "High Impact",
+      "body": "<2-3 sentences explaining this specific opportunity for their business. Reference their challenge.>",
+      "action": "<specific first action to take>"
+    },
+    {
+      "rank": 2,
+      "title": "<specific opportunity title>",
+      "impact": "Quick Win",
+      "body": "<2-3 sentences>",
+      "action": "<specific first action>"
+    },
+    {
+      "rank": 3,
+      "title": "<specific opportunity title>",
+      "impact": "Medium Priority",
+      "body": "<2-3 sentences>",
+      "action": "<specific first action>"
+    }
+  ],
+  "revenue": {
+    "at_risk": "<AED amount range currently at risk e.g. AED 180K–320K>",
+    "recoverable_90d": "<AED amount recoverable in 90 days>",
+    "roi_12m": "<ROI multiplier e.g. 4.2x>"
+  },
+  "roadmap": [
+    {
+      "phase": "Days 1–30",
+      "title": "Foundation",
+      "items": ["<action 1>", "<action 2>", "<action 3>"]
+    },
+    {
+      "phase": "Days 31–60",
+      "title": "Implementation",
+      "items": ["<action 1>", "<action 2>", "<action 3>"]
+    },
+    {
+      "phase": "Days 61–90",
+      "title": "Optimisation",
+      "items": ["<action 1>", "<action 2>", "<action 3>"]
+    }
+  ],
+  "detailed_analysis": "<4-5 sentences of detailed analysis specific to their challenge. Include specific tools, approaches, and what they should stop doing. Be direct and actionable. Reference UAE/MENA market context where relevant.>"
+}`;
+
+  try {
+    const response = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content[0].text.trim();
+
+    // Parse JSON — strip any accidental markdown
+    const clean = text.replace(/```json|```/g, '').trim();
+    return JSON.parse(clean);
+
+  } catch (err) {
+    console.error('Report generation error:', err);
+    return null;
+  }
+}
+
+// ── Render report ─────────────────────────────────────────────────
+function renderReport(report) {
+  // Finish progress
+  clearInterval(stepInterval);
+  progressBar.style.width = '100%';
+  steps.forEach(s => {
+    document.getElementById(s).classList.remove('active');
+    document.getElementById(s).classList.add('done');
+  });
+
+  setTimeout(() => {
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('report-wrap').style.display = 'block';
+
+    // Headline
+    document.getElementById('report-headline').innerHTML =
+      `${fn}, Your AI Audit Report<br>for <span>${co}</span> is Ready.`;
+    document.getElementById('report-subline').textContent =
+      `Here is your personalised Zonar™ revenue diagnostic — built specifically for your business.`;
+
+    // Score
+    const score = report.score || 72;
+    const offset = 264 - (264 * score / 100);
+    document.getElementById('score-circle').setAttribute('stroke-dashoffset', offset);
+    document.getElementById('score-text').textContent = score;
+    document.getElementById('score-display').textContent = score + '/100';
+    document.getElementById('score-desc').textContent = report.score_label || 'High AI Opportunity';
+
+    // Executive summary
+    document.getElementById('exec-summary').innerHTML =
+      `<p>${report.exec_summary}</p>`;
+
+    // Opportunities
+    const oppContainer = document.getElementById('opportunities-container');
+    oppContainer.innerHTML = '';
+    (report.opportunities || []).forEach(opp => {
+      const impactClass = opp.impact === 'High Impact' ? 'impact-high' :
+                          opp.impact === 'Quick Win'   ? 'impact-quick' : 'impact-med';
+      const div = document.createElement('div');
+      div.className = 'opp-card';
+      div.innerHTML = `
+        <div class="opp-header">
+          <div class="opp-rank">${opp.rank}</div>
+          <div class="opp-title">${opp.title}</div>
+          <span class="opp-impact ${impactClass}">${opp.impact}</span>
+        </div>
+        <div class="opp-body">${opp.body}</div>
+        <div class="opp-action"><i class="fas fa-arrow-right" style="font-size:0.7rem;"></i> ${opp.action}</div>`;
+      oppContainer.appendChild(div);
+    });
+
+    // Revenue
+    if (report.revenue) {
+      document.getElementById('rev-1').textContent = report.revenue.at_risk || '–';
+      document.getElementById('rev-2').textContent = report.revenue.recoverable_90d || '–';
+      document.getElementById('rev-3').textContent = report.revenue.roi_12m || '–';
+    }
+
+    // Roadmap
+    const roadmapContainer = document.getElementById('roadmap-container');
+    roadmapContainer.innerHTML = '';
+    (report.roadmap || []).forEach(phase => {
+      const div = document.createElement('div');
+      div.className = 'roadmap-phase';
+      div.innerHTML = `
+        <div class="phase-label">${phase.phase}</div>
+        <div class="phase-title">${phase.title}</div>
+        <div class="phase-items">${(phase.items||[]).map(i=>`<div class="phase-item">${i}</div>`).join('')}</div>`;
+      roadmapContainer.appendChild(div);
+    });
+
+    // Detailed analysis
+    document.getElementById('detailed-analysis').innerHTML =
+      `<p>${report.detailed_analysis}</p>`;
+
+    // Scroll to top of report
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // GA4
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'audit_report_generated', {
+        event_category: 'conversion',
+        event_label: ch,
+        value: 100
+      });
+    }
+
+  }, 800);
+}
+
+// ── Fallback report if API fails ──────────────────────────────────
+function fallbackReport() {
+  const fallbacks = {
+    no_leads: {
+      score: 78, score_label: 'High Opportunity',
+      exec_summary: `${co} is experiencing a common but solvable problem — your pipeline is leaking qualified leads before they reach sales. For a ${sz}-employee business generating ${revenueLabels[rv]||rv}, this typically represents 25–35% of unrealised revenue potential. The good news: this is one of the fastest areas to fix with AI, and results are measurable within 30 days.`,
+      opportunities: [
+        { rank:1, title:'AI Lead Scoring & Qualification', impact:'High Impact', body:'Your team is spending time on leads that will never convert. AI lead scoring can identify your top 20% of leads — the ones 4x more likely to close — and route them to sales instantly.', action:'Audit your current CRM lead data and identify the 5 fields that correlate most with closed deals' },
+        { rank:2, title:'Automated Lead Nurture Sequences', impact:'Quick Win', body:'Leads that aren\'t ready today need nurturing — and most businesses let them go cold. AI-driven nurture sequences keep your brand front of mind and surface buying signals automatically.', action:'Set up a 5-email nurture sequence triggered by specific website behaviour' },
+        { rank:3, title:'Marketing Attribution Clarity', impact:'Medium Priority', body:'Without knowing which channels are driving qualified leads, budget is being wasted. AI-powered attribution shows you exactly where your best leads come from.', action:'Implement UTM tracking across all channels and connect to your CRM' }
+      ],
+      revenue: { at_risk:'AED 280K–420K', recoverable_90d:'AED 95K–160K', roi_12m:'3.8x' },
+      roadmap: [
+        { phase:'Days 1–30', title:'Diagnose & Score', items:['Audit CRM data quality','Implement lead scoring model','Identify top 3 lead sources'] },
+        { phase:'Days 31–60', title:'Automate & Nurture', items:['Deploy nurture sequences','Set up lead routing rules','Connect marketing attribution'] },
+        { phase:'Days 61–90', title:'Optimise & Scale', items:['A/B test nurture content','Refine scoring thresholds','Report on pipeline velocity'] }
+      ],
+      detailed_analysis:`For ${co}, the fastest path to revenue recovery is fixing the lead qualification layer. In UAE and MENA markets, where relationship-driven selling is critical, AI doesn't replace the human touch — it ensures your team is spending time on the right people. Stop manually reviewing every inbound lead. Start using behavioural data and firmographic signals to prioritise automatically. The businesses winning in 2026 are the ones where sales only speaks to prospects who are already 70% through their buying journey.`
+    }
+  };
+
+  const f = fallbacks[ch] || fallbacks['no_leads'];
+  renderReport(f);
+}
+
+// ── Main ──────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', async () => {
+  // Start loading animation
+  advanceStep();
+
+  // Generate report
+  const report = await generateReport();
+
+  if (report) {
+    renderReport(report);
+  } else {
+    fallbackReport();
+  }
+});
+</script>
+</body>
+</html>

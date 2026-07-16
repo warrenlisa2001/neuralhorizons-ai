@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-369867907');
+</script>
+  <meta charset="UTF-8">
+  <meta name="msvalidate.01" content="0DF985EB4023CF2522679038D9299517">
+  <meta name="google-site-verification" content="ELlr5Y0mz6u5CGxtY5AZyL0VM_sdjuKSYjucWFtDTpk">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Asset Manager AI Case Study | Neural Horizons AI</title>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Case Studies | Neural Horizons AI — Real Results">
+  <meta name="twitter:description" content="Real AI transformation case studies. Asset management, cybersecurity, retail automation, and franchise lead generation across UAE & MENA.">
+  <meta name="twitter:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+  <meta property="og:site_name" content="Neural Horizons AI">
+  <meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+  <meta name="description" content="How Neural Horizons AI led a digital transformation for a global asset management firm — enabling 400+ sales teams, marketing 70+ products and delivering a 50% digital performance uplift.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.neuralhorizonsai.com/case-studies/asset-management-digital-transformation/">
+  <meta property="og:title" content="Case Studies | Neural Horizons AI — Real Results">
+  <meta property="og:description" content="Real AI transformation case studies. Asset management, cybersecurity, retail automation, and franchise lead generation across UAE & MENA.">
+  <meta property="og:url" content="https://www.neuralhorizonsai.com/case-studies/">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Case Studies — Neural Horizons AI",
+  "description":"Real AI and digital transformation case studies. See measurable results delivered by Neural Horizons AI across cybersecurity, financial services, and global enterprise.",
+  "url":"https://www.neuralhorizonsai.com/case-studies/",
+  "publisher":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"}
+}</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/assets/css/theme-2026.css">
+<style>body{background:#FFFFFF !important;color:#12172B;}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#FFFFFF; color:#12172B; font-family:'Inter',sans-serif; }
+    .nav-blur { background:rgba(18,23,43,0.18); backdrop-filter:blur(20px); }
+    .btn-primary { background:linear-gradient(135deg,#05C793,#00CC6A); color:#12172B; font-weight:800; border:none; cursor:pointer; transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(5,199,147,0.4); }
+    @media(max-width:768px){.md-grid-2{grid-template-columns:1fr!important}.md-grid-3{grid-template-columns:1fr!important}}
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"50% Digital Performance Uplift for a Global Asset Manager","author":{"@type":"Person","name":"Lisa Warren"},"publisher":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"},"url":"https://www.neuralhorizonsai.com/case-studies/asset-management-digital-transformation/"}</script>
+<!-- HubSpot Tracking Code -->
+<script type="text/javascript">
+  // Suppress HubSpot chat widget launcher — site uses custom Nova chat
+  window.hsConversationsSettings = {
+    loadImmediately: false,
+    inlineEmbedSelector: ''
+  };
+</script>
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/146667855.js"></script>
+<!-- End HubSpot Tracking Code -->
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav class="fixed w-full top-0 z-50 nav-blur border-b border-slate-200">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center"><img src="/images/logo-lockup.svg" alt="Neural Horizons AI" style="height:36px;width:auto;display:block;"></a>
+                    
+                    <!-- Desktop Menu -->
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <a href="/" class="text-slate-600 hover:text-emerald-600 transition">Home</a>
+                        <a href="/zonar-os" class="text-slate-600 hover:text-emerald-600 transition">Zonar OS™</a>
+
+                        <!-- Services Dropdown -->
+                        <div class="relative group" style="display:inline-block;">
+                          <a href="/services" class="text-slate-600 hover:text-emerald-600 transition flex items-center gap-1">
+                            Services
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-top:1px;transition:transform 0.2s;" class="group-hover:rotate-180"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </a>
+                          <div class="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" style="min-width:240px;z-index:200;">
+                            <div style="background:#ffffff;border:1px solid rgba(5,199,147,0.15);border-radius:14px;padding:8px;box-shadow:0 20px 60px rgba(18,23,43,0.18);">
+                              <div style="padding:8px 12px 6px;font-size:0.65rem;font-weight:700;color:#4a5568;letter-spacing:0.1em;text-transform:uppercase;">Tier 1 — Audit &amp; Consultation</div>
+                              <a href="/ai-audit" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">AI Audit</span>
+                              </a>
+                              <a href="/services/consultation" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">Consultation</span>
+                              </a>
+                              <div style="height:1px;background:rgba(18,23,43,0.057);margin:6px 8px;"></div>
+                              <div style="padding:8px 12px 6px;font-size:0.65rem;font-weight:700;color:#4a5568;letter-spacing:0.1em;text-transform:uppercase;">Tier 2 — Strategy &amp; Transformation</div>
+                              <a href="/services/ai-strategy" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">AI Strategy</span>
+                              </a>
+                              <a href="/services/digital-transformation" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">Digital Transformation</span>
+                              </a>
+                              <div style="height:1px;background:rgba(18,23,43,0.057);margin:6px 8px;"></div>
+                              <div style="padding:8px 12px 6px;font-size:0.65rem;font-weight:700;color:#4a5568;letter-spacing:0.1em;text-transform:uppercase;">Tier 3 — Build &amp; Implementation</div>
+                              <a href="/agentic-ai" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">Agentic AI Build</span>
+                              </a>
+                              <a href="/zonar-os" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <span style="color:#12172B;font-size:0.88rem;font-weight:600;">Zonar OS™ Implementation</span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Resources Dropdown -->
+                        <div class="relative group" style="display:inline-block;">
+                          <a href="/case-studies" class="text-slate-600 hover:text-emerald-600 transition flex items-center gap-1">
+                            Resources
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-top:1px;transition:transform 0.2s;" class="group-hover:rotate-180"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </a>
+                          <div class="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" style="min-width:200px;z-index:200;">
+                            <div style="background:#ffffff;border:1px solid rgba(5,199,147,0.15);border-radius:14px;padding:8px;box-shadow:0 20px 60px rgba(18,23,43,0.18);">
+                              <a href="/case-studies" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <div><div style="color:#12172B;font-size:0.88rem;font-weight:600;">Case Studies</div><div style="color:#6b7280;font-size:0.75rem;">Real client results</div></div>
+                              </a>
+                              <a href="/blog" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <div><div style="color:#12172B;font-size:0.88rem;font-weight:600;">Blog &amp; Insights</div><div style="color:#6b7280;font-size:0.75rem;">AI strategy &amp; news</div></div>
+                              </a>
+                              <a href="/playbooks" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <div><div style="color:#12172B;font-size:0.88rem;font-weight:600;">Playbooks &amp; Members</div><div style="color:#6b7280;font-size:0.75rem;">AI playbook library</div></div>
+                              </a>
+                              <a href="/webinar/" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'">
+                                <span style="color:#05C793;font-size:0.8rem;">⬡</span>
+                                <div><div style="color:#12172B;font-size:0.88rem;font-weight:600;">Webinar — 3rd June</div><div style="color:#6b7280;font-size:0.75rem;">Free executive briefing</div></div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="/about" class="text-slate-600 hover:text-emerald-600 transition">About</a>
+                        <a href="/faq" class="text-slate-600 hover:text-emerald-600 transition">FAQ</a>
+                        <a href="/members/" style="display:inline-flex;align-items:center;gap:6px;color:#5B6478;font-size:0.875rem;font-weight:700;text-decoration:none;padding:8px 14px;border-radius:8px;transition:all 0.2s;border:1px solid rgba(18,23,43,0.071);" onmouseover="this.style.color='#05C793';this.style.borderColor='rgba(5,199,147,0.3)'" onmouseout="this.style.color='#5B6478';this.style.borderColor='rgba(18,23,43,0.071)'">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                          Client Login</a>
+                        <a href="/ai-audit" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 22px;border-radius:9999px;font-weight:800;font-size:0.875rem;text-decoration:none;white-space:nowrap;letter-spacing:0.01em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">⚡ Take Free Audit</a>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="lg:hidden text-slate-900 p-3 rounded-lg border border-slate-200 hover:border-gray-500 transition-all">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+<section style="padding-top:140px;padding-bottom:60px;background:linear-gradient(180deg,#FFFFFF 0%,#F7F9FC 100%);">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem;">
+      <span style="background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#05C793;text-transform:uppercase;">Financial Services</span>
+      <span style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9999px;padding:4px 12px;font-size:0.72rem;font-weight:700;color:#60a5fa;text-transform:uppercase;">Digital Transformation</span>
+    </div>
+    <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;line-height:1.2;margin-bottom:1.5rem;">50% Digital Performance Uplift for a Global Asset Manager</h1>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:2rem;" class="md-grid-3">
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#05C793;margin-bottom:8px;">+50%</div><div style="color:#5B6478;font-size:0.85rem;">Digital performance uplift</div></div>
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#a855f7;margin-bottom:8px;">70+</div><div style="color:#5B6478;font-size:0.85rem;">Products marketed globally</div></div>
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#60a5fa;margin-bottom:8px;">400+</div><div style="color:#5B6478;font-size:0.85rem;">Sales teams enabled</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#FFFFFF;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:1.25rem;">The Challenge</h2>
+    <p style="color:#5B6478;font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">A global asset management firm managing over 70 financial products across EU and Asia had a fundamental problem: their digital presence wasn't supporting the sales process. With 400+ sales professionals globally, the gap between marketing and sales was costing client engagement and investor conversion.</p>
+    <p style="color:#5B6478;font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">Product campaigns were built for institutional audiences but lacked the digital infrastructure to reach and engage them effectively. Sales teams had no centralised platform to access current marketing materials, product messaging or campaign content. Every market, every fund, every campaign was managed in isolation.</p>
+    <p style="color:#5B6478;font-size:0.95rem;line-height:1.8;">The firm needed a digital transformation that would bring marketing, sales enablement and client communications into a unified, scalable system — and do it across 70+ products without losing the precision that institutional investors demand.</p>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#F7F9FC;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:2rem;">Our Approach</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="step-grid">
+      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:3rem;font-weight:900;color:#60a5fa;opacity:0.2;line-height:1;margin-bottom:1rem;">01</div><h4 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Digital Audit &amp; Architecture</h4><p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Audited the full digital ecosystem — product pages, campaign infrastructure, sales tools and client journey touchpoints. Mapped the gaps between what marketing was producing and what sales needed.</p></div>
+      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:3rem;font-weight:900;color:#a855f7;opacity:0.2;line-height:1;margin-bottom:1rem;">02</div><h4 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Platform Design &amp; Digital Transformation</h4><p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Designed and launched a centralised digital platform giving 400+ global sales teams instant access to current product content, campaign materials and investor communications — all in one place.</p></div>
+      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:3rem;font-weight:900;color:#05C793;opacity:0.2;line-height:1;margin-bottom:1rem;">03</div><h4 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Campaign Alignment &amp; Performance</h4><p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Rebuilt product campaign frameworks to align with the new digital infrastructure — ensuring every campaign was measurable, sales-ready and investor-appropriate from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#FFFFFF;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:2rem;">The Solution</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;" class="md-grid-2">
+      <div>
+        <p style="color:#5B6478;font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">We designed and delivered a centralised digital platform that became the single source of truth for all marketing and sales content across the firm's global operation. For the first time, 400+ sales professionals across multiple markets could access up-to-date, compliant product content instantly — without waiting for marketing.</p>
+        <p style="color:#5B6478;font-size:0.95rem;line-height:1.8;">Alongside the platform, we rebuilt the campaign architecture for the 70+ product suite — creating a scalable framework that could produce product-level campaigns efficiently while maintaining institutional-grade quality and compliance alignment.</p>
+      </div>
+      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:16px;padding:28px;">
+        <h4 style="font-size:0.9rem;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.25rem;">What Was Delivered</h4>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Centralised digital sales enablement platform</li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Content architecture for 70+ financial products</li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Global rollout to 400+ sales professionals</li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Scalable campaign framework (EU &amp; Asia)</li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Digital client journey optimisation</li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:#374050;font-size:0.88rem;margin-bottom:8px;"><span style="color:#05C793;flex-shrink:0;">✓</span>Marketing-sales alignment framework</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#F7F9FC;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:2rem;">The Results</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:2.5rem;" class="md-grid-2">
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#05C793;margin-bottom:8px;">+50%</div><div style="color:#5B6478;font-size:0.85rem;">Digital client journey performance</div></div>
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#a855f7;margin-bottom:8px;">70+</div><div style="color:#5B6478;font-size:0.85rem;">Products with campaign coverage</div></div>
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#60a5fa;margin-bottom:8px;">400+</div><div style="color:#5B6478;font-size:0.85rem;">Sales teams enabled globally</div></div>
+      <div style="text-align:center;background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:28px;"><div style="font-size:2.5rem;font-weight:900;color:#05C793;margin-bottom:8px;">2</div><div style="color:#5B6478;font-size:0.85rem;">Regions (EU &amp; Asia) unified</div></div>
+    </div>
+    <div style="background:rgba(18,23,43,0.036);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:2rem;">
+      <div style="font-size:2.5rem;color:#05C793;line-height:1;margin-bottom:0.75rem;font-family:Georgia,serif;">"</div>
+      <p style="color:#374050;font-size:0.95rem;line-height:1.8;font-style:italic;margin-bottom:1rem;">The platform transformed how our sales teams operate. What previously required weeks of back-and-forth with marketing now happens instantly. Client engagement improved measurably, and our digital performance metrics moved by 50% within the first year.</p>
+      <div style="color:#5B6478;font-size:0.85rem;font-weight:600;">CMO, Global Asset Management Firm</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#FFFFFF;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.6rem;font-weight:800;color:#12172B;margin-bottom:1.5rem;">Key Takeaways</h2>
+    <ul style="list-style:none;padding:0;margin:0;">
+      <li style="display:flex;align-items:flex-start;gap:12px;color:#374050;font-size:0.9rem;margin-bottom:12px;"><span style="color:#05C793;flex-shrink:0;">→</span>Digital transformation in financial services isn't about technology — it's about enabling the people closest to clients to do their jobs better, faster and with confidence.</li>
+      <li style="display:flex;align-items:flex-start;gap:12px;color:#374050;font-size:0.9rem;margin-bottom:12px;"><span style="color:#05C793;flex-shrink:0;">→</span>At scale, the marketing-sales gap is the most expensive problem a firm can have. Closing it with the right platform and framework pays back immediately.</li>
+      <li style="display:flex;align-items:flex-start;gap:12px;color:#374050;font-size:0.9rem;margin-bottom:12px;"><span style="color:#05C793;flex-shrink:0;">→</span>70+ products don't need 70 different marketing approaches. A scalable campaign framework built on sound architecture is what makes quality consistent at volume.</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#F7F9FC;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <h2 style="font-size:1.4rem;font-weight:800;color:#12172B;margin-bottom:1.25rem;">Related Services</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" class="md-grid-2">
+      <a href="/services/digital-marketing/" style="display:block;background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:24px;text-decoration:none;" onmouseover="this.style.borderColor='#05C79340'" onmouseout="this.style.borderColor='rgba(18,23,43,0.064)'"><h4 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">Digital Marketing, Brand &amp; Growth</h4><p style="color:#5B6478;font-size:0.85rem;line-height:1.6;margin-bottom:12px;">AI-powered SEO, content, paid media and brand strategy — built to drive revenue, not just reach.</p><span style="color:#05C793;font-size:0.82rem;font-weight:700;">Learn More →</span></a>
+      <a href="/services/agentic-ai/" style="display:block;background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:16px;padding:24px;text-decoration:none;" onmouseover="this.style.borderColor='#a855f740'" onmouseout="this.style.borderColor='rgba(18,23,43,0.064)'"><h4 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">Agentic AI Implementation</h4><p style="color:#5B6478;font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Deploy AI agents that automate workflows and scale your operations with measurable ROI from day one.</p><span style="color:#a855f7;font-size:0.82rem;font-weight:700;">Learn More →</span></a>
+    </div>
+  </div>
+</section>
+<section style="padding:80px 0;background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(124,58,237,0.06));border-top:1px solid rgba(5,199,147,0.1);"><div style="max-width:680px;margin:0 auto;padding:0 24px;text-align:center;"><h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#12172B;margin-bottom:1rem;">Could this be your business?</h2><p style="color:#5B6478;font-size:1rem;margin-bottom:2rem;line-height:1.7;">Book a free 30-minute discovery call. No pitch — just a conversation about what's possible.</p><div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;"><a href="https://www.neuralhorizonsai.com/ai-audit/" target="_blank" style="background:#05C793;color:#12172B;padding:16px 36px;border-radius:9999px;font-weight:900;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;"><i class="fas fa-calendar-check"></i> Book a Free Call</a><a href="https://wa.me/971585697562" target="_blank" style="background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#25D366;padding:16px 28px;border-radius:9999px;font-weight:700;font-size:0.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></div></div></section>
+
+</body>
+</html>
