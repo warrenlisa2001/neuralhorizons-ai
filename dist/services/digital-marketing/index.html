@@ -78,6 +78,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .faq-item.open .fa-chevron-down { transform: rotate(180deg); }
     .fa-chevron-down { transition: transform 0.3s ease; }
   </style>
+
+<style>
+/* === Shared Service Page Enhancements === */
+@keyframes svcOrbDrift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.08);}66%{transform:translate(-25px,25px) scale(0.95);}}
+@keyframes svcGridPan{0%{background-position:0 0;}100%{background-position:48px 48px;}}
+@keyframes svcPulseRing{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(1.8);opacity:0;}}
+@keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes svcFlowMove{0%{background-position:0 0;}100%{background-position:60px 0;}}
+
+.svc-mesh{position:relative;overflow:hidden;}
+.svc-mesh::before{content:'';position:absolute;inset:-20%;background:
+  radial-gradient(circle at 20% 20%, rgba(124,58,237,0.16), transparent 45%),
+  radial-gradient(circle at 80% 30%, rgba(5,199,147,0.18), transparent 50%),
+  radial-gradient(circle at 50% 90%, rgba(124,58,237,0.12), transparent 55%);
+  pointer-events:none;z-index:0;}
+.svc-mesh::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(5,199,147,0.16) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;animation:svcGridPan 14s linear infinite;pointer-events:none;z-index:0;}
+.svc-mesh>*{position:relative;z-index:1;}
+
+.svc-orb{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none;z-index:0;animation:svcOrbDrift 16s ease-in-out infinite;}
+
+.svc-badge-float{animation:svcFloat 4s ease-in-out infinite;display:inline-block;}
+
+.svc-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(.2,.8,.2,1),transform 0.7s cubic-bezier(.2,.8,.2,1);}
+.svc-reveal.svc-in{opacity:1;transform:translateY(0);}
+
+.svc-card{transition:transform 0.35s cubic-bezier(.2,.8,.2,1),box-shadow 0.35s,border-color 0.35s;}
+.svc-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(5,199,147,0.18);border-color:rgba(5,199,147,0.4) !important;}
+
+.svc-flow-wrap{position:relative;}
+.svc-flow-line{position:absolute;top:38px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,rgba(5,199,147,0.5) 0 14px,transparent 14px 26px);background-size:60px 3px;animation:svcFlowMove 2.4s linear infinite;z-index:0;display:none;}
+@media(min-width:768px){.svc-flow-line{display:block;}}
+.svc-flow-node{position:relative;z-index:1;width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#05C793,#7C3AED);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.5rem;margin:0 auto 20px;box-shadow:0 10px 26px rgba(5,199,147,0.4);transition:transform 0.35s;}
+.svc-flow-item:hover .svc-flow-node{transform:scale(1.12);}
+.svc-flow-ring{position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(5,199,147,0.4);animation:svcPulseRing 2.5s ease-out infinite;z-index:0;}
+.svc-flow-item{position:relative;text-align:center;}
+
+.svc-tint{background:linear-gradient(180deg,#FFFFFF 0%,rgba(124,58,237,0.045) 100%) !important;}
+
+@media (prefers-reduced-motion: reduce){
+  .svc-mesh::after,.svc-orb,.svc-badge-float,.svc-flow-line,.svc-flow-ring{animation:none !important;}
+  .svc-reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+
 </head>
 <body>
 
@@ -181,9 +225,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </nav>
 
 <!-- Hero -->
-<section style="padding:140px 0 80px;background:linear-gradient(135deg,rgba(5,199,147,0.08) 0%,rgba(124,58,237,0.07) 100%);">
-  <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
-    <div style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
+<section class="svc-mesh" style="padding:140px 0 80px;background:linear-gradient(135deg,rgba(5,199,147,0.08) 0%,rgba(124,58,237,0.07) 100%);">
+  <div class="svc-orb" style="width:280px;height:280px;background:#05C793;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#05C793;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+  <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
+    <div class="svc-badge-float" style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
       <span style="color:#05C793;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Digital Marketing, Brand &amp; Growth</span>
     </div>
     <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:1.25rem;">Your Brand Is the<br><span style="background:linear-gradient(135deg,#05C793,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">First Thing AI Sees.</span></h1>
@@ -205,27 +252,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;">Five Service Areas. One Integrated Strategy.</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-      <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;transition-delay:0.0s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(5,199,147,0.15);margin-bottom:1rem;">01</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Brand Identity &amp; Rebrand</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Full brand audits, positioning strategy, visual identity creation, messaging frameworks, and end-to-end rebrand management — built to perform in an AI-first world.</p>
       </div>
-      <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;transition-delay:0.1s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(5,199,147,0.15);margin-bottom:1rem;">02</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">AI-Powered SEO &amp; AEO</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Technical SEO, entity-based optimisation, and Answer Engine Optimisation (AEO) — so your brand gets cited by Google, ChatGPT, Perplexity, and Gemini.</p>
       </div>
-      <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;transition-delay:0.2s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(5,199,147,0.15);margin-bottom:1rem;">03</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Paid Media Strategy</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Google Ads, Meta, LinkedIn — AI-optimised campaigns built for lead generation and revenue, with full tracking, attribution, and monthly performance reporting.</p>
       </div>
-      <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;transition-delay:0.0s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(5,199,147,0.15);margin-bottom:1rem;">04</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Social Media &amp; Content</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Platform strategy, content creation, scheduling, community management, and performance analytics — executed with AI-powered workflows for consistency and scale.</p>
       </div>
-      <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.1);border-radius:14px;padding:28px;transition-delay:0.1s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(5,199,147,0.15);margin-bottom:1rem;">05</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Lead Generation &amp; Conversion</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Funnel design, landing page optimisation, CRM integration, lead nurture sequences, and conversion rate optimisation — turning traffic into pipeline.</p>
@@ -235,36 +282,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- Rebrand Process -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-mesh" style="padding:80px 0;background:linear-gradient(180deg,#031B14 0%,#0B241C 100%);">
+  <div class="svc-orb" style="width:220px;height:220px;background:#05C793;opacity:0.18;top:-40px;right:-30px;"></div>
+    <div class="svc-orb" style="width:180px;height:180px;background:#7C3AED;opacity:0.18;bottom:-40px;left:-20px;animation-delay:-5s;"></div>
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <div style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
-        <span style="color:#05C793;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Rebrand Process</span>
+    <div class="svc-reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="svc-badge-float" style="display:inline-block;background:rgba(5,199,147,0.15);border:1px solid rgba(5,199,147,0.35);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
+        <span style="color:#34D399;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Rebrand Process</span>
       </div>
-      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#12172B;">How a Rebrand Works</h2>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;">How a Rebrand Works</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:32px;position:relative;">
-        <div style="position:absolute;top:-1px;left:32px;background:#05C793;color:#12172B;font-size:0.72rem;font-weight:800;padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:0.08em;">STAGE 1</div>
-        <h3 style="font-size:1.1rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;margin-top:0.5rem;">Discovery &amp; Audit</h3>
-        <p style="color:#5B6478;font-size:0.9rem;line-height:1.7;">Competitive analysis, brand perception audit, audience research, and digital presence review — building the strategic foundation for your new brand.</p>
-      </div>
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:32px;position:relative;">
-        <div style="position:absolute;top:-1px;left:32px;background:#05C793;color:#12172B;font-size:0.72rem;font-weight:800;padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:0.08em;">STAGE 2</div>
-        <h3 style="font-size:1.1rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;margin-top:0.5rem;">Brand Build</h3>
-        <p style="color:#5B6478;font-size:0.9rem;line-height:1.7;">Visual identity, logo, colour system, typography, messaging framework, tone of voice, and full brand guidelines — built for digital-first environments.</p>
-      </div>
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:32px;position:relative;">
-        <div style="position:absolute;top:-1px;left:32px;background:#05C793;color:#12172B;font-size:0.72rem;font-weight:800;padding:4px 12px;border-radius:0 0 8px 8px;letter-spacing:0.08em;">STAGE 3</div>
-        <h3 style="font-size:1.1rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;margin-top:0.5rem;">Launch &amp; Amplify</h3>
-        <p style="color:#5B6478;font-size:0.9rem;line-height:1.7;">Coordinated rebrand launch across all digital channels — website, social, paid media, PR, and SEO — with ongoing marketing to build momentum.</p>
+    <div class="svc-flow-wrap">
+      <div class="svc-flow-line"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.0s;">
+          <div class="svc-flow-node">1<div class="svc-flow-ring" style="animation-delay:-0.0s;"></div></div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:0.6rem;">Discovery &amp; Audit</h3>
+          <p style="color:#6EE7C7;font-size:0.9rem;line-height:1.7;">Competitive analysis, brand perception audit, audience research, and digital presence review — building the strategic foundation for your new brand.</p>
+        </div>
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.15s;">
+          <div class="svc-flow-node">2<div class="svc-flow-ring" style="animation-delay:-0.8s;"></div></div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:0.6rem;">Brand Build</h3>
+          <p style="color:#6EE7C7;font-size:0.9rem;line-height:1.7;">Visual identity, logo, colour system, typography, messaging framework, tone of voice, and full brand guidelines — built for digital-first environments.</p>
+        </div>
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.3s;">
+          <div class="svc-flow-node">3<div class="svc-flow-ring" style="animation-delay:-1.6s;"></div></div>
+          <h3 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:0.6rem;">Launch &amp; Amplify</h3>
+          <p style="color:#6EE7C7;font-size:0.9rem;line-height:1.7;">Coordinated rebrand launch across all digital channels — website, social, paid media, PR, and SEO — with ongoing marketing to build momentum.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Pricing -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-tint" style="padding:80px 0;">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
     <div style="text-align:center;margin-bottom:3rem;">
       <div style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
@@ -275,7 +327,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;align-items:stretch;">
 
-      <div class="pricing-card">
+      <div class="pricing-card svc-reveal" style="transition-delay:0s;">
         <div style="font-size:0.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Starter</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">$1,900 / AED 7,000</div>
         <p style="color:#5B6478;font-size:0.85rem;margin-bottom:1.75rem;">One-off project</p>
@@ -289,7 +341,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://www.neuralhorizonsai.com/ai-audit/" target="_blank" rel="noopener" style="display:block;text-align:center;border:2px solid rgba(5,199,147,0.4);color:#05C793;padding:12px 24px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;" onmouseover="this.style.background='rgba(5,199,147,0.08)'" onmouseout="this.style.background='transparent'">Get Started</a>
       </div>
 
-      <div class="pricing-card popular" style="position:relative;">
+      <div class="pricing-card popular svc-reveal" style="position:relative;transition-delay:0.15s;">
         <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#05C793;color:#12172B;font-size:0.72rem;font-weight:800;padding:5px 16px;border-radius:0 0 10px 10px;letter-spacing:0.08em;white-space:nowrap;">MOST POPULAR</div>
         <div style="font-size:0.8rem;font-weight:700;color:#05C793;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;margin-top:0.5rem;">Growth</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">$5,800 / AED 21,300<span style="font-size:1rem;color:#6b7280;font-weight:500;">/mo</span></div>
@@ -308,7 +360,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="/ai-audit" target="_blank" rel="noopener" style="display:block;text-align:center;background:linear-gradient(135deg,#05C793,#00CC6E);color:#12172B;padding:14px 24px;border-radius:50px;font-weight:800;font-size:0.95rem;text-decoration:none;">⚡ Take Audit</a>
       </div>
 
-      <div class="pricing-card">
+      <div class="pricing-card svc-reveal" style="transition-delay:0.3s;">
         <div style="font-size:0.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Enterprise</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">Let's Talk</div>
         <p style="color:#5B6478;font-size:0.85rem;margin-bottom:1.75rem;">Custom scope &amp; pricing</p>
@@ -358,14 +410,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- FAQ -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-tint" style="padding:80px 0;">
   <div style="max-width:780px;margin:0 auto;padding:0 24px;">
     <div style="text-align:center;margin-bottom:3rem;">
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#12172B;">Frequently Asked Questions</h2>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;">
 
-      <div class="faq-item" style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
+      <div class="faq-item svc-reveal svc-in" style="background:#ffffff;border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
         <button onclick="this.closest('.faq-item').classList.toggle('open')" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;color:#12172B;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:700;">
           How is AI-powered marketing different from traditional digital marketing?
           <i class="fas fa-chevron-down" style="color:#05C793;flex-shrink:0;margin-left:12px;"></i>
@@ -375,7 +427,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
 
-      <div class="faq-item" style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
+      <div class="faq-item svc-reveal svc-in" style="background:#ffffff;border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
         <button onclick="this.closest('.faq-item').classList.toggle('open')" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;color:#12172B;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:700;">
           How long does a rebrand take?
           <i class="fas fa-chevron-down" style="color:#05C793;flex-shrink:0;margin-left:12px;"></i>
@@ -385,7 +437,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
 
-      <div class="faq-item" style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
+      <div class="faq-item svc-reveal svc-in" style="background:#ffffff;border:1px solid rgba(18,23,43,0.071);border-radius:12px;overflow:hidden;">
         <button onclick="this.closest('.faq-item').classList.toggle('open')" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;color:#12172B;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:700;">
           Do you work with businesses outside the UAE?
           <i class="fas fa-chevron-down" style="color:#05C793;flex-shrink:0;margin-left:12px;"></i>
@@ -400,8 +452,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- CTA -->
-<section style="padding:80px 0;background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(124,58,237,0.06));border-top:1px solid rgba(5,199,147,0.15);">
-  <div style="max-width:700px;margin:0 auto;padding:0 24px;text-align:center;">
+<section class="svc-mesh" style="padding:80px 0;background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(124,58,237,0.06));border-top:1px solid rgba(5,199,147,0.15);">
+  <div class="svc-orb" style="width:280px;height:280px;background:#05C793;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#05C793;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+  <div class="svc-reveal svc-in" style="max-width:700px;margin:0 auto;padding:0 24px;text-align:center;">
     <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;margin-bottom:1rem;">Ready to grow with AI on your side?</h2>
     <p style="color:#5B6478;font-size:1.05rem;margin-bottom:2rem;line-height:1.7;">Book a free discovery call and we'll audit your current digital presence and show you exactly where the biggest growth opportunities are.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
@@ -476,6 +531,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   window.addEventListener('scroll', () => {
     navbar.style.boxShadow = window.scrollY > 50 ? '0 10px 30px rgba(18,23,43,0.114)' : 'none';
   });
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.svc-reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('svc-in');}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('svc-in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
 </script>
 </body>
 </html>

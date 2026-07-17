@@ -62,6 +62,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(18,23,43,0.142); }
     .pricing-card.popular { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.03); }
   </style>
+
+<style>
+/* === Shared Service Page Enhancements === */
+@keyframes svcOrbDrift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.08);}66%{transform:translate(-25px,25px) scale(0.95);}}
+@keyframes svcGridPan{0%{background-position:0 0;}100%{background-position:48px 48px;}}
+@keyframes svcPulseRing{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(1.8);opacity:0;}}
+@keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes svcFlowMove{0%{background-position:0 0;}100%{background-position:60px 0;}}
+
+.svc-mesh{position:relative;overflow:hidden;}
+.svc-mesh::before{content:'';position:absolute;inset:-20%;background:
+  radial-gradient(circle at 20% 20%, rgba(124,58,237,0.16), transparent 45%),
+  radial-gradient(circle at 80% 30%, rgba(59,130,246,0.18), transparent 50%),
+  radial-gradient(circle at 50% 90%, rgba(124,58,237,0.12), transparent 55%);
+  pointer-events:none;z-index:0;}
+.svc-mesh::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(59,130,246,0.16) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;animation:svcGridPan 14s linear infinite;pointer-events:none;z-index:0;}
+.svc-mesh>*{position:relative;z-index:1;}
+
+.svc-orb{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none;z-index:0;animation:svcOrbDrift 16s ease-in-out infinite;}
+
+.svc-badge-float{animation:svcFloat 4s ease-in-out infinite;display:inline-block;}
+
+.svc-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(.2,.8,.2,1),transform 0.7s cubic-bezier(.2,.8,.2,1);}
+.svc-reveal.svc-in{opacity:1;transform:translateY(0);}
+
+.svc-card{transition:transform 0.35s cubic-bezier(.2,.8,.2,1),box-shadow 0.35s,border-color 0.35s;}
+.svc-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(59,130,246,0.18);border-color:rgba(59,130,246,0.4) !important;}
+
+.svc-flow-wrap{position:relative;}
+.svc-flow-line{position:absolute;top:38px;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,rgba(59,130,246,0.5) 0 14px,transparent 14px 26px);background-size:60px 3px;animation:svcFlowMove 2.4s linear infinite;z-index:0;display:none;}
+@media(min-width:768px){.svc-flow-line{display:block;}}
+.svc-flow-node{position:relative;z-index:1;width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#7C3AED);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.5rem;margin:0 auto 20px;box-shadow:0 10px 26px rgba(59,130,246,0.4);transition:transform 0.35s;}
+.svc-flow-item:hover .svc-flow-node{transform:scale(1.12);}
+.svc-flow-ring{position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(59,130,246,0.4);animation:svcPulseRing 2.5s ease-out infinite;z-index:0;}
+.svc-flow-item{position:relative;text-align:center;}
+
+.svc-tint{background:linear-gradient(180deg,#FFFFFF 0%,rgba(124,58,237,0.045) 100%) !important;}
+
+@media (prefers-reduced-motion: reduce){
+  .svc-mesh::after,.svc-orb,.svc-badge-float,.svc-flow-line,.svc-flow-ring{animation:none !important;}
+  .svc-reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"AI Training & Workshops | Neural Horizons AI UAE","url":"https://www.neuralhorizonsai.com/services/training/","provider":{"@type":"Organization","name":"Neural Horizons AI"}}</script>
 </head>
 <body>
@@ -166,9 +210,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </nav>
 
 <!-- Hero -->
-<section style="padding:140px 0 80px;background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,rgba(124,58,237,0.07) 100%);">
-  <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
-    <div style="display:inline-block;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);border-radius:9999px;padding:5px 16px;margin-bottom:1rem;">
+<section class="svc-mesh" style="padding:140px 0 80px;background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,rgba(124,58,237,0.07) 100%);">
+  <div class="svc-orb" style="width:280px;height:280px;background:#3B82F6;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#3B82F6;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+  <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
+    <div class="svc-badge-float" style="display:inline-block;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.3);border-radius:9999px;padding:5px 16px;margin-bottom:1rem;">
       <span style="font-size:0.68rem;font-weight:800;color:#a855f7;letter-spacing:0.1em;text-transform:uppercase;">Members Platform</span>
     </div>
     <div style="display:inline-block;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;margin-left:8px;">
@@ -193,22 +240,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;">Training That Actually Changes Behaviour</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;transition-delay:0.0s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(59,130,246,0.2);margin-bottom:1rem;">01</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Executive AI Workshops</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Half-day and full-day workshops for C-suite and senior leadership — covering AI strategy, decision-making, risk, and competitive positioning.</p>
       </div>
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;transition-delay:0.1s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(59,130,246,0.2);margin-bottom:1rem;">02</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Team Upskilling Programs</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Practical AI literacy programs for marketing, operations, sales, and finance teams — building capability to work with AI tools from day one.</p>
       </div>
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;transition-delay:0.2s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(59,130,246,0.2);margin-bottom:1rem;">03</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Agentic AI Masterclasses</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Deep-dive sessions on agentic AI systems — how they work, how to manage them, and how to evaluate vendors and use cases for your business.</p>
       </div>
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;">
+      <div class="svc-card svc-reveal" style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);border-radius:14px;padding:28px;transition-delay:0.30000000000000004s;">
         <div style="font-size:2rem;font-weight:900;color:rgba(59,130,246,0.2);margin-bottom:1rem;">04</div>
         <h3 style="font-size:1.05rem;font-weight:800;color:#12172B;margin-bottom:0.6rem;">Bespoke Corporate Programs</h3>
         <p style="color:#5B6478;font-size:0.88rem;line-height:1.7;">Fully tailored training programs built around your industry, culture, and strategic goals — delivered in-person or virtually, anywhere in the world.</p>
@@ -218,28 +265,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- Who It's For -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-tint" style="padding:80px 0;">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
     <div style="text-align:center;margin-bottom:3rem;">
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#12172B;">Who We Train</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
+      <div class="svc-card svc-reveal" style="background:#ffffff;border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
         <div style="font-size:2rem;margin-bottom:12px;">👔</div>
         <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">C-Suite &amp; Board</h3>
         <p style="color:#5B6478;font-size:0.85rem;line-height:1.6;">CEOs, CDOs, CMOs, COOs who need strategic AI fluency to lead transformation from the top.</p>
       </div>
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
+      <div class="svc-card svc-reveal" style="background:#ffffff;border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
         <div style="font-size:2rem;margin-bottom:12px;">📊</div>
         <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">Department Heads</h3>
         <p style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Heads of Marketing, Ops, Finance, HR and Sales who need to apply AI within their function immediately.</p>
       </div>
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
+      <div class="svc-card svc-reveal" style="background:#ffffff;border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
         <div style="font-size:2rem;margin-bottom:12px;">⚡</div>
         <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">Marketing &amp; Ops Teams</h3>
         <p style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Hands-on teams who will use AI tools daily and need practical skills, not just theory.</p>
       </div>
-      <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
+      <div class="svc-card svc-reveal" style="background:#ffffff;border:1px solid rgba(18,23,43,0.064);border-radius:12px;padding:24px;text-align:center;">
         <div style="font-size:2rem;margin-bottom:12px;">🏢</div>
         <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:6px;">Entire Organisations</h3>
         <p style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Companies undergoing AI transformation who need every employee to understand and embrace the change.</p>
@@ -249,36 +296,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- Delivery Formats -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-mesh" style="padding:80px 0;background:linear-gradient(180deg,#0B1220 0%,#141B2E 100%);">
+  <div class="svc-orb" style="width:220px;height:220px;background:#3B82F6;opacity:0.18;top:-40px;right:-30px;"></div>
+    <div class="svc-orb" style="width:180px;height:180px;background:#7C3AED;opacity:0.18;bottom:-40px;left:-20px;animation-delay:-5s;"></div>
   <div style="max-width:900px;margin:0 auto;padding:0 24px;">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <div style="display:inline-block;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
+    <div class="svc-reveal" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="svc-badge-float" style="display:inline-block;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
         <span style="color:#60a5fa;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Delivery</span>
       </div>
-      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#12172B;">How We Deliver</h2>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;">How We Deliver</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:14px;padding:28px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:12px;">🌍</div>
-        <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:8px;">In-Person</h3>
-        <p style="color:#5B6478;font-size:0.87rem;line-height:1.65;">UAE, London &amp; Global. We travel to you for corporate programs — boardrooms, off-sites, team days.</p>
-      </div>
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:14px;padding:28px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:12px;">💻</div>
-        <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:8px;">Virtual Live</h3>
-        <p style="color:#5B6478;font-size:0.87rem;line-height:1.65;">Interactive live sessions via Zoom/Teams for distributed teams and global organisations.</p>
-      </div>
-      <div style="background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);border-radius:14px;padding:28px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:12px;">📱</div>
-        <h3 style="font-size:1rem;font-weight:800;color:#12172B;margin-bottom:8px;">On-Demand</h3>
-        <p style="color:#5B6478;font-size:0.87rem;line-height:1.65;">Access our full library of courses, workshops, and masterclasses any time via the Members Platform.</p>
+    <div class="svc-flow-wrap">
+      <div class="svc-flow-line"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.0s;">
+          <div class="svc-flow-node" style="font-size:1.7rem;">🌍<div class="svc-flow-ring" style="animation-delay:-0.0s;"></div></div>
+          <h3 style="font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px;">In-Person</h3>
+          <p style="color:#93C5FD;font-size:0.87rem;line-height:1.65;">UAE, London &amp; Global. We travel to you for corporate programs — boardrooms, off-sites, team days.</p>
+        </div>
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.12s;">
+          <div class="svc-flow-node" style="font-size:1.7rem;">💻<div class="svc-flow-ring" style="animation-delay:-0.8s;"></div></div>
+          <h3 style="font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px;">Virtual Live</h3>
+          <p style="color:#93C5FD;font-size:0.87rem;line-height:1.65;">Interactive live sessions via Zoom/Teams for distributed teams and global organisations.</p>
+        </div>
+        <div class="svc-flow-item svc-reveal" style="transition-delay:0.24s;">
+          <div class="svc-flow-node" style="font-size:1.7rem;">📱<div class="svc-flow-ring" style="animation-delay:-1.6s;"></div></div>
+          <h3 style="font-size:1rem;font-weight:800;color:#fff;margin-bottom:8px;">On-Demand</h3>
+          <p style="color:#93C5FD;font-size:0.87rem;line-height:1.65;">Access our full library of courses, workshops, and masterclasses any time via the Members Platform.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Members Platform CTA Banner -->
-<section style="padding:60px 24px;background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(124,58,237,0.12));border-top:1px solid rgba(59,130,246,0.2);border-bottom:1px solid rgba(59,130,246,0.2);text-align:center;">
+<section class="svc-mesh svc-reveal svc-in" style="padding:60px 24px;background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(124,58,237,0.12));border-top:1px solid rgba(59,130,246,0.2);border-bottom:1px solid rgba(59,130,246,0.2);text-align:center;">
   <div style="display:inline-block;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:9999px;padding:5px 16px;margin-bottom:1rem;">
     <span style="font-size:0.68rem;font-weight:800;color:#a855f7;letter-spacing:0.1em;text-transform:uppercase;">Members Platform</span>
   </div>
@@ -288,7 +340,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- Pricing -->
-<section style="padding:80px 0;background:#FFFFFF;">
+<section class="svc-tint" style="padding:80px 0;">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
     <div style="text-align:center;margin-bottom:3rem;">
       <div style="display:inline-block;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:9999px;padding:6px 18px;margin-bottom:1rem;">
@@ -299,7 +351,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;align-items:stretch;">
 
-      <div class="pricing-card">
+      <div class="pricing-card svc-reveal" style="transition-delay:0s;">
         <div style="font-size:0.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Starter</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">$250 / AED 920<span style="font-size:1rem;color:#6b7280;font-weight:500;">/mo</span></div>
         <p style="color:#5B6478;font-size:0.85rem;margin-bottom:1.75rem;">Members Platform access</p>
@@ -312,7 +364,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://members.neuralhorizonsai.com" target="_blank" rel="noopener" style="display:block;text-align:center;border:2px solid rgba(59,130,246,0.4);color:#60a5fa;padding:12px 24px;border-radius:50px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;" onmouseover="this.style.background='rgba(59,130,246,0.1)'" onmouseout="this.style.background='transparent'">Join Platform</a>
       </div>
 
-      <div class="pricing-card popular" style="position:relative;">
+      <div class="pricing-card popular svc-reveal" style="position:relative;transition-delay:0.15s;">
         <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#3B82F6;color:#fff;font-size:0.72rem;font-weight:800;padding:5px 16px;border-radius:0 0 10px 10px;letter-spacing:0.08em;white-space:nowrap;">MOST POPULAR</div>
         <div style="font-size:0.8rem;font-weight:700;color:#60a5fa;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;margin-top:0.5rem;">Growth</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">$650 / AED 2,390<span style="font-size:1rem;color:#6b7280;font-weight:500;">/mo</span></div>
@@ -327,7 +379,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://members.neuralhorizonsai.com" target="_blank" rel="noopener" style="display:block;text-align:center;background:linear-gradient(135deg,#3B82F6,#2563eb);color:#fff;padding:14px 24px;border-radius:50px;font-weight:800;font-size:0.95rem;text-decoration:none;">Join Platform</a>
       </div>
 
-      <div class="pricing-card">
+      <div class="pricing-card svc-reveal" style="transition-delay:0.3s;">
         <div style="font-size:0.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Enterprise</div>
         <div style="font-size:2.8rem;font-weight:900;color:#12172B;margin-bottom:0.25rem;">Let's Talk</div>
         <p style="color:#5B6478;font-size:0.85rem;margin-bottom:1.75rem;">Bespoke corporate program</p>
@@ -375,8 +427,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 <!-- CTA -->
-<section style="padding:80px 0;background:linear-gradient(135deg,rgba(59,130,246,0.07),rgba(124,58,237,0.06));border-top:1px solid rgba(59,130,246,0.15);">
-  <div style="max-width:700px;margin:0 auto;padding:0 24px;text-align:center;">
+<section class="svc-mesh" style="padding:80px 0;background:linear-gradient(135deg,rgba(59,130,246,0.07),rgba(124,58,237,0.06));border-top:1px solid rgba(59,130,246,0.15);">
+  <div class="svc-orb" style="width:280px;height:280px;background:#3B82F6;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#3B82F6;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+  <div class="svc-reveal svc-in" style="max-width:700px;margin:0 auto;padding:0 24px;text-align:center;">
     <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#12172B;margin-bottom:1rem;">Let's build an AI-confident team.</h2>
     <p style="color:#5B6478;font-size:1.05rem;margin-bottom:2rem;line-height:1.7;">Whether you need a one-off executive workshop or an organisation-wide transformation program — we'll design it around you.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
@@ -451,6 +506,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   window.addEventListener('scroll', () => {
     navbar.style.boxShadow = window.scrollY > 50 ? '0 10px 30px rgba(18,23,43,0.114)' : 'none';
   });
+</script>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.svc-reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('svc-in');}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('svc-in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
 </script>
 </body>
 </html>
