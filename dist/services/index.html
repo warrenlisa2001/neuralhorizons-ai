@@ -686,6 +686,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .service-card-new:hover .card-arrow { transform: translateX(4px); }
             .service-card-new:hover .card-num { color: rgba(5,199,147,0.3) !important; }
         </style>
+
+<style>
+@keyframes svcOrbDrift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.08);}66%{transform:translate(-25px,25px) scale(0.95);}}
+@keyframes svcGridPan{0%{background-position:0 0;}100%{background-position:48px 48px;}}
+@keyframes svcPulseRing{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(1.8);opacity:0;}}
+@keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes svcDash{0%{background-position:0 0;}100%{background-position:40px 0;}}
+.svc-mesh{position:relative;overflow:hidden;}
+.svc-mesh::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(5,199,147,0.14) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;animation:svcGridPan 14s linear infinite;pointer-events:none;z-index:0;}
+.svc-mesh>*{position:relative;z-index:1;}
+.svc-orb{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none;z-index:0;animation:svcOrbDrift 16s ease-in-out infinite;}
+.svc-badge-float{animation:svcFloat 4s ease-in-out infinite;display:inline-block;}
+.svc-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(.2,.8,.2,1),transform 0.7s cubic-bezier(.2,.8,.2,1);}
+.svc-reveal.svc-in{opacity:1;transform:translateY(0);}
+.svc-feat-card{transition:transform 0.3s cubic-bezier(.2,.8,.2,1),box-shadow 0.3s,border-color 0.3s;}
+.svc-feat-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(18,23,43,0.12);}
+.svc-tier-node{position:relative;z-index:1;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;margin:0 auto 10px;box-shadow:0 8px 20px rgba(18,23,43,0.2);flex-shrink:0;}
+.svc-tier-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid;animation:svcPulseRing 2.5s ease-out infinite;z-index:0;}
+.svc-prog-line{flex:1;min-width:24px;height:3px;background-image:repeating-linear-gradient(90deg,currentColor 0 8px,transparent 8px 16px);background-size:24px 3px;animation:svcDash 1.2s linear infinite;flex-shrink:0;}
+@media (prefers-reduced-motion: reduce){
+  .svc-mesh::after,.svc-orb,.svc-badge-float,.svc-tier-ring,.svc-prog-line{animation:none !important;}
+  .svc-reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.neuralhorizonsai.com/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.neuralhorizonsai.com/services/"}]}
 </script><script type="application/ld+json">
@@ -812,10 +837,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <main>
 
   <!-- Services Hero -->
-  <section style="padding:120px 0 60px;background:#FFFFFF;position:relative;overflow:hidden;">
+  <section class="svc-mesh" style="padding:120px 0 60px;background:linear-gradient(135deg,rgba(5,199,147,0.06) 0%,#FFFFFF 60%);position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;right:0;width:700px;height:700px;background:radial-gradient(circle,rgba(5,199,147,0.05) 0%,transparent 65%);pointer-events:none;"></div>
-    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-      <div style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">How We Work</div>
+    <div class="svc-orb" style="width:280px;height:280px;background:#05C793;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#05C793;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+    <div class="svc-reveal svc-in" style="max-width:1100px;margin:0 auto;padding:0 24px;">
+      <div class="svc-badge-float" style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">How We Work</div>
       <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;color:#12172B;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;max-width:800px;">From Diagnosis<br>to Deployment.</h1>
       <p style="font-size:1.1rem;color:#5B6478;line-height:1.75;max-width:620px;margin-bottom:36px;">Most companies try to implement AI without first understanding what's broken. We start with a diagnostic, then build the strategy, then deploy the system. Every engagement follows the same progression — you choose where you enter.</p>
       <a href="/ai-audit" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:14px 32px;border-radius:9999px;font-weight:800;font-size:1rem;text-decoration:none;">⚡ Take Free Audit — Start Here</a>
@@ -823,37 +851,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </section>
 
   <!-- Progression Arrow -->
-  <section style="background:#f7f9fc;padding:20px 0;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:0;overflow-x:auto;">
-      <div style="flex:1;min-width:140px;text-align:center;padding:16px 8px;">
-        <div style="font-size:0.7rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Tier 1</div>
-        <div style="font-weight:800;color:#12172B;font-size:0.95rem;">Audit &amp; Consultation</div>
-      </div>
-      <div style="color:#05C793;font-size:1.4rem;flex-shrink:0;padding:0 4px;">→</div>
-      <div style="flex:1;min-width:160px;text-align:center;padding:16px 8px;">
-        <div style="font-size:0.7rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Tier 2</div>
-        <div style="font-weight:800;color:#12172B;font-size:0.95rem;">Strategy &amp; Transformation</div>
-      </div>
-      <div style="color:#05C793;font-size:1.4rem;flex-shrink:0;padding:0 4px;">→</div>
-      <div style="flex:1;min-width:160px;text-align:center;padding:16px 8px;">
-        <div style="font-size:0.7rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">Tier 3</div>
-        <div style="font-weight:800;color:#12172B;font-size:0.95rem;">Build &amp; Implementation</div>
-      </div>
+  <section style="background:linear-gradient(135deg,#0B1220,#141B2E);padding:36px 0;">
+    <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:8px;overflow-x:auto;">
+      <a href="#tier-1" style="flex:1;min-width:130px;text-align:center;padding:10px 8px;text-decoration:none;">
+        <div class="svc-tier-node" style="background:linear-gradient(135deg,#05C793,#00CC6E);">1<div class="svc-tier-ring" style="border-color:rgba(5,199,147,0.5);"></div></div>
+        <div style="font-weight:800;color:#fff;font-size:0.9rem;">Audit &amp; Consultation</div>
+      </a>
+      <div class="svc-prog-line" style="color:#05C793;"></div>
+      <a href="#tier-2" style="flex:1;min-width:150px;text-align:center;padding:10px 8px;text-decoration:none;">
+        <div class="svc-tier-node" style="background:linear-gradient(135deg,#7C3AED,#a855f7);">2<div class="svc-tier-ring" style="border-color:rgba(124,58,237,0.5);animation-delay:-0.8s;"></div></div>
+        <div style="font-weight:800;color:#fff;font-size:0.9rem;">Strategy &amp; Transformation</div>
+      </a>
+      <div class="svc-prog-line" style="color:#a855f7;"></div>
+      <a href="#tier-3" style="flex:1;min-width:150px;text-align:center;padding:10px 8px;text-decoration:none;">
+        <div class="svc-tier-node" style="background:linear-gradient(135deg,#3B82F6,#60a5fa);">3<div class="svc-tier-ring" style="border-color:rgba(59,130,246,0.5);animation-delay:-1.6s;"></div></div>
+        <div style="font-weight:800;color:#fff;font-size:0.9rem;">Build &amp; Implementation</div>
+      </a>
     </div>
   </section>
 
   <!-- TIER 1 -->
-  <section style="padding:80px 0;background:#FFFFFF;" id="tier-1">
+  <section style="padding:80px 0;background:linear-gradient(180deg,#FFFFFF 0%,rgba(5,199,147,0.05) 100%);" id="tier-1">
     <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-      <div style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
+      <div class="svc-reveal svc-in" style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
         <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 1</div>
+          <div class="svc-badge-float" style="display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 1</div>
           <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:16px;">Audit &amp;<br>Consultation</h2>
           <p style="color:#5B6478;font-size:1rem;line-height:1.75;margin-bottom:28px;">Clarify what is broken, what is possible, and what should happen next. Best for companies that need clarity before committing to a direction.</p>
           <a href="/ai-audit" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:13px 28px;border-radius:9999px;font-weight:800;font-size:0.95rem;text-decoration:none;">Take Free Audit →</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(5,199,147,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(18,23,43,0.029);border:1px solid rgba(5,199,147,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(5,199,147,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">🔍</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">AI Audit</div>
@@ -861,7 +889,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <a href="/ai-audit" style="display:inline-block;margin-top:12px;color:#05C793;font-size:0.85rem;font-weight:700;text-decoration:none;">Start Free Audit →</a>
             </div>
           </div>
-          <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(5,199,147,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">💬</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">Consultation</div>
@@ -878,24 +906,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div style="height:1px;background:linear-gradient(to right,transparent,rgba(5,199,147,0.2),transparent);margin:0 5%;"></div>
 
   <!-- TIER 2 -->
-  <section style="padding:80px 0;background:#FFFFFF;" id="tier-2">
+  <section style="padding:80px 0;background:linear-gradient(180deg,#FFFFFF 0%,rgba(124,58,237,0.045) 100%);" id="tier-2">
     <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-      <div style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
+      <div class="svc-reveal svc-in" style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
         <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#a855f7;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 2</div>
+          <div class="svc-badge-float" style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#a855f7;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 2</div>
           <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:16px;">Strategy &amp;<br>Transformation</h2>
           <p style="color:#5B6478;font-size:1rem;line-height:1.75;margin-bottom:28px;">Design the operating model. Define how AI integrates with your business — not as a tool, but as a core part of how you run. Best for companies that know they need to change but need the blueprint.</p>
           <a href="/contact" style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#a855f7;padding:13px 28px;border-radius:9999px;font-weight:800;font-size:0.95rem;text-decoration:none;">Discuss Tier 2 →</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(124,58,237,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(18,23,43,0.029);border:1px solid rgba(124,58,237,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(124,58,237,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">🧠</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">AI Strategy</div>
               <div style="color:#5B6478;font-size:0.9rem;line-height:1.65;">Define your AI operating model — where AI plays a role, how it connects your teams, what it automates, and how it scales. A clear strategic roadmap built around your business, not a generic framework.</div>
             </div>
           </div>
-          <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(18,23,43,0.029);border:1px solid rgba(18,23,43,0.071);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(124,58,237,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">⚙️</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">Digital Transformation</div>
@@ -911,17 +939,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div style="height:1px;background:linear-gradient(to right,transparent,rgba(59,130,246,0.2),transparent);margin:0 5%;"></div>
 
   <!-- TIER 3 -->
-  <section style="padding:80px 0;background:#FFFFFF;" id="tier-3">
+  <section style="padding:80px 0;background:linear-gradient(180deg,#FFFFFF 0%,rgba(59,130,246,0.05) 100%);" id="tier-3">
     <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-      <div style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
+      <div class="svc-reveal svc-in" style="display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;">
         <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#60a5fa;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 3</div>
+          <div class="svc-badge-float" style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:9999px;padding:5px 14px;font-size:0.7rem;font-weight:700;color:#60a5fa;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Tier 3</div>
           <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:16px;">Build &amp;<br>Implementation</h2>
           <p style="color:#5B6478;font-size:1rem;line-height:1.75;margin-bottom:28px;">Deploy. Build the agentic AI systems, connect your workflows, and roll out Zonar OS™ across the business. Best for companies that have clarity and are ready to execute.</p>
           <a href="/agentic-ai" style="display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;padding:13px 28px;border-radius:9999px;font-weight:800;font-size:0.95rem;text-decoration:none;">Explore Tier 3 →</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="background:rgba(18,23,43,0.029);border:1px solid rgba(59,130,246,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(18,23,43,0.029);border:1px solid rgba(59,130,246,0.15);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(59,130,246,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">🤖</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">Agentic AI Build</div>
@@ -929,7 +957,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <a href="/agentic-ai" style="display:inline-block;margin-top:12px;color:#60a5fa;font-size:0.85rem;font-weight:700;text-decoration:none;">Learn more →</a>
             </div>
           </div>
-          <div style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.2);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <div class="svc-feat-card svc-reveal svc-in" style="background:rgba(5,199,147,0.03);border:1px solid rgba(5,199,147,0.2);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
             <div style="width:44px;height:44px;background:rgba(5,199,147,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;">⚡</div>
             <div>
               <div style="font-weight:800;color:#12172B;font-size:1.05rem;margin-bottom:6px;">Zonar OS™ Implementation</div>
@@ -943,8 +971,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </section>
 
   <!-- How clients move through the tiers -->
-  <section style="padding:80px 0;background:#f7f9fc;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
+  <section class="svc-mesh" style="padding:80px 0;background:linear-gradient(135deg,rgba(5,199,147,0.06),rgba(124,58,237,0.06));">
+    <div class="svc-orb" style="width:220px;height:220px;background:#05C793;opacity:0.18;top:-40px;right:-30px;"></div>
+    <div class="svc-orb" style="width:180px;height:180px;background:#7C3AED;opacity:0.18;bottom:-40px;left:-20px;animation-delay:-5s;"></div>
+    <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
       <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;color:#12172B;margin-bottom:16px;">You Don't Have to Start at Tier 3</h2>
       <p style="color:#5B6478;font-size:1rem;line-height:1.75;max-width:600px;margin:0 auto 40px;">Most clients start with a free audit. That tells us exactly where the gaps are. Some engage at Tier 1 for clarity. Others move straight to Tier 2 to redesign their operating model. A few arrive ready to build. The path is yours — the progression is always the same.</p>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
@@ -2056,6 +2086,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   // No additional code needed here
 </script>
 <!-- End HubSpot Chat Widget -->
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.svc-reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('svc-in');}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('svc-in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
 
     </body>
     </html>
