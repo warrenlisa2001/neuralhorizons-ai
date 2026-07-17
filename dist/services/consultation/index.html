@@ -686,6 +686,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .service-card-new:hover .card-arrow { transform: translateX(4px); }
             .service-card-new:hover .card-num { color: rgba(5,199,147,0.3) !important; }
         </style>
+
+<style>
+@keyframes svcOrbDrift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.08);}66%{transform:translate(-25px,25px) scale(0.95);}}
+@keyframes svcGridPan{0%{background-position:0 0;}100%{background-position:48px 48px;}}
+@keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes svcCheckPop{0%{transform:scale(0);opacity:0;}60%{transform:scale(1.2);}100%{transform:scale(1);opacity:1;}}
+.svc-mesh{position:relative;overflow:hidden;}
+.svc-mesh::before{content:'';position:absolute;inset:-20%;background:
+  radial-gradient(circle at 15% 20%, rgba(124,58,237,0.12), transparent 45%),
+  radial-gradient(circle at 85% 25%, rgba(5,199,147,0.16), transparent 50%);
+  pointer-events:none;z-index:0;}
+.svc-mesh::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(5,199,147,0.14) 1px,transparent 1px);background-size:32px 32px;opacity:0.5;animation:svcGridPan 14s linear infinite;pointer-events:none;z-index:0;}
+.svc-mesh>*{position:relative;z-index:1;}
+.svc-orb{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none;z-index:0;animation:svcOrbDrift 16s ease-in-out infinite;}
+.svc-badge-float{animation:svcFloat 4s ease-in-out infinite;display:inline-block;}
+.svc-reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(.2,.8,.2,1),transform 0.7s cubic-bezier(.2,.8,.2,1);}
+.svc-reveal.svc-in{opacity:1;transform:translateY(0);}
+.svc-cov-card{transition:transform 0.35s cubic-bezier(.2,.8,.2,1),box-shadow 0.35s;}
+.svc-cov-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(5,199,147,0.18);}
+.svc-check-item{animation:svcCheckPop 0.5s cubic-bezier(.34,1.56,.64,1) both;}
+@media (prefers-reduced-motion: reduce){
+  .svc-mesh::after,.svc-orb,.svc-badge-float,.svc-check-item{animation:none !important;}
+  .svc-reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.neuralhorizonsai.com/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.neuralhorizonsai.com/services/"},{"@type":"ListItem","position":3,"name":"Consultation","item":"https://www.neuralhorizonsai.com/services/consultation/"}]}
 </script><script type="application/ld+json">
@@ -807,18 +833,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
         </div>
 <main>
-  <section style="padding:120px 0 80px;background:#FFFFFF;min-height:60vh;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
-      <div style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">Tier 1 — Audit & Consultation</div>
+  <section class="svc-mesh" style="padding:120px 0 90px;background:linear-gradient(135deg,rgba(5,199,147,0.07) 0%,#FFFFFF 55%);min-height:60vh;">
+    <div class="svc-orb" style="width:280px;height:280px;background:#05C793;opacity:0.22;top:-60px;left:-40px;"></div>
+    <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
+    <div class="svc-orb" style="width:160px;height:160px;background:#05C793;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
+    <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <div class="svc-badge-float" style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">Tier 1 — Audit &amp; Consultation</div>
       <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#12172B;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;">Consultation.<br><span style="color:#05C793;">Clarity Before Commitment.</span></h1>
       <p style="font-size:1.1rem;color:#5B6478;line-height:1.75;max-width:600px;margin-bottom:40px;">A focused advisory session with Lisa Warren to shape your AI direction. You bring your audit results, current challenges, and goals. We map the opportunities, prioritise what matters most, and define clear next steps — so you move with confidence, not guesswork.</p>
-      <div style="background:rgba(5,199,147,0.04);border:1px solid rgba(5,199,147,0.15);border-radius:16px;padding:32px;margin-bottom:16px;">
+      <div class="svc-cov-card" style="background:rgba(5,199,147,0.04);border:1px solid rgba(5,199,147,0.15);border-radius:16px;padding:32px;margin-bottom:16px;">
           <div style="font-weight:800;color:#12172B;margin-bottom:16px;font-size:1.05rem;">What a consultation covers:</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Current-state review of your AI, sales, marketing and ops</span></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Opportunity mapping — where the biggest wins are</span></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Prioritisation framework — what to do first</span></div>
-            <div style="display:flex;gap:12px;align-items:flex-start;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Next-step recommendation — a clear path forward</span></div>
+            <div class="svc-check-item" style="display:flex;gap:12px;align-items:flex-start;animation-delay:0s;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Current-state review of your AI, sales, marketing and ops</span></div>
+            <div class="svc-check-item" style="display:flex;gap:12px;align-items:flex-start;animation-delay:0.1s;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Opportunity mapping — where the biggest wins are</span></div>
+            <div class="svc-check-item" style="display:flex;gap:12px;align-items:flex-start;animation-delay:0.2s;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Prioritisation framework — what to do first</span></div>
+            <div class="svc-check-item" style="display:flex;gap:12px;align-items:flex-start;animation-delay:0.3s;"><span style="color:#05C793;flex-shrink:0;">✓</span><span style="color:#374050;font-size:0.95rem;">Next-step recommendation — a clear path forward</span></div>
           </div>
         </div>
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
@@ -1926,6 +1955,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   // No additional code needed here
 </script>
 <!-- End HubSpot Chat Widget -->
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.svc-reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('svc-in');}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('svc-in'); io.unobserve(entry.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
 
     </body>
     </html>
