@@ -177,7 +177,14 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 </div>
 
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden" id="hero" style="background:#FFFFFF;z-index:1;">
+<section class="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden" id="hero" style="background:#05050A;z-index:1;">
+    <div class="hero-video-fx" aria-hidden="true">
+      <div class="hero-video-wrap">
+        <iframe id="heroBgVideo" class="hero-bg-video" src="https://www.youtube.com/embed/xwWrjeFGVuI?start=204&autoplay=1&mute=1&loop=1&playlist=xwWrjeFGVuI&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div class="hero-video-scrim"></div>
+    </div>
+    <button class="hero-video-sound" id="heroBgSoundToggle" type="button">Unmute</button>
     <canvas id="neuralCanvas" class="absolute inset-0 w-full h-full" style="opacity:0.9;"></canvas>
     <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
       <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(ellipse at center,rgba(5,199,147,0.10) 0%,transparent 65%);animation:heroBgPulse 6s ease-in-out infinite;"></div>
@@ -195,6 +202,14 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     @keyframes heroBgPulse{0%,100%{opacity:0.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
     @keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
     @keyframes heroPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+    .hero-video-fx{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;}
+    .hero-video-wrap{position:absolute;inset:0;overflow:hidden;}
+    .hero-bg-video{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0;}
+    .hero-video-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.62) 0%, rgba(5,5,10,.7) 55%, rgba(5,5,10,.8) 100%);}
+    .hero-video-sound{position:absolute;right:24px;bottom:24px;z-index:15;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);font-family:inherit;}
+    .hero-video-sound:hover{border-color:#05C793;}
+    #hero .btn-secondary{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.08);color:#ffffff;}
+    #hero .btn-secondary:hover{background:#05C793;border-color:#05C793;color:#04110c;}
     </style>
     <div class="container mx-auto px-6 relative z-20 flex items-center justify-center min-h-[calc(100vh-120px)] py-12">
         <div class="max-w-4xl mx-auto text-center fade-in relative z-20 w-full">
@@ -202,24 +217,24 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
                 <span style="width:7px;height:7px;border-radius:50%;background:#05C793;display:inline-block;animation:heroPulse 2s infinite;flex-shrink:0;"></span>
                 <span style="font-size:0.78rem;font-weight:800;color:#0B7A5C;letter-spacing:0.12em;text-transform:uppercase;">Agentic AI &nbsp;&middot;&nbsp; No Silos &nbsp;&middot;&nbsp; No Leakage &nbsp;&middot;&nbsp; UAE &amp; MENA</span>
             </div>
-            <h1 style="font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;color:#12172B;margin-bottom:1.5rem;">
+            <h1 style="font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;line-height:1.08;letter-spacing:-0.03em;color:#ffffff;margin-bottom:1.5rem;">
                 Your business has gaps.<br>
                 <span style="background:linear-gradient(135deg,#05C793,#2563EB);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Revenue leaks through them every day.</span>
             </h1>
-            <p style="font-size:clamp(1.05rem,2.2vw,1.3rem);color:#5B6478;line-height:1.75;max-width:620px;margin:0 auto 1rem;">
+            <p style="font-size:clamp(1.05rem,2.2vw,1.3rem);color:#D3D6E0;line-height:1.75;max-width:620px;margin:0 auto 1rem;">
                 Silos between departments. Tools that don&apos;t connect.<br>Decisions made without the full picture.
             </p>
-            <p style="font-size:1.05rem;color:#3B4257;line-height:1.75;max-width:600px;margin:0 auto 2.5rem;font-weight:500;">
-                This isn&apos;t a technology problem &mdash; it&apos;s a systems problem, and agentic AI is a genuinely positive way to solve it. <strong style="color:#12172B;">Neural Horizons AI</strong> implements AI that finds your gaps, closes the leaks, and connects your business end to end &mdash; with your team firmly in control.
+            <p style="font-size:1.05rem;color:#D3D6E0;line-height:1.75;max-width:600px;margin:0 auto 2.5rem;font-weight:500;">
+                This isn&apos;t a technology problem &mdash; it&apos;s a systems problem, and agentic AI is a genuinely positive way to solve it. <strong style="color:#ffffff;">Neural Horizons AI</strong> implements AI that finds your gaps, closes the leaks, and connects your business end to end &mdash; with your team firmly in control.
             </p>
             <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-bottom:2.75rem;">
-                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#05C793;font-size:1.4rem;font-weight:900;">20+</span><span style="color:#8A93A8;font-size:0.85rem;">Global Clients</span></div>
-                <div style="width:1px;background:#E7EAF3;"></div>
-                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#2563EB;font-size:1.4rem;font-weight:900;">98%</span><span style="color:#8A93A8;font-size:0.85rem;">Client Satisfaction</span></div>
-                <div style="width:1px;background:#E7EAF3;"></div>
-                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#7C3AED;font-size:1.4rem;font-weight:900;">AED 9M+</span><span style="color:#8A93A8;font-size:0.85rem;">Revenue Generated</span></div>
-                <div style="width:1px;background:#E7EAF3;"></div>
-                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#F59E0B;font-size:1.4rem;font-weight:900;">15+</span><span style="color:#8A93A8;font-size:0.85rem;">Years Experience</span></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#05C793;font-size:1.4rem;font-weight:900;">20+</span><span style="color:#B8BFCE;font-size:0.85rem;">Global Clients</span></div>
+                <div style="width:1px;background:rgba(255,255,255,.18);"></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#2563EB;font-size:1.4rem;font-weight:900;">98%</span><span style="color:#B8BFCE;font-size:0.85rem;">Client Satisfaction</span></div>
+                <div style="width:1px;background:rgba(255,255,255,.18);"></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#7C3AED;font-size:1.4rem;font-weight:900;">AED 9M+</span><span style="color:#B8BFCE;font-size:0.85rem;">Revenue Generated</span></div>
+                <div style="width:1px;background:rgba(255,255,255,.18);"></div>
+                <div style="display:flex;align-items:center;gap:8px;"><span style="color:#F59E0B;font-size:1.4rem;font-weight:900;">15+</span><span style="color:#B8BFCE;font-size:0.85rem;">Years Experience</span></div>
             </div>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20">
                 <a href="/ai-audit" class="btn-primary px-10 py-4 rounded-full font-bold text-base inline-flex items-center shadow-lg w-full sm:w-auto justify-center">⚡ Take Free AI Audit<i class="fas fa-arrow-right ml-3"></i></a>
@@ -229,6 +244,35 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
     <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"><i class="fas fa-chevron-down text-2xl" style="color:#05C793;"></i></div>
 </section>
+<script>
+(function(){
+  var heroVideoFrame = document.getElementById('heroBgVideo');
+  var heroSoundBtn = document.getElementById('heroBgSoundToggle');
+  var heroMuted = true;
+  if (heroVideoFrame) {
+    var kickPlay = function(){
+      try {
+        heroVideoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'mute', args:[]}), '*');
+        heroVideoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
+      } catch (e) {}
+    };
+    heroVideoFrame.addEventListener('load', function(){
+      kickPlay();
+      setTimeout(kickPlay, 800);
+      setTimeout(kickPlay, 2000);
+    });
+    document.addEventListener('click', kickPlay, {once:true});
+    document.addEventListener('scroll', kickPlay, {once:true});
+  }
+  if (heroSoundBtn && heroVideoFrame) {
+    heroSoundBtn.addEventListener('click', function(){
+      heroMuted = !heroMuted;
+      heroVideoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func: heroMuted ? 'mute' : 'unMute', args:[]}), '*');
+      heroSoundBtn.textContent = heroMuted ? 'Unmute' : 'Mute';
+    });
+  }
+})();
+</script>
 
 <!-- ECOSYSTEM INTELLIGENCE — CENTERPIECE: ANIMATED, INTERACTIVE AI/AGENTIC/AUTONOMOUS JOURNEY -->
 <section class="py-24 ecoj-section" id="ecosystem" style="position:relative;overflow:hidden;border-top:1px solid #E7EAF3;border-bottom:1px solid #E7EAF3;">
