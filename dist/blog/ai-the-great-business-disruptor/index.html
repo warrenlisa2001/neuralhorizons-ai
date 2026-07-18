@@ -56,6 +56,17 @@
   @media (max-width:720px){ nav.links a:not(.cta-btn){display:none;} }
 
   .article-head{padding:56px 0 32px;border-bottom:1px solid var(--phantom);}
+  .article-head.has-video{
+    position:relative;overflow:hidden;background:#05050A;padding:150px 0 60px;
+    --white:#FFFFFF; --space:#D3D6E0; --steel:#B7BCCB; --phantom:rgba(255,255,255,0.14);
+  }
+  .ahero-video-fx{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;}
+  .ahero-video-wrap{position:absolute;inset:0;overflow:hidden;}
+  .ahero-bg-video{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0;}
+  .ahero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.62) 0%, rgba(5,5,10,.7) 55%, rgba(5,5,10,.88) 100%);}
+  .ahero-sound{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:600;padding:7px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);font-family:inherit;}
+  .ahero-sound:hover{border-color:#05C793;}
+  .article-head.has-video .container, .article-head.has-video .tag-row, .article-head.has-video h1, .article-head.has-video .dek, .article-head.has-video .byline{position:relative;z-index:2;}
   .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
   .tag{font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 12px;border-radius:100px;border:1px solid var(--phantom);color:var(--steel);}
   .tag.accent{border:none;background:var(--grad);color:#04110c;}
@@ -163,7 +174,15 @@
   </div>
 </header>
 
-<div id="top" class="container article-head">
+<div id="top" class="article-head has-video">
+  <div class="ahero-video-fx" aria-hidden="true">
+    <div class="ahero-video-wrap">
+      <iframe id="postHeroBgVideo" class="ahero-bg-video" src="https://www.youtube.com/embed/xwWrjeFGVuI?start=204&autoplay=1&mute=1&loop=1&playlist=xwWrjeFGVuI&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+    <div class="ahero-scrim"></div>
+  </div>
+  <button class="ahero-sound" id="postHeroSoundToggle" type="button">Unmute</button>
+  <div class="container">
   <div class="tag-row">
     <span class="tag accent">AI Disruption</span>
     <span class="tag">Business Strategy</span>
@@ -180,7 +199,37 @@
       <div class="meta">Founder &amp; CEO, Neural Horizons AI · July 18, 2026</div>
     </div>
   </div>
+  </div>
 </div>
+<script>
+(function(){
+  var videoFrame = document.getElementById('postHeroBgVideo');
+  var soundBtn = document.getElementById('postHeroSoundToggle');
+  var muted = true;
+  if (videoFrame) {
+    var kickPlay = function(){
+      try {
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'mute', args:[]}), '*');
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
+      } catch (e) {}
+    };
+    videoFrame.addEventListener('load', function(){
+      kickPlay();
+      setTimeout(kickPlay, 800);
+      setTimeout(kickPlay, 2000);
+    });
+    document.addEventListener('click', kickPlay, {once:true});
+    document.addEventListener('scroll', kickPlay, {once:true});
+  }
+  if (soundBtn && videoFrame) {
+    soundBtn.addEventListener('click', function(){
+      muted = !muted;
+      videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func: muted ? 'mute' : 'unMute', args:[]}), '*');
+      soundBtn.textContent = muted ? 'Unmute' : 'Mute';
+    });
+  }
+})();
+</script>
 
 <div class="container article-body">
 
