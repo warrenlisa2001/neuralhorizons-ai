@@ -46,12 +46,12 @@
 <div class="splash">
   <div class="splash-video-fx" aria-hidden="true">
     <div class="splash-video-wrap">
-      <iframe id="splashBgVideo" class="splash-bg-video" src="https://www.youtube.com/embed/Ynoh37vsZAo?start=65&autoplay=1&mute=0&loop=1&playlist=Ynoh37vsZAo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <iframe id="splashBgVideo" class="splash-bg-video" src="https://www.youtube.com/embed/Ynoh37vsZAo?start=65&autoplay=1&mute=1&loop=1&playlist=Ynoh37vsZAo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     <div class="splash-scrim"></div>
   </div>
 
-  <button class="splash-sound" id="splashSoundToggle" type="button">Mute</button>
+  <button class="splash-sound" id="splashSoundToggle" type="button">Unmute</button>
 
   <div class="splash-content">
     <img class="splash-logo" src="/images/logo-lockup-white.svg" alt="Neural Horizons AI">
@@ -67,24 +67,32 @@
 (function(){
   var videoFrame = document.getElementById('splashBgVideo');
   var soundBtn = document.getElementById('splashSoundToggle');
-  var muted = false;
+  var muted = true;
   if (videoFrame) {
-    var kickPlay = function(){
+    var ensurePlaying = function(){
       try {
-        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'unMute', args:[]}), '*');
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'mute', args:[]}), '*');
         videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
       } catch (e) {}
     };
+    var trySound = function(){
+      try {
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'unMute', args:[]}), '*');
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
+        muted = false;
+        if (soundBtn) soundBtn.textContent = 'Mute';
+      } catch (e) {}
+    };
+    // Muted autoplay is always allowed — this guarantees the video actually plays.
     videoFrame.addEventListener('load', function(){
-      kickPlay();
-      setTimeout(kickPlay, 600);
-      setTimeout(kickPlay, 1500);
-      setTimeout(kickPlay, 3000);
+      ensurePlaying();
+      setTimeout(ensurePlaying, 600);
+      setTimeout(ensurePlaying, 1500);
     });
-    // Browsers that block unmuted autoplay will still be silent until a gesture —
-    // the first click/scroll/keypress forces sound on as a fallback.
+    // The first click/scroll/keypress on the page is a user gesture, so browsers
+    // will allow sound from that point on — switch it on automatically then.
     var forceOnGesture = function(){
-      if (!muted) kickPlay();
+      if (muted) trySound();
     };
     document.addEventListener('click', forceOnGesture, {once:true});
     document.addEventListener('scroll', forceOnGesture, {once:true});
