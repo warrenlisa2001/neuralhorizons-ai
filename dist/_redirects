@@ -1,0 +1,7 @@
+/ai-audit/ /contact/ 301
+/ai-audit/questionnaire/ /contact/ 301
+/ai-audit/questionnaire/* /contact/ 301
+/ai-audit/thank-you/ /contact/ 301
+/ai-audit/thank-you/* /contact/ 301
+/ai-audit /contact/ 301
+/ai-audit/* /contact/ 301
