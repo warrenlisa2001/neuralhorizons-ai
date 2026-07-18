@@ -107,17 +107,63 @@ body{font-family:'Manrope',sans-serif;background:#FFFFFF;color:#12172B;overflow-
 </div>
 
 
-<!-- Hero -->
-<section class="pt-40 pb-20" style="background:#F0F9FF;">
-    <div class="container mx-auto px-6 max-w-4xl text-center">
-        <div style="width:76px;height:76px;border-radius:20px;background:#ffffff;border:2px solid #0EA5E9;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1.5rem;">🛡️</div>
-        <div style="display:inline-block;background:#ffffff;border:1px solid #0EA5E9;border-radius:9999px;padding:6px 18px;margin-bottom:1.2rem;">
-            <span style="color:#0EA5E9;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Cybersecurity</span>
+<!-- Hero (video) -->
+<style>
+  .ecohero{position:relative;overflow:hidden;background:#05050A;padding-top:150px;padding-bottom:90px;text-align:center;}
+  .ecohero-video-fx{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;}
+  .ecohero-video-wrap{position:absolute;inset:0;overflow:hidden;}
+  .ecohero-bg-video{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0;}
+  .ecohero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.55) 0%, rgba(5,5,10,.65) 55%, rgba(5,5,10,.82) 100%);}
+  .ecohero-sound{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:600;padding:7px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);font-family:inherit;}
+  .ecohero-sound:hover{border-color:#0EA5E9;}
+  .ecohero-content{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 24px;}
+</style>
+<section class="ecohero">
+    <div class="ecohero-video-fx" aria-hidden="true">
+      <div class="ecohero-video-wrap">
+        <iframe id="ecoHeroBgVideo" class="ecohero-bg-video" src="https://www.youtube.com/embed/Ynoh37vsZAo?start=65&autoplay=1&mute=1&loop=1&playlist=Ynoh37vsZAo&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div class="ecohero-scrim"></div>
+    </div>
+    <button class="ecohero-sound" id="ecoHeroSoundToggle" type="button">Unmute</button>
+    <div class="ecohero-content">
+        <div style="width:76px;height:76px;border-radius:20px;background:rgba(255,255,255,0.08);border:2px solid #38BDF8;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1.5rem;backdrop-filter:blur(6px);">🛡️</div>
+        <div style="display:inline-block;background:rgba(255,255,255,0.08);border:1px solid #38BDF8;border-radius:9999px;padding:6px 18px;margin-bottom:1.2rem;backdrop-filter:blur(6px);">
+            <span style="color:#7DD3FC;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">Cybersecurity</span>
         </div>
-        <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:1.2rem;">Autonomous defence, human command</h1>
-        <p style="font-size:1.15rem;color:#5B6478;line-height:1.75;max-width:640px;margin:0 auto;">Threats don't wait for business hours, and neither should detection. We build autonomous monitoring that watches continuously &mdash; with your security team always in command of the response.</p>
+        <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1.2rem;">Autonomous defence, human command</h1>
+        <p style="font-size:1.15rem;color:#D3D6E0;line-height:1.75;max-width:640px;margin:0 auto;">Threats don't wait for business hours, and neither should detection. We build autonomous monitoring that watches continuously &mdash; with your security team always in command of the response.</p>
     </div>
 </section>
+<script>
+(function(){
+  var videoFrame = document.getElementById('ecoHeroBgVideo');
+  var soundBtn = document.getElementById('ecoHeroSoundToggle');
+  var muted = true;
+  if (videoFrame) {
+    var kickPlay = function(){
+      try {
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'mute', args:[]}), '*');
+        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
+      } catch (e) {}
+    };
+    videoFrame.addEventListener('load', function(){
+      kickPlay();
+      setTimeout(kickPlay, 800);
+      setTimeout(kickPlay, 2000);
+    });
+    document.addEventListener('click', kickPlay, {once:true});
+    document.addEventListener('scroll', kickPlay, {once:true});
+  }
+  if (soundBtn && videoFrame) {
+    soundBtn.addEventListener('click', function(){
+      muted = !muted;
+      videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func: muted ? 'mute' : 'unMute', args:[]}), '*');
+      soundBtn.textContent = muted ? 'Unmute' : 'Mute';
+    });
+  }
+})();
+</script>
 
 <!-- Pillars -->
 <section class="py-20" style="background:#FFFFFF;">
