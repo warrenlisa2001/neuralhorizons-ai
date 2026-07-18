@@ -16,21 +16,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#05050A; --card:#1E1E24; --card-2:#40424D; --border:#3A3B45;
-    --cloud:#EDEFF7; --smoke:#D3D6E0; --steel:#BCBFCC; --space:#9DA2B3; --graphite:#6E7180;
+    --bg:#FFFFFF; --card:#F4F5FA; --card-2:#E7E9F2; --border:#E2E4ED;
+    --cloud:#12172B; --smoke:#334155; --steel:#5B6478; --space:#6E7180; --graphite:#94969E;
     --green:#00FF88; --cyan:#00D2C6; --blue:#2E6BFF; --purple:#8A2BE2; --magenta:#FF3EA5; --red:#FF5C5C;
     --grad: linear-gradient(90deg,#00FF88 0%,#00D2C6 33%,#2E6BFF 66%,#8A2BE2 100%);
     --grad2: linear-gradient(120deg,#FF3EA5 0%,#8A2BE2 35%,#2E6BFF 70%,#00D2C6 100%);
+  }
+  /* These three panels keep their original dark "instrument panel" styling
+     regardless of the page theme, so their internal text stays legible. */
+  .hero, .atom-wrap, .loop-wrap{
+    --cloud:#EDEFF7; --smoke:#D3D6E0; --steel:#BCBFCC; --space:#9DA2B3; --graphite:#6E7180;
+    --border:#3A3B45; --card:#1E1E24;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:var(--bg);color:var(--cloud);font-family:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden;}
   .wrap{max-width:960px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
   a{color:var(--cyan);}
-  #starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  #starfield{position:absolute;top:0;left:0;right:0;height:640px;z-index:0;pointer-events:none;overflow:hidden;}
   .star{position:absolute;border-radius:50%;background:#fff;opacity:.15;animation:twinkle 4s ease-in-out infinite;}
   @keyframes twinkle{0%,100%{opacity:.06;}50%{opacity:.5;}}
-  .hero{padding:56px 0 30px;background:radial-gradient(ellipse at top left, rgba(0,255,136,.10), transparent 55%),radial-gradient(ellipse at bottom right, rgba(138,43,226,.16), transparent 55%);border-bottom:1px solid var(--border);position:relative;z-index:2;overflow:hidden;}
+  .hero{padding:56px 0 30px;background:radial-gradient(ellipse at top left, rgba(0,255,136,.10), transparent 55%),radial-gradient(ellipse at bottom right, rgba(138,43,226,.16), transparent 55%);position:relative;z-index:2;overflow:hidden;}
   /* HERO VIDEO BACKGROUND — official YouTube embed, not a ripped/rehosted file */
   .hero-fx{position:absolute;inset:0;overflow:hidden;z-index:1;}
   .hero-video-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
@@ -48,7 +54,7 @@
   .byline strong{color:var(--cloud);}
   .dot-sep::before{content:"•";margin:0 8px;color:var(--graphite);}
   section{padding:52px 0;border-bottom:1px solid var(--border);position:relative;z-index:2;}
-  h2{font-size:clamp(22px,3vw,32px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em;color:#fff;}
+  h2{font-size:clamp(22px,3vw,32px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em;color:var(--cloud);}
   .section-sub{color:var(--space);margin:0 0 32px;max-width:65ch;font-size:15.5px;}
   p{margin:0 0 16px;}
   /* ATOM SCENE */
@@ -135,8 +141,8 @@
   .qwall{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
   .qcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
   .qcard.in{opacity:1;transform:translateY(0);}
-  .qcard.mine{background:linear-gradient(150deg,rgba(0,255,136,.10),rgba(255,62,165,.10),rgba(138,43,226,.16));border:1px solid rgba(138,43,226,.5);grid-column:1 / -1;box-shadow:0 0 40px rgba(138,43,226,.12);}
-  .qcard blockquote{margin:0;font-size:15px;font-style:italic;line-height:1.5;color:#fff;}
+  .qcard.mine{background:linear-gradient(150deg,rgba(0,255,136,.14),rgba(255,62,165,.14),rgba(138,43,226,.20));border:1px solid rgba(138,43,226,.55);grid-column:1 / -1;box-shadow:0 0 40px rgba(138,43,226,.16);}
+  .qcard blockquote{margin:0;font-size:15px;font-style:italic;line-height:1.5;color:var(--cloud);}
   .qcard.mine blockquote{font-size:19px;line-height:1.55;}
   .qword{opacity:0;display:inline-block;filter:blur(4px);transition:opacity .5s ease, filter .5s ease;}
   .qword.show{opacity:1;filter:blur(0);}
@@ -148,22 +154,22 @@
   .avatar{position:relative;width:64px;height:64px;flex-shrink:0;}
   .avatar svg{width:100%;height:100%;display:block;overflow:visible;}
   .avatar-ring{fill:none;stroke:var(--ac);stroke-width:2;}
-  .avatar-bust{fill:rgba(255,255,255,.14);}
+  .avatar-bust{fill:rgba(18,23,43,.10);}
   .avatar-photo{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 12%;display:block;border:2px solid var(--ac);background:rgba(255,255,255,.06);}
   .avatar.img-fallback .avatar-photo{display:none;}
-  .avatar.img-fallback::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--ac);background:rgba(255,255,255,.08);}
+  .avatar.img-fallback::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--ac);background:rgba(18,23,43,.06);}
   .init-chip{position:absolute;bottom:-2px;right:-3px;width:20px;height:20px;border-radius:50%;background:var(--ac);border:2px solid var(--card);display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:800;color:#05050A;z-index:2;}
-  .qcard.mine .init-chip{border-color:#20161f;}
+  .qcard.mine .init-chip{border-color:#FFFFFF;}
   .speak-bars{position:absolute;bottom:4px;left:-8px;display:flex;align-items:flex-end;gap:1.5px;height:11px;}
   .speak-bars span{display:block;width:2.2px;border-radius:1px;background:var(--ac);opacity:.85;animation:speakBar 1.1s ease-in-out infinite;}
   .speak-bars span:nth-child(2){animation-delay:.15s;}
   .speak-bars span:nth-child(3){animation-delay:.3s;}
   @keyframes speakBar{0%,100%{height:3px;}50%{height:11px;}}
-  .qname{font-size:14.5px;font-weight:700;color:#fff;line-height:1.3;}
+  .qname{font-size:14.5px;font-weight:700;color:var(--cloud);line-height:1.3;}
   .qtitle{font-size:11.5px;color:var(--space);margin-top:2px;}
-  .qbubble{position:relative;background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:4px 14px 14px 14px;padding:14px 16px;margin-bottom:10px;opacity:0;transform:scale(.96);transition:opacity .5s ease .15s, transform .5s cubic-bezier(.34,1.56,.64,1) .15s;}
+  .qbubble{position:relative;background:#FFFFFF;border:1px solid var(--border);border-radius:4px 14px 14px 14px;padding:14px 16px;margin-bottom:10px;opacity:0;transform:scale(.96);transition:opacity .5s ease .15s, transform .5s cubic-bezier(.34,1.56,.64,1) .15s;}
   .qcard.in .qbubble{opacity:1;transform:scale(1);}
-  .qcard.mine .qbubble{border-color:rgba(138,43,226,.4);background:rgba(255,255,255,.02);}
+  .qcard.mine .qbubble{border-color:rgba(138,43,226,.4);background:rgba(255,255,255,.55);}
   /* POSITION */
   .position-block{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 26px;font-size:15.5px;color:var(--smoke);}
   .position-block p:last-child{margin-bottom:0;}
@@ -171,7 +177,7 @@
   .pred-list{display:flex;flex-direction:column;gap:14px;}
   .pred-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
   .pred-num{font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;flex-shrink:0;min-width:36px;}
-  .pred-body h4{margin:0 0 6px;font-size:15.5px;color:#fff;}
+  .pred-body h4{margin:0 0 6px;font-size:15.5px;color:var(--cloud);}
   .pred-body p{margin:0;font-size:14px;color:var(--steel);}
   .pred-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--red);background:rgba(255,92,92,.1);border:1px solid rgba(255,92,92,.3);padding:2px 8px;border-radius:999px;margin-bottom:8px;}
   .cta-box{text-align:center;background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(138,43,226,.14));border:1px solid rgba(138,43,226,.35);border-radius:16px;padding:28px 24px;margin-top:22px;}
@@ -612,7 +618,7 @@
   </div>
 </section>
 <footer>
-  <p style="margin-bottom:14px;"><a href="/blog/" style="color:var(--cyan);text-decoration:none;font-weight:600;">← Back to Blog &amp; Insights</a></p>
+  <p style="margin-bottom:14px;"><a href="/blog/" style="color:var(--blue);text-decoration:none;font-weight:600;">← Back to Blog &amp; Insights</a></p>
   Neural Horizons AI — No hype. Just what matters, and what to do about it.
 </footer>
 <script>
