@@ -65,6 +65,7 @@
 
 <script>
 (function(){
+  try { sessionStorage.setItem('nh_splash_seen', '1'); } catch(e) {}
   var videoFrame = document.getElementById('splashBgVideo');
   var soundBtn = document.getElementById('splashSoundToggle');
   var muted = true;

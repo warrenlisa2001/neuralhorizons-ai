@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){
+  try {
+    if (!sessionStorage.getItem('nh_splash_seen')) {
+      location.replace('/splash/');
+    }
+  } catch(e) {}
+})();
+</script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
