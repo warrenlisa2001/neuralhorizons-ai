@@ -212,6 +212,21 @@
   @media (max-width:640px){
     .align-tabs{flex-direction:column;}
   }
+
+  .era-timeline{margin:26px 0 30px;border:1px solid var(--phantom);border-radius:16px;padding:8px 28px;}
+  .era-item{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--phantom);align-items:baseline;}
+  .era-item:last-child{border-bottom:none;}
+  .era-tag{flex:none;width:118px;font-size:11.5px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--space);padding-top:2px;}
+  .era-item p{margin:0;font-size:15.5px;flex:1;}
+  .era-item strong{color:var(--white);}
+  .era-item.current{background:linear-gradient(90deg, rgba(5,199,147,0.06), rgba(30,144,255,0.06), rgba(124,58,237,0.06));margin:0 -28px;padding:18px 28px;border-radius:10px;}
+  .era-item.current .era-tag{color:#05C793;}
+  @media (max-width:640px){
+    .era-item{flex-direction:column;gap:4px;}
+    .era-tag{width:auto;}
+    .era-item.current{margin:0 -16px;padding:18px 16px;}
+  }
+
 </style>
 </head>
 <body>
@@ -295,6 +310,20 @@
   <p class="lede-strong">Let's be direct about something first: it is happening. Not "might happen." Not "could disrupt." It is already restructuring how companies make decisions, allocate capital, and organise work — and whether any individual leader likes that fact has no bearing on whether it's true.</p>
   <p>Every technology gets called "disruptive" eventually. Most of them aren't. Cloud computing changed where software lived. Mobile changed how people accessed it. Both were significant. Neither one forced a company to fundamentally rethink who makes decisions, how work gets organised, or what its people are actually for.</p>
   <p>AI is different, and the data backs that up. This isn't a tool you add to the stack — it's a force that's already restructuring how companies operate, and most leadership teams are underestimating how far that restructuring goes. Some of what follows is genuinely exciting. Some of it should worry you. Both things are true at once, and pretending otherwise is how businesses get caught flat-footed.</p>
+
+  <h2 class="reveal">The bigger pattern: six waves of value creation</h2>
+  <p class="reveal">Every technology era shifts where value gets created in a business. Looking at the sequence makes it obvious why this wave is different from the ones before it.</p>
+
+  <div class="era-timeline reveal">
+    <div class="era-item"><span class="era-tag">PC Era</span><p>Digitized individual work.</p></div>
+    <div class="era-item"><span class="era-tag">Internet Era</span><p>Connected people and information.</p></div>
+    <div class="era-item"><span class="era-tag">Mobile Era</span><p>Connected people anywhere, anytime.</p></div>
+    <div class="era-item"><span class="era-tag">Cloud Era</span><p>Connected enterprise systems and data.</p></div>
+    <div class="era-item"><span class="era-tag">AI Era</span><p>Helps interpret information and generate insights.</p></div>
+    <div class="era-item current"><span class="era-tag">Agentic AI Era</span><p><strong>Coordinates work across systems and can execute complex tasks</strong> while humans set objectives, constraints, and governance.</p></div>
+  </div>
+
+  <p>Every prior wave changed what a business could <em>build</em>. This one changes how a business <em>decides</em> and <em>operates</em> &mdash; which is exactly why it's landing so differently at the leadership level. Today's disruption is less about replacing software and more about changing how organisations make decisions and get work done.</p>
 
   <h2 class="reveal">The scale of what's already happening</h2>
   <p class="reveal">This isn't a future-tense conversation. It's already the default operating condition for most of the corporate world.</p>
@@ -481,7 +510,7 @@
     <a class="li-btn" href="https://www.linkedin.com/company/108644105/" target="_blank" rel="noopener">Follow the Page &rarr;</a>
   </div>
 
-  <p>AI as a disruptor isn't a prediction anymore &mdash; it's a description of the present. It is happening whether any of us are ready for it or not. The only open question left for most companies is whether they're the ones doing the disrupting, or the ones reading about it happening to someone else.</p>
+  <p>AI as a disruptor isn't a prediction anymore &mdash; it's a description of the present. It is happening whether any of us are ready for it or not. And it isn't happening to any one company in isolation: every leader, every team, every industry navigating this shift is part of the same wave, moving toward the same horizon, whether they've said so out loud or not. The only open question left is whether you're helping shape where it goes, or finding out where it went after everyone else already moved.</p>
 
 </div>
 
