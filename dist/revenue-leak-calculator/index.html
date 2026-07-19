@@ -24,7 +24,7 @@
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
 .nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{font-weight:800;font-size:16px;color:var(--ink);text-decoration:none;font-family:'Space Grotesk',sans-serif;}
+.nav-logo{font-weight:800;font-size:16px;color:var(--ink);text-decoration:none;font-family:'Space Grotesk',sans-serif;display:flex;align-items:center;gap:8px;}
 .nav-logo span{color:var(--green);}
 .nav-cta{background:var(--ink);color:#fff;font-weight:700;font-size:13px;padding:10px 20px;border-radius:100px;text-decoration:none;}
 .wrap{max-width:720px;margin:0 auto;padding:64px 24px 100px;}
@@ -72,7 +72,7 @@ footer a{color:var(--muted);}
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">Neural Horizons <span>AI</span></a>
+    <a href="/" class="nav-logo"><img src="/images/logo-mark.svg" alt="Neural Horizons AI logo" style="height:24px;width:auto;display:block;">Neural Horizons <span>AI</span></a>
     <a href="/contact/" class="nav-cta">Contact Us</a>
   </div>
 </nav>

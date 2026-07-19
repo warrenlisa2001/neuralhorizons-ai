@@ -162,7 +162,7 @@ a{text-decoration:none}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,23,43,0.18);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(14px)}
-.nav-logo{font-size:17px;font-weight:900;color:#12172B}
+.nav-logo{font-size:17px;font-weight:900;color:#12172B;display:flex;align-items:center;gap:8px}
 .nav-logo span{color:var(--green)}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links a{font-size:14px;color:#5B6478;transition:color 0.2s}
@@ -301,7 +301,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="/" class="nav-logo">Neural Horizons <span>AI</span></a>
+  <a href="/" class="nav-logo"><img src="/images/logo-mark.svg" alt="Neural Horizons AI logo" style="height:26px;width:auto;display:block;">Neural Horizons <span>AI</span></a>
   <div class="nav-links">
     <a href="/platform/" class="active">Platform</a>
     <a href="/halu/">HALU™</a>
