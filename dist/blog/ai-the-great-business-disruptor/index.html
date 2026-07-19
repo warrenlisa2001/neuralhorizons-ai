@@ -227,6 +227,68 @@
     .era-item.current{margin:0 -16px;padding:18px 16px;}
   }
 
+
+  /* ============ Infographic, modal, quote boxes, comparison ============ */
+  .quote-callout{background:#05050A;border-radius:16px;padding:36px;margin:28px 0;position:relative;overflow:hidden;}
+  .quote-callout.tone-blue::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top right, rgba(30,144,255,.18), transparent 60%);pointer-events:none;}
+  .quote-callout.tone-red::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top right, rgba(220,38,38,.16), transparent 60%);pointer-events:none;}
+  .quote-callout .qc-eyebrow{position:relative;font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 14px;display:flex;align-items:center;gap:8px;}
+  .quote-callout.tone-blue .qc-eyebrow{color:#7DD3FC;}
+  .quote-callout.tone-red .qc-eyebrow{color:#FCA5A5;}
+  .quote-callout .qc-eyebrow .dot{width:7px;height:7px;border-radius:50%;}
+  .quote-callout.tone-blue .qc-eyebrow .dot{background:#1E90FF;}
+  .quote-callout.tone-red .qc-eyebrow .dot{background:#DC2626;}
+  .quote-callout p.qc-text{position:relative;font-size:21px;color:#fff;font-style:italic;line-height:1.5;margin:0 0 16px;font-weight:500;}
+  .quote-callout cite{position:relative;display:block;font-size:13.5px;color:#9CA3AF;font-style:normal;font-weight:600;}
+  .quote-callout .qc-note{position:relative;display:block;font-size:12.5px;color:#6B7280;font-style:normal;margin-top:8px;line-height:1.5;}
+
+  .news-strip{display:flex;flex-direction:column;gap:0;margin:24px 0 30px;border:1px solid var(--phantom);border-radius:16px;overflow:hidden;}
+  .news-item{display:flex;gap:16px;align-items:flex-start;padding:16px 22px;border-bottom:1px solid var(--phantom);}
+  .news-item:last-child{border-bottom:none;}
+  .news-date{flex:none;width:86px;font-size:12px;font-weight:800;letter-spacing:0.03em;color:#05C793;padding-top:2px;}
+  .news-item p{margin:0;font-size:14.5px;}
+  .news-item a{color:var(--white);font-weight:700;text-decoration:none;border-bottom:1px solid var(--phantom);}
+  .news-item a:hover{border-bottom-color:var(--white);}
+
+  .bespoke-compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0 30px;}
+  .bespoke-card{border-radius:16px;padding:26px 26px 22px;border:1px solid var(--phantom);}
+  .bespoke-card.off{background:rgba(220,38,38,0.03);}
+  .bespoke-card.custom{background:rgba(5,199,147,0.04);border-color:rgba(5,199,147,0.25);}
+  .bespoke-card .bc-label{font-size:12px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;display:block;}
+  .bespoke-card.off .bc-label{color:#DC2626;}
+  .bespoke-card.custom .bc-label{color:#05C793;}
+  .bespoke-card ul{padding-left:0;list-style:none;margin:0;}
+  .bespoke-card li{position:relative;padding-left:24px;margin-bottom:11px;font-size:14.5px;}
+  .bespoke-card.off li::before{content:"\2715";position:absolute;left:0;top:1px;color:#EF4444;font-weight:800;font-size:13px;}
+  .bespoke-card.custom li::before{content:"\2713";position:absolute;left:0;top:1px;color:#05C793;font-weight:800;font-size:13px;}
+  @media (max-width:640px){ .bespoke-compare{grid-template-columns:1fr;} }
+
+  .related-box{display:flex;align-items:center;gap:16px;border:1px solid var(--phantom);border-radius:14px;padding:18px 22px;margin:24px 0;background:rgba(18,23,43,0.015);}
+  .related-box .rb-icon{flex:none;font-size:20px;}
+  .related-box a{color:var(--white);font-weight:700;text-decoration:none;border-bottom:1px solid var(--phantom);}
+  .related-box a:hover{border-bottom-color:var(--white);}
+  .related-box span.rb-label{display:block;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--space);margin-bottom:3px;}
+
+  .infographic{margin:26px 0 34px;border:1px solid var(--phantom);border-radius:20px;padding:36px 30px;background:radial-gradient(ellipse at top, rgba(5,199,147,0.03), transparent 60%);}
+  .infographic .ig-hint{text-align:center;font-size:12.5px;color:var(--space);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:24px;}
+  .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .ig-node{cursor:pointer;border:1px solid var(--phantom);border-radius:14px;padding:22px 16px;text-align:center;background:#fff;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;position:relative;}
+  .ig-node:hover, .ig-node:focus-visible{transform:translateY(-4px);box-shadow:0 12px 28px rgba(18,23,43,0.1);border-color:rgba(5,199,147,0.4);outline:none;}
+  .ig-node .ig-icon{font-size:26px;margin-bottom:10px;display:block;}
+  .ig-node .ig-name{font-size:14px;font-weight:800;color:var(--white);display:block;margin-bottom:4px;}
+  .ig-node .ig-stat{font-size:12.5px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .ig-node .ig-plus{position:absolute;top:10px;right:12px;font-size:15px;font-weight:800;color:var(--phantom);}
+  @media (max-width:640px){ .ig-grid{grid-template-columns:repeat(2,1fr);} }
+
+  .ig-modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,5,10,0.72);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+  .ig-modal-overlay.open{display:flex;}
+  .ig-modal{background:#fff;border-radius:18px;max-width:480px;width:100%;padding:32px;position:relative;max-height:85vh;overflow-y:auto;}
+  .ig-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--phantom);color:var(--white);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;}
+  .ig-modal .im-icon{font-size:30px;margin-bottom:12px;display:block;}
+  .ig-modal h4{font-size:20px;margin:0 0 6px;color:var(--white);}
+  .ig-modal .im-stat{display:inline-block;font-size:13px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:14px;}
+  .ig-modal p{font-size:14.5px;margin:0;color:var(--graphite);}
+
 </style>
 </head>
 <body>
@@ -310,6 +372,7 @@
   <p class="lede-strong">Let's be direct about something first: it is happening. Not "might happen." Not "could disrupt." It is already restructuring how companies make decisions, allocate capital, and organise work — and whether any individual leader likes that fact has no bearing on whether it's true.</p>
   <p>Every technology gets called "disruptive" eventually. Most of them aren't. Cloud computing changed where software lived. Mobile changed how people accessed it. Both were significant. Neither one forced a company to fundamentally rethink who makes decisions, how work gets organised, or what its people are actually for.</p>
   <p>AI is different, and the data backs that up. This isn't a tool you add to the stack — it's a force that's already restructuring how companies operate, and most leadership teams are underestimating how far that restructuring goes. Some of what follows is genuinely exciting. Some of it should worry you. Both things are true at once, and pretending otherwise is how businesses get caught flat-footed.</p>
+  <p>And here's the opinion I'll defend anywhere: the businesses that win this decade won't be the ones who bought the most AI licences. They'll be the ones who refused to buy a generic system and built one around their own business instead. More on why, below.</p>
 
   <h2 class="reveal">The bigger pattern: six waves of value creation</h2>
   <p class="reveal">Every technology era shifts where value gets created in a business. Looking at the sequence makes it obvious why this wave is different from the ones before it.</p>
@@ -324,6 +387,23 @@
   </div>
 
   <p>Every prior wave changed what a business could <em>build</em>. This one changes how a business <em>decides</em> and <em>operates</em> &mdash; which is exactly why it's landing so differently at the leadership level. Today's disruption is less about replacing software and more about changing how organisations make decisions and get work done.</p>
+
+  <h2 class="reveal">This is not a slow burn. It's happening this month.</h2>
+  <p class="reveal">If the disruption thesis still sounds theoretical, look at what's landed in trade press in the last three weeks alone. This isn't a 2027 forecast anymore &mdash; it's the current news cycle.</p>
+
+  <div class="news-strip reveal">
+    <div class="news-item"><span class="news-date">JUL 17</span><p>A Commvault survey finds <strong>90% of enterprises</strong> say they must overhaul identity management to safely handle agentic AI systems now running inside their business.</p></div>
+    <div class="news-item"><span class="news-date">JUL 7</span><p>Forbes reports as many as <strong>40% of agentic AI projects</strong> are on track to be cancelled by 2027 &mdash; not for lack of capability, but governance, ownership and unclear ROI.</p></div>
+    <div class="news-item"><span class="news-date">JUL 1</span><p>Gartner puts <strong>$234 billion</strong> of enterprise software spending at risk from "agentic arbitrage" through 2030, as agents bypass traditional interfaces entirely.</p></div>
+  </div>
+
+  <div class="quote-callout tone-blue reveal">
+    <p class="qc-eyebrow"><span class="dot"></span> Gartner</p>
+    <p class="qc-text">"Agentic AI changes the economics of software. Agentic systems deliver outcomes directly, bypassing traditional user experience (UX)-heavy applications and making the software invisible. This breaks the link between user growth and revenue growth for many enterprise software vendors."</p>
+    <cite>&mdash; George Brocklehurst, Managing Vice President, Gartner &middot; July 2026</cite>
+  </div>
+
+  <p>Gartner's own advice to enterprise software vendors watching this happen: stop selling interfaces, start selling outcomes &mdash; and the businesses positioned to win are the ones who become <strong>the orchestration layer that coordinates work across multiple systems</strong>, not the ones still selling another login screen.</p>
 
   <h2 class="reveal">The scale of what's already happening</h2>
   <p class="reveal">This isn't a future-tense conversation. It's already the default operating condition for most of the corporate world.</p>
@@ -341,6 +421,15 @@
     <p class="dm-text">"This is a pivotal moment in human history. We have to navigate this critical period of development thoughtfully and carefully. We will need robust safeguards to maintain control of increasingly agentic, recursively self-improving systems."</p>
     <cite>&mdash; Demis Hassabis, CEO, Google DeepMind &middot; "A Framework for Frontier AI and the Dawning of a New Age," July 2026</cite>
   </div>
+
+  <div class="quote-callout tone-red reveal">
+    <p class="qc-eyebrow"><span class="dot"></span> DeepSeek</p>
+    <p class="qc-text">DeepSeek's leadership has told investors, repeatedly and on the record, that the company is prioritising the race to artificial general intelligence over near-term commercialisation &mdash; even as it raises its first-ever outside funding round at a valuation north of $70 billion.</p>
+    <cite>&mdash; Reported statement from Liang Wenfeng, Founder, DeepSeek &middot; investor briefings, May 2026</cite>
+    <span class="qc-note">Paraphrased from reporting on DeepSeek's 2026 funding round; no direct public quotation attributed.</span>
+  </div>
+
+  <p>Two labs, on opposite sides of the world, are converging on the same conclusion: this isn't a feature race anymore, it's a race toward systems that operate with real autonomy. One is asking the industry to slow down and build safeguards. The other is racing flat out toward the same finish line. Neither position is one a business can safely ignore.</p>
 
   <h2 class="reveal">How AI is rewiring how companies actually run</h2>
   <p class="reveal">The shift isn't just "tasks get done faster." It's showing up in the structure of organisations themselves.</p>
@@ -413,6 +502,102 @@
   </div>
 
   <p>More than 40% of agentic AI projects are projected to be cancelled by the end of 2027 &mdash; not because the models failed, but because of unclear value, rising costs and weak governance. The pattern is consistent: agentic AI works at the task level almost everywhere it's tried. It only compounds into a business result when it's connected across the departments that touch it.</p>
+
+  <h2 class="reveal">Why bespoke wins &mdash; agentic AI was never meant to be plug-and-play</h2>
+  <p class="reveal">Here's where I disagree with a lot of the vendor pitch decks: the winning move isn't buying a generic agent off a shelf and pointing it at your business. It's building the system <em>around</em> your business &mdash; your data, your workflows, your controls &mdash; from the ground up.</p>
+  <p>The data backs this up. <strong>47% of organisations</strong> are already blending off-the-shelf agents with custom development, and <strong>60% are moving toward a hybrid model</strong> deliberately, because neither extreme works alone. But the sharper signal is this: companies that redesign their core processes <em>around</em> custom AI &mdash; rather than bolting a generic tool onto an unchanged workflow &mdash; report <strong>90% higher revenue impact and 40% lower capital expenditure</strong> than those who don't. Meanwhile, of the roughly $30&ndash;40 billion enterprises have already sunk into generic GenAI pilots, <strong>95% report no measurable financial return</strong> &mdash; and <strong>46% name integration with existing systems</strong> as the single biggest reason why.</p>
+  <p>That's not a technology failure. That's a fit failure. Off-the-shelf agents are trained on someone else's workflows, someone else's org chart, someone else's definition of "done." Your business isn't that business.</p>
+
+  <div class="bespoke-compare reveal">
+    <div class="bespoke-card off">
+      <span class="bc-label">Off-the-shelf agent</span>
+      <ul>
+        <li>Generic workflow, forced onto your process</li>
+        <li>No visibility into your actual systems of record</li>
+        <li>Governance is whatever the vendor decided, not what you need</li>
+        <li>Stalls at pilot &mdash; one of the 88% that never reach production</li>
+        <li>Same tool your competitor is running, with the same blind spots</li>
+      </ul>
+    </div>
+    <div class="bespoke-card custom">
+      <span class="bc-label">Bespoke-built system</span>
+      <ul>
+        <li>Trained on your actual data, workflows and definitions</li>
+        <li>Full visibility across every department it touches</li>
+        <li>Governance and human oversight built to your risk profile</li>
+        <li>Designed to reach production, not just a demo</li>
+        <li>A structural advantage your competitor can't just download</li>
+      </ul>
+    </div>
+  </div>
+
+  <blockquote class="reveal">
+    <p>"Plug-and-play was always the wrong promise. You can't buy a generic system and expect it to understand a business it's never seen. The agentic systems that actually work are the ones built for one company, on that company's own data and decisions &mdash; not a template with your logo on it."</p>
+    <cite>&mdash; Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite>
+  </blockquote>
+
+  <h2 class="reveal">Click through: where bespoke actually changes the outcome</h2>
+  <p class="reveal">Tap any function below to see where a generic tool typically stalls, and what changes when the system is built around that specific team.</p>
+
+  <div class="infographic reveal">
+    <p class="ig-hint">Click a department to see the bespoke difference</p>
+    <div class="ig-grid" id="igGrid">
+      <button class="ig-node" type="button" data-name="Sales &amp; Revenue" data-icon="💼" data-stat="90% higher revenue impact when processes are redesigned around custom AI" data-text="Generic sales assistants don't know your pipeline stages, your qualification criteria, or your actual close process &mdash; they generate generic follow-ups. A bespoke agent trained on your CRM and your definition of a qualified deal catches slippage before your team does, which is where that 90% revenue gap comes from.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">💼</span>
+        <span class="ig-name">Sales &amp; Revenue</span>
+        <span class="ig-stat">+90% revenue impact</span>
+      </button>
+      <button class="ig-node" type="button" data-name="Marketing Ops" data-icon="📊" data-stat="3.1x productivity multiplier for teams using purpose-built agents" data-text="Off-the-shelf writing tools ignore your channel mix, brand voice, and campaign calendar. A bespoke build encodes all three from day one, which is why purpose-fit marketing agents post a 3.1x productivity multiplier &mdash; almost double the generic-tool average.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">📊</span>
+        <span class="ig-name">Marketing Ops</span>
+        <span class="ig-stat">3.1&times; productivity</span>
+      </button>
+      <button class="ig-node" type="button" data-name="Operations" data-icon="⚙️" data-stat="40&ndash;60% operational cost reduction (GCC businesses, agentic AI)" data-text="Your supply chain, approvals and exception-handling rules aren't like anyone else's. A generic workflow automation tool automates a process that was never actually yours. Businesses that built agentic systems around their own operations report 40&ndash;60% cost reductions &mdash; the ones that didn't, mostly didn't.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">⚙️</span>
+        <span class="ig-name">Operations</span>
+        <span class="ig-stat">&minus;40&ndash;60% cost</span>
+      </button>
+      <button class="ig-node" type="button" data-name="Finance &amp; Legal" data-icon="💰" data-stat="1.4x productivity multiplier &mdash; the lowest of any function measured" data-text="Finance and legal show the smallest AI productivity gain of any function measured &mdash; just 1.4x, against 4.2x in customer service. That's not because AI can't help here. It's because reconciliation logic, approval chains and regulatory controls are specific to your business, and generic tools simply can't touch them safely without a bespoke build.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">💰</span>
+        <span class="ig-name">Finance &amp; Legal</span>
+        <span class="ig-stat">1.4&times; (lowest gap)</span>
+      </button>
+      <button class="ig-node" type="button" data-name="People &amp; HR" data-icon="👥" data-stat="53% of employees will need upskilling to perform their current role by 2028" data-text="Workforce-planning agents need your actual org structure, skills data and role definitions &mdash; not a generic competency framework. With 53% of your workforce needing upskilling within two years, a bespoke system that tracks real skill gaps against real roles is the difference between a training plan and a guess.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">👥</span>
+        <span class="ig-name">People &amp; HR</span>
+        <span class="ig-stat">53% need upskilling</span>
+      </button>
+      <button class="ig-node" type="button" data-name="Customer Service" data-icon="🎧" data-stat="4.2x productivity multiplier &mdash; the highest of any function measured" data-text="This is the one function where general-purpose tools work reasonably well straight out of the box, because ticket handling looks similar across most businesses. Even here, though, the highest performers still customise escalation logic and tone to their own SLAs &mdash; the 4.2x figure is the ceiling, not the floor, of what's possible.">
+        <span class="ig-plus">+</span>
+        <span class="ig-icon">🎧</span>
+        <span class="ig-name">Customer Service</span>
+        <span class="ig-stat">4.2&times; productivity</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="related-box reveal">
+    <span class="rb-icon">🔗</span>
+    <div>
+      <span class="rb-label">Related reading</span>
+      <a href="/agentic-ai-communication/">The New Language of AI: How Agentic Systems Actually Communicate &rarr;</a>
+    </div>
+  </div>
+
+  <div class="ig-modal-overlay" id="igModalOverlay">
+    <div class="ig-modal" role="dialog" aria-modal="true">
+      <button class="ig-modal-close" id="igModalClose" type="button" aria-label="Close">&#10005;</button>
+      <span class="im-icon" id="igModalIcon"></span>
+      <h4 id="igModalName"></h4>
+      <span class="im-stat" id="igModalStat"></span>
+      <p id="igModalText"></p>
+    </div>
+  </div>
 
   <h2 class="reveal">The honest case, both sides</h2>
   <p class="reveal">I don't think it's useful to sell AI as pure upside, and I don't think fear-based headlines are useful either. Here's the balanced version.</p>
@@ -539,6 +724,12 @@
     <li><a href="https://www.businesstoday.in/technology/artificial-intelligence/story/were-entering-a-new-age-google-deepmind-ceo-demis-hassabis-on-emergence-of-agi-543022-2026-07-15" target="_blank" rel="noopener">Business Today &mdash; Demis Hassabis, "A Framework for Frontier AI and the Dawning of a New Age"</a></li>
     <li><a href="https://www.digitalapplied.com/blog/agentic-ai-statistics-2026-definitive-collection-150-data-points" target="_blank" rel="noopener">Digital Applied &mdash; Agentic AI Statistics 2026: Productivity, Silos &amp; ROI</a></li>
     <li><a href="https://iternal.ai/ai-skills-gap" target="_blank" rel="noopener">Iternal &mdash; AI Skills Gap 2026 (IBM CEO Study data)</a></li>
+    <li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-07-01-gartner-says-us-dollars-234-billion-in-enterprise-application-software-spend-is-at-risk-from-agentic-artificial-intelligence" target="_blank" rel="noopener">Gartner &mdash; $234 Billion in Enterprise Application Software Spend Is at Risk from Agentic AI, July 2026</a></li>
+    <li><a href="https://www.forbes.com/sites/robertszczerba/2026/07/07/why-40-of-agentic-ai-projects-may-be-canceled-by-2027/" target="_blank" rel="noopener">Forbes &mdash; Why 40% of Agentic AI Projects May Be Canceled by 2027</a></li>
+    <li><a href="https://www.roi-nj.com/2026/07/17/tech/commvault-survey-finds-identity-management-gap-in-agentic-ai-deployments/" target="_blank" rel="noopener">ROI-NJ &mdash; Commvault Survey Finds Identity Management Gap in Agentic AI Deployments, July 2026</a></li>
+    <li><a href="https://www.bloomberg.com/news/articles/2026-05-22/deepseek-founder-declares-agi-goal-as-10-billion-round-advances" target="_blank" rel="noopener">Bloomberg &mdash; DeepSeek Founder Avows AGI Goal Ahead of $10 Billion Funding</a></li>
+    <li><a href="https://www.arcade.dev/blog/5-takeaways-2026-state-of-ai-agents-claude/" target="_blank" rel="noopener">Arcade.dev &mdash; State of AI Agents 2026: 5 Enterprise Trends</a></li>
+    <li><a href="https://logicballs.com/news/enterprises-ditching-off-the-shelf-ai-for-custom-builds" target="_blank" rel="noopener">LogicBalls &mdash; New Industry Data: Enterprises Prioritizing Custom AI Development Over Off-the-Shelf Tools</a></li>
   </ol>
 </div>
 
@@ -652,6 +843,40 @@
     revealEls.forEach(function(el){ el.classList.add('in'); });
     countEls.forEach(function(el){ animateCount(el); });
     barEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+
+  // Interactive infographic: click a department node to open its popup
+  var igOverlay = document.getElementById('igModalOverlay');
+  var igNodes = document.querySelectorAll('.ig-node');
+  if (igOverlay && igNodes.length) {
+    var igName = document.getElementById('igModalName');
+    var igStat = document.getElementById('igModalStat');
+    var igText = document.getElementById('igModalText');
+    var igIcon = document.getElementById('igModalIcon');
+    var igClose = document.getElementById('igModalClose');
+
+    function openIgModal(node){
+      igName.textContent = node.getAttribute('data-name') || '';
+      igStat.textContent = node.getAttribute('data-stat') || '';
+      igText.textContent = node.getAttribute('data-text') || '';
+      igIcon.textContent = node.getAttribute('data-icon') || '';
+      igOverlay.classList.add('open');
+    }
+    function closeIgModal(){
+      igOverlay.classList.remove('open');
+    }
+
+    igNodes.forEach(function(node){
+      node.addEventListener('click', function(){ openIgModal(node); });
+    });
+    if (igClose) igClose.addEventListener('click', closeIgModal);
+    igOverlay.addEventListener('click', function(e){
+      if (e.target === igOverlay) closeIgModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closeIgModal();
+    });
   }
 
   // Silo vs. Aligned interactive toggle
