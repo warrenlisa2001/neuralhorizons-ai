@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Leak Calculator — Where Is Your Business Losing Money to Silos? | Neural Horizons AI</title>
+<meta name="description" content="A free 60-second calculator that estimates how much revenue your business may be losing to disconnected departments and tools — based on real agentic AI benchmark data.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://www.neuralhorizonsai.com/revenue-leak-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Revenue Leak Calculator | Neural Horizons AI">
+<meta property="og:description" content="A free 60-second calculator that estimates how much revenue your business may be losing to disconnected departments and tools.">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/revenue-leak-calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Revenue Leak Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"A free calculator that estimates revenue lost to departmental silos and disconnected AI tooling, based on published agentic AI benchmark data.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#12172B;--muted:#5B6478;--bg:#FFFFFF;--panel:#F7F9FC;--border:#E7EAF3;--green:#05C793;--blue:#2563EB;--grad:linear-gradient(135deg,#05C793,#2563EB);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-weight:800;font-size:16px;color:var(--ink);text-decoration:none;font-family:'Space Grotesk',sans-serif;}
+.nav-logo span{color:var(--green);}
+.nav-cta{background:var(--ink);color:#fff;font-weight:700;font-size:13px;padding:10px 20px;border-radius:100px;text-decoration:none;}
+.wrap{max-width:720px;margin:0 auto;padding:64px 24px 100px;}
+.eyebrow{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--green);margin-bottom:14px;}
+h1{text-align:center;font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4.5vw,42px);font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;}
+.lede{text-align:center;color:var(--muted);font-size:16px;max-width:520px;margin:0 auto 48px;}
+.calc-card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px;}
+.progress{display:flex;gap:6px;margin-bottom:32px;}
+.progress-seg{flex:1;height:4px;border-radius:100px;background:var(--border);}
+.progress-seg.done{background:var(--grad);}
+.q-step{display:none;}
+.q-step.active{display:block;}
+.q-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;}
+.q-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:24px;line-height:1.3;}
+.opt-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.opt{display:block;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 20px;cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);transition:border-color .15s,background .15s;}
+.opt:hover{border-color:rgba(5,199,147,0.4);}
+.opt.selected{border-color:var(--green);background:rgba(5,199,147,0.06);}
+.step-nav{display:flex;justify-content:space-between;align-items:center;}
+.btn-back{background:none;border:none;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;}
+.btn-next{background:var(--grad);color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;opacity:0.4;pointer-events:none;transition:opacity .15s;}
+.btn-next.enabled{opacity:1;pointer-events:auto;}
+/* Results */
+.result-card{display:none;text-align:center;}
+.result-card.active{display:block;}
+.result-badge{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:6px 16px;border-radius:100px;margin-bottom:20px;}
+.result-badge.low{background:rgba(5,199,147,0.1);color:#0B7A5C;}
+.result-badge.moderate{background:rgba(251,191,36,0.12);color:#B45309;}
+.result-badge.high{background:rgba(239,68,68,0.1);color:#B91C1C;}
+.result-num{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,6vw,52px);font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;}
+.result-sub{color:var(--muted);font-size:15px;margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;}
+.result-detail{text-align:left;background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 26px;margin-bottom:28px;}
+.result-detail p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+.result-detail p:last-child{margin-bottom:0;}
+.result-detail strong{color:var(--ink);}
+.result-cta{display:flex;flex-direction:column;gap:10px;align-items:center;}
+.btn-primary-cta{background:var(--ink);color:#fff;font-weight:700;font-size:15px;padding:15px 32px;border-radius:100px;text-decoration:none;display:inline-block;}
+.btn-restart{background:none;border:none;color:var(--muted);font-weight:600;font-size:13px;cursor:pointer;text-decoration:underline;font-family:inherit;}
+.disclaimer{text-align:center;font-size:12px;color:#9CA3AF;margin-top:36px;line-height:1.6;}
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:13px;color:var(--muted);}
+footer a{color:var(--muted);}
+@media(max-width:600px){.calc-card{padding:28px 22px;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Neural Horizons <span>AI</span></a>
+    <a href="/contact/" class="nav-cta">Contact Us</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">Free Tool &middot; 60 Seconds</div>
+  <h1>Where is your business leaking revenue?</h1>
+  <p class="lede">Four quick questions. We'll estimate how much revenue disconnected departments and tools are likely costing you each year — based on the same patterns we see across UAE and MENA businesses.</p>
+
+  <div class="calc-card">
+    <div class="progress" id="progressBar">
+      <div class="progress-seg done"></div>
+      <div class="progress-seg"></div>
+      <div class="progress-seg"></div>
+      <div class="progress-seg"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="q-step active" data-step="1">
+      <div class="q-label">Question 1 of 4</div>
+      <div class="q-title">What's your business's approximate annual revenue?</div>
+      <div class="opt-grid" data-q="revenue">
+        <div class="opt" data-val="3000000">Under AED 10M</div>
+        <div class="opt" data-val="20000000">AED 10M &ndash; 50M</div>
+        <div class="opt" data-val="75000000">AED 50M &ndash; 100M</div>
+        <div class="opt" data-val="150000000">AED 100M+</div>
+      </div>
+      <div class="step-nav">
+        <span></span>
+        <button class="btn-next" data-next="2">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="q-step" data-step="2">
+      <div class="q-label">Question 2 of 4</div>
+      <div class="q-title">How many departments run on separate, disconnected tools (CRM, marketing, ops, finance)?</div>
+      <div class="opt-grid" data-q="silos">
+        <div class="opt" data-val="0.015">1&ndash;2 &mdash; mostly connected already</div>
+        <div class="opt" data-val="0.03">3&ndash;4 &mdash; some overlap, some gaps</div>
+        <div class="opt" data-val="0.045">5 or more &mdash; each team runs its own thing</div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" data-back="1">← Back</button>
+        <button class="btn-next" data-next="3">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="q-step" data-step="3">
+      <div class="q-label">Question 3 of 4</div>
+      <div class="q-title">How is AI currently used in your business?</div>
+      <div class="opt-grid" data-q="aimaturity">
+        <div class="opt" data-val="1.15">Not really &mdash; still fully manual</div>
+        <div class="opt" data-val="1.05">A few disconnected off-the-shelf tools</div>
+        <div class="opt" data-val="1.0">One off-the-shelf platform across most teams</div>
+        <div class="opt" data-val="0.55">A bespoke system built around our own workflows</div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" data-back="2">← Back</button>
+        <button class="btn-next" data-next="4">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="q-step" data-step="4">
+      <div class="q-label">Question 4 of 4</div>
+      <div class="q-title">How many hours a week does leadership spend manually pulling together reports from different teams?</div>
+      <div class="opt-grid" data-q="hours">
+        <div class="opt" data-val="1.0">Under 3 hours</div>
+        <div class="opt" data-val="1.08">3&ndash;8 hours</div>
+        <div class="opt" data-val="1.15">More than 8 hours</div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-back" data-back="3">← Back</button>
+        <button class="btn-next" id="btnSeeResult">See My Estimate →</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-card" id="resultCard">
+      <div class="result-badge" id="resultBadge">Estimate</div>
+      <div class="result-num" id="resultNum">AED 0</div>
+      <div class="result-sub">Estimated annual revenue leak from disconnected departments and manual reporting &mdash; based on patterns from real agentic AI deployments.</div>
+      <div class="result-detail">
+        <p><strong>Why this range:</strong> Businesses that implement agentic AI across departments report 40&ndash;60% operational cost reductions, while 79% of organisations still run AI in isolated silos and 88% of AI agents never reach production. Your answers place you in that pattern.</p>
+        <p><strong>The fix isn't more tools.</strong> It's connecting the ones you have — and building what's missing around your actual business, not a generic template.</p>
+      </div>
+      <div class="result-cta">
+        <a href="mailto:lisawarren@neuralhorizonsai.com?subject=Revenue%20Leak%20Calculator%20-%20I%27d%20like%20the%20full%20breakdown" class="btn-primary-cta">Get the Full Breakdown from Lisa →</a>
+        <button class="btn-restart" onclick="restartCalc()">Start over</button>
+      </div>
+    </div>
+
+    <p class="disclaimer">This is an illustrative estimate based on patterns observed across agentic AI deployments and published industry benchmarks — not a guarantee or formal audit. For a precise assessment of your business, <a href="/contact/" style="color:#9CA3AF;">talk to us directly</a>.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="/">Neural Horizons AI</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/contact/">Contact</a>
+  <p style="margin-top:8px;">&copy; 2026 Neural Horizons AI. All Rights Reserved.</p>
+</footer>
+<script>
+(function(){
+  var state = { revenue: null, silos: null, aimaturity: null, hours: null };
+  var currentStep = 1;
+
+  function selectOpt(stepEl, optEl){
+    var group = stepEl.querySelectorAll('.opt');
+    group.forEach(function(o){ o.classList.remove('selected'); });
+    optEl.classList.add('selected');
+    var qKey = stepEl.querySelector('[data-q]').getAttribute('data-q');
+    state[qKey] = parseFloat(optEl.getAttribute('data-val'));
+    var nextBtn = stepEl.querySelector('.btn-next');
+    if (nextBtn) nextBtn.classList.add('enabled');
+  }
+
+  document.querySelectorAll('.q-step').forEach(function(stepEl){
+    stepEl.querySelectorAll('.opt').forEach(function(optEl){
+      optEl.addEventListener('click', function(){ selectOpt(stepEl, optEl); });
+    });
+  });
+
+  function goToStep(n){
+    document.querySelectorAll('.q-step').forEach(function(s){ s.classList.remove('active'); });
+    var target = document.querySelector('.q-step[data-step="' + n + '"]');
+    if (target) target.classList.add('active');
+    currentStep = n;
+    var segs = document.querySelectorAll('.progress-seg');
+    segs.forEach(function(seg, i){
+      if (i < n) seg.classList.add('done'); else seg.classList.remove('done');
+    });
+  }
+
+  document.querySelectorAll('[data-next]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (!btn.classList.contains('enabled')) return;
+      goToStep(parseInt(btn.getAttribute('data-next'), 10));
+    });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      goToStep(parseInt(btn.getAttribute('data-back'), 10));
+    });
+  });
+
+  document.getElementById('btnSeeResult').addEventListener('click', function(){
+    if (!this.classList.contains('enabled')) return;
+    computeResult();
+  });
+
+  function computeResult(){
+    var baseRate = 0.01;
+    var totalRate = (baseRate + state.silos) * state.aimaturity * state.hours;
+    var midEstimate = state.revenue * totalRate;
+    var low = Math.round((midEstimate * 0.75) / 5000) * 5000;
+    var high = Math.round((midEstimate * 1.35) / 5000) * 5000;
+
+    function fmtAED(n){
+      if (n >= 1000000) return 'AED ' + (n/1000000).toFixed(n % 1000000 === 0 ? 0 : 1) + 'M';
+      return 'AED ' + Math.round(n/1000) + 'K';
+    }
+
+    document.getElementById('resultNum').textContent = fmtAED(low) + ' – ' + fmtAED(high);
+
+    var badge = document.getElementById('resultBadge');
+    if (totalRate < 0.025) {
+      badge.textContent = 'Lower Risk';
+      badge.className = 'result-badge low';
+    } else if (totalRate < 0.05) {
+      badge.textContent = 'Moderate Risk';
+      badge.className = 'result-badge moderate';
+    } else {
+      badge.textContent = 'High Risk';
+      badge.className = 'result-badge high';
+    }
+
+    document.querySelectorAll('.q-step').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById('resultCard').classList.add('active');
+    document.getElementById('progressBar').style.display = 'none';
+  }
+
+  window.restartCalc = function(){
+    state = { revenue: null, silos: null, aimaturity: null, hours: null };
+    document.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('selected'); });
+    document.querySelectorAll('.btn-next').forEach(function(b){ b.classList.remove('enabled'); });
+    document.getElementById('resultCard').classList.remove('active');
+    document.getElementById('progressBar').style.display = 'flex';
+    goToStep(1);
+  };
+})();
+</script>
+
+</body>
+</html>

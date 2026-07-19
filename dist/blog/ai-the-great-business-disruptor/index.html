@@ -703,7 +703,32 @@
 
 </div>
 
-<div class="container cta-block">
+<div class="quote-callout tone-blue reveal" style="text-align:center;">
+    <p class="qc-eyebrow" style="justify-content:center;"><span class="dot"></span> Friday AI Insights</p>
+    <p class="qc-text" style="font-style:normal;font-size:24px;font-weight:700;">Get the sharpest AI analysis in your inbox — free, weekly.</p>
+    <p style="position:relative;color:#9CA3AF;font-size:14.5px;line-height:1.65;max-width:480px;margin:0 auto 22px;">Real stats, straight opinions, and what's actually changing for UAE and MENA businesses. Written personally by Lisa Warren. No fluff, unsubscribe any time.</p>
+    <form id="nlFormPost" onsubmit="return nlSubmitPost(event)" style="position:relative;display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="nlEmailPost" placeholder="you@company.com" required style="flex:1;min-width:220px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:100px;padding:13px 20px;font-size:14px;color:#fff;outline:none;font-family:inherit;">
+      <button type="submit" style="background:var(--grad);color:#04110c;font-weight:800;font-size:14px;padding:13px 26px;border-radius:100px;border:none;cursor:pointer;white-space:nowrap;font-family:inherit;">Subscribe &rarr;</button>
+    </form>
+    <p id="nlSuccessPost" style="display:none;position:relative;color:#05C793;font-weight:700;font-size:14px;margin-top:16px;">Thanks — check your email client to confirm and we'll add you to the list. &#10003;</p>
+  </div>
+
+  <script>
+  function nlSubmitPost(e){
+    e.preventDefault();
+    var email = document.getElementById('nlEmailPost').value.trim();
+    if(!email) return false;
+    var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
+    var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
+    window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    document.getElementById('nlFormPost').style.display = 'none';
+    document.getElementById('nlSuccessPost').style.display = 'block';
+    return false;
+  }
+  </script>
+
+  <div class="container cta-block">
   <h2>Talk to us before you build the wrong thing</h2>
   <p>If you're trying to work out where AI actually belongs in your business &mdash; and where it doesn't &mdash; the fastest way to get clarity is a direct conversation, not another generic playbook.</p>
   <div class="cta-buttons">

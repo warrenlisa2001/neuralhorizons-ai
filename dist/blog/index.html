@@ -71,6 +71,19 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .footer-links a{color:var(--slate-light);text-decoration:none;font-size:14px;transition:color .2s}
 .footer-links a:hover{color:var(--accent)}
 @media(max-width:640px){.nav-links{display:none}.hero{padding:60px 20px 40px}.hero h1{font-size:32px}.posts-grid{grid-template-columns:1fr}.post-featured{padding:24px}.footer-inner{flex-direction:column;gap:20px}}
+/* Newsletter signup */
+.nl-signup{background:linear-gradient(135deg,rgba(56,189,248,0.06),rgba(129,140,248,0.06));border:1px solid rgba(56,189,248,0.18);border-radius:var(--radius);padding:40px;margin:8px 0 44px;text-align:center;}
+.nl-signup .nl-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:12px;}
+.nl-signup h3{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:var(--slate);margin-bottom:10px;letter-spacing:-0.01em;}
+.nl-signup p{color:var(--muted);font-size:14.5px;line-height:1.65;max-width:480px;margin:0 auto 22px;}
+.nl-form{display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+.nl-form input{flex:1;min-width:220px;background:var(--navy);border:1px solid var(--border);border-radius:100px;padding:13px 20px;font-size:14px;color:var(--slate);font-family:inherit;outline:none;transition:border-color .2s;}
+.nl-form input:focus{border-color:rgba(56,189,248,0.5);}
+.nl-form button{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;border:none;cursor:pointer;white-space:nowrap;font-family:inherit;transition:opacity .2s;}
+.nl-form button:hover{opacity:0.88;}
+.nl-fine{font-size:11.5px;color:var(--slate-light);margin-top:12px;}
+.nl-success{display:none;color:var(--accent);font-weight:600;font-size:14px;margin-top:16px;}
+
 </style>
 </head>
 <body>
@@ -114,6 +127,33 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
         <span class="read-link">Read article →</span>
       </div>
     </a>
+
+<div class="nl-signup reveal">
+    <p class="nl-eyebrow">Friday AI Insights</p>
+    <h3>Get the sharpest AI analysis in your inbox — free, weekly.</h3>
+    <p>Real stats, straight opinions, and what's actually changing for UAE and MENA businesses. No fluff, unsubscribe any time.</p>
+    <form class="nl-form" id="nlForm" onsubmit="return nlSubmit(event)">
+      <input type="email" id="nlEmail" placeholder="you@company.com" required>
+      <button type="submit">Subscribe →</button>
+    </form>
+    <p class="nl-fine" id="nlFine">Written personally by Lisa Warren, Founder &amp; CEO. &middot; <a href="/revenue-leak-calculator/" style="color:var(--accent);font-weight:600;">Try the free Revenue Leak Calculator →</a></p>
+    <p class="nl-success" id="nlSuccess">Thanks — check your email client to confirm and we'll add you to the list. ✓</p>
+  </div>
+
+  <script>
+  function nlSubmit(e){
+    e.preventDefault();
+    var email = document.getElementById('nlEmail').value.trim();
+    if(!email) return false;
+    var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
+    var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
+    window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    document.getElementById('nlForm').style.display = 'none';
+    document.getElementById('nlFine').style.display = 'none';
+    document.getElementById('nlSuccess').style.display = 'block';
+    return false;
+  }
+  </script>
 
     <!-- ARCHIVE GRID -->
     <div class="posts-grid">

@@ -1179,6 +1179,50 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
 </section>
 
+
+<!-- NEWSLETTER SIGNUP -->
+<section class="py-20" style="background:#FFFFFF;">
+    <div class="container mx-auto px-6">
+        <div style="max-width:680px;margin:0 auto;text-align:center;background:linear-gradient(135deg,rgba(5,199,147,0.05),rgba(37,99,235,0.05));border:1px solid rgba(5,199,147,0.18);border-radius:20px;padding:48px 40px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#05C793;margin-bottom:12px;">Friday AI Insights</div>
+            <h3 style="font-size:1.6rem;font-weight:900;color:#12172B;margin-bottom:10px;">Get the sharpest AI analysis in your inbox — free, weekly.</h3>
+            <p style="color:#5B6478;font-size:14.5px;line-height:1.65;max-width:480px;margin:0 auto 22px;">Real stats, straight opinions, and what's actually changing for UAE and MENA businesses. Written personally by Lisa Warren. No fluff, unsubscribe any time.</p>
+            <form id="nlFormHome" onsubmit="return nlSubmitHome(event)" style="display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+                <input type="email" id="nlEmailHome" placeholder="you@company.com" required style="flex:1;min-width:220px;background:#FFFFFF;border:1px solid #E7EAF3;border-radius:9999px;padding:13px 20px;font-size:14px;color:#12172B;outline:none;">
+                <button type="submit" style="background:linear-gradient(135deg,#05C793,#2563EB);color:#fff;font-weight:700;font-size:14px;padding:13px 26px;border-radius:9999px;border:none;cursor:pointer;white-space:nowrap;">Subscribe →</button>
+            </form>
+            <p id="nlSuccessHome" style="display:none;color:#05C793;font-weight:600;font-size:14px;margin-top:16px;">Thanks — check your email client to confirm and we'll add you to the list. ✓</p>
+        </div>
+    </div>
+</section>
+<script>
+function nlSubmitHome(e){
+  e.preventDefault();
+  var email = document.getElementById('nlEmailHome').value.trim();
+  if(!email) return false;
+  var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
+  var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
+  window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+  document.getElementById('nlFormHome').style.display = 'none';
+  document.getElementById('nlSuccessHome').style.display = 'block';
+  return false;
+}
+</script>
+
+<!-- REVENUE LEAK CALCULATOR CTA -->
+<section class="py-16" style="background:#12172B;">
+    <div class="container mx-auto px-6">
+        <div style="max-width:760px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:space-between;">
+            <div style="flex:1;min-width:260px;">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#05C793;margin-bottom:8px;">Free Tool &middot; 60 Seconds</div>
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:800;margin-bottom:6px;">Where is your business leaking revenue?</h3>
+                <p style="color:#9CA3AF;font-size:14px;margin:0;">Four quick questions. Get an instant estimate.</p>
+            </div>
+            <a href="/revenue-leak-calculator/" style="flex:none;background:linear-gradient(135deg,#05C793,#2563EB);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:9999px;text-decoration:none;white-space:nowrap;">Calculate My Leak →</a>
+        </div>
+    </div>
+</section>
+
 <!-- ABOUT LISA -->
 <section class="py-20" style="background:#F7F9FC;border-top:1px solid #E7EAF3;">
     <div class="container mx-auto px-6">
