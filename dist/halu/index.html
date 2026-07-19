@@ -494,7 +494,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
         <button class="chat-send" id="chatSend" onclick="sendMessage()">Send ⚡</button>
       </div>
     </div>
-    <p style="text-align:center;font-size:11px;color:#1f2937;margin-top:10px;">HALU™ is a live autonomous agent. Responses are generated in real time. · <a href="mailto:warrenlisa2001@gmail.com" style="color:#374151;">warrenlisa2001@gmail.com</a></p>
+    <p style="text-align:center;font-size:11px;color:#1f2937;margin-top:10px;">HALU™ is a live autonomous agent. Responses are generated in real time. · <a href="mailto:support@neuralhorizonsai.com" style="color:#374151;">support@neuralhorizonsai.com</a></p>
   </div>
 </section>
 
@@ -531,7 +531,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
         Is HALU™ available as a white-label product?
         <span class="fi" style="font-size:18px;color:var(--cyan);transition:transform 0.2s;flex-shrink:0">+</span>
       </div>
-      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:none;">Yes — on the Enterprise tier. You can license HALU™ under your own brand and sell it to your clients. Contact <a href="mailto:warrenlisa2001@gmail.com" style="color:var(--cyan)">warrenlisa2001@gmail.com</a> for white-label pricing.</div>
+      <div style="font-size:14px;color:#5B6478;line-height:1.75;padding:0 24px 20px;display:none;">Yes — on the Enterprise tier. You can license HALU™ under your own brand and sell it to your clients. Contact <a href="mailto:support@neuralhorizonsai.com" style="color:var(--cyan)">support@neuralhorizonsai.com</a> for white-label pricing.</div>
     </div>
   </div>
 </section>
@@ -590,7 +590,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
         <li>SLA guarantee</li>
         <li>Quarterly strategy reviews</li>
       </ul>
-      <a href="mailto:warrenlisa2001@gmail.com" class="btn-border">Contact for Pricing</a>
+      <a href="mailto:support@neuralhorizonsai.com" class="btn-border">Contact for Pricing</a>
     </div>
   </div>
 
@@ -617,7 +617,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
     <a href="/" style="color:#4b5563">Neural Horizons AI</a>&nbsp;·&nbsp;
     <a href="/zonar-os/" style="color:#4b5563">Zonar OS™</a>&nbsp;·&nbsp;
     <a href="mailto:lisawarren@neuralhorizonsai.com" style="color:var(--cyan)">Contact Us</a>&nbsp;·&nbsp;
-    <a href="mailto:warrenlisa2001@gmail.com" style="color:#4b5563">warrenlisa2001@gmail.com</a>
+    <a href="mailto:support@neuralhorizonsai.com" style="color:#4b5563">support@neuralhorizonsai.com</a>
   </p>
   <p style="font-size:12px;color:#1f2937">© 2026 Neural Horizons AI. All Rights Reserved.</p>
 </footer>
@@ -676,7 +676,7 @@ window.sendMessage = async function() {
   const text = inp.value.trim();
   if (!text || loading) return;
   if (!conversation) { showTyping(); await initConvo(); hideTyping(); }
-  if (!conversation) { append('halu','Unable to connect right now. Email us at warrenlisa2001@gmail.com ⚡'); return; }
+  if (!conversation) { append('halu','Unable to connect right now. Email us at support@neuralhorizonsai.com ⚡'); return; }
 
   loading = true; btn.disabled = true; inp.value = '';
   append('user', text);
@@ -688,7 +688,7 @@ window.sendMessage = async function() {
     append('halu', reply.content || '...');
   } catch(e) {
     hideTyping();
-    append('halu', 'Something went wrong — please try again or email warrenlisa2001@gmail.com');
+    append('halu', 'Something went wrong — please try again or email support@neuralhorizonsai.com');
     console.error(e);
   }
 
