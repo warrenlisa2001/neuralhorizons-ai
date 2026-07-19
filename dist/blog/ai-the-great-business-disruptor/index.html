@@ -715,13 +715,22 @@
   </div>
 
   <script>
-  function nlSubmitPost(e){
+  async function nlSubmitPost(e){
     e.preventDefault();
     var email = document.getElementById('nlEmailPost').value.trim();
     if(!email) return false;
-    var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
-    var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
-    window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    try {
+      var res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email: email, source: 'disruptor-post'})
+      });
+      if (!res.ok) throw new Error('not ok');
+    } catch (err) {
+      var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
+      var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
+      window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    }
     document.getElementById('nlFormPost').style.display = 'none';
     document.getElementById('nlSuccessPost').style.display = 'block';
     return false;

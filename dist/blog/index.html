@@ -141,13 +141,22 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   </div>
 
   <script>
-  function nlSubmit(e){
+  async function nlSubmit(e){
     e.preventDefault();
     var email = document.getElementById('nlEmail').value.trim();
     if(!email) return false;
-    var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
-    var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
-    window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    try {
+      var res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email: email, source: 'blog-listing'})
+      });
+      if (!res.ok) throw new Error('not ok');
+    } catch (err) {
+      var subject = encodeURIComponent('Subscribe me to Friday AI Insights');
+      var body = encodeURIComponent('Please add this email to the Friday AI Insights list: ' + email);
+      window.location.href = 'mailto:lisawarren@neuralhorizonsai.com?subject=' + subject + '&body=' + body;
+    }
     document.getElementById('nlForm').style.display = 'none';
     document.getElementById('nlFine').style.display = 'none';
     document.getElementById('nlSuccess').style.display = 'block';
