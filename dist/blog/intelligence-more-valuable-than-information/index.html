@@ -379,6 +379,62 @@
     <span class="qc-note">This is precisely why layer 5 of the stack &mdash; human leaders &mdash; can never be automated away. Agentic AI only earns the right to act inside boundaries a person is willing to be accountable for.</span>
   </div>
 
+  <h2>From One Department to the Whole Organisation &mdash; and Where It Breaks</h2>
+  <p>Layer 4 rarely stays inside one department for long. It starts there &mdash; an agent that qualifies leads, another that reconciles invoices, another that triages support tickets, each working inside a single team's systems. That's <em>agentic</em> AI, and it's where almost every business starts. <strong>Autonomous</strong> AI is what happens when those department-level agents start talking to each other: the sales agent's qualified lead flows straight to a finance agent that checks credit terms, which hands off to an operations agent that schedules delivery &mdash; no human relaying information between teams, no re-entering the same data three times.</p>
+
+  <p>That connection is exactly where the value multiplies. It's also exactly where a single mistake stops being a local problem and becomes an organisation-wide one. If the sales agent misreads a discount, every agent downstream inherits that error and acts on it as if it were true &mdash; the finance agent approves the wrong terms, the ops agent schedules the wrong quantity, and by the time a human notices, three departments have already acted on bad information. Academic researchers who tested seven of today's leading multi-agent AI systems across more than 1,600 execution traces found failure rates between <strong>41% and 87%</strong> &mdash; and the single biggest driver wasn't any individual agent being "dumb." It was <strong>coordination breakdowns</strong> between agents, and errors propagating silently from one to the next.</p>
+
+  <div class="chart-wrap reveal">
+    <div class="chart-title">Why Connected Agent Systems Actually Fail</div>
+    <div class="chart-sub">Root cause breakdown across 1,600+ execution traces, multi-agent LLM systems (MAST taxonomy)</div>
+    <div class="bar-row">
+      <div class="bar-row-top"><span class="bar-label">Specification problems (unclear task boundaries, roles)</span><span class="bar-value">41.8%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="--pct:41.8%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-row-top"><span class="bar-label">Coordination breakdowns (handoffs between agents)</span><span class="bar-value">36.9%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="--pct:36.9%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-row-top"><span class="bar-label">Verification gaps (nothing checks the output)</span><span class="bar-value">21.3%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="--pct:21.3%"></div></div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--graphite);margin-top:-18px;">Two-thirds of all failures happen at the seams &mdash; between agents, not inside them. That's the part most businesses never test.</p>
+
+  <h3>How to Stop It</h3>
+  <div class="checklist reveal">
+    <p class="label">Guardrails Between Every Handoff</p>
+    <ul>
+      <li><strong>Validation gates at every handoff.</strong> No agent's output should pass straight into the next agent's input unchecked. A cheap rules check &mdash; does this number fall inside a sane range, does this customer actually exist &mdash; catches most bad handoffs before they spread.</li>
+      <li><strong>Confidence thresholds that escalate, not guess.</strong> When an agent isn't confident in a decision, the correct behaviour is to stop and ask a human &mdash; not to proceed anyway. Silent low-confidence guessing is how small errors become organisation-wide ones.</li>
+      <li><strong>Circuit breakers.</strong> If an agent's error rate spikes, everything downstream that depends on it should pause automatically until a human clears it &mdash; the same principle that stops one bad microservice from taking down an entire application.</li>
+      <li><strong>Govern by autonomy level, not one policy for everything.</strong> Gartner's own research warns that applying uniform governance across every agent &mdash; treating a low-stakes scheduling agent the same as one that moves money &mdash; is itself a leading cause of enterprise agent failure.</li>
+    </ul>
+  </div>
+
+  <h3>The Tests That Actually Prove It's Working</h3>
+  <div class="checklist reveal">
+    <p class="label">Before &mdash; and After &mdash; You Go Live</p>
+    <ul>
+      <li><strong>Test each agent alone first.</strong> Before it talks to anything else, an agent needs to prove it's reliable in isolation, against known-correct answers.</li>
+      <li><strong>Test the handoffs, not just the agents.</strong> Deliberately feed a downstream agent bad, incomplete or edge-case data and confirm it catches it &mdash; rather than politely acting on it. This is the single most-skipped test, and it's where two-thirds of real failures live.</li>
+      <li><strong>Run new agents in shadow mode first.</strong> Let the agent make its recommendation alongside the existing human process, without acting, and compare the two for a defined period before it's allowed to act independently.</li>
+      <li><strong>Re-test on a schedule, not just at launch.</strong> Agent behaviour drifts as underlying models update and the data they see changes. A system that passed every test in January can quietly degrade by June without anyone re-checking it.</li>
+    </ul>
+  </div>
+
+  <h3>Who Actually Reconciles and Benchmarks It, Every Day</h3>
+  <p>This is layer 5 made concrete. Somewhere in every business running connected agents, a specific person needs to own one recurring job: compare what the agents actually did today against what should have happened, and flag the gap before it compounds. Not "the system handles it" &mdash; a named owner, a defined time each day, and a real benchmark to check against.</p>
+  <p>In practice this doesn't have to mean a new hire. In most mid-size businesses we work with, it's a defined addition to an existing ops or finance role: a short daily reconciliation &mdash; agent output versus actual outcome, flagged exceptions reviewed, drift from benchmark logged &mdash; with a clear escalation path when the numbers stop adding up. What matters isn't the org chart. It's that the job exists, is someone's explicitly, and happens every single day rather than only when something visibly breaks.</p>
+
+  <div class="quote-callout tone-gold reveal">
+    <p class="qc-eyebrow"><span class="dot"></span> The Governance Reality</p>
+    <p class="qc-text">An orchestrator agent delegates to a sub-agent, which calls an API, which modifies a database &mdash; the accountability chain now spans multiple layers. Traditional security models built around "who logged in" break down once agents are acting on a person's behalf without that person reviewing each specific action.</p>
+    <span class="qc-note">The fix isn't more AI watching the AI. It's a full audit trail on every handoff &mdash; what happened, why, on whose behalf, under what policy &mdash; and one accountable human reviewing it daily.</span>
+  </div>
+
+
   <h2>What This Means for Your Business</h2>
   <div class="checklist reveal">
     <p class="label">Building The Stack, In Order</p>
@@ -472,6 +528,9 @@ async function nlSubmitIntel(e){
     <li><a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener">Gartner &mdash; Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027</a></li>
     <li><a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/state-of-ai-trust-in-2026-shifting-to-the-agentic-era" target="_blank" rel="noopener">McKinsey &mdash; State of AI Trust in 2026: Shifting to the Agentic Era</a></li>
     <li><a href="https://www.forbes.com/sites/josipamajic/2026/03/22/10-of-enterprise-functions-use-ai-agents-mckinsey-finds/" target="_blank" rel="noopener">Forbes &mdash; Roughly 10% of Enterprise Functions Use AI Agents, McKinsey Finds</a></li>
+    <li><a href="https://arxiv.org/pdf/2503.13657" target="_blank" rel="noopener">Cemri, Pan et al. &mdash; Why Do Multi-Agent LLM Systems Fail? (MAST Taxonomy)</a></li>
+    <li><a href="https://www.augmentcode.com/guides/why-multi-agent-llm-systems-fail-and-how-to-fix-them" target="_blank" rel="noopener">Augment Code &mdash; Multi-Agent AI Systems: Why They Fail and How to Fix Coordination Issues</a></li>
+    <li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure" target="_blank" rel="noopener">Gartner &mdash; Applying Uniform Governance Across AI Agents Will Lead to Enterprise AI Agent Failure</a></li>
   </ol>
 </div>
 
