@@ -715,7 +715,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.neuralhorizonsai.com/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://www.neuralhorizonsai.com/services/"},{"@type":"ListItem","position":3,"name":"Consultation","item":"https://www.neuralhorizonsai.com/services/consultation/"}]}
 </script><script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"AI Consultation","description":"Strategic AI consultation for mid-size businesses in UAE and MENA.","url":"https://www.neuralhorizonsai.com/services/consultation/","provider":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"},"areaServed":[{"@type":"Country","name":"United Arab Emirates"},{"@type":"Place","name":"MENA"}],"offers":{"@type":"Offer","url":"https://www.neuralhorizonsai.com/services/consultation/","seller":{"@type":"Organization","name":"Neural Horizons AI"}}}
+{"@context":"https://schema.org","@type":"Service","name":"AI Consultation","description":"A free, no-obligation strategic AI consultation with Neural Horizons AI founder Lisa Warren for mid-size businesses in UAE and MENA. Includes a current-state review, department-by-department opportunity mapping across sales, marketing, operations and finance, a prioritisation framework, and a written next-step roadmap.","url":"https://www.neuralhorizonsai.com/services/consultation/","provider":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"},"areaServed":[{"@type":"Country","name":"United Arab Emirates"},{"@type":"Place","name":"MENA"}],"offers":{"@type":"Offer","url":"https://www.neuralhorizonsai.com/services/consultation/","seller":{"@type":"Organization","name":"Neural Horizons AI"}}}
 </script>
 </head>
 <body class="bg-white text-slate-900">
@@ -827,15 +827,95 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <a href="mailto:lisawarren@neuralhorizonsai.com" class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-xl inline-flex items-center gap-2">Contact Us</a>
             </div>
         </div>
+  <style>
+    /* Process map */
+    .pmap-track{position:relative;height:2px;background:rgba(18,23,43,0.08);margin:0 30px 0;display:none;}
+    @media(min-width:860px){.pmap-track{display:block;}}
+    .pmap-track-fill{position:absolute;inset:0;background:linear-gradient(90deg,#2563EB,#05C793,#7C3AED,#2563EB,#05C793);}
+    .pmap-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:-1px;}
+    @media(max-width:859px){.pmap-row{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:520px){.pmap-row{grid-template-columns:1fr;}}
+    .pmap-node{
+      background:#fff;border:1.5px solid rgba(18,23,43,0.08);border-radius:16px;
+      padding:22px 14px 18px;text-align:center;cursor:pointer;font-family:inherit;
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+    }
+    .pmap-node:hover{transform:translateY(-6px);box-shadow:0 16px 32px -12px rgba(18,23,43,0.18);border-color:var(--pc);}
+    .pmap-num{width:26px;height:26px;border-radius:9999px;background:var(--pcs);color:var(--pc);font-weight:800;font-size:0.8rem;display:flex;align-items:center;justify-content:center;}
+    .pmap-icon{font-size:1.7rem;margin-top:2px;}
+    .pmap-label{font-weight:800;color:#12172B;font-size:0.9rem;line-height:1.3;}
+    .pmap-tap{font-size:0.7rem;color:var(--pc);font-weight:700;opacity:0.85;}
+    .pmap-mid{transform:translateY(-8px);}
+    @media(max-width:859px){.pmap-mid{transform:none;}}
+
+    /* Department map */
+    .dmap-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+    @media(max-width:900px){.dmap-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:560px){.dmap-grid{grid-template-columns:repeat(2,1fr);}}
+    .dmap-node{
+      background:#fff;border:1.5px solid rgba(18,23,43,0.08);border-radius:18px;
+      padding:26px 14px;text-align:center;cursor:pointer;font-family:inherit;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+    }
+    .dmap-node:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 36px -14px rgba(18,23,43,0.2);border-color:var(--dc);}
+    .dmap-icon{font-size:2rem;}
+    .dmap-name{font-weight:800;color:#12172B;font-size:0.95rem;}
+    .dmap-stat{font-size:0.72rem;color:#8A93A8;line-height:1.4;}
+
+    /* Shared animated popup modal */
+    .pmap-overlay{
+      display:none;position:fixed;inset:0;background:rgba(18,23,43,0.6);
+      backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:24px;
+      opacity:0;transition:opacity .25s ease;
+    }
+    .pmap-overlay.open{display:flex;opacity:1;}
+    .pmap-modal{
+      display:none;background:#fff;border-radius:22px;max-width:480px;width:100%;
+      padding:36px 32px 32px;position:relative;box-shadow:0 30px 60px -20px rgba(18,23,43,0.4);
+      border-top:5px solid var(--pc);
+      transform:translateY(24px) scale(0.96);opacity:0;transition:transform .32s cubic-bezier(.2,.9,.3,1.2),opacity .28s ease;
+      max-height:85vh;overflow-y:auto;
+    }
+    .pmap-overlay.open .pmap-modal.active{display:block;transform:translateY(0) scale(1);opacity:1;}
+    .pmap-close{
+      position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:9999px;
+      border:none;background:#F7F9FC;color:#5B6478;font-size:1.3rem;line-height:1;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;transition:background .2s ease;
+    }
+    .pmap-close:hover{background:#E7EAF3;}
+    .pmap-modal-tag{display:inline-block;font-size:0.68rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--pc);background:var(--pcs);padding:4px 10px;border-radius:9999px;margin-bottom:14px;}
+    .pmap-modal-icon{font-size:2.2rem;margin-bottom:10px;}
+    .pmap-modal h3{font-size:1.4rem;font-weight:900;color:#12172B;margin-bottom:12px;letter-spacing:-0.01em;}
+    .pmap-modal-body{color:#5B6478;font-size:0.95rem;line-height:1.75;margin-bottom:18px;}
+    .pmap-modal-example{background:#F7F9FC;border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+    .pmap-modal-example .pml{font-size:0.68rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--pc);margin-bottom:4px;}
+    .pmap-modal-example p:not(.pml){color:#374050;font-size:0.86rem;line-height:1.6;}
+
+    /* FAQ */
+    .cfaq-list{display:flex;flex-direction:column;gap:12px;}
+    .cfaq-item{background:#fff;border:1px solid rgba(18,23,43,0.08);border-radius:14px;padding:18px 20px;}
+    .cfaq-item summary{cursor:pointer;font-weight:800;color:#12172B;font-size:0.98rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .cfaq-item summary::-webkit-details-marker{display:none;}
+    .cfaq-icon{color:#05C793;font-weight:900;font-size:1.1rem;flex-shrink:0;transition:transform .2s ease;}
+    .cfaq-item[open] .cfaq-icon{transform:rotate(45deg);}
+    .cfaq-a{color:#5B6478;font-size:0.9rem;line-height:1.75;margin-top:12px;}
+
+    @media(prefers-reduced-motion: reduce){
+      .pmap-node:hover,.dmap-node:hover{transform:none;}
+      .pmap-modal{transition:none;}
+    }
+  </style>
 <main>
-  <section class="svc-mesh" style="padding:120px 0 90px;background:linear-gradient(135deg,rgba(5,199,147,0.07) 0%,#FFFFFF 55%);min-height:60vh;">
+  <section class="svc-mesh" style="padding:120px 0 70px;background:linear-gradient(135deg,rgba(5,199,147,0.07) 0%,#FFFFFF 55%);min-height:60vh;">
     <div class="svc-orb" style="width:280px;height:280px;background:#05C793;opacity:0.22;top:-60px;left:-40px;"></div>
     <div class="svc-orb" style="width:220px;height:220px;background:#7C3AED;opacity:0.20;bottom:-50px;right:-30px;animation-delay:-6s;"></div>
     <div class="svc-orb" style="width:160px;height:160px;background:#05C793;opacity:0.16;top:40%;right:15%;animation-delay:-3s;"></div>
     <div class="svc-reveal svc-in" style="max-width:900px;margin:0 auto;padding:0 24px;">
       <div class="svc-badge-float" style="display:inline-block;background:rgba(5,199,147,0.08);border:1px solid rgba(5,199,147,0.2);border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;">Tier 1 — Audit &amp; Consultation</div>
       <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#12172B;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;">Consultation.<br><span style="color:#05C793;">Clarity Before Commitment.</span></h1>
-      <p style="font-size:1.1rem;color:#5B6478;line-height:1.75;max-width:600px;margin-bottom:40px;">A focused advisory session with Lisa Warren to shape your AI direction. You bring your audit results, current challenges, and goals. We map the opportunities, prioritise what matters most, and define clear next steps — so you move with confidence, not guesswork.</p>
+      <p style="font-size:1.1rem;color:#5B6478;line-height:1.75;max-width:640px;margin-bottom:40px;">A focused advisory session with Lisa Warren to shape your AI direction. You bring your audit results, current challenges, and goals. We map the opportunities, prioritise what matters most, and define clear next steps — so you move with confidence, not guesswork.</p>
       <div class="svc-cov-card" style="background:rgba(5,199,147,0.04);border:1px solid rgba(5,199,147,0.15);border-radius:16px;padding:32px;margin-bottom:16px;">
           <div style="font-weight:800;color:#12172B;margin-bottom:16px;font-size:1.05rem;">What a consultation covers:</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
@@ -847,10 +927,318 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:32px;">
         <a href="mailto:lisawarren@neuralhorizonsai.com" style="background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:14px 32px;border-radius:9999px;font-weight:800;font-size:1rem;text-decoration:none;">Contact Us</a>
-        <a href="/contact" style="background:transparent;border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:14px 32px;border-radius:9999px;font-weight:700;font-size:1rem;text-decoration:none;">Talk to a Senior Team Member</a>
+        <a href="#process-map" style="background:transparent;border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:14px 32px;border-radius:9999px;font-weight:700;font-size:1rem;text-decoration:none;">See How It Works ↓</a>
       </div>
     </div>
-  </section></main>
+  </section>
+
+  <!-- TIER MODEL -->
+  <section style="padding:56px 0;background:#F7F9FC;border-top:1px solid rgba(18,23,43,0.043);border-bottom:1px solid rgba(18,23,43,0.043);">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#5B6478;margin-bottom:20px;">Where Consultation Fits</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div style="background:#fff;border:2px solid #05C793;border-radius:16px;padding:22px 18px;position:relative;">
+          <div style="position:absolute;top:-11px;left:18px;background:#05C793;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:9999px;">YOU ARE HERE</div>
+          <div style="font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#05C793;margin-bottom:6px;">Tier 1</div>
+          <div style="font-weight:800;color:#12172B;font-size:1.02rem;margin-bottom:6px;">Audit &amp; Consultation</div>
+          <div style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Diagnose what's broken and where the opportunity is. No commitment required.</div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(18,23,43,0.08);border-radius:16px;padding:22px 18px;opacity:0.75;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#2563EB;margin-bottom:6px;">Tier 2</div>
+          <div style="font-weight:800;color:#12172B;font-size:1.02rem;margin-bottom:6px;">Strategy &amp; Transformation</div>
+          <div style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Build the roadmap and prepare the organisation to execute it.</div>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(18,23,43,0.08);border-radius:16px;padding:22px 18px;opacity:0.75;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#7C3AED;margin-bottom:6px;">Tier 3</div>
+          <div style="font-weight:800;color:#12172B;font-size:1.02rem;margin-bottom:6px;">Build &amp; Implementation</div>
+          <div style="color:#5B6478;font-size:0.85rem;line-height:1.6;">Deploy HALU™ and Zonar OS™ — agentic AI running in your business.</div>
+        </div>
+      </div>
+      <p style="text-align:center;color:#5B6478;font-size:0.9rem;margin-top:18px;">Most clients move through all three. Consultation is deliberately low-commitment — it exists to earn the next step, not sell it upfront.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS MAP -->
+  <section id="process-map" style="padding:90px 0;background:#FFFFFF;">
+    <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+      <p style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#05C793;margin-bottom:14px;">The Process</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:900;color:#12172B;margin-bottom:14px;letter-spacing:-0.02em;">What actually happens, step by step.</h2>
+      <p style="color:#5B6478;font-size:1.02rem;line-height:1.8;max-width:640px;margin-bottom:12px;">Click any stage to see exactly what happens, what we need from you, and what you walk away with.</p>
+      <p style="color:#8A93A8;font-size:0.82rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:36px;"><i class="fas fa-hand-pointer" style="margin-right:6px;"></i> Click each stage to explore</p>
+
+      <div class="pmap-track" aria-hidden="true">
+        <span class="pmap-track-fill"></span>
+      </div>
+      <div class="pmap-row">
+        <button type="button" class="pmap-node" data-modal="pmModal1" style="--pc:#2563EB;--pcs:#EFF6FF;">
+          <span class="pmap-num">1</span>
+          <span class="pmap-icon">📞</span>
+          <span class="pmap-label">Discovery Call</span>
+          <span class="pmap-tap">Tap to explore →</span>
+        </button>
+        <button type="button" class="pmap-node" data-modal="pmModal2" style="--pc:#05C793;--pcs:#F2FBF8;">
+          <span class="pmap-num">2</span>
+          <span class="pmap-icon">🔍</span>
+          <span class="pmap-label">Current-State Review</span>
+          <span class="pmap-tap">Tap to explore →</span>
+        </button>
+        <button type="button" class="pmap-node pmap-mid" data-modal="pmModal3" style="--pc:#7C3AED;--pcs:#F5F0FF;">
+          <span class="pmap-num">3</span>
+          <span class="pmap-icon">🗺️</span>
+          <span class="pmap-label">Opportunity Mapping</span>
+          <span class="pmap-tap">Tap to explore →</span>
+        </button>
+        <button type="button" class="pmap-node" data-modal="pmModal4" style="--pc:#2563EB;--pcs:#EFF6FF;">
+          <span class="pmap-num">4</span>
+          <span class="pmap-icon">🎯</span>
+          <span class="pmap-label">Prioritisation</span>
+          <span class="pmap-tap">Tap to explore →</span>
+        </button>
+        <button type="button" class="pmap-node" data-modal="pmModal5" style="--pc:#05C793;--pcs:#F2FBF8;">
+          <span class="pmap-num">5</span>
+          <span class="pmap-icon">📋</span>
+          <span class="pmap-label">Roadmap Delivery</span>
+          <span class="pmap-tap">Tap to explore →</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PROCESS MODALS -->
+    <div class="pmap-overlay" id="pmapOverlay">
+      <div class="pmap-modal" id="pmModal1" style="--pc:#2563EB;--pcs:#EFF6FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <span class="pmap-modal-tag">Stage 1 of 5</span>
+        <div class="pmap-modal-icon">📞</div>
+        <h3>Discovery Call</h3>
+        <p class="pmap-modal-body">A direct, unscripted conversation with Lisa Warren — not a sales rep, not a junior associate. We talk through your business, what's prompting you to look at AI now, and what "success" would actually mean for you.</p>
+        <div class="pmap-modal-example"><p class="pml">What we cover</p><p>Your business model, department structure, existing tools, past AI attempts (if any), and the specific pressure points pushing you to act.</p></div>
+        <div class="pmap-modal-example"><p class="pml">Duration</p><p>30–45 minutes, by video or phone. No slides, no pitch deck.</p></div>
+      </div>
+
+      <div class="pmap-modal" id="pmModal2" style="--pc:#05C793;--pcs:#F2FBF8;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <span class="pmap-modal-tag">Stage 2 of 5</span>
+        <div class="pmap-modal-icon">🔍</div>
+        <h3>Current-State Review</h3>
+        <p class="pmap-modal-body">We go through your existing systems, workflows and (if you've run one) your Zonar™ audit results together — line by line, not a generic checklist. This is where we find out what's actually happening versus what you assume is happening.</p>
+        <div class="pmap-modal-example"><p class="pml">What we look at</p><p>Sales pipeline handling, marketing attribution, operational handoffs between teams, finance reconciliation, and any AI tools already in use.</p></div>
+        <div class="pmap-modal-example"><p class="pml">What you bring</p><p>Whatever you have — a free Zonar™ audit report if you've run one, or just your honest description of where things feel broken.</p></div>
+      </div>
+
+      <div class="pmap-modal" id="pmModal3" style="--pc:#7C3AED;--pcs:#F5F0FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <span class="pmap-modal-tag">Stage 3 of 5 · The Core of the Session</span>
+        <div class="pmap-modal-icon">🗺️</div>
+        <h3>Opportunity Mapping</h3>
+        <p class="pmap-modal-body">Every department gets scored against three questions: where is revenue leaking, where are teams duplicating effort across silos, and where would agentic AI create the fastest, safest win. This becomes a visual map of your business, not a vague list.</p>
+        <div class="pmap-modal-example"><p class="pml">Output</p><p>A ranked map of opportunities across Sales, Marketing, Operations, Finance and Leadership — see the live version below.</p></div>
+        <a href="#dept-map" style="display:inline-block;margin-top:6px;color:#7C3AED;font-weight:700;font-size:0.85rem;">See the opportunity map ↓</a>
+      </div>
+
+      <div class="pmap-modal" id="pmModal4" style="--pc:#2563EB;--pcs:#EFF6FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <span class="pmap-modal-tag">Stage 4 of 5</span>
+        <div class="pmap-modal-icon">🎯</div>
+        <h3>Prioritisation</h3>
+        <p class="pmap-modal-body">Not every opportunity should be tackled first. We rank what we found against effort, risk and business impact — so you know exactly what to do first, what to do next, and what to deliberately leave for later.</p>
+        <div class="pmap-modal-example"><p class="pml">Framework</p><p>Impact vs. effort scoring, weighted by how exposed the current process is to failure and how quickly a fix would show measurable results.</p></div>
+      </div>
+
+      <div class="pmap-modal" id="pmModal5" style="--pc:#05C793;--pcs:#F2FBF8;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <span class="pmap-modal-tag">Stage 5 of 5</span>
+        <div class="pmap-modal-icon">📋</div>
+        <h3>Roadmap Delivery</h3>
+        <p class="pmap-modal-body">You leave with a written, plain-English roadmap — not a 40-page slide deck nobody reads. It names the top opportunities, the recommended order of attack, and whether Strategy &amp; Transformation (Tier 2) or a direct HALU™/Zonar OS™ build (Tier 3) is the right next step for you.</p>
+        <div class="pmap-modal-example"><p class="pml">No obligation</p><p>You're free to take the roadmap and implement it yourself, hire someone else, or come back to us. Nothing is bundled or forced.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPARTMENT / OPPORTUNITY MAP -->
+  <section id="dept-map" style="padding:90px 0;background:#F7F9FC;border-top:1px solid rgba(18,23,43,0.043);">
+    <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+      <p style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#7C3AED;margin-bottom:14px;">Opportunity Mapping, Live</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:900;color:#12172B;margin-bottom:14px;letter-spacing:-0.02em;">Where we typically find the biggest wins.</h2>
+      <p style="color:#5B6478;font-size:1.02rem;line-height:1.8;max-width:640px;margin-bottom:12px;">This is a real map, built from patterns we've seen across client consultations — not a generic department list. Click a department to see what usually turns up.</p>
+      <p style="color:#8A93A8;font-size:0.82rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:36px;"><i class="fas fa-hand-pointer" style="margin-right:6px;"></i> Click a department</p>
+
+      <div class="dmap-grid">
+        <button type="button" class="dmap-node" data-modal="dmModalSales" style="--dc:#05C793;">
+          <span class="dmap-icon">💰</span>
+          <span class="dmap-name">Sales</span>
+          <span class="dmap-stat">Most common finding: slow lead follow-up</span>
+        </button>
+        <button type="button" class="dmap-node" data-modal="dmModalMarketing" style="--dc:#2563EB;">
+          <span class="dmap-icon">📣</span>
+          <span class="dmap-name">Marketing</span>
+          <span class="dmap-stat">Most common finding: broken attribution</span>
+        </button>
+        <button type="button" class="dmap-node" data-modal="dmModalOps" style="--dc:#7C3AED;">
+          <span class="dmap-icon">⚙️</span>
+          <span class="dmap-name">Operations</span>
+          <span class="dmap-stat">Most common finding: manual handoffs</span>
+        </button>
+        <button type="button" class="dmap-node" data-modal="dmModalFinance" style="--dc:#05C793;">
+          <span class="dmap-icon">📊</span>
+          <span class="dmap-name">Finance</span>
+          <span class="dmap-stat">Most common finding: reconciliation lag</span>
+        </button>
+        <button type="button" class="dmap-node" data-modal="dmModalLeadership" style="--dc:#2563EB;">
+          <span class="dmap-icon">🧭</span>
+          <span class="dmap-name">Leadership</span>
+          <span class="dmap-stat">Most common finding: no shared truth</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DEPARTMENT MODALS -->
+    <div class="pmap-overlay" id="dmapOverlay">
+      <div class="pmap-modal" id="dmModalSales" style="--pc:#05C793;--pcs:#F2FBF8;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <div class="pmap-modal-icon">💰</div>
+        <h3>Sales</h3>
+        <p class="pmap-modal-body">The single most common finding across consultations: leads sit for hours or days before anyone follows up, and by then the buyer has often already engaged a competitor. Pipeline visibility is usually fragmented across a CRM nobody fully trusts.</p>
+        <div class="pmap-modal-example"><p class="pml">What agentic AI typically fixes</p><p>Instant lead scoring and first response, automated nurture sequences for stalled deals, and a live pipeline view leadership can actually trust.</p></div>
+      </div>
+      <div class="pmap-modal" id="dmModalMarketing" style="--pc:#2563EB;--pcs:#EFF6FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <div class="pmap-modal-icon">📣</div>
+        <h3>Marketing</h3>
+        <p class="pmap-modal-body">Spend decisions are frequently made on last-click attribution alone, with no cross-channel view of what's actually driving revenue. Campaigns keep running past their useful life because nobody's watching closely enough to cut them.</p>
+        <div class="pmap-modal-example"><p class="pml">What agentic AI typically fixes</p><p>Cross-channel attribution, automated budget-reallocation alerts, and content/campaign performance monitored continuously instead of in a monthly report.</p></div>
+      </div>
+      <div class="pmap-modal" id="dmModalOps" style="--pc:#7C3AED;--pcs:#F5F0FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <div class="pmap-modal-icon">⚙️</div>
+        <h3>Operations</h3>
+        <p class="pmap-modal-body">Work gets handed between teams manually — a form, an email, a Slack message — with no system tracking whether it actually landed. This is where silos cost the most and get noticed the least, because nothing visibly "breaks," it just slowly leaks time.</p>
+        <div class="pmap-modal-example"><p class="pml">What agentic AI typically fixes</p><p>Automated workflow handoffs with full audit trails, anomaly alerts before a bottleneck becomes a crisis, and one shared view of what's actually in progress.</p></div>
+      </div>
+      <div class="pmap-modal" id="dmModalFinance" style="--pc:#05C793;--pcs:#F2FBF8;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <div class="pmap-modal-icon">📊</div>
+        <h3>Finance</h3>
+        <p class="pmap-modal-body">Reconciliation between sales, ops and accounting data is usually done manually at month-end, which means problems are discovered weeks after they happened — too late to act on, only possible to explain.</p>
+        <div class="pmap-modal-example"><p class="pml">What agentic AI typically fixes</p><p>Continuous reconciliation instead of month-end scrambles, and anomaly flags the moment numbers stop lining up — not four weeks later.</p></div>
+      </div>
+      <div class="pmap-modal" id="dmModalLeadership" style="--pc:#2563EB;--pcs:#EFF6FF;">
+        <button type="button" class="pmap-close" aria-label="Close">&times;</button>
+        <div class="pmap-modal-icon">🧭</div>
+        <h3>Leadership</h3>
+        <p class="pmap-modal-body">Every department has its own version of "the numbers," and by the time it reaches leadership it's been filtered, summarised and delayed. Decisions get made on last month's picture, not this week's reality.</p>
+        <div class="pmap-modal-example"><p class="pml">What agentic AI typically fixes</p><p>One live intelligence layer every department reports into, so leadership sees the same real-time truth everyone else is working from.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section style="padding:90px 0;background:#FFFFFF;">
+    <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+      <p style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#05C793;margin-bottom:14px;">Who This Is For</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:900;color:#12172B;margin-bottom:36px;letter-spacing:-0.02em;">Built for three kinds of leaders.</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+        <div style="border:1px solid rgba(18,23,43,0.08);border-radius:16px;padding:26px;">
+          <div style="font-size:1.6rem;margin-bottom:12px;">🌱</div>
+          <div style="font-weight:800;color:#12172B;margin-bottom:8px;">First-time evaluators</div>
+          <div style="color:#5B6478;font-size:0.9rem;line-height:1.7;">You know AI matters but haven't touched it yet, and don't want your first move to be an expensive guess.</div>
+        </div>
+        <div style="border:1px solid rgba(18,23,43,0.08);border-radius:16px;padding:26px;">
+          <div style="font-size:1.6rem;margin-bottom:12px;">🔧</div>
+          <div style="font-weight:800;color:#12172B;margin-bottom:8px;">Stalled implementers</div>
+          <div style="color:#5B6478;font-size:0.9rem;line-height:1.7;">You've tried an AI tool or two — they didn't stick, or didn't move the numbers you actually care about.</div>
+        </div>
+        <div style="border:1px solid rgba(18,23,43,0.08);border-radius:16px;padding:26px;">
+          <div style="font-size:1.6rem;margin-bottom:12px;">📈</div>
+          <div style="font-weight:800;color:#12172B;margin-bottom:8px;">Scaling operators</div>
+          <div style="color:#5B6478;font-size:0.9rem;line-height:1.7;">Revenue is growing but the systems underneath it aren't — and you can feel the cracks before you can name them.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATION FAQ -->
+  <section style="padding:90px 0;background:#F7F9FC;border-top:1px solid rgba(18,23,43,0.043);">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;">
+      <p style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#05C793;margin-bottom:14px;">FAQ</p>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:900;color:#12172B;margin-bottom:36px;letter-spacing:-0.02em;">Consultation questions, answered.</h2>
+      <div class="cfaq-list">
+        <details class="cfaq-item" open>
+          <summary>Is the consultation actually free, or is there a catch?<span class="cfaq-icon">+</span></summary>
+          <div class="cfaq-a">It's free, with no obligation attached. You leave with a written roadmap whether or not you ever engage us again. We do this because most people who go through it choose to continue — not because we lock you in.</div>
+        </details>
+        <details class="cfaq-item">
+          <summary>Do I need to have run a Zonar™ audit first?<span class="cfaq-icon">+</span></summary>
+          <div class="cfaq-a">No, but it helps. If you've run the free Zonar™ audit, we use it as the starting point for the current-state review. If not, we'll build that picture together during the call — it just means the session covers a bit more ground.</div>
+        </details>
+        <details class="cfaq-item">
+          <summary>Who runs the consultation — is it actually Lisa Warren?</summary>
+          <div class="cfaq-a" style="display:none;">Yes. Consultations are run personally by Lisa Warren, Founder &amp; CEO. This isn't handed off to a junior associate or a sales rep reading from a script.</div>
+        </details>
+        <details class="cfaq-item">
+          <summary>What happens after the roadmap is delivered?<span class="cfaq-icon">+</span></summary>
+          <div class="cfaq-a">You decide. Some clients take the roadmap and run with it internally. Most move into Tier 2 (Strategy &amp; Transformation) to build out the plan properly, or go straight into a HALU™/Zonar OS™ build if the opportunity is clear enough. There's no pressure either way.</div>
+        </details>
+        <details class="cfaq-item">
+          <summary>How is this different from a generic AI strategy call?<span class="cfaq-icon">+</span></summary>
+          <div class="cfaq-a">Most "AI strategy calls" are thinly disguised sales pitches for a specific tool. This is a diagnostic — we're mapping where your business actually leaks time and revenue first, and only then talking about what (if anything) should be built to fix it.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="padding:80px 0;background:#FFFFFF;">
+    <div style="max-width:700px;margin:0 auto;padding:0 24px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:14px;">⚡</div>
+      <h2 style="font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:900;color:#12172B;margin-bottom:14px;letter-spacing:-0.02em;">Ready to see your opportunity map?</h2>
+      <p style="color:#5B6478;font-size:1rem;line-height:1.8;max-width:480px;margin:0 auto 28px;">30–45 minutes with Lisa Warren. No pitch deck, no pressure — just clarity on where AI would actually help your business.</p>
+      <a href="mailto:lisawarren@neuralhorizonsai.com" style="display:inline-block;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:800;font-size:1rem;padding:16px 40px;border-radius:9999px;text-decoration:none;">Book Your Consultation →</a>
+      <p style="font-size:0.8rem;color:#9CA3AF;margin-top:16px;">Free · Direct &amp; personal · UAE, MENA &amp; global clients welcome</p>
+    </div>
+  </section>
+
+  </main>
+
+  <script>
+    (function(){
+      function wireMap(overlaySelector, nodeSelector){
+        var overlay = document.querySelector(overlaySelector);
+        if(!overlay) return;
+        var nodes = document.querySelectorAll(nodeSelector);
+        nodes.forEach(function(node){
+          node.addEventListener('click', function(){
+            var id = node.getAttribute('data-modal');
+            var modal = document.getElementById(id);
+            if(!modal) return;
+            overlay.querySelectorAll('.pmap-modal').forEach(function(m){ m.classList.remove('active'); });
+            modal.classList.add('active');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+        overlay.addEventListener('click', function(e){
+          if(e.target === overlay){ closeMap(overlay); }
+        });
+        overlay.querySelectorAll('.pmap-close').forEach(function(btn){
+          btn.addEventListener('click', function(){ closeMap(overlay); });
+        });
+        document.addEventListener('keydown', function(e){
+          if(e.key === 'Escape'){ closeMap(overlay); }
+        });
+      }
+      function closeMap(overlay){
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function(){
+          overlay.querySelectorAll('.pmap-modal').forEach(function(m){ m.classList.remove('active'); });
+        }, 250);
+      }
+      wireMap('#pmapOverlay', '.pmap-node');
+      wireMap('#dmapOverlay', '.dmap-node');
+    })();
+  </script>
+
 <footer class="bg-white border-t border-slate-200 py-12">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-4 gap-8 mb-8">
