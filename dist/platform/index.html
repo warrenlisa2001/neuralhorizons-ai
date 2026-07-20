@@ -28,7 +28,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://www.neuralhorizonsai.com/zonar-os/#software",
       "name": "Zonar OS",
-      "description": "Neural Horizons AI's proprietary agentic AI operating platform. Connects all business departments, provides live intelligence dashboards, revenue diagnostics and workflow orchestration.",
+      "description": "Neural Horizons AI's proprietary agentic-to-autonomous AI operating platform. Connects all business departments, provides live intelligence dashboards, revenue diagnostics and workflow orchestration.",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Cloud",
       "url": "https://www.neuralhorizonsai.com/zonar-os/",
@@ -41,22 +41,17 @@
         "@type": "SoftwareApplication",
         "@id": "https://www.neuralhorizonsai.com/halu/#software"
       },
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Zonar OS Core",
-          "price": "80000",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.neuralhorizonsai.com/zonar-os/",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "0",
           "priceCurrency": "AED",
-          "description": "One-time deployment + annual support, includes HALU Pro"
+          "description": "Contact us for pricing — scoped to your business"
         },
-        {
-          "@type": "Offer",
-          "name": "Zonar OS Enterprise",
-          "price": "150000",
-          "priceCurrency": "AED",
-          "description": "One-time deployment + annual support, includes HALU Pro, white-label option"
-        }
-      ]
+        "seller": { "@type": "Organization", "name": "Neural Horizons AI" }
+      }
     },
     {
       "@type": "SoftwareApplication",
@@ -76,22 +71,17 @@
         "@id": "https://www.neuralhorizonsai.com/#org",
         "name": "Neural Horizons AI"
       },
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "HALU Lite",
-          "price": "8500",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.neuralhorizonsai.com/halu/",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "0",
           "priceCurrency": "AED",
-          "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" }
+          "description": "Contact us for pricing — scoped to your business"
         },
-        {
-          "@type": "Offer",
-          "name": "HALU Pro",
-          "price": "22000",
-          "priceCurrency": "AED",
-          "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" }
-        }
-      ]
+        "seller": { "@type": "Organization", "name": "Neural Horizons AI" }
+      }
     },
     {
       "@type": "FAQPage",
@@ -159,6 +149,8 @@ body{background:var(--dark);color:#12172B;font-family:system-ui,-apple-system,sa
 a{text-decoration:none}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
 
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(18,23,43,0.18);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(14px)}
@@ -172,11 +164,11 @@ a{text-decoration:none}
 @media(max-width:700px){.nav-links{display:none}}
 
 /* HERO */
-.hero{padding:150px 24px 90px;text-align:center;max-width:860px;margin:0 auto;animation:fadeUp 0.7s ease both;position:relative;overflow:hidden;background:#05050A;border-radius:0 0 28px 28px}
+.hero{padding:150px 24px 60px;text-align:center;max-width:900px;margin:0 auto;animation:fadeUp 0.7s ease both;position:relative;overflow:hidden;background:#05050A;border-radius:0 0 28px 28px}
 .hero-video-fx{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden}
 .hero-bg-video{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0}
-.hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.6) 0%, rgba(5,5,10,.68) 55%, rgba(5,5,10,.82) 100%)}
+.hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.62) 0%, rgba(5,5,10,.7) 55%, rgba(5,5,10,.88) 100%)}
 .hero-sound{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:600;padding:7px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);font-family:inherit}
 .hero-sound:hover{border-color:var(--green)}
 .hero>*{position:relative;z-index:2}
@@ -186,29 +178,21 @@ a{text-decoration:none}
 .hero .btn-ghost:hover{border-color:var(--green);color:var(--green)}
 .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.07);border:1px solid rgba(5,199,147,0.2);border-radius:100px;padding:7px 18px;font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
 .badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-h1{font-size:clamp(34px,6vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
-.hero-sub{font-size:18px;color:#5B6478;line-height:1.8;max-width:620px;margin:0 auto 36px}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+h1{font-size:clamp(34px,6vw,64px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:20px}
+.hero-sub{font-size:18px;color:#5B6478;line-height:1.8;max-width:620px;margin:0 auto 32px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
 .btn-green{background:var(--green);color:#12172B;font-weight:800;padding:14px 34px;border-radius:100px;font-size:15px;display:inline-block;transition:opacity 0.2s}
 .btn-green:hover{opacity:0.85}
 .btn-ghost{border:1px solid rgba(18,23,43,0.12);color:#374050;font-weight:700;padding:14px 30px;border-radius:100px;font-size:15px;display:inline-block;transition:border-color 0.2s}
 .btn-ghost:hover{border-color:rgba(5,199,147,0.4);color:#12172B}
 
-/* STACK DIAGRAM */
-.stack-section{max-width:700px;margin:60px auto 0;padding:0 24px}
-.stack-label{text-align:center;font-size:11px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
-.stack{display:flex;flex-direction:column;gap:0;border-radius:20px;overflow:hidden;border:1px solid var(--border)}
-.stack-layer{padding:24px 28px;display:flex;align-items:center;gap:20px;transition:background 0.2s}
-.stack-layer:hover{background:rgba(18,23,43,0.029)}
-.stack-layer-top{background:rgba(0,229,255,0.05);border-bottom:1px solid rgba(0,229,255,0.1)}
-.stack-layer-mid{background:rgba(5,199,147,0.04);border-bottom:1px solid var(--border)}
-.stack-layer-bot{background:rgba(168,85,247,0.04)}
-.stack-icon{font-size:28px;flex-shrink:0;width:44px;text-align:center}
-.stack-info{flex:1}
-.stack-name{font-size:16px;font-weight:800;color:#12172B;margin-bottom:3px}
-.stack-desc{font-size:13px;color:#6b7280;line-height:1.55}
-.stack-link{font-size:12px;font-weight:700;color:var(--green);white-space:nowrap;flex-shrink:0}
-.stack-arrow{text-align:center;padding:10px 0;font-size:20px;color:#374151}
+/* HERO STAT STRIP */
+.hero-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;max-width:640px;margin:0 auto}
+.hero-stat{padding:0 22px;text-align:center;border-right:1px solid rgba(255,255,255,0.12)}
+.hero-stat:last-child{border-right:none}
+.hero-stat .hs-num{display:block;font-size:22px;font-weight:900;color:var(--green);margin-bottom:2px}
+.hero-stat .hs-lbl{font-size:11px;color:#9CA3AF;letter-spacing:0.03em}
+@media(max-width:640px){.hero-stat{padding:0 12px 12px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.1);width:50%}}
 
 /* SECTION */
 .section{max-width:1060px;margin:80px auto;padding:0 24px}
@@ -216,19 +200,96 @@ h1{font-size:clamp(34px,6vw,68px);font-weight:900;line-height:1.05;letter-spacin
 .section-title{font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:12px}
 .section-sub{font-size:16px;color:#5B6478;line-height:1.8;max-width:580px;margin-bottom:44px}
 
-/* COMPARISON TABLE */
-.compare-wrap{overflow-x:auto}
-.compare-table{width:100%;border-collapse:collapse;min-width:600px}
-.compare-table th{padding:14px 20px;text-align:left;font-size:11px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.compare-table th:nth-child(2){color:var(--cyan)}
-.compare-table th:nth-child(3){color:var(--green)}
-.compare-table td{padding:14px 20px;font-size:14px;color:#5B6478;border-bottom:1px solid rgba(18,23,43,0.043);vertical-align:top}
-.compare-table td:first-child{color:#12172B;font-weight:600}
-.compare-table td:nth-child(2){color:#374050}
-.compare-table td:nth-child(3){color:#374050}
-.compare-table tr:last-child td{border-bottom:none}
-.compare-table tr:hover td{background:rgba(18,23,43,0.025)}
-.col-hdr{display:flex;align-items:center;gap:8px}
+/* INTELLIGENCE LAYER EXPLAINER */
+.intel-section{max-width:900px;margin:70px auto 0;padding:0 24px}
+.intel-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:600px;margin:28px auto 32px}
+.intel-compare-card{border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center}
+.intel-compare-card.you{background:rgba(5,199,147,0.05);border-color:rgba(5,199,147,0.25)}
+.intel-compare-card .ic-tag{font-size:10.5px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#6b7280;margin-bottom:8px}
+.intel-compare-card.you .ic-tag{color:#0B7A5C}
+.intel-compare-card .ic-val{font-size:15px;font-weight:900;color:#12172B}
+.intel-diagram{border:1px solid var(--border);border-radius:22px;padding:32px 26px;background:radial-gradient(ellipse at top, rgba(5,199,147,0.04), transparent 60%)}
+.intel-sources{text-align:center;font-size:10.5px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#6b7280;margin-bottom:12px}
+.intel-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:14px}
+.intel-pill{border:1px solid var(--border);border-radius:9999px;padding:7px 16px;font-size:13px;font-weight:700;color:#12172B;background:#fff}
+.intel-arrow{text-align:center;color:var(--green);font-size:20px;margin:4px 0}
+.intel-layer{background:#12172B;border-radius:16px;padding:26px 22px;margin-bottom:4px}
+.intel-layer-title{text-align:center;color:#fff;font-weight:900;font-size:16px;margin-bottom:4px}
+.intel-layer-sub{text-align:center;color:#8A93A8;font-size:12.5px;margin-bottom:18px}
+.intel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.intel-item{border-radius:10px;padding:12px 8px;text-align:center}
+.intel-item .ii-icon{font-size:18px;margin-bottom:4px}
+.intel-item .ii-name{color:#fff;font-size:11.5px;font-weight:700}
+@media(max-width:640px){.intel-grid{grid-template-columns:repeat(2,1fr)}.intel-compare{grid-template-columns:1fr 1fr}}
+.intel-outcome{text-align:center;margin-top:4px}
+.intel-outcome span{background:linear-gradient(135deg,#05C793,#2563EB);color:#fff;border-radius:9999px;padding:11px 30px;font-size:14px;font-weight:900;display:inline-block}
+.intel-note{text-align:center;color:#5B6478;font-size:14.5px;line-height:1.8;max-width:640px;margin:22px auto 0}
+
+/* STACK DIAGRAM */
+.stack-section{max-width:900px;margin:80px auto 0;padding:0 24px}
+.stack-label{text-align:center;font-size:11px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.stack{display:flex;flex-direction:column;gap:0;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(18,23,43,0.06)}
+.stack-layer{padding:26px 28px;display:flex;align-items:center;gap:20px;transition:background 0.2s}
+.stack-layer:hover{background:rgba(18,23,43,0.029)}
+.stack-layer-top{background:rgba(124,58,237,0.05);border-bottom:1px solid rgba(124,58,237,0.1)}
+.stack-layer-mid{background:rgba(37,99,235,0.05);border-bottom:1px solid var(--border)}
+.stack-layer-bot{background:rgba(5,199,147,0.05)}
+.stack-icon{font-size:26px;flex-shrink:0;width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(18,23,43,0.08)}
+.stack-info{flex:1}
+.stack-name{font-size:16px;font-weight:800;color:#12172B;margin-bottom:3px}
+.stack-desc{font-size:13px;color:#6b7280;line-height:1.55}
+.stack-link{font-size:12px;font-weight:700;color:var(--green);white-space:nowrap;flex-shrink:0}
+.stack-arrow{text-align:center;padding:8px 0;font-size:18px;color:#9CA3AF;background:#fff}
+@media(max-width:640px){.stack-layer{flex-wrap:wrap}.stack-link{margin-left:72px}}
+
+/* PRODUCT CARDS */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.product-card{border-radius:20px;padding:32px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(18,23,43,0.1)}
+.product-card.halu{background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(37,99,235,0.02));border-color:rgba(37,99,235,0.2)}
+.product-card.zonar{background:linear-gradient(135deg,rgba(5,199,147,0.05),rgba(5,199,147,0.02));border-color:rgba(5,199,147,0.2)}
+.product-card-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.product-card.halu .product-card-tag{color:var(--cyan)}
+.product-card.zonar .product-card-tag{color:var(--green)}
+.product-card-name{font-size:26px;font-weight:900;color:#12172B;margin-bottom:8px}
+.product-card-desc{font-size:14px;color:#5B6478;line-height:1.7;margin-bottom:20px}
+.product-card-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.product-card-features li{font-size:13px;color:#374050;display:flex;gap:8px;align-items:flex-start}
+.product-card.halu .product-card-features li::before{content:"✓";color:var(--cyan);font-weight:900;flex-shrink:0}
+.product-card.zonar .product-card-features li::before{content:"✓";color:var(--green);font-weight:900;flex-shrink:0}
+.product-card-price{font-size:20px;font-weight:900;margin-bottom:4px}
+.product-card.halu .product-card-price{color:var(--cyan)}
+.product-card.zonar .product-card-price{color:var(--green)}
+.product-card-price-sub{font-size:12px;color:#6b7280;margin-bottom:20px}
+.btn-cyan{display:block;background:var(--cyan);color:#fff;font-weight:800;font-size:14px;padding:13px;border-radius:100px;text-align:center;transition:opacity 0.2s}
+.btn-cyan:hover{opacity:0.85}
+.btn-green-outline{display:block;background:transparent;border:1px solid rgba(5,199,147,0.3);color:#374050;font-weight:700;font-size:14px;padding:13px;border-radius:100px;text-align:center;transition:all 0.2s}
+.btn-green-outline:hover{border-color:var(--green);color:#12172B}
+
+@media(max-width:680px){
+  .product-grid{grid-template-columns:1fr}
+  h1{letter-spacing:-1px}
+}
+
+/* COMPARISON CARDS (replaces raw table) */
+.cmp-grid{border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.cmp-head{display:grid;grid-template-columns:1.3fr 1fr 1fr;background:#F7F9FC;border-bottom:1px solid var(--border)}
+.cmp-head div{padding:16px 18px;font-size:12px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#4b5563}
+.cmp-head div:nth-child(2){color:var(--cyan);display:flex;align-items:center;gap:6px}
+.cmp-head div:nth-child(3){color:var(--green);display:flex;align-items:center;gap:6px}
+.cmp-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;border-bottom:1px solid rgba(18,23,43,0.043);transition:background .15s}
+.cmp-row:last-child{border-bottom:none}
+.cmp-row:hover{background:rgba(18,23,43,0.02)}
+.cmp-row div{padding:15px 18px;font-size:13.5px;color:#374050;line-height:1.5}
+.cmp-row div:first-child{color:#12172B;font-weight:700;font-size:13.5px}
+.cmp-foot{display:grid;grid-template-columns:1.3fr 1fr 1fr;padding:18px;gap:12px;background:#F7F9FC}
+.cmp-foot div:first-child{display:none}
+@media(max-width:680px){
+  .cmp-head, .cmp-row, .cmp-foot{grid-template-columns:1fr 1fr}
+  .cmp-head div:first-child{display:none}
+  .cmp-row div:first-child{grid-column:1/-1;background:rgba(18,23,43,0.025);font-size:11px;letter-spacing:0.03em;text-transform:uppercase;padding-bottom:4px}
+  .cmp-foot div:first-child{display:none}
+}
 
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden}
@@ -249,34 +310,6 @@ h1{font-size:clamp(34px,6vw,68px);font-weight:900;line-height:1.05;letter-spacin
 .funnel-title{font-size:15px;font-weight:800;color:#12172B;margin-bottom:4px}
 .funnel-desc{font-size:13px;color:#5B6478;line-height:1.6}
 .funnel-price{font-size:12px;font-weight:700;color:var(--green);margin-top:6px}
-
-/* PRODUCT CARDS */
-.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.product-card{border-radius:20px;padding:32px;border:1px solid var(--border);position:relative;overflow:hidden}
-.product-card.halu{background:linear-gradient(135deg,rgba(0,229,255,0.05),rgba(0,229,255,0.02));border-color:rgba(0,229,255,0.2)}
-.product-card.zonar{background:linear-gradient(135deg,rgba(5,199,147,0.05),rgba(5,199,147,0.02));border-color:rgba(5,199,147,0.2)}
-.product-card-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
-.product-card.halu .product-card-tag{color:var(--cyan)}
-.product-card.zonar .product-card-tag{color:var(--green)}
-.product-card-name{font-size:26px;font-weight:900;color:#12172B;margin-bottom:8px}
-.product-card-desc{font-size:14px;color:#5B6478;line-height:1.7;margin-bottom:20px}
-.product-card-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.product-card-features li{font-size:13px;color:#374050;display:flex;gap:8px;align-items:flex-start}
-.product-card.halu .product-card-features li::before{content:"✓";color:var(--cyan);font-weight:900;flex-shrink:0}
-.product-card.zonar .product-card-features li::before{content:"✓";color:var(--green);font-weight:900;flex-shrink:0}
-.product-card-price{font-size:24px;font-weight:900;margin-bottom:4px}
-.product-card.halu .product-card-price{color:var(--cyan)}
-.product-card.zonar .product-card-price{color:var(--green)}
-.product-card-price-sub{font-size:12px;color:#6b7280;margin-bottom:20px}
-.btn-cyan{display:block;background:var(--cyan);color:#12172B;font-weight:800;font-size:14px;padding:13px;border-radius:100px;text-align:center;transition:opacity 0.2s}
-.btn-cyan:hover{opacity:0.85}
-.btn-green-outline{display:block;background:transparent;border:1px solid rgba(5,199,147,0.3);color:#374050;font-weight:700;font-size:14px;padding:13px;border-radius:100px;text-align:center;transition:all 0.2s}
-.btn-green-outline:hover{border-color:var(--green);color:#12172B}
-
-@media(max-width:680px){
-  .product-grid{grid-template-columns:1fr}
-  h1{letter-spacing:-1px}
-}
 
 /* CTA */
 .cta-block{max-width:660px;margin:80px auto;padding:0 24px;text-align:center}
@@ -322,10 +355,16 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   <button class="hero-sound" id="heroBgSoundToggle" type="button">Unmute</button>
   <div class="badge"><span class="badge-dot"></span>THE COMPLETE AI STACK</div>
   <h1>The AI Platform Built to<br><span style="color:var(--green)">Close Revenue Leaks</span><br>and Break Down Silos.</h1>
-  <p class="hero-sub">Neural Horizons AI has built two interconnected products — <strong style="color:var(--cyan)">HALU™</strong>, the autonomous agent, and <strong style="color:var(--green)">Zonar OS™</strong>, the AI operating platform. Together they give mid-size businesses the intelligence layer they've been missing.</p>
+  <p class="hero-sub">Neural Horizons AI has built two interconnected products — <strong style="color:#7DD3FC">HALU™</strong>, the autonomous agent, and <strong style="color:var(--green)">Zonar OS™</strong>, the AI operating platform. Together they give mid-size businesses the intelligence layer they've been missing.</p>
   <div class="hero-btns">
     <a href="mailto:lisawarren@neuralhorizonsai.com" class="btn-green">Contact Lisa Warren →</a>
     <a href="#compare" class="btn-ghost">Compare Products →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hs-num">2</span><span class="hs-lbl">Products, One Stack</span></div>
+    <div class="hero-stat"><span class="hs-num">2–4wk</span><span class="hs-lbl">To Deploy HALU™</span></div>
+    <div class="hero-stat"><span class="hs-num">24/7</span><span class="hs-lbl">Autonomous Monitoring</span></div>
+    <div class="hero-stat"><span class="hs-num">AED 9M+</span><span class="hs-lbl">Generated For Clients</span></div>
   </div>
 </section>
 <script>
@@ -358,10 +397,60 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
 })();
 </script>
 
+<!-- INTELLIGENCE LAYER EXPLAINER -->
+<div class="intel-section">
+  <div style="text-align:center;max-width:640px;margin:0 auto 8px;">
+    <p class="eyebrow" style="text-align:center;">Why Two Products, Not One</p>
+    <h2 class="section-title" style="font-size:clamp(22px,3.4vw,32px);">You don't need another Microsoft consultancy.</h2>
+    <p style="color:#5B6478;font-size:15px;line-height:1.8;">Microsoft, SAP, Oracle, Salesforce — whatever you already run — is infrastructure. It's the operating system underneath your business. HALU™ and Zonar OS™ are the intelligence layer Neural Horizons builds on top of it.</p>
+  </div>
+
+  <div class="intel-compare reveal">
+    <div class="intel-compare-card">
+      <div class="ic-tag">Your Existing Stack</div>
+      <div class="ic-val">= Operating System</div>
+    </div>
+    <div class="intel-compare-card you">
+      <div class="ic-tag">HALU™ + Zonar OS™</div>
+      <div class="ic-val">= Intelligence Layer</div>
+    </div>
+  </div>
+
+  <div class="intel-diagram reveal">
+    <div class="intel-sources">Your Existing Systems &amp; Data</div>
+    <div class="intel-pills">
+      <span class="intel-pill">SAP</span>
+      <span class="intel-pill">Oracle</span>
+      <span class="intel-pill">Microsoft Dynamics</span>
+      <span class="intel-pill">HubSpot</span>
+      <span class="intel-pill">Salesforce</span>
+      <span class="intel-pill">Emails</span>
+      <span class="intel-pill">Documents</span>
+    </div>
+    <div class="intel-arrow">↓</div>
+    <div class="intel-layer">
+      <div class="intel-layer-title">HALU™ + Zonar OS™</div>
+      <div class="intel-layer-sub">The intelligence layer that sits between your systems and your outcomes</div>
+      <div class="intel-grid">
+        <div class="intel-item" style="background:rgba(5,199,147,0.1);"><div class="ii-icon">🧭</div><div class="ii-name">Orchestrator</div></div>
+        <div class="intel-item" style="background:rgba(37,99,235,0.1);"><div class="ii-icon">⚡</div><div class="ii-name">Autonomous Agents</div></div>
+        <div class="intel-item" style="background:rgba(124,58,237,0.1);"><div class="ii-icon">🛡️</div><div class="ii-name">Governance</div></div>
+        <div class="intel-item" style="background:rgba(5,199,147,0.1);"><div class="ii-icon">🧠</div><div class="ii-name">Decision Engine</div></div>
+        <div class="intel-item" style="background:rgba(37,99,235,0.1);"><div class="ii-icon">💾</div><div class="ii-name">Memory</div></div>
+        <div class="intel-item" style="background:rgba(124,58,237,0.1);"><div class="ii-icon">✅</div><div class="ii-name">Human Approval</div></div>
+        <div class="intel-item" style="background:rgba(5,199,147,0.1);grid-column:span 2;"><div class="ii-icon">📊</div><div class="ii-name">Analytics</div></div>
+      </div>
+    </div>
+    <div class="intel-arrow">↓</div>
+    <div class="intel-outcome"><span>Business Outcomes</span></div>
+  </div>
+  <p class="intel-note">We don't replace what you already run — we sit on top of it. <a href="/zonar-os/" style="color:var(--green);font-weight:700;">See the full Zonar OS™ architecture →</a></p>
+</div>
+
 <!-- STACK DIAGRAM -->
 <div class="stack-section">
-  <p class="stack-label">THE STACK</p>
-  <div class="stack">
+  <p class="stack-label">HOW HALU™ &amp; ZONAR OS™ RELATE</p>
+  <div class="stack reveal">
     <div class="stack-layer stack-layer-top">
       <div class="stack-icon">💬</div>
       <div class="stack-info">
@@ -398,7 +487,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   <p class="section-sub">Most clients start with HALU™ and upgrade to Zonar OS™ once they see results. Both products are built and supported by Neural Horizons AI.</p>
 
   <div class="product-grid">
-    <div class="product-card halu">
+    <div class="product-card halu reveal">
       <div class="product-card-tag">⚡ Start here · Deploy in 2–4 weeks</div>
       <div class="product-card-name">HALU™</div>
       <div class="product-card-desc">The autonomous agent that monitors every department, finds revenue leaks, generates action items and delivers results — continuously, without human intervention.</div>
@@ -415,17 +504,17 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
       <a href="/halu/" class="btn-cyan">Learn About HALU™ →</a>
     </div>
 
-    <div class="product-card zonar">
+    <div class="product-card zonar reveal">
       <div class="product-card-tag">🖥️ Enterprise upgrade · Full platform</div>
       <div class="product-card-name">Zonar OS™</div>
       <div class="product-card-desc">The AI operating platform that powers HALU™ — and every AI workflow in your business. Built for enterprises that need deep integrations, custom AI models and enterprise-grade infrastructure.</div>
       <ul class="product-card-features">
         <li>Full AI operating system for your business</li>
-        <li>Deep CRM, ERP & analytics integrations</li>
-        <li>Custom AI model training & tuning</li>
+        <li>Deep CRM, ERP &amp; analytics integrations</li>
+        <li>Custom AI model training &amp; tuning</li>
         <li>Multi-department workflow orchestration</li>
         <li>White-label licensing available</li>
-        <li>SLA guarantee & dedicated team</li>
+        <li>SLA guarantee &amp; dedicated team</li>
       </ul>
       <div class="product-card-price">Contact us for pricing</div>
       <div class="product-card-price-sub">Scoped to your business · includes HALU™ Pro</div>
@@ -434,40 +523,34 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   </div>
 </section>
 
-<!-- COMPARISON TABLE -->
+<!-- COMPARISON CARDS -->
 <section class="section" id="compare">
   <p class="eyebrow">SIDE BY SIDE</p>
   <h2 class="section-title">HALU™ vs Zonar OS™ —<br>which do you need?</h2>
   <p class="section-sub">The short answer: start with HALU™. Upgrade to Zonar OS™ when you're ready to deploy a full enterprise AI platform.</p>
 
-  <div class="compare-wrap">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th><div class="col-hdr"><span style="font-size:16px">⚡</span> HALU™</div></th>
-          <th><div class="col-hdr"><span style="font-size:16px">🖥️</span> Zonar OS™</div></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>What it is</td><td>Autonomous AI agent</td><td>AI operating platform</td></tr>
-        <tr><td>Primary buyer</td><td>CEO / Operations lead</td><td>CTO / IT / Enterprise team</td></tr>
-        <tr><td>Deployment time</td><td>2–4 weeks</td><td>4–8 weeks</td></tr>
-        <tr><td>Runs on your existing tools</td><td>✓ Yes — no rip-and-replace</td><td>Deep integrations required</td></tr>
-        <tr><td>Department monitoring</td><td>✓ Real-time, all departments</td><td>✓ Full enterprise scope</td></tr>
-        <tr><td>Revenue leak detection</td><td>✓ Core feature</td><td>✓ Enhanced with full data access</td></tr>
-        <tr><td>Action item generation</td><td>✓ Autonomous</td><td>✓ Automated across all workflows</td></tr>
-        <tr><td>Custom AI model training</td><td>—</td><td>✓ Enterprise feature</td></tr>
-        <tr><td>White-label licensing</td><td>Enterprise tier only</td><td>✓ Available</td></tr>
-        <tr><td>Pricing</td><td>Contact us</td><td>Contact us</td></tr>
-        <tr><td>Best for</td><td>Mid-size businesses ready to act now</td><td>Enterprises building an AI-powered organisation</td></tr>
-        <tr>
-          <td></td>
-          <td><a href="/halu/" style="display:inline-block;background:var(--cyan);color:#12172B;font-weight:800;font-size:13px;padding:10px 22px;border-radius:100px;">Start with HALU™ →</a></td>
-          <td><a href="/zonar-os/" style="display:inline-block;border:1px solid rgba(5,199,147,0.3);color:#374050;font-weight:700;font-size:13px;padding:10px 22px;border-radius:100px;">See Zonar OS™ →</a></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="cmp-grid reveal">
+    <div class="cmp-head">
+      <div>&nbsp;</div>
+      <div>⚡ HALU™</div>
+      <div>🖥️ Zonar OS™</div>
+    </div>
+    <div class="cmp-row"><div>What it is</div><div>Autonomous AI agent</div><div>AI operating platform</div></div>
+    <div class="cmp-row"><div>Primary buyer</div><div>CEO / Operations lead</div><div>CTO / IT / Enterprise team</div></div>
+    <div class="cmp-row"><div>Deployment time</div><div>2–4 weeks</div><div>4–8 weeks</div></div>
+    <div class="cmp-row"><div>Runs on your existing tools</div><div>✓ Yes — no rip-and-replace</div><div>Deep integrations required</div></div>
+    <div class="cmp-row"><div>Department monitoring</div><div>✓ Real-time, all departments</div><div>✓ Full enterprise scope</div></div>
+    <div class="cmp-row"><div>Revenue leak detection</div><div>✓ Core feature</div><div>✓ Enhanced with full data access</div></div>
+    <div class="cmp-row"><div>Action item generation</div><div>✓ Autonomous</div><div>✓ Automated across all workflows</div></div>
+    <div class="cmp-row"><div>Custom AI model training</div><div>—</div><div>✓ Enterprise feature</div></div>
+    <div class="cmp-row"><div>White-label licensing</div><div>Enterprise tier only</div><div>✓ Available</div></div>
+    <div class="cmp-row"><div>Pricing</div><div>Contact us</div><div>Contact us</div></div>
+    <div class="cmp-row"><div>Best for</div><div>Mid-size businesses ready to act now</div><div>Enterprises building an AI-powered organisation</div></div>
+    <div class="cmp-foot">
+      <div>&nbsp;</div>
+      <div><a href="/halu/" style="display:inline-block;background:var(--cyan);color:#fff;font-weight:800;font-size:13px;padding:10px 20px;border-radius:100px;">Start with HALU™ →</a></div>
+      <div><a href="/zonar-os/" style="display:inline-block;border:1px solid rgba(5,199,147,0.3);color:#374050;font-weight:700;font-size:13px;padding:10px 20px;border-radius:100px;">See Zonar OS™ →</a></div>
+    </div>
   </div>
 </section>
 
@@ -478,7 +561,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
   <p class="section-sub">Every Neural Horizons AI client starts with a direct conversation. Most are on HALU™ within 4 weeks. The best outcomes come when Zonar OS™ takes over the full platform.</p>
 
   <div class="funnel">
-    <div class="funnel-step">
+    <div class="funnel-step reveal">
       <div class="funnel-num">1</div>
       <div>
         <div class="funnel-title">Contact Lisa Warren</div>
@@ -487,7 +570,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
       </div>
     </div>
     <div class="funnel-arrow">↓</div>
-    <div class="funnel-step">
+    <div class="funnel-step reveal">
       <div class="funnel-num">2</div>
       <div>
         <div class="funnel-title">Deploy HALU™</div>
@@ -496,7 +579,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
       </div>
     </div>
     <div class="funnel-arrow">↓</div>
-    <div class="funnel-step">
+    <div class="funnel-step reveal">
       <div class="funnel-num">3</div>
       <div>
         <div class="funnel-title">Upgrade to HALU™ Pro</div>
@@ -505,7 +588,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
       </div>
     </div>
     <div class="funnel-arrow">↓</div>
-    <div class="funnel-step">
+    <div class="funnel-step reveal">
       <div class="funnel-num">4</div>
       <div>
         <div class="funnel-title">Deploy Zonar OS™</div>
@@ -585,7 +668,7 @@ footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;margin-bottom:36px;">
       <div>
         <p style="font-size:15px;font-weight:800;color:#12172B;margin:0 0 10px;">Neural Horizons AI</p>
-        <p style="font-size:13px;color:#6b7280;line-height:1.7;margin:0 0 16px;">Specialist AI & digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
+        <p style="font-size:13px;color:#6b7280;line-height:1.7;margin:0 0 16px;">Specialist AI &amp; digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
         <a href="mailto:lisawarren@neuralhorizonsai.com" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 18px;border-radius:9999px;font-weight:800;font-size:13px;text-decoration:none;">Contact Us</a>
       </div>
       <div>
@@ -629,6 +712,22 @@ function toggleFaq(el) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+(function(){
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    revealEls.forEach(function(el){ obs.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
 </script>
 </body>
 </html>
