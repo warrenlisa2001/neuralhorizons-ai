@@ -17,16 +17,6 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.neuralhorizonsai.com/blog/wednesday-ai-insights-22-july-2026/">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:video" content="https://www.youtube.com/embed/zzdCckEvMj0">
-<meta property="og:video:secure_url" content="https://www.youtube.com/embed/zzdCckEvMj0">
-<meta property="og:video:type" content="text/html">
-<meta property="og:video:width" content="1280">
-<meta property="og:video:height" content="720">
-<meta name="twitter:player" content="https://www.youtube.com/embed/zzdCckEvMj0">
-<meta name="twitter:player:width" content="1280">
-<meta name="twitter:player:height" content="720">
-<meta name="twitter:image" content="https://i.ytimg.com/vi/zzdCckEvMj0/hqdefault.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Sunset Deep House 2026 | Relaxing Melodic House","description":"Ambient background video for the Neural Horizons AI Wednesday AI Insights article hero.","thumbnailUrl":"https://i.ytimg.com/vi/zzdCckEvMj0/hqdefault.jpg","embedUrl":"https://www.youtube.com/embed/zzdCckEvMj0","contentUrl":"https://www.youtube.com/watch?v=zzdCckEvMj0","publisher":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com","logo":{"@type":"ImageObject","url":"https://www.neuralhorizonsai.com/images/logo-mark.png"}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -63,19 +53,7 @@
   .cta-btn{background:var(--grad);color:#04110c;font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:100px;text-decoration:none;white-space:nowrap;}
   @media (max-width:720px){ nav.links a:not(.cta-btn){display:none;} }
 
-  .article-head{padding:130px 0 64px;position:relative;overflow:hidden;background:#05050A;}
-  .hero-video-fx{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
-  .hero-video-wrap{position:absolute;inset:0;overflow:hidden}
-  .hero-bg-video{position:absolute;top:50%;left:50%;width:177.77vh;min-width:100%;height:56.25vw;min-height:100%;transform:translate(-50%,-50%);border:0}
-  .hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,10,.55) 0%, rgba(5,5,10,.72) 60%, rgba(5,5,10,.92) 100%)}
-  .hero-sound{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:600;padding:7px 14px;border-radius:100px;cursor:pointer;backdrop-filter:blur(6px);font-family:inherit}
-  .hero-sound:hover{border-color:#05C793}
-  .article-head>.hero-content{position:relative;z-index:2}
-  .article-head .tag:not(.accent){color:#C7CBD6;border-color:rgba(255,255,255,0.22)}
-  .article-head h1{color:#fff}
-  .article-head .dek{color:#D3D6E0}
-  .article-head .byline .name{color:#fff}
-  .article-head .byline .meta{color:#B8BCC8}
+  .article-head{padding:56px 0 32px;border-bottom:1px solid var(--phantom);}
   .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
   .tag{font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 12px;border-radius:100px;border:1px solid var(--phantom);color:var(--steel);}
   .tag.accent{border:none;background:var(--grad);color:#04110c;}
@@ -175,14 +153,6 @@
 </header>
 
 <div id="top" class="container article-head">
-  <div class="hero-video-fx" aria-hidden="true">
-    <div class="hero-video-wrap">
-      <iframe id="heroBgVideo" class="hero-bg-video" src="https://www.youtube.com/embed/zzdCckEvMj0?autoplay=1&mute=1&loop=1&playlist=zzdCckEvMj0&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1" title="Background video" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    </div>
-    <div class="hero-scrim"></div>
-  </div>
-  <button class="hero-sound" id="heroBgSoundToggle" type="button">Unmute</button>
-  <div class="hero-content">
   <div class="tag-row">
     <span class="tag accent">Wednesday AI Insights</span>
     <span class="tag">UAE</span>
@@ -201,37 +171,7 @@
       <div class="meta">Founder &amp; CEO, Neural Horizons AI · July 22, 2026</div>
     </div>
   </div>
-  </div>
 </div>
-<script>
-(function(){
-  var videoFrame = document.getElementById('heroBgVideo');
-  var soundBtn = document.getElementById('heroBgSoundToggle');
-  var muted = true;
-  if (videoFrame) {
-    var kickPlay = function(){
-      try {
-        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'mute', args:[]}), '*');
-        videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func:'playVideo', args:[]}), '*');
-      } catch (e) {}
-    };
-    videoFrame.addEventListener('load', function(){
-      kickPlay();
-      setTimeout(kickPlay, 800);
-      setTimeout(kickPlay, 2000);
-    });
-    document.addEventListener('click', kickPlay, {once:true});
-    document.addEventListener('scroll', kickPlay, {once:true});
-  }
-  if (soundBtn && videoFrame) {
-    soundBtn.addEventListener('click', function(){
-      muted = !muted;
-      videoFrame.contentWindow.postMessage(JSON.stringify({event:'command', func: muted ? 'mute' : 'unMute', args:[]}), '*');
-      soundBtn.textContent = muted ? 'Unmute' : 'Mute';
-    });
-  }
-})();
-</script>
 
 <div class="container article-body">
 
