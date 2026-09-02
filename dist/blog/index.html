@@ -67,6 +67,22 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .post-featured h2{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--slate);margin-bottom:12px;line-height:1.3;letter-spacing:-0.01em}
 .post-featured p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px}
+/* Image-led featured hero — extension of .post-featured used at top of blog */
+.post-featured.hero-featured{padding:0;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;gap:0;align-items:stretch;margin-bottom:32px}
+.post-featured.hero-featured .hf-media{position:relative;background:linear-gradient(135deg,#0a1726 0%,#14405e 60%,#0f2338 100%);min-height:280px;overflow:hidden}
+.post-featured.hero-featured .hf-media img{width:100%;height:100%;object-fit:cover;display:block;opacity:.88;transition:transform .5s ease,opacity .3s}
+.post-featured.hero-featured:hover .hf-media img{transform:scale(1.03);opacity:1}
+.post-featured.hero-featured .hf-badge{position:absolute;top:18px;left:18px;background:#d11e2e;color:#fff;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:3px;z-index:2;box-shadow:0 4px 14px rgba(209,30,46,.35)}
+.post-featured.hero-featured .hf-body{padding:36px 34px;display:flex;flex-direction:column;justify-content:center;background:var(--navy-light)}
+.post-featured.hero-featured .hf-eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.post-featured.hero-featured h2{font-size:30px;line-height:1.15;margin-bottom:14px;color:var(--slate);letter-spacing:-.015em}
+.post-featured.hero-featured p{font-size:15px;margin-bottom:20px;color:var(--muted)}
+.post-featured.hero-featured .hf-cta{display:inline-flex;align-items:center;gap:10px;background:#0a1726;color:#fff;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:11px 18px;border-radius:6px;align-self:flex-start;transition:background .18s}
+.post-featured.hero-featured:hover .hf-cta{background:#d11e2e}
+.post-featured.hero-featured .hf-meta{display:flex;gap:14px;margin-top:14px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;color:var(--slate-light);letter-spacing:.04em}
+.post-featured.hero-featured .hf-meta b{color:var(--slate);font-weight:700}
+@media(max-width:820px){.post-featured.hero-featured{grid-template-columns:1fr}.post-featured.hero-featured .hf-media{min-height:220px}.post-featured.hero-featured h2{font-size:24px}.post-featured.hero-featured .hf-body{padding:26px}}
+
 .post-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .post-date{font-size:13px;color:var(--accent);font-weight:600}
 .post-tag{background:var(--navy-lighter);padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted)}
@@ -170,7 +186,21 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 <section class="section">
   <div class="container">
 
-    <a href="/podcasts/" class="post-featured" style="margin-bottom:40px;">
+    <a href="/blog/the-ai-death-spiral/" class="post-featured hero-featured">
+      <div class="hf-media">
+        <span class="hf-badge">● New · Preview episode</span>
+        <img src="/images/blog-agentic-ai-hero.png" alt="" loading="eager">
+      </div>
+      <div class="hf-body">
+        <div class="hf-eyebrow">Podcast · Deep Dive</div>
+        <h2>The AI Death Spiral — the pattern I keep meeting</h2>
+        <p>Two years of watching companies stall in front of the very tool that would save them. Six signatures, three mechanics, a UAE clock — and the five-step rescue that actually works. Plus the 11-minute preview episode of <em>The Agentic</em>.</p>
+        <span class="hf-cta">Read the deep dive →</span>
+        <div class="hf-meta"><span><b>2 September 2026</b></span><span>· 15-minute read</span><span>· 🎙 11-min listen</span></div>
+      </div>
+    </a>
+
+        <a href="/podcasts/" class="post-featured" style="margin-bottom:40px;">
       <div class="post-badge"><span class="dot"></span> New — Podcasts</div>
       <h2>5 AI Podcasts Worth Your Time — Plus Lisa's Own, Launching 23 September</h2>
       <p>Curated, embedded episodes from Lex Fridman, Dwarkesh Podcast, No Priors, Hard Fork and AI at a16z — and the first look at Lisa Warren's own AI podcast.</p>
@@ -232,16 +262,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
     <!-- ARCHIVE GRID -->
     <div class="posts-grid">
-
-      <a href="/blog/the-ai-death-spiral/" class="post-card">
-        <div class="post-card-tag">Podcast · Deep Dive</div>
-        <h3>The AI Death Spiral — the pattern I keep meeting</h3>
-        <p>Two years of watching companies stall in front of the very tool that would save them. Six signatures, three mechanics, a UAE clock — and the five-step rescue that actually works. Plus the 11-minute preview episode of <em>The Agentic</em>.</p>
-        <div class="post-card-meta">
-          <span class="post-card-date">2 September 2026</span>
-          <span class="post-card-read">Read →</span>
-        </div>
-      </a>
 
       <a href="/blog/intelligence-more-valuable-than-information/" class="post-card">
         <div class="post-card-tag">Thought Leadership</div>
