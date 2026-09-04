@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One-Question Call — Neural Horizons AI</title>
+<meta name="description" content="One burning question about AI in your business. Three concrete outcomes in 72 hours: a defensible one-page answer, the board objection it pre-empts, and three named next-steps. If any is missing, you don't pay. AED 1,500. Delivered by Lisa Warren.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a1726;
+  --ink2:#10243c;
+  --page:#f2f6f9;
+  --card:#ffffff;
+  --leak:#d11e2e;
+  --leak-soft:#fbe9ea;
+  --water:#2f7fb8;
+  --water-soft:#e6f1f8;
+  --gold:#c9a53a;
+  --gold-soft:#f7f0dc;
+  --text:#16222e;
+  --muted:#5a6b7b;
+  --line:#dbe4ea;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --body:"Inter",-apple-system,system-ui,sans-serif;
+  --disp:"Archivo Expanded","Archivo Black",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--text);background:var(--page);line-height:1.65;font-size:16.5px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--leak);color:#fff}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+a{color:var(--water);text-decoration-color:var(--water);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--leak);text-decoration-color:var(--leak)}
+
+.topbar{background:var(--ink);color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.topbar .brand{font-weight:600;color:#fff;text-decoration:none;font-size:12.5px}
+.topbar .brand b{color:var(--water)}
+.topbar a{color:#dbe7f1;text-decoration:underline;text-underline-offset:3px}
+
+.hero{background:var(--ink);color:#eaf2f9;position:relative;overflow:hidden;padding:70px 0 60px}
+.hero::before{content:"";position:absolute;right:-100px;top:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,165,58,.18),transparent 70%);pointer-events:none}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink);font-family:var(--mono);font-weight:700;font-size:11.5px;letter-spacing:.14em;padding:6px 12px;text-transform:uppercase;margin-bottom:26px}
+.hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(34px,5.4vw,58px);line-height:1.03;letter-spacing:-.015em;text-transform:uppercase;max-width:20ch;margin-bottom:22px}
+.hero h1 .gld{color:var(--gold)}
+.hero h1 .blu{color:var(--water)}
+.hero h1 .red{color:var(--leak)}
+.hero .dek{font-size:clamp(17px,1.9vw,20px);max-width:64ch;color:#c8dced;font-weight:500;margin-bottom:32px}
+.hero .dek b{color:#fff}
+.price-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.price{font-family:var(--disp);font-size:44px;font-weight:900;color:#fff;line-height:1}
+.price .cur{font-size:22px;color:var(--gold);margin-right:4px;font-weight:700}
+.price-note{font-family:var(--mono);font-size:12.5px;color:#a9c5dc;letter-spacing:.05em}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--leak);color:#fff;font-family:var(--disp);font-weight:800;font-size:16px;letter-spacing:.04em;padding:16px 28px;text-decoration:none;text-transform:uppercase;transition:all .15s}
+.cta:hover{background:#fff;color:var(--ink);text-decoration:none}
+.cta-secondary{color:#c8dced;font-family:var(--mono);font-size:13px;margin-left:18px;text-decoration:underline}
+
+.section{padding:70px 0;border-bottom:1px solid var(--line)}
+.section h2{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px;color:var(--ink)}
+.section h2 .accent{color:var(--leak)}
+.section h2 .gld{color:var(--gold)}
+.section p{font-size:17px;max-width:64ch;margin-bottom:16px;color:var(--text)}
+.section p.big{font-size:19px;color:var(--ink)}
+.section p b{color:var(--ink)}
+
+.kpi{background:linear-gradient(180deg,#fff 0%,var(--gold-soft) 100%);padding:70px 0;border-bottom:1px solid var(--line)}
+.kpi .lead{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--leak);font-weight:700;margin-bottom:14px}
+.kpi h2{font-family:var(--disp);font-weight:900;font-size:clamp(28px,3.8vw,42px);line-height:1.05;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:14px;color:var(--ink);max-width:22ch}
+.kpi h2 .accent{color:var(--leak)}
+.kpi .subline{font-size:19px;color:var(--ink);margin-bottom:36px;max-width:62ch}
+.kpi .subline b{color:var(--leak)}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:34px}
+@media(max-width:760px){.kpi-grid{grid-template-columns:1fr}}
+.kpi-card{background:#fff;border-left:5px solid var(--leak);padding:26px 22px;box-shadow:0 6px 18px rgba(10,23,38,.06)}
+.kpi-card:nth-child(2){border-left-color:var(--water)}
+.kpi-card:nth-child(3){border-left-color:var(--gold)}
+.kpi-card .badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;font-weight:700}
+.kpi-card h3{font-family:var(--disp);font-weight:800;font-size:20px;line-height:1.15;text-transform:uppercase;color:var(--ink);margin-bottom:12px;letter-spacing:-.005em}
+.kpi-card p{font-size:15px;color:var(--text);margin-bottom:0}
+.guarantee-box{background:var(--ink);color:#fff;padding:34px 32px;border-top:4px solid var(--gold);margin-top:8px}
+.guarantee-box .g-lead{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;display:block}
+.guarantee-box p{font-size:19px;color:#fff;max-width:none;margin-bottom:0;line-height:1.5}
+.guarantee-box p b{color:var(--gold);font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.02em}
+
+.vs{background:var(--ink);color:#eaf2f9;padding:70px 0}
+.vs h2{color:#fff;font-family:var(--disp);font-weight:900;font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;letter-spacing:-.01em;margin-bottom:12px;line-height:1.05}
+.vs h2 .accent{color:var(--gold)}
+.vs .sub{color:#a9c5dc;font-size:16px;margin-bottom:34px;max-width:64ch;font-family:var(--mono);letter-spacing:.02em}
+.vs table{width:100%;border-collapse:collapse;background:#0f2137;font-size:15px}
+.vs th{background:var(--ink2);color:var(--gold);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:16px 14px;text-align:left;border-bottom:2px solid #1a2f47}
+.vs th:nth-child(1){width:44%}
+.vs th:nth-child(2){width:22%;text-align:center;color:#a9c5dc}
+.vs th:nth-child(3){width:34%;text-align:center;color:var(--gold)}
+.vs td{padding:14px;vertical-align:top;color:#c8dced;border-bottom:1px solid #1a2f47}
+.vs td:nth-child(2),.vs td:nth-child(3){text-align:center;font-size:14.5px}
+.vs td:nth-child(1){color:#fff}
+.vs .yes{color:var(--gold);font-weight:700}
+.vs .no{color:var(--leak);font-weight:700}
+.vs .warn{color:#e8a63a;font-weight:600}
+.vs tr:last-child td{border-bottom:0}
+.vs .honest{font-family:var(--mono);font-size:12.5px;color:#8fa8be;margin-top:20px;font-style:italic;letter-spacing:.02em}
+
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+@media(max-width:760px){.what-grid{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--water);padding:26px 22px}
+.step .n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--water);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.step h3{font-family:var(--disp);font-weight:800;font-size:19px;line-height:1.2;text-transform:uppercase;margin-bottom:12px;color:var(--ink);letter-spacing:-.005em}
+.step p{font-size:15px;color:var(--text);margin-bottom:0}
+.step:nth-child(2){border-top-color:var(--gold)}
+.step:nth-child(3){border-top-color:var(--leak)}
+
+.who{background:var(--gold-soft);padding:60px 0}
+.who h2{color:var(--ink)}
+.who h2 .accent{color:var(--leak)}
+.who ul{list-style:none;padding:0;margin-top:22px;max-width:60ch}
+.who li{padding:12px 0;border-bottom:1px dashed #d4c68a;font-size:16.5px;color:var(--ink)}
+.who li:last-child{border-bottom:0}
+.who li::before{content:"→ ";color:var(--leak);font-weight:800;margin-right:6px}
+
+.about{background:var(--card);padding:60px 0}
+.about .box{display:grid;grid-template-columns:120px 1fr;gap:26px;align-items:flex-start}
+@media(max-width:600px){.about .box{grid-template-columns:1fr}}
+.about .av{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--water),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--disp);font-weight:900;font-size:44px}
+.about h3{font-family:var(--disp);font-weight:800;font-size:22px;text-transform:uppercase;margin-bottom:10px;color:var(--ink);letter-spacing:-.005em}
+.about p{font-size:16px;margin-bottom:14px}
+.about .creds{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.7;margin-top:8px}
+
+.scarce{background:var(--leak-soft);border-top:3px solid var(--leak);border-bottom:3px solid var(--leak);padding:34px 0}
+.scarce .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:space-between}
+.scarce .txt{font-family:var(--mono);font-size:13.5px;color:var(--ink);max-width:56ch;letter-spacing:.02em}
+.scarce .txt b{font-family:var(--disp);color:var(--leak);font-size:16px;text-transform:uppercase;letter-spacing:.04em}
+.scarce .cta-lg{background:var(--leak);color:#fff;font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:.05em;padding:14px 24px;text-decoration:none;text-transform:uppercase}
+.scarce .cta-lg:hover{background:var(--ink);color:#fff;text-decoration:none}
+
+.faq{background:var(--page);padding:60px 0}
+.faq h2{color:var(--ink)}
+.faq h2 .accent{color:var(--water)}
+.faq-item{border-bottom:1px solid var(--line);padding:22px 0}
+.faq-item:last-child{border-bottom:0}
+.faq-item h4{font-family:var(--disp);font-size:17px;text-transform:uppercase;color:var(--ink);margin-bottom:10px;letter-spacing:-.005em}
+.faq-item p{font-size:15.5px;color:var(--text);max-width:70ch}
+
+.final{background:var(--ink);color:#fff;padding:80px 0 90px;text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(47,127,184,.14),transparent 70%);pointer-events:none}
+.final h2{font-family:var(--disp);font-weight:900;font-size:clamp(30px,4.4vw,48px);text-transform:uppercase;line-height:1.05;margin-bottom:22px;letter-spacing:-.01em;position:relative}
+.final h2 .accent{color:var(--gold)}
+.final p{font-size:18px;color:#c8dced;max-width:56ch;margin:0 auto 34px;position:relative}
+.final .cta-final{background:var(--gold);color:var(--ink);font-family:var(--disp);font-weight:900;font-size:18px;letter-spacing:.05em;padding:20px 44px;text-decoration:none;text-transform:uppercase;display:inline-block;transition:all .15s;position:relative}
+.final .cta-final:hover{background:#fff;color:var(--ink);text-decoration:none}
+.final .after{font-family:var(--mono);font-size:12.5px;color:#8fa8be;margin-top:22px;position:relative}
+
+.foot{background:var(--ink2);color:#8fa8be;font-family:var(--mono);font-size:12px;letter-spacing:.05em;padding:26px 0}
+.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot a{color:#c8dced}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="/" class="brand">Neural Horizons <b>AI</b></a>
+    <span>Founded by Lisa Warren · Dubai, UAE</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">The One-Question Call · 5 slots this week</div>
+    <h1>One <span class="gld">burning question</span> about AI. <span class="red">Three defensible outcomes</span> in 72 hours.</h1>
+    <p class="dek">You have an AI decision to make. Your board is asking. ChatGPT gives you an answer that sounds fine — until you have to defend it. <b>Book the One-Question Call and by 72 hours from now, you will have three specific things you can put in front of your board on Tuesday. If any of them is missing, you don't pay.</b></p>
+    <div class="price-row">
+      <div class="price"><span class="cur">AED</span>1,500</div>
+      <div class="price-note">Fixed price · Money-back guarantee · Delivered in 72 hours</div>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#f0bc998391b09e958582919c989f82998a9f9e839199de939f9dcf8385929a959384cdb29f9f9b999e97d5c2c0d5b3c2d5b2c7d5c2c0bf9e95dda185958384999f9ed5c2c0b3919c9cd6929f9489cdb899d5c2c0bc998391d5c2b3d5c0b1d5c0b1b9d5c2c794d5c2c09c999b95d5c2c0849fd5c2c0929f9f9bd5c2c091d5c2c0bf9e95dda185958384999f9ed5c2c0b3919c9cded5c0b1d5c0b1bd89d5c2c09f9e95d5c2c08185958384999f9ed5c3b1d5c0b1d5c5b284898095d5c2c0899f8582d5c2c09f9e95d5c2c08380959399969993d5c2c0b1b9dd82959c91849594d5c2c08185958384999f9ed5c2c098958295d5c2c0d5b5c2d5c8c0d5c9c4d5c2c09295d5c2c08380959399969993d5c5b4d5c0b1d5c0b1bd89d5c2c0829f9c95d5c2c0d5c2c6d5c2c09f8297919e99839184999f9ed5c3b1d5c0b1d5c5b295de97ded5c2c0b29f918294d5c2c0bd959d929582d5c2b3d5c2c0a5b1b5d5c2c0999e838582919e9395d5c2c0939fd5c2c0d5b3c2d5b2c7d5c2c0b3b5bfd5c2b3d5c2c09d9994dd9d91829b9584d5c2c096999e84959398d5c5b4d5c0b1d5c0b1b19e89d5c2c0949591949c999e95d5c2c0b9d5c2c083989f859c94d5c2c09b9e9f87d5c2c091929f8584d5c3b1d5c0b1d5c5b295de97ded5c2c0929f918294d5c2c09d959584999e97d5c2c0a4859583949189d5c2c0c9d5c2c0a39580d5c2c0d5b3c2d5b2c7d5c2c09f82d5c2c0d5c2c29e9fd5c2c082858398d5c2c2d5c5b4d5c0b1d5c0b1b9d5c2c794d5c2c09c999b95d5c2c0849fd5c2c0809189d5c2c09289d5c3b1d5c2c0d5c5b292919e9bd5c2c08482919e83969582d5c2c0d5c2b6d5c2c0999e869f999395d5c2c09d95d5c5b4d5c0b1d5c0b1a498919e9bd5c2c0899f85ded5c0b1d5c5b2899f8582d5c2c09e919d95d5c5b4d5c0b1d5c5b2899f8582d5c2c09d9f92999c95d5c2c0d5c2b2c9c7c1d5c2c0dededed5c5b4" class="cta">Book The Call →</a>
+    <a href="#kpi" class="cta-secondary">See the three outcomes</a>
+  </div>
+</section>
+
+<section class="kpi" id="kpi">
+  <div class="wrap">
+    <div class="lead">The KPI — what you actually walk away with</div>
+    <h2>Three <span class="accent">defensible outcomes</span>. In writing. In 72 hours.</h2>
+    <p class="subline">Not "vibes from a good call." Three concrete deliverables that either exist or they don't. <b>If any is missing at the end of our 45 minutes, you don't pay.</b></p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="badge">Outcome 1 · Within 24h</span>
+        <h3>A defensible one-page written answer</h3>
+        <p>Your specific question, answered on one page as a PDF. Not a summary of Google. Not a hedge. A considered read you can literally send your board — with the trade-offs, the second-order effects, and where I'd push back on the way you framed it.</p>
+      </div>
+      <div class="kpi-card">
+        <span class="badge">Outcome 2 · Within 24h</span>
+        <h3>The board objection it pre-empts</h3>
+        <p>Named on the same page: the exact objection your board (or CFO, or investor, or regulator) will raise when they see the answer — and the specific response to it. So you never get caught cold in the meeting where it matters.</p>
+      </div>
+      <div class="kpi-card">
+        <span class="badge">Outcome 3 · Within 72h</span>
+        <h3>Three named next-steps</h3>
+        <p>Written down on the same page: three specific actions with a name, a priority, and a timeframe. Not "review your AI strategy." Actual, forwardable next-steps you can put in an email to your team by Friday afternoon.</p>
+      </div>
+    </div>
+
+    <div class="guarantee-box">
+      <span class="g-lead">The Guarantee</span>
+      <p><b>If any of the three outcomes above is not delivered by the end of our 45-minute call, you don't pay.</b> Full refund, same day, no argument. My time is my risk, not yours.</p>
+    </div>
+  </div>
+</section>
+
+<section class="vs">
+  <div class="wrap">
+    <h2>"Why not just ask <span class="accent">ChatGPT</span>?"</h2>
+    <p class="sub">Fair question — and I'll answer it honestly. Some things ChatGPT does well. Some things it can't do at all. This is the actual comparison.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>ChatGPT / Claude · free</th>
+          <th>Lisa · AED 1,500</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Give me a general framework for adopting agentic AI</td>
+          <td class="yes">✓ In 3 seconds</td>
+          <td class="yes">✓ Yes (slower — but that's not the point)</td>
+        </tr>
+        <tr>
+          <td>Tell me the specific objection MY board will raise — and how to answer it</td>
+          <td class="no">✗ Doesn't know your board</td>
+          <td class="yes">✓ 4 months of Death Spiral fieldwork with UAE boards</td>
+        </tr>
+        <tr>
+          <td>Reference the CBUAE / DFSA / SCA framework that applies to my sector</td>
+          <td class="warn">△ Approximate — sometimes hallucinated</td>
+          <td class="yes">✓ Verified, cited, correct</td>
+        </tr>
+        <tr>
+          <td>Tell me where I'm asking the wrong question</td>
+          <td class="no">✗ Optimises to agree with you</td>
+          <td class="yes">✓ Trained to disagree — that's the product</td>
+        </tr>
+        <tr>
+          <td>Give me anonymised patterns from 20+ orgs who tried this already</td>
+          <td class="no">✗ No access</td>
+          <td class="yes">✓ From MEA/APAC operating floors, live</td>
+        </tr>
+        <tr>
+          <td>Take accountability if the answer is wrong</td>
+          <td class="no">✗ No skin in the game</td>
+          <td class="yes">✓ Full refund guarantee (see above)</td>
+        </tr>
+        <tr>
+          <td>Sign a mutual NDA and treat the question as confidential</td>
+          <td class="warn">△ Depends on the tool</td>
+          <td class="yes">✓ NDA on request within 1 hour</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="honest">The honest answer: if the question is generic, use ChatGPT. If the question is one you have to defend in front of a board, a CFO, a regulator, or your own team on Monday — that's what this is for.</p>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>How it <span class="accent">actually</span> works</h2>
+    <p class="big">Three steps. No sales call. No discovery workshop. No 12-slide "framework."</p>
+    <div class="what-grid">
+      <div class="step">
+        <div class="n">Step 1 · You book</div>
+        <h3>Send your question + book</h3>
+        <p>Click Book — a pre-filled email opens. Add your one specific AI-related question, your role, and any deadline. Reply and I send back an invoice with my Mashreq IBAN. Payment same-day by UAE bank transfer, clearing in hours.</p>
+      </div>
+      <div class="step">
+        <div class="n">Step 2 · Within 24 hours</div>
+        <h3>The written page arrives</h3>
+        <p>You receive the one-page PDF with all three outcomes: the answer, the pre-empted board objection, and the three next-steps. Ready to read before we meet.</p>
+      </div>
+      <div class="step">
+        <div class="n">Step 3 · Within 72 hours</div>
+        <h3>45 minutes on Zoom</h3>
+        <p>We walk through the page together. You bring your follow-up questions. I bring the pattern-match. Recording sent afterwards — for you or your board. If any of the three outcomes is missing at the end of the call, I refund you same-day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap">
+    <h2>The One-Question Call is <span class="accent">for you</span> if</h2>
+    <ul>
+      <li>You've been asked to present on AI at the next board meeting and you're not sure what to say</li>
+      <li>Your team keeps pitching agentic AI use cases and you can't tell which one is real</li>
+      <li>Your CFO is asking why the AI budget hasn't produced ROI — you need one honest sentence to say back</li>
+      <li>You're in a regulated sector (finance, healthcare, wealth, insurance) and the compliance-vs-speed question is keeping you up</li>
+      <li>You're a founder and your investors are asking about your "AI moat" — and you don't have one yet</li>
+      <li>You've read the Death Spiral piece and want to know which of the six patterns is showing up in your own org</li>
+    </ul>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="box">
+      <div class="av">LW</div>
+      <div>
+        <h3>Delivered by Lisa Warren</h3>
+        <p>Founder of Neural Horizons AI. 15+ years leading enterprise growth, cybersecurity marketing, and digital transformation across MEA, APAC and Europe.</p>
+        <p>Author of <a href="/blog/the-ai-death-spiral/">The AI Death Spiral</a> — the six patterns behind why AI stalls inside intelligent organisations.</p>
+        <div class="creds">SecurityHQ MEA/APAC · Amundi · CSP Group · currently advising a UAE single-family office on agentic AI adoption.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scarce">
+  <div class="wrap">
+    <div class="txt"><b>5 slots this week</b> — one per weekday. I deliver each personally, without a team behind me. When the 5 are booked, the page shows sold-out.</div>
+    <a href="/cdn-cgi/l/email-protection#e0ac899381a08e859592818c888f92899a8f8e938189ce838f8ddf9395828a858394dda28f8f8b898e87c5d2d0c5a3d2c5a2d7c5d2d0af8e85cdb195859394898f8ec5d2d0a3818c8cc6828f8499dda889c5d2d0ac899381c5d2a3c5d0a1c5d0a1a9c5d2d784c5d2d08c898b85c5d2d0948fc5d2d0828f8f8bc5d2d081c5d2d0af8e85cdb195859394898f8ec5d2d0a3818c8ccec5d0a1c5d0a1ad99c5d2d08f8e85c5d2d09195859394898f8ec5d3a1c5d0a1c5d5a294999085c5d2d0998f9592c5d2d08f8e85c5d2d09390858389868983c5d2d0a1a9cd92858c81948584c5d2d09195859394898f8ec5d2d088859285c5d2d0c5a5d2c5d8d0c5d9d4c5d2d08285c5d2d09390858389868983c5d5a4c5d0a1c5d0a1ad99c5d2d0928f8c85c5d2d0c5d2d6c5d2d08f9287818e89938194898f8ec5d3a1c5d0a1c5d5a285ce87cec5d2d0a28f819284c5d2d0ad858d828592c5d2a3c5d2d0b5a1a5c5d2d0898e939592818e8385c5d2d0838fc5d2d0c5a3d2c5a2d7c5d2d0a3a5afc5d2a3c5d2d08d8984cd8d81928b8594c5d2d086898e94858388c5d5a4c5d0a1c5d0a1a18e99c5d2d0848581848c898e85c5d2d0a9c5d2d093888f958c84c5d2d08b8e8f97c5d2d081828f9594c5d3a1c5d0a1c5d5a285ce87cec5d2d0828f819284c5d2d08d858594898e87c5d2d0b4958593848199c5d2d0d9c5d2d0b38590c5d2d0c5a3d2c5a2d7c5d2d08f92c5d2d0c5d2d28e8fc5d2d092959388c5d2d2c5d5a4c5d0a1c5d0a1a9c5d2d784c5d2d08c898b85c5d2d0948fc5d2d0908199c5d2d08299c5d3a1c5d2d0c5d5a282818e8bc5d2d09492818e93868592c5d2d0c5d2a6c5d2d0898e968f898385c5d2d08d85c5d5a4c5d0a1c5d0a1b488818e8bc5d2d0998f95cec5d0a1c5d5a2998f9592c5d2d08e818d85c5d5a4c5d0a1c5d5a2998f9592c5d2d08d8f82898c85c5d2d0c5d2a2d9d7d1c5d2d0cececec5d5a4" class="cta-lg">Book Your Slot →</a>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Fair <span class="accent">questions</span></h2>
+    <div class="faq-item">
+      <h4>What if the answer doesn't fit on one page?</h4>
+      <p>Then it's not a One-Question Call — it's a <a href="/blog/the-ai-death-spiral/#board-room-read">Board Room Read</a> (AED 7,500, 5-page written diagnostic on your specific board material, 72h). Book this if you know your question fits in one page. If it doesn't, email me and I'll point you to the right thing.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What kind of questions actually work?</h4>
+      <p>"How should I frame the AI conversation for our board next week?" · "Is our AI vendor selling us the right thing?" · "Where should I draw the line between AI experimentation and governance?" · "How do I answer 'what's our AI strategy' in one paragraph?" · "Which of the Death Spiral patterns is showing up in my org?" — those all fit in one page. "Build me an AI strategy" does not.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What if I'm not happy with the written answer or the call?</h4>
+      <p>If any of the three outcomes above is missing by the end of the call, you don't pay. Full refund, same day, no argument. That's the whole guarantee — no clauses, no clawbacks.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Is my question confidential?</h4>
+      <p>Yes. I don't publish it, I don't share it with a team, and I don't put it into any public example. If you want a mutual NDA before you send it, reply to the payment receipt with the word "NDA" and I'll send one within an hour.</p>
+    </div>
+    <div class="faq-item">
+      <h4>How do I pay?</h4>
+      <p>UAE bank wire transfer to my Mashreq business account — IBAN sent by return email within 15 minutes of your booking. Funds clear same-day on UAE banking days (Sunday–Thursday). Card payments (Stripe) are being enabled and will follow shortly; for this launch week, bank transfer only.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Can I have more than 45 minutes if we're mid-flow?</h4>
+      <p>The call is scoped at 45 minutes because that's the honest amount of time three focused outcomes need. If we're mid-sentence I'll happily go 10 minutes over. If you want a longer engagement, that's the Board Room Read or a Zonar OS™ engagement — different products.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>One question. <span class="accent">Three outcomes.</span> Zero risk to you.</h2>
+    <p>The board meeting is on Tuesday. The team keeps asking. ChatGPT gave you an answer that sounds fine but you can't stand behind it. Let's just do this properly.</p>
+    <a href="/cdn-cgi/l/email-protection#a6eacfd5c7e6c8c3d3d4c7cacec9d4cfdcc9c8d5c7cf88c5c9cb99d5d3c4ccc3c5d29be4c9c9cdcfc8c183949683e59483e491839496e9c8c38bf7d3c3d5d2cfc9c8839496e5c7caca80c4c9c2df9beecf839496eacfd5c78394e58396e78396e7ef839491c2839496cacfcdc3839496d2c9839496c4c9c9cd839496c7839496e9c8c38bf7d3c3d5d2cfc9c8839496e5c7caca888396e78396e7ebdf839496c9c8c3839496d7d3c3d5d2cfc9c88395e78396e78393e4d2dfd6c3839496dfc9d3d4839496c9c8c3839496d5d6c3c5cfc0cfc5839496e7ef8bd4c3cac7d2c3c2839496d7d3c3d5d2cfc9c8839496cec3d4c383949683e394839e96839f92839496c4c3839496d5d6c3c5cfc0cfc58393e28396e78396e7ebdf839496d4c9cac3839496839490839496c9d4c1c7c8cfd5c7d2cfc9c88395e78396e78393e4c388c188839496e4c9c7d4c2839496ebc3cbc4c3d48394e5839496f3e7e3839496cfc8d5d3d4c7c8c5c3839496c5c983949683e59483e491839496e5e3e98394e5839496cbcfc28bcbc7d4cdc3d2839496c0cfc8d2c3c5ce8393e28396e78396e7e7c8df839496c2c3c7c2cacfc8c3839496ef839496d5cec9d3cac2839496cdc8c9d1839496c7c4c9d3d28395e78396e78393e4c388c188839496c4c9c7d4c2839496cbc3c3d2cfc8c1839496f2d3c3d5c2c7df8394969f839496f5c3d683949683e59483e491839496c9d4839496839494c8c9839496d4d3d5ce8394948393e28396e78396e7ef839491c2839496cacfcdc3839496d2c9839496d6c7df839496c4df8395e78394968393e4c4c7c8cd839496d2d4c7c8d5c0c3d48394968394e0839496cfc8d0c9cfc5c3839496cbc38393e28396e78396e7f2cec7c8cd839496dfc9d3888396e78393e4dfc9d3d4839496c8c7cbc38393e28396e78393e4dfc9d3d4839496cbc9c4cfcac38394968394e49f91978394968888888393e2" class="cta-final">Book For AED 1,500 →</a>
+    <div class="after">Payment by bank transfer (same-day clearing) · Written page in 24h · 45-min call in 72h · Full refund if any outcome is missing</div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Neural Horizons AI · Dubai, UAE</span>
+    <span><a href="/">Home</a> · <a href="/blog/the-ai-death-spiral/">Death Spiral thesis</a> · <a href="/blog/the-spiral-scan/">Spiral Scan</a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
