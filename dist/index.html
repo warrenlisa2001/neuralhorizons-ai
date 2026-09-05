@@ -163,6 +163,38 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         </div>
     </div>
 </div>
+<script>
+(function(){
+  var track = document.getElementById('tickerTrack');
+  if(!track) return;
+  var OWN_ITEMS = [
+    {title:'Our take: UAE AI adoption has reached 84% — but execution is the real gap', url:'/blog/uae-70-percent-ai-adoption-execution-gap-2026/', source:'NH Insights', internal:true},
+    {title:'From agentic to autonomous: what changes for UAE & GCC businesses in 2026', url:'/blog/agentic-to-autonomous-2026/', source:'NH Insights', internal:true},
+    {title:'More weekly AI Insights from Neural Horizons AI', url:'/blog/', source:'read all', internal:true}
+  ];
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function buildSet(items, hidden){
+    var html = '';
+    items.forEach(function(it){
+      var attrs = 'href="' + esc(it.url) + '"' + (hidden ? ' tabindex="-1"' : '');
+      if(!it.internal){ attrs += ' target="_blank" rel="noopener"'; }
+      html += '<span class="ticker-item"><a ' + attrs + '>' + esc(it.title) + ' <em>— ' + esc(it.source) + '</em></a></span><span class="ticker-sep">&bull;</span>';
+    });
+    return html;
+  }
+  fetch('/api/news').then(function(r){ return r.ok ? r.json() : null; }).then(function(data){
+    if(!data || !data.items || !data.items.length) return;
+    var items = data.items.slice(0, 10).concat(OWN_ITEMS);
+    track.innerHTML =
+      '<span class="ticker-set">' + buildSet(items, false) + '</span>' +
+      '<span class="ticker-set" aria-hidden="true">' + buildSet(items, true) + '</span>';
+  }).catch(function(){ /* fetch failed — the static headlines already in the page stay put */ });
+})();
+</script>
 <style>
 body{padding-top:38px;}
 .ticker-bar{position:fixed;top:0;left:0;width:100%;height:38px;z-index:100;background:#0A0A0F;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;overflow:hidden;}
