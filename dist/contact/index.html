@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-        
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -29,11 +29,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="msvalidate.01" content="0DF985EB4023CF2522679038D9299517">
   <meta name="google-site-verification" content="ELlr5Y0mz6u5CGxtY5AZyL0VM_sdjuKSYjucWFtDTpk">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
     <!-- Primary Meta Tags -->
-    <title>Contact | Neural Horizons AI — Get in Touch</title>
+    <title>Contact | Neural Horizons AI — Start the Conversation</title>
     <meta name="title" content="Neural Horizons AI - Empowering Your Future with AI & Marketing Integration">
-    <meta name="description" content="Contact Neural Horizons AI. Email lisa@neuralhorizonsai.com to start the conversation.">
+    <meta name="description" content="Tell us about your business and what you're looking to solve. Neural Horizons AI reviews every inquiry personally and replies within one business day.">
     <meta name="keywords" content="AI Consulting, Digital Transformation, Marketing AI, Business Intelligence, AI Solutions, Machine Learning, Dubai AI, UAE Technology">
     <meta name="author" content="Lisa Warren">
     <meta name="robots" content="index,follow">
@@ -43,8 +43,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.neuralhorizonsai.com/contact/">
-    <meta property="og:title" content="Contact | Neural Horizons AI — Get in Touch">
-    <meta property="og:description" content="Contact Neural Horizons AI. Email lisa@neuralhorizonsai.com to start the conversation.">
+    <meta property="og:title" content="Contact | Neural Horizons AI — Start the Conversation">
+    <meta property="og:description" content="Tell us about your business and what you're looking to solve. Neural Horizons AI reviews every inquiry personally and replies within one business day.">
     <meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-home.jpg">
     <meta property="og:site_name" content="Neural Horizons AI">
     <meta property="og:locale" content="en_US">
@@ -65,7 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
-  
+
     <script type="application/ld+json">
       {
   "@context": "https://schema.org",
@@ -114,12 +114,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .mobile-menu.active { transform: translateX(0); }
 
             /* Form input focus styles */
-            .nhai-input:focus {
+            .nhai-input:focus,
+            .nhai-select:focus {
               outline: none;
               border-color: rgba(5,199,147,0.5) !important;
               box-shadow: 0 0 0 3px rgba(5,199,147,0.1);
             }
-            .nhai-input::placeholder { color: rgba(18,23,43,0.12); }
+            .nhai-input::placeholder { color: rgba(18,23,43,0.32); }
+            .nhai-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%235B6478' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+
+            /* Wizard */
+            .wiz-progress { display:flex; align-items:center; gap:8px; margin-bottom:30px; }
+            .wiz-dot { flex:1; height:4px; border-radius:9999px; background:rgba(18,23,43,0.1); overflow:hidden; }
+            .wiz-dot-fill { height:100%; width:0%; background:linear-gradient(135deg,#05C793,#7C3AED); transition:width .35s ease; }
+            .wiz-dot.is-done .wiz-dot-fill, .wiz-dot.is-active .wiz-dot-fill { width:100%; }
+            .wiz-step { display:none; }
+            .wiz-step.is-active { display:block; animation:wizIn .35s ease; }
+            @keyframes wizIn { from{opacity:0;transform:translateX(8px);} to{opacity:1;transform:translateX(0);} }
+            .wiz-step-label { font-size:0.72rem; font-weight:800; color:#05C793; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; }
+            .wiz-step-title { font-size:1.25rem; font-weight:800; color:#12172B; margin-bottom:22px; }
+            .wiz-field { margin-bottom:16px; }
+            .wiz-field label { display:block; font-size:0.9rem; font-weight:600; margin-bottom:8px; color:#374050; }
+            .wiz-field .req { color:#05C793; }
+            .wiz-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+            @media (max-width:520px) { .wiz-row { grid-template-columns:1fr; } }
+            @media (max-width:900px) { .contact-grid { grid-template-columns:1fr !important; gap:40px !important; } }
+            .wiz-nav { display:flex; gap:12px; margin-top:8px; }
+            .wiz-btn-next, .wiz-btn-submit { flex:1; background:linear-gradient(135deg,#05C793,#00CC6E); color:#12172B; padding:14px 24px; border-radius:50px; font-weight:700; font-size:1rem; border:none; cursor:pointer; font-family:'Manrope',sans-serif; transition:opacity 0.2s,transform 0.2s; }
+            .wiz-btn-next:hover, .wiz-btn-submit:hover { opacity:0.9; transform:translateY(-1px); }
+            .wiz-btn-back { background:transparent; border:1.5px solid rgba(18,23,43,0.15); color:#374050; padding:14px 22px; border-radius:50px; font-weight:700; font-size:0.95rem; cursor:pointer; font-family:'Manrope',sans-serif; }
+            .wiz-btn-back:hover { border-color:#05C793; color:#05C793; }
+            .wiz-error { display:none; color:#e35d5d; font-size:0.82rem; margin-top:-8px; margin-bottom:14px; }
+            .wiz-chip-group { display:flex; flex-wrap:wrap; gap:8px; }
+            .wiz-chip { border:1.5px solid #E7EAF3; background:#fff; color:#5B6478; padding:9px 16px; border-radius:9999px; font-size:0.85rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s ease; }
+            .wiz-chip:hover { border-color:#05C793; color:#05C793; }
+            .wiz-chip.is-selected { background:#12172B; border-color:#12172B; color:#fff; }
+            .wiz-success { display:none; text-align:center; padding:20px 0; }
+            .wiz-success-icon { width:64px; height:64px; border-radius:50%; background:rgba(5,199,147,0.12); border:2px solid #05C793; color:#05C793; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 20px; }
         </style>
 </head>
 <body>
@@ -144,7 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div style="height:1px;background:rgba(18,23,43,0.057);margin:6px 8px;"></div>
               <div style="padding:8px 12px 6px;font-size:0.65rem;font-weight:700;color:#4a5568;letter-spacing:0.1em;text-transform:uppercase;">Tier 2 — Strategy &amp; Transformation</div>
               <a href="/services/ai-strategy" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'"><span style="color:#05C793;font-size:0.8rem;">⬡</span><span style="color:#12172B;font-size:0.88rem;font-weight:600;">AI Strategy</span></a>
-              
+
               <div style="height:1px;background:rgba(18,23,43,0.057);margin:6px 8px;"></div>
               <div style="padding:8px 12px 6px;font-size:0.65rem;font-weight:700;color:#4a5568;letter-spacing:0.1em;text-transform:uppercase;">Tier 3 — Build &amp; Implementation</div>
               <a href="/agentic-ai" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(5,199,147,0.06)'" onmouseout="this.style.background='transparent'"><span style="color:#05C793;font-size:0.8rem;">⬡</span><span style="color:#12172B;font-size:0.88rem;font-weight:600;">Agentic AI Build</span></a>
@@ -171,7 +202,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Client Login
         </a>
-        <a href="mailto:lisa@neuralhorizonsai.com" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 22px;border-radius:9999px;font-weight:800;font-size:0.875rem;text-decoration:none;white-space:nowrap;letter-spacing:0.01em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Contact Us</a>
+        <a href="/contact/" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 22px;border-radius:9999px;font-weight:800;font-size:0.875rem;text-decoration:none;white-space:nowrap;letter-spacing:0.01em;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Contact Us</a>
       </div>
       <button id="mobileMenuBtn" class="lg:hidden text-slate-900 p-3 rounded-lg border border-slate-200 hover:border-gray-500 transition-all">
         <i class="fas fa-bars text-2xl"></i>
@@ -180,13 +211,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-full bg-white z-40 lg:hidden" style="display:none;overflow-y:auto;">
+    <div class="flex flex-col items-center justify-center h-full space-y-6" style="padding:100px 24px 40px;">
+        <button id="closeMobileMenu" class="absolute top-6 right-6 text-slate-900 text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="/" class="text-slate-900 text-2xl hover:text-emerald-600 transition">Home</a>
+        <a href="/services" class="text-slate-900 text-2xl hover:text-emerald-600 transition">Services</a>
+        <a href="/case-studies" class="text-slate-900 text-2xl hover:text-emerald-600 transition">Resources</a>
+        <a href="/about" class="text-slate-900 text-2xl hover:text-emerald-600 transition">About</a>
+        <a href="/faq" class="text-slate-900 text-2xl hover:text-emerald-600 transition">FAQ</a>
+        <a href="/contact/" class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-xl inline-flex items-center gap-2" style="background:linear-gradient(135deg,#3b82f6,#7c3aed);text-decoration:none;">Contact Us</a>
+    </div>
+</div>
+
 <!-- ── HERO ── -->
 <section style="background:linear-gradient(135deg,rgba(5,199,147,0.1) 0%,rgba(124,58,237,0.1) 100%);padding:140px 0 80px;">
   <div style="max-width:1200px;margin:0 auto;padding:0 24px;text-align:center;">
     <h1 style="font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:24px;line-height:1.2;">
-      <span style="background:linear-gradient(to right,#05C793,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Get in Touch</span>
+      <span style="background:linear-gradient(to right,#05C793,#7C3AED);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Let's Start the Conversation</span>
     </h1>
-    <p style="font-size:1.25rem;color:#5B6478;max-width:700px;margin:0 auto 40px;">Ready to transform your business? Book a call or send us a message below.</p>
+    <p style="font-size:1.25rem;color:#5B6478;max-width:700px;margin:0 auto 40px;">Tell us a bit about your business below, or book a free discovery call directly.</p>
     <a href="mailto:lisa@neuralhorizonsai.com"
        style="display:inline-flex;align-items:center;gap:12px;background:#05C793;color:#12172B;padding:18px 40px;border-radius:9999px;font-weight:900;font-size:1.1rem;text-decoration:none;box-shadow:0 0 40px rgba(5,199,147,0.35);transition:all 0.3s;"
        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 0 60px rgba(5,199,147,0.55)'"
@@ -200,7 +246,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- ── CONTACT SECTION ── -->
 <section style="padding:80px 0;background:#FFFFFF;">
   <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
 
       <!-- Left: Contact Info -->
       <div>
@@ -223,98 +269,279 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
         <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px;">
           <a href="https://wa.me/971585697562" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:14px 24px;border-radius:50px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="mailto:lisa@neuralhorizonsai.com" style="background:linear-gradient(135deg,#006BFF,#0052cc);color:#fff;padding:14px 24px;border-radius:50px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;">Contact Us</a>
+          <a href="mailto:lisa@neuralhorizonsai.com" style="background:linear-gradient(135deg,#006BFF,#0052cc);color:#fff;padding:14px 24px;border-radius:50px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;"><i class="fas fa-envelope"></i> Email Us</a>
         </div>
       </div>
 
-      <!-- Right: Contact Form → HubSpot API -->
+      <!-- Right: 3-Step Form -->
       <div style="background:linear-gradient(135deg,rgba(18,23,43,0.05),rgba(18,23,43,0.029));border:1px solid rgba(18,23,43,0.085);border-radius:16px;padding:40px;">
-        <h3 style="font-size:1.4rem;font-weight:700;margin-bottom:24px;">Send a Message</h3>
 
-        <form id="contact-form" novalidate>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:#374050;">Your Name</label>
-            <input type="text" id="cf-name" name="name" required placeholder="Lisa Warren" class="nhai-input"
-              style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
+        <div id="wiz-form-wrap">
+          <div class="wiz-progress">
+            <div class="wiz-dot is-active" data-dot="0"><div class="wiz-dot-fill"></div></div>
+            <div class="wiz-dot" data-dot="1"><div class="wiz-dot-fill"></div></div>
+            <div class="wiz-dot" data-dot="2"><div class="wiz-dot-fill"></div></div>
           </div>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:#374050;">Email Address</label>
-            <input type="email" id="cf-email" name="email" required placeholder="you@company.com" class="nhai-input"
-              style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
-          </div>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:#374050;">Phone (Optional)</label>
-            <input type="tel" id="cf-phone" name="phone" placeholder="+971 58 xxx xxxx" class="nhai-input"
-              style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
-          </div>
-          <div style="margin-bottom:16px;">
-            <label style="display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:#374050;">Message</label>
-            <textarea id="cf-message" name="message" required rows="5" placeholder="Tell us about your project..." class="nhai-input"
-              style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;resize:vertical;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;"></textarea>
-          </div>
-          <button type="submit" id="cf-submit"
-            style="background:linear-gradient(135deg,#05C793,#00CC6E);color:#12172B;padding:14px 32px;border-radius:50px;font-weight:700;font-size:1rem;border:none;cursor:pointer;width:100%;font-family:'Manrope',sans-serif;transition:opacity 0.2s,transform 0.2s;"
-            onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'"
-            onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
-            Send Message
-          </button>
+
+          <form id="contact-form" novalidate>
+
+            <!-- Step 1: About You -->
+            <div class="wiz-step is-active" data-step="0">
+              <div class="wiz-step-label">Step 1 of 3</div>
+              <div class="wiz-step-title">A little about you</div>
+              <div class="wiz-row">
+                <div class="wiz-field">
+                  <label>Your Name <span class="req">*</span></label>
+                  <input type="text" id="cf-name" name="name" placeholder="Lisa Warren" class="nhai-input"
+                    style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
+                </div>
+                <div class="wiz-field">
+                  <label>Work Email <span class="req">*</span></label>
+                  <input type="email" id="cf-email" name="email" placeholder="you@company.com" class="nhai-input"
+                    style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
+                </div>
+              </div>
+              <div class="wiz-row">
+                <div class="wiz-field">
+                  <label>Company Name <span class="req">*</span></label>
+                  <input type="text" id="cf-company" name="company" placeholder="Acme Corp" class="nhai-input"
+                    style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
+                </div>
+                <div class="wiz-field">
+                  <label>Phone (Optional)</label>
+                  <input type="tel" id="cf-phone" name="phone" placeholder="+971 58 xxx xxxx" class="nhai-input"
+                    style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;">
+                </div>
+              </div>
+              <div class="wiz-error" data-error="0">Please fill in your name, work email, and company name.</div>
+              <div class="wiz-nav">
+                <button type="button" class="wiz-btn-next" data-next="1">Next Step →</button>
+              </div>
+            </div>
+
+            <!-- Step 2: About Your Business -->
+            <div class="wiz-step" data-step="1">
+              <div class="wiz-step-label">Step 2 of 3</div>
+              <div class="wiz-step-title">About your business</div>
+              <div class="wiz-field">
+                <label>Company Size <span class="req">*</span></label>
+                <select id="cf-size" name="company_size" class="nhai-select"
+                  style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;">
+                  <option value="">Select one…</option>
+                  <option value="Just me">Just me</option>
+                  <option value="2-10 employees">2–10 employees</option>
+                  <option value="11-50 employees">11–50 employees</option>
+                  <option value="51-200 employees">51–200 employees</option>
+                  <option value="201-1000 employees">201–1,000 employees</option>
+                  <option value="1000+ employees">1,000+ employees</option>
+                </select>
+              </div>
+              <div class="wiz-field">
+                <label>Which area are you most interested in? <span class="req">*</span></label>
+                <div class="wiz-chip-group" id="cf-area-chips">
+                  <button type="button" class="wiz-chip" data-value="Agentic AI">Agentic AI</button>
+                  <button type="button" class="wiz-chip" data-value="Sustainability">Sustainability</button>
+                  <button type="button" class="wiz-chip" data-value="Supply Chain &amp; Process">Supply Chain &amp; Process</button>
+                  <button type="button" class="wiz-chip" data-value="Education">Education</button>
+                  <button type="button" class="wiz-chip" data-value="Healthcare">Healthcare</button>
+                  <button type="button" class="wiz-chip" data-value="FMCG">FMCG</button>
+                  <button type="button" class="wiz-chip" data-value="Finance">Finance</button>
+                  <button type="button" class="wiz-chip" data-value="Digital">Digital</button>
+                  <button type="button" class="wiz-chip" data-value="Strategic Planning">Strategic Planning</button>
+                  <button type="button" class="wiz-chip" data-value="Government Relations &amp; ESG">Government Relations &amp; ESG</button>
+                  <button type="button" class="wiz-chip" data-value="Not sure yet">Not sure yet</button>
+                </div>
+                <input type="hidden" id="cf-area" name="area_of_interest" value="">
+              </div>
+              <div class="wiz-error" data-error="1">Please select your company size and an area of interest.</div>
+              <div class="wiz-nav">
+                <button type="button" class="wiz-btn-back" data-back="0">← Back</button>
+                <button type="button" class="wiz-btn-next" data-next="2">Next Step →</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Your Project -->
+            <div class="wiz-step" data-step="2">
+              <div class="wiz-step-label">Step 3 of 3</div>
+              <div class="wiz-step-title">Your project</div>
+              <div class="wiz-field">
+                <label>What's the main challenge you're looking to solve? <span class="req">*</span></label>
+                <textarea id="cf-message" name="message" rows="4" placeholder="Tell us what's prompting you to look into agentic AI…" class="nhai-input"
+                  style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;resize:vertical;font-family:'Manrope',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;"></textarea>
+              </div>
+              <div class="wiz-field">
+                <label>Timeline</label>
+                <select id="cf-timeline" name="timeline" class="nhai-select"
+                  style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;">
+                  <option value="">Select one…</option>
+                  <option value="ASAP / within 1 month">ASAP / within 1 month</option>
+                  <option value="1-3 months">1–3 months</option>
+                  <option value="3-6 months">3–6 months</option>
+                  <option value="Just exploring">Just exploring</option>
+                </select>
+              </div>
+              <div class="wiz-field">
+                <label>How did you hear about us? (Optional)</label>
+                <select id="cf-source" name="referral_source" class="nhai-select"
+                  style="width:100%;background:rgba(18,23,43,0.05);border:1px solid rgba(18,23,43,0.12);color:#12172B;padding:12px 16px;border-radius:12px;font-size:1rem;box-sizing:border-box;font-family:'Manrope',sans-serif;">
+                  <option value="">Select one…</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Referral">Referral</option>
+                  <option value="Google Search">Google Search</option>
+                  <option value="Event or conference">Event or conference</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="wiz-error" data-error="2">Please tell us the main challenge you're looking to solve.</div>
+              <div class="wiz-nav">
+                <button type="button" class="wiz-btn-back" data-back="1">← Back</button>
+                <button type="submit" class="wiz-btn-submit" id="cf-submit">Send My Details</button>
+              </div>
+            </div>
+
+          </form>
+
           <p id="cf-status" style="display:none;margin-top:16px;font-size:0.9rem;text-align:center;padding:12px 16px;border-radius:8px;font-weight:500;"></p>
-        </form>
+        </div>
+
+        <!-- Success state -->
+        <div class="wiz-success" id="wiz-success">
+          <div class="wiz-success-icon"><i class="fas fa-check"></i></div>
+          <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:12px;">Thanks — that's in Lisa's inbox.</h3>
+          <p style="color:#5B6478;font-size:0.98rem;line-height:1.7;">Every inquiry is reviewed personally, and you'll hear back within one business day. If it's urgent, WhatsApp or call using the details on the left.</p>
+        </div>
 
         <script>
-        document.getElementById('contact-form').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const btn    = document.getElementById('cf-submit');
-          const status = document.getElementById('cf-status');
+        (function(){
+          var WEB3FORMS_ACCESS_KEY = "41ab1943-e2b9-4fe3-a13c-4b199f397504";
 
-          btn.disabled        = true;
-          btn.textContent     = 'Sending...';
-          btn.style.opacity   = '0.7';
-          status.style.display = 'none';
+          var form = document.getElementById('contact-form');
+          var steps = document.querySelectorAll('.wiz-step');
+          var dots = document.querySelectorAll('.wiz-dot');
+          var errors = document.querySelectorAll('.wiz-error');
+          var current = 0;
 
-          const payload = {
-            name:    document.getElementById('cf-name').value.trim(),
-            email:   document.getElementById('cf-email').value.trim(),
-            phone:   document.getElementById('cf-phone').value.trim(),
-            message: document.getElementById('cf-message').value.trim()
-          };
-
-          try {
-            const res  = await fetch('/api/contact', {
-              method:  'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body:    JSON.stringify(payload)
+          function showStep(idx){
+            steps.forEach(function(s){ s.classList.toggle('is-active', parseInt(s.getAttribute('data-step'),10) === idx); });
+            dots.forEach(function(d){
+              var i = parseInt(d.getAttribute('data-dot'),10);
+              d.classList.toggle('is-active', i === idx);
+              d.classList.toggle('is-done', i < idx);
             });
-            const data = await res.json();
-
-            status.style.display = 'block';
-            if (data.ok) {
-              status.style.background = 'rgba(5,199,147,0.1)';
-              status.style.border     = '1px solid rgba(5,199,147,0.3)';
-              status.style.color      = '#05C793';
-              status.textContent      = data.message;
-              this.reset();
-              if (typeof gtag !== 'undefined') {
-                gtag('event', 'form_submit', { event_category: 'Lead', event_label: 'Contact Form — /contact/' });
-              }
-            } else {
-              status.style.background = 'rgba(255,100,100,0.1)';
-              status.style.border     = '1px solid rgba(255,100,100,0.3)';
-              status.style.color      = '#ff6b6b';
-              status.textContent      = data.error || 'Something went wrong. Please try again.';
-            }
-          } catch(err) {
-            status.style.display    = 'block';
-            status.style.background = 'rgba(255,100,100,0.1)';
-            status.style.border     = '1px solid rgba(255,100,100,0.3)';
-            status.style.color      = '#ff6b6b';
-            status.textContent      = 'Network error. Please email us at support@neuralhorizonsai.com';
-          } finally {
-            btn.disabled      = false;
-            btn.textContent   = 'Send Message';
-            btn.style.opacity = '1';
+            current = idx;
           }
-        });
+
+          function showError(stepIdx, show){
+            errors.forEach(function(e){
+              if(parseInt(e.getAttribute('data-error'),10) === stepIdx){ e.style.display = show ? 'block' : 'none'; }
+            });
+          }
+
+          function validateStep(idx){
+            if(idx === 0){
+              var name = document.getElementById('cf-name').value.trim();
+              var email = document.getElementById('cf-email').value.trim();
+              var company = document.getElementById('cf-company').value.trim();
+              var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+              var ok = name.length > 0 && emailOk && company.length > 0;
+              showError(0, !ok);
+              return ok;
+            }
+            if(idx === 1){
+              var size = document.getElementById('cf-size').value;
+              var area = document.getElementById('cf-area').value;
+              var ok = size.length > 0 && area.length > 0;
+              showError(1, !ok);
+              return ok;
+            }
+            if(idx === 2){
+              var message = document.getElementById('cf-message').value.trim();
+              var ok = message.length > 0;
+              showError(2, !ok);
+              return ok;
+            }
+            return true;
+          }
+
+          document.querySelectorAll('[data-next]').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              if(!validateStep(current)) return;
+              showStep(parseInt(btn.getAttribute('data-next'),10));
+            });
+          });
+          document.querySelectorAll('[data-back]').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              showStep(parseInt(btn.getAttribute('data-back'),10));
+            });
+          });
+
+          document.querySelectorAll('#cf-area-chips .wiz-chip').forEach(function(chip){
+            chip.addEventListener('click', function(){
+              document.querySelectorAll('#cf-area-chips .wiz-chip').forEach(function(c){ c.classList.remove('is-selected'); });
+              chip.classList.add('is-selected');
+              document.getElementById('cf-area').value = chip.getAttribute('data-value');
+            });
+          });
+
+          form.addEventListener('submit', async function(e){
+            e.preventDefault();
+            if(!validateStep(2)) return;
+
+            var btn = document.getElementById('cf-submit');
+            var status = document.getElementById('cf-status');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            status.style.display = 'none';
+
+            var payload = {
+              access_key: WEB3FORMS_ACCESS_KEY,
+              subject: 'New inquiry from ' + document.getElementById('cf-name').value.trim() + ' (' + document.getElementById('cf-company').value.trim() + ')',
+              from_name: 'Neural Horizons AI Website',
+              name: document.getElementById('cf-name').value.trim(),
+              email: document.getElementById('cf-email').value.trim(),
+              company: document.getElementById('cf-company').value.trim(),
+              phone: document.getElementById('cf-phone').value.trim(),
+              company_size: document.getElementById('cf-size').value,
+              area_of_interest: document.getElementById('cf-area').value,
+              message: document.getElementById('cf-message').value.trim(),
+              timeline: document.getElementById('cf-timeline').value,
+              referral_source: document.getElementById('cf-source').value
+            };
+
+            try {
+              var res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              var data = await res.json();
+
+              if(data.success){
+                document.getElementById('wiz-form-wrap').style.display = 'none';
+                document.getElementById('wiz-success').style.display = 'block';
+                if (typeof gtag !== 'undefined') {
+                  gtag('event', 'form_submit', { event_category: 'Lead', event_label: 'Contact Form — /contact/' });
+                }
+              } else {
+                status.style.display = 'block';
+                status.style.background = 'rgba(255,100,100,0.1)';
+                status.style.border = '1px solid rgba(255,100,100,0.3)';
+                status.style.color = '#ff6b6b';
+                status.textContent = data.message || 'Something went wrong. Please try again.';
+                btn.disabled = false;
+                btn.textContent = 'Send My Details';
+              }
+            } catch(err){
+              status.style.display = 'block';
+              status.style.background = 'rgba(255,100,100,0.1)';
+              status.style.border = '1px solid rgba(255,100,100,0.3)';
+              status.style.color = '#ff6b6b';
+              status.textContent = 'Network error. Please email us at support@neuralhorizonsai.com';
+              btn.disabled = false;
+              btn.textContent = 'Send My Details';
+            }
+          });
+        })();
         </script>
       </div>
 
@@ -329,7 +556,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div>
         <h6 class="font-bold text-lg mb-4">Neural Horizons AI</h6>
         <p class="text-slate-500 text-sm leading-relaxed mb-4">Specialist AI &amp; digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
-        <a href="mailto:lisa@neuralhorizonsai.com" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 20px;border-radius:9999px;font-weight:800;font-size:0.85rem;text-decoration:none;">Contact Us</a>
+        <a href="/contact/" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:10px 20px;border-radius:9999px;font-weight:800;font-size:0.85rem;text-decoration:none;">Contact Us</a>
       </div>
       <div>
         <h6 class="font-bold text-lg mb-4">Quick Links</h6>
@@ -347,7 +574,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div>
         <h6 class="font-bold text-lg mb-4">Services</h6>
         <ul class="space-y-2">
-          <li><a href="mailto:lisa@neuralhorizonsai.com" class="text-slate-500 hover:text-emerald-600 transition text-sm">Contact Us</a></li>
+          <li><a href="/contact/" class="text-slate-500 hover:text-emerald-600 transition text-sm">Contact Us</a></li>
           <li><a href="/services/consultation" class="text-slate-500 hover:text-emerald-600 transition text-sm">Consultation</a></li>
           <li><a href="/services/ai-strategy" class="text-slate-500 hover:text-emerald-600 transition text-sm">AI Strategy</a></li>
           <li><a href="/agentic-ai" class="text-slate-500 hover:text-emerald-600 transition text-sm">Agentic AI Build</a></li>
@@ -373,6 +600,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   const navbar = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     navbar.style.boxShadow = window.scrollY > 50 ? '0 10px 30px rgba(18,23,43,0.114)' : 'none';
+  });
+
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMobileMenu = document.getElementById('closeMobileMenu');
+  mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.style.display = 'block';
+      setTimeout(() => mobileMenu.classList.add('active'), 10);
+  });
+  closeMobileMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      setTimeout(() => mobileMenu.style.display = 'none', 300);
+  });
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          setTimeout(() => mobileMenu.style.display = 'none', 300);
+      });
   });
 </script>
 </body>
