@@ -78,6 +78,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             .stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
             @media (max-width:900px){ .iw-grid{grid-template-columns:repeat(2,1fr);} .stat-grid{grid-template-columns:1fr;} }
             @media (max-width:640px){ .iw-grid{grid-template-columns:1fr;} }
+
+            /* Healthcare agent loop hero visual */
+            .loop-node{display:flex;gap:14px;padding-bottom:26px;position:relative;}
+            .loop-node:last-child{padding-bottom:0;}
+            .loop-line{position:absolute;left:15px;top:32px;bottom:-8px;width:2px;background:rgba(255,255,255,0.12);}
+            .loop-node:last-child .loop-line{display:none;}
+            .loop-circle{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.75rem;font-weight:800;color:#9ca3af;transition:all .4s ease;z-index:1;}
+            .loop-label{font-weight:800;color:#f3f4f6;font-size:0.95rem;margin-bottom:2px;transition:color .4s ease;}
+            .loop-node.is-active .loop-circle{background:linear-gradient(135deg,#05C793,#2563EB);border-color:transparent;color:#fff;box-shadow:0 0 0 6px rgba(5,199,147,0.15);}
+            .loop-node.is-active .loop-label{color:#05C793;}
+
+            /* Compare tabs + demo scenario chips */
+            .compare-tab, .demo-chip{background:#fff;border:1.5px solid #E7EAF3;border-radius:9999px;padding:10px 22px;font-weight:700;font-size:0.85rem;color:#5B6478;cursor:pointer;font-family:inherit;transition:all .18s ease;}
+            .compare-tab.is-active, .demo-chip.is-active{background:#12172B;border-color:#12172B;color:#fff;}
+            .compare-tab:hover:not(.is-active), .demo-chip:hover:not(.is-active){border-color:#05C793;color:#05C793;}
+            .cmp-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid rgba(18,23,43,0.07);}
+            .cmp-row:last-child{border-bottom:none;}
+            .cmp-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0;}
+            .cmp-icon.yes{background:rgba(5,199,147,0.15);color:#05C793;}
+            .cmp-icon.no{background:rgba(18,23,43,0.06);color:#9ca3af;}
+
+            /* How-it-works accordion */
+            .how-step{border:1px solid rgba(18,23,43,0.1);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .3s ease;}
+            .how-step.is-open{border-color:#05C793;}
+            .how-step-head{width:100%;display:flex;align-items:center;gap:16px;padding:20px 22px;background:#fff;border:none;cursor:pointer;text-align:left;font-family:inherit;}
+            .how-step-num{color:#05C793;font-weight:800;font-size:0.85rem;flex-shrink:0;}
+            .how-step-title{font-weight:800;color:#12172B;font-size:1.05rem;flex:1;}
+            .how-step-chevron{color:#9ca3af;transition:transform .3s ease;flex-shrink:0;font-size:0.85rem;}
+            .how-step.is-open .how-step-chevron{transform:rotate(180deg);color:#05C793;}
+            .how-step-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+            .how-step.is-open .how-step-body{max-height:240px;}
+            .how-step-body p{padding:0 22px 22px 54px;color:#5B6478;font-size:0.95rem;line-height:1.7;}
+            @media (max-width:640px){ .how-step-body p{padding-left:22px;} }
+
+            /* Live agent demo */
+            .demo-log-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);opacity:0;transition:opacity .35s ease;}
+            .demo-log-row.is-shown{opacity:1;}
+            .demo-log-check{width:20px;height:20px;border-radius:50%;background:rgba(5,199,147,0.15);border:1.5px solid #05C793;color:#05C793;display:flex;align-items:center;justify-content:center;font-size:0.62rem;flex-shrink:0;margin-top:2px;}
         </style>
 
     </head>
@@ -141,58 +179,143 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- Hero -->
   <section style="padding:150px 0 70px;background:linear-gradient(135deg, #05C79314 0%, #2563EB14 100%);position:relative;overflow:hidden;">
     <div style="position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,#05C79322 0%,transparent 70%);pointer-events:none;"></div>
-    <div class="container mx-auto px-6" style="max-width:900px;position:relative;z-index:1;">
-      <div style="font-size:0.85rem;color:#5B6478;margin-bottom:20px;">
-        <a href="/intelligence/" style="color:#05C793;text-decoration:none;font-weight:700;">Intelligence</a>
-        <span style="margin:0 8px;color:#9ca3af;">/</span>
-        <span style="color:#12172B;font-weight:600;">Healthcare</span>
+    <div class="container mx-auto px-6" style="max-width:1180px;position:relative;z-index:1;">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div style="font-size:0.85rem;color:#5B6478;margin-bottom:20px;">
+            <a href="/intelligence/" style="color:#05C793;text-decoration:none;font-weight:700;">Intelligence</a>
+            <span style="margin:0 8px;color:#9ca3af;">/</span>
+            <span style="color:#12172B;font-weight:600;">Healthcare</span>
+          </div>
+          <div style="display:inline-block;background:#05C79314;border:1px solid #05C79333;border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;">AI &amp; Agentic AI in Healthcare</div>
+          <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:20px;">Your hospital runs on paperwork. Let agents run the paperwork.</h1>
+          <p style="font-size:1.15rem;color:#5B6478;line-height:1.7;max-width:520px;">Agentic AI handles the pre-authorizations, claims, scheduling, and compliance work that quietly consumes your clinical staff's time and your margin.</p>
+        </div>
+        <div>
+          <div style="background:#12172B;border-radius:20px;padding:30px 28px;box-shadow:0 30px 80px rgba(18,23,43,0.22);">
+            <div style="color:#9ca3af;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:8px;"><span style="width:7px;height:7px;border-radius:50%;background:#05C793;display:inline-block;"></span>The Healthcare Agent Loop</div>
+            <div id="agent-loop">
+              <div class="loop-node" data-node="0">
+                <div class="loop-line"></div>
+                <div class="loop-circle">1</div>
+                <div><div class="loop-label">Verify</div><div style="color:#9ca3af;font-size:0.8rem;">Checks eligibility and assembles pre-auth requests.</div></div>
+              </div>
+              <div class="loop-node" data-node="1">
+                <div class="loop-line"></div>
+                <div class="loop-circle">2</div>
+                <div><div class="loop-label">Schedule</div><div style="color:#9ca3af;font-size:0.8rem;">Predicts no-shows and fills the calendar.</div></div>
+              </div>
+              <div class="loop-node" data-node="2">
+                <div class="loop-line"></div>
+                <div class="loop-circle">3</div>
+                <div><div class="loop-label">Resolve</div><div style="color:#9ca3af;font-size:0.8rem;">Classifies denials and auto-corrects claims.</div></div>
+              </div>
+              <div class="loop-node" data-node="3">
+                <div class="loop-circle">4</div>
+                <div><div class="loop-label">Document</div><div style="color:#9ca3af;font-size:0.8rem;">Assembles DHA/DOH audit-ready reports.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="display:inline-block;background:#05C79314;border:1px solid #05C79333;border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;">AI &amp; Agentic AI in Healthcare</div>
-      <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;color:#12172B;line-height:1.15;margin-bottom:20px;">Your hospital runs on paperwork. Let agents run the paperwork.</h1>
-      <p style="font-size:1.15rem;color:#5B6478;line-height:1.7;max-width:760px;">Agentic AI handles the pre-authorizations, claims, scheduling, and compliance work that quietly consumes your clinical staff's time and your margin.</p>
     </div>
   </section>
 
-  <!-- Intro -->
-  <section style="padding:60px 0 20px;background:#FFFFFF;">
-    <div class="container mx-auto px-6" style="max-width:820px;">
-      <p style="font-size:1.1rem;color:#374050;line-height:1.9;">Every hour a nurse spends chasing an insurer's pre-authorization, or a claims officer re-keys a rejected code, is an hour not spent on patient care or growth. In the UAE and wider GCC region, DHA and DOH reporting requirements, multi-payer claims formats, and dense provider networks add real administrative load on top of standard operations. Agentic AI doesn't diagnose or treat — it takes on the operational grind around care delivery: verifying eligibility, chasing denials, filling schedules, and keeping documentation audit-ready, so clinical teams and case managers stay focused on patients rather than portals.</p>
+  <!-- Manual vs PM Software vs Agentic -->
+  <section style="padding:70px 0 20px;background:#FFFFFF;">
+    <div class="container mx-auto px-6" style="max-width:900px;">
+      <div style="text-align:center;margin-bottom:8px;">
+        <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#12172B;margin-bottom:14px;">Not manual admin. Not just PM software. Something else.</h2>
+        <p style="color:#5B6478;font-size:1.02rem;max-width:640px;margin:0 auto 28px;">Click each one to see how they actually differ.</p>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;" id="compare-tabs">
+        <button type="button" class="compare-tab is-active" data-tab="manual">Manual Admin</button>
+        <button type="button" class="compare-tab" data-tab="pm">Practice Management Software</button>
+        <button type="button" class="compare-tab" data-tab="agentic">Agentic Healthcare Ops</button>
+      </div>
+      <div style="background:#F7F9FC;border:1px solid #E7EAF3;border-radius:20px;padding:36px;margin-top:26px;">
+        <div class="compare-content" data-content="manual">
+          <p style="color:#374050;font-size:1.02rem;line-height:1.8;margin-bottom:20px;">A nurse chases a pre-authorization by phone, a claims officer re-keys a rejected code by hand, and reports get assembled the week before an audit is due — one exception at a time.</p>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Submits pre-authorization requests automatically</span></div>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Predicts and fills no-show slots before they happen</span></div>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Classifies and auto-corrects claim denials</span></div>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Assembles regulatory documentation continuously</span></div>
+        </div>
+        <div class="compare-content" data-content="pm" style="display:none;">
+          <p style="color:#374050;font-size:1.02rem;line-height:1.8;margin-bottom:20px;">Scheduling and reminder systems can nudge patients about upcoming appointments — but they don't touch payer submissions, denial triage, or compliance documentation.</p>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Submits pre-authorization requests automatically</span></div>
+          <div class="cmp-row"><span class="cmp-icon yes">✓</span><span style="color:#374050;font-size:0.95rem;">Predicts and fills no-show slots before they happen</span></div>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Classifies and auto-corrects claim denials</span></div>
+          <div class="cmp-row"><span class="cmp-icon no">✕</span><span style="color:#374050;font-size:0.95rem;">Assembles regulatory documentation continuously</span></div>
+        </div>
+        <div class="compare-content" data-content="agentic" style="display:none;">
+          <p style="color:#374050;font-size:1.02rem;line-height:1.8;margin-bottom:20px;">Agents verify eligibility, submit pre-authorizations, classify and correct claim denials, and keep documentation audit-ready — so clinical teams and case managers stay focused on patients, not portals.</p>
+          <div class="cmp-row"><span class="cmp-icon yes">✓</span><span style="color:#374050;font-size:0.95rem;">Submits pre-authorization requests automatically</span></div>
+          <div class="cmp-row"><span class="cmp-icon yes">✓</span><span style="color:#374050;font-size:0.95rem;">Predicts and fills no-show slots before they happen</span></div>
+          <div class="cmp-row"><span class="cmp-icon yes">✓</span><span style="color:#374050;font-size:0.95rem;">Classifies and auto-corrects claim denials</span></div>
+          <div class="cmp-row"><span class="cmp-icon yes">✓</span><span style="color:#374050;font-size:0.95rem;">Assembles regulatory documentation continuously</span></div>
+        </div>
+      </div>
+      <p style="text-align:center;color:#9ca3af;font-size:0.85rem;margin-top:22px;">In the UAE and wider GCC region, DHA and DOH reporting requirements, multi-payer claims formats, and dense provider networks add real administrative load on top of standard operations — agentic AI absorbs that grind so clinical teams stay focused on patients.</p>
     </div>
   </section>
 
   <!-- How It Works -->
   <section style="padding:70px 0;background:#FFFFFF;">
-    <div class="container mx-auto px-6" style="max-width:1160px;">
-      <div style="text-align:center;margin-bottom:44px;">
+    <div class="container mx-auto px-6" style="max-width:820px;">
+      <div style="text-align:center;margin-bottom:40px;">
         <div style="display:inline-block;background:#05C79314;border:1px solid #05C79333;border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">How It Works</div>
-        <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:900;color:#12172B;">Five ways agentic AI shows up in healthcare.</h2>
+        <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:900;color:#12172B;margin-bottom:12px;">Five ways agentic AI shows up in healthcare.</h2>
+        <p style="color:#5B6478;font-size:1rem;">Click any step to see it in more depth.</p>
       </div>
-      <div class="iw-grid">
-              <div class="service-card" style="padding:30px;border-radius:16px;">
-                <div style="color:#05C793;font-weight:800;font-size:0.8rem;letter-spacing:0.08em;margin-bottom:12px;">01</div>
-                <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;">Pre-authorization request agents</h3>
-                <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;">Software agents assemble payer-specific documentation, check eligibility against policy rules, and submit pre-authorization requests automatically, flagging only cases missing required clinical codes or consent for human review.</p>
-              </div>
-              <div class="service-card" style="padding:30px;border-radius:16px;">
-                <div style="color:#05C793;font-weight:800;font-size:0.8rem;letter-spacing:0.08em;margin-bottom:12px;">02</div>
-                <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;">No-show prediction &amp; scheduling</h3>
-                <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;">Models score each upcoming appointment's no-show risk from history, distance, and payer type, then agents automatically overbook, send targeted reminders, or offer waitlist slots to keep clinics running full.</p>
-              </div>
-              <div class="service-card" style="padding:30px;border-radius:16px;">
-                <div style="color:#05C793;font-weight:800;font-size:0.8rem;letter-spacing:0.08em;margin-bottom:12px;">03</div>
-                <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;">Denial &amp; claims exception handling</h3>
-                <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;">Agents monitor claim status across payers, classify denial reasons, auto-correct common coding or documentation errors, and resubmit or escalate to a biller only when judgment is genuinely required.</p>
-              </div>
-              <div class="service-card" style="padding:30px;border-radius:16px;">
-                <div style="color:#05C793;font-weight:800;font-size:0.8rem;letter-spacing:0.08em;margin-bottom:12px;">04</div>
-                <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;">Consumables &amp; inventory forecasting</h3>
-                <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;">Agents track usage patterns across departments, predict stockouts for medical consumables and pharmacy items, and trigger reorders before shortages disrupt clinics or force emergency procurement at markup.</p>
-              </div>
-              <div class="service-card" style="padding:30px;border-radius:16px;">
-                <div style="color:#05C793;font-weight:800;font-size:0.8rem;letter-spacing:0.08em;margin-bottom:12px;">05</div>
-                <h3 style="font-size:1.15rem;font-weight:800;color:#12172B;margin-bottom:10px;">Regulatory documentation assembly</h3>
-                <p style="color:#5B6478;font-size:0.95rem;line-height:1.7;">Agents compile and format the recurring reports, incident logs, and audit trails DHA/DOH and payers require, cutting the manual assembly work that otherwise falls on already-stretched quality and compliance teams.</p>
-              </div>
+      <div id="how-accordion">
+        <div class="how-step is-open" data-step="0">
+          <button type="button" class="how-step-head"><span class="how-step-num">01</span><span class="how-step-title">Pre-authorization request agents</span><span class="how-step-chevron">▾</span></button>
+          <div class="how-step-body"><p>Software agents assemble payer-specific documentation, check eligibility against policy rules, and submit pre-authorization requests automatically, flagging only cases missing required clinical codes or consent for human review.</p></div>
+        </div>
+        <div class="how-step" data-step="1">
+          <button type="button" class="how-step-head"><span class="how-step-num">02</span><span class="how-step-title">No-show prediction &amp; scheduling</span><span class="how-step-chevron">▾</span></button>
+          <div class="how-step-body"><p>Models score each upcoming appointment's no-show risk from history, distance, and payer type, then agents automatically overbook, send targeted reminders, or offer waitlist slots to keep clinics running full.</p></div>
+        </div>
+        <div class="how-step" data-step="2">
+          <button type="button" class="how-step-head"><span class="how-step-num">03</span><span class="how-step-title">Denial &amp; claims exception handling</span><span class="how-step-chevron">▾</span></button>
+          <div class="how-step-body"><p>Agents monitor claim status across payers, classify denial reasons, auto-correct common coding or documentation errors, and resubmit or escalate to a biller only when judgment is genuinely required.</p></div>
+        </div>
+        <div class="how-step" data-step="3">
+          <button type="button" class="how-step-head"><span class="how-step-num">04</span><span class="how-step-title">Consumables &amp; inventory forecasting</span><span class="how-step-chevron">▾</span></button>
+          <div class="how-step-body"><p>Agents track usage patterns across departments, predict stockouts for medical consumables and pharmacy items, and trigger reorders before shortages disrupt clinics or force emergency procurement at markup.</p></div>
+        </div>
+        <div class="how-step" data-step="4">
+          <button type="button" class="how-step-head"><span class="how-step-num">05</span><span class="how-step-title">Regulatory documentation assembly</span><span class="how-step-chevron">▾</span></button>
+          <div class="how-step-body"><p>Agents compile and format the recurring reports, incident logs, and audit trails DHA/DOH and payers require, cutting the manual assembly work that otherwise falls on already-stretched quality and compliance teams.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Watch an agent work -->
+  <section style="padding:80px 0;background:#F7F9FC;border-top:1px solid #E7EAF3;border-bottom:1px solid #E7EAF3;">
+    <div class="container mx-auto px-6" style="max-width:980px;">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div style="display:inline-block;background:#05C79314;border:1px solid #05C79333;border-radius:9999px;padding:6px 16px;font-size:0.75rem;font-weight:700;color:#05C793;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">See It In Motion</div>
+        <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:900;color:#12172B;margin-bottom:12px;">Watch a healthcare agent actually work.</h2>
+        <p style="color:#5B6478;font-size:1rem;max-width:600px;margin:0 auto;">Pick a scenario, then run it. This is a simplified illustration of the mechanism, not a specific client's real system.</p>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:26px;" id="demo-scenarios">
+        <button type="button" class="demo-chip is-active" data-scenario="preauth">Submit a pre-authorization</button>
+        <button type="button" class="demo-chip" data-scenario="denial">Resolve a claim denial</button>
+        <button type="button" class="demo-chip" data-scenario="noshow">Fill a no-show slot</button>
+      </div>
+      <div style="background:#12172B;border-radius:20px;padding:30px 32px;max-width:720px;margin:0 auto;box-shadow:0 30px 80px rgba(18,23,43,0.18);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <div style="color:#9ca3af;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;" id="demo-scenario-label">Submit a pre-authorization</div>
+          <button type="button" id="demo-run-btn" style="background:linear-gradient(135deg,#05C793,#2563EB);color:#fff;border:none;padding:9px 20px;border-radius:9999px;font-weight:800;font-size:0.82rem;cursor:pointer;font-family:inherit;">Run &#9654;</button>
+        </div>
+        <div id="demo-log" style="min-height:220px;"></div>
+        <div id="demo-result" style="display:none;margin-top:16px;padding:15px 18px;background:rgba(5,199,147,0.12);border:1px solid rgba(5,199,147,0.3);border-radius:12px;color:#fff;font-size:0.9rem;font-weight:700;"></div>
+      </div>
+      <div style="text-align:center;margin-top:30px;">
+        <a href="mailto:lisa@neuralhorizonsai.com?subject=Healthcare%20-%20I%27d%20like%20to%20see%20this%20built%20for%20my%20practice" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;padding:14px 30px;border-radius:9999px;font-weight:800;font-size:0.95rem;text-decoration:none;">See this built for your practice &rarr;</a>
       </div>
     </div>
   </section>
@@ -312,6 +435,134 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     setTimeout(() => mobileMenu.style.display = 'none', 300);
                 });
             });
+        </script>
+
+        <script>
+        (function(){
+          // Healthcare agent loop hero animation
+          var loopNodes = document.querySelectorAll('#agent-loop .loop-node');
+          if(loopNodes.length){
+            var loopIdx = 0;
+            function loopTick(){
+              loopNodes.forEach(function(n,i){ n.classList.toggle('is-active', i===loopIdx); });
+              loopIdx = (loopIdx+1) % loopNodes.length;
+            }
+            loopTick();
+            setInterval(loopTick, 1700);
+          }
+
+          // Manual / PM Software / Agentic comparison tabs
+          var tabs = document.querySelectorAll('.compare-tab');
+          tabs.forEach(function(tab){
+            tab.addEventListener('click', function(){
+              tabs.forEach(function(t){ t.classList.remove('is-active'); });
+              tab.classList.add('is-active');
+              var target = tab.getAttribute('data-tab');
+              document.querySelectorAll('.compare-content').forEach(function(panel){
+                panel.style.display = (panel.getAttribute('data-content') === target) ? 'block' : 'none';
+              });
+            });
+          });
+
+          // How It Works accordion
+          var steps = document.querySelectorAll('.how-step');
+          steps.forEach(function(step){
+            step.querySelector('.how-step-head').addEventListener('click', function(){
+              var wasOpen = step.classList.contains('is-open');
+              steps.forEach(function(s){ s.classList.remove('is-open'); });
+              if(!wasOpen){ step.classList.add('is-open'); }
+            });
+          });
+
+          // Watch-a-healthcare-agent-work live demo
+          var scenarios = {
+            preauth: {
+              label: 'Submit a pre-authorization',
+              steps: [
+                'Goal received: pre-authorize an MRI for a referred patient',
+                "Checking eligibility and coverage against the payer's policy rules",
+                "Checking memory — this payer's documentation requirements for imaging",
+                "Assembling clinical codes and consent into the payer's submission format",
+                'Complete and consistent — submitting automatically, no human review needed'
+              ],
+              result: '&#10003; Pre-authorization submitted — 6 minutes, 0 approvals needed'
+            },
+            denial: {
+              label: 'Resolve a claim denial',
+              steps: [
+                'Payer returns claim #77321 denied — code mismatch on diagnosis',
+                'Cross-checking the clinical note against the submitted code',
+                "Checking memory — this payer's denial pattern for this procedure type",
+                'Correcting the code and resubmitting through the payer portal',
+                'Resubmission accepted — no biller time spent on this one'
+              ],
+              result: '&#10003; Denial resolved and resubmitted — 3 minutes, 0 approvals needed'
+            },
+            noshow: {
+              label: 'Fill a no-show slot',
+              steps: [
+                "Patient confirmed cancellation for tomorrow's 10:00am slot",
+                'Scoring the waitlist by urgency, distance, and payer match',
+                'Checking memory — which patients have accepted last-minute slots before',
+                'Offering the slot to the top-ranked waitlisted patient',
+                'Slot accepted — calendar refilled within minutes of the cancellation'
+              ],
+              result: '&#10003; Slot refilled — 4 minutes, 0 approvals needed'
+            }
+          };
+          var currentScenario = 'preauth';
+          var demoRunning = false;
+          var demoLog = document.getElementById('demo-log');
+          var demoResult = document.getElementById('demo-result');
+          var demoBtn = document.getElementById('demo-run-btn');
+          var demoLabel = document.getElementById('demo-scenario-label');
+
+          function renderIdle(){
+            if(!demoLog) return;
+            demoLog.innerHTML = '<div style="color:#6b7280;font-size:0.88rem;padding:44px 0;text-align:center;">Click &ldquo;Run&rdquo; to see this scenario execute.</div>';
+            demoResult.style.display = 'none';
+          }
+
+          function runDemo(){
+            if(demoRunning || !demoLog) return;
+            demoRunning = true;
+            demoBtn.textContent = 'Running…';
+            demoBtn.disabled = true;
+            demoLog.innerHTML = '';
+            var steps = scenarios[currentScenario].steps;
+            steps.forEach(function(stepText, i){
+              setTimeout(function(){
+                var row = document.createElement('div');
+                row.className = 'demo-log-row';
+                row.innerHTML = '<span class="demo-log-check">&#10003;</span><span style="color:#e5e7eb;font-size:0.92rem;line-height:1.5;">' + stepText + '</span>';
+                demoLog.appendChild(row);
+                requestAnimationFrame(function(){ row.classList.add('is-shown'); });
+                if(i === steps.length - 1){
+                  setTimeout(function(){
+                    demoResult.innerHTML = scenarios[currentScenario].result;
+                    demoResult.style.display = 'block';
+                    demoBtn.textContent = 'Run Again ▶';
+                    demoBtn.disabled = false;
+                    demoRunning = false;
+                  }, 500);
+                }
+              }, i * 650);
+            });
+          }
+
+          document.querySelectorAll('.demo-chip').forEach(function(chip){
+            chip.addEventListener('click', function(){
+              if(demoRunning) return;
+              document.querySelectorAll('.demo-chip').forEach(function(c){ c.classList.remove('is-active'); });
+              chip.classList.add('is-active');
+              currentScenario = chip.getAttribute('data-scenario');
+              demoLabel.textContent = scenarios[currentScenario].label;
+              renderIdle();
+            });
+          });
+          if(demoBtn){ demoBtn.addEventListener('click', runDemo); }
+          renderIdle();
+        })();
         </script>
 
 </body>
