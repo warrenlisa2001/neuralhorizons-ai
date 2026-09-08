@@ -174,13 +174,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-    <url>
-    <loc>https://www.neuralhorizonsai.com/blog/ai-death-spiral-new-evidence-2026/</loc>
-    <lastmod>2026-09-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
+     <url>
     <loc>https://www.neuralhorizonsai.com/blog/why-uae-businesses-fail-ai-agents-2026/</loc>
     <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
@@ -326,6 +320,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <a href="/blog/ai-death-spiral-new-evidence-2026/" class="post-featured">
+      <div class="post-badge"><span class="dot"></span> Latest — 8 September 2026</div>
+      <h2>The Data Just Caught Up To The Death Spiral</h2>
+      <p>New 2026 research from Publicis Sapient, MIT NANDA and RAND puts a number on the AI Death Spiral thesis — and the UAE's 16 September CBUAE deadline makes it non-optional.</p>
+      <div class="post-meta">
+        <span class="post-date">8 September 2026</span>
+        <span class="post-tag">The AI Death Spiral</span>
+        <span class="read-link">Read article →</span>
+      </div>
+    </a>
     <loc>https://www.neuralhorizonsai.com/blog/wednesday-ai-insights-22-july-2026/</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
