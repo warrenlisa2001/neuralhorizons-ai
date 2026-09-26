@@ -97,6 +97,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.neuralhorizonsai.com/case-studies/fmcg-agentic-ai-readiness/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.neuralhorizonsai.com/blog/</loc>
     <lastmod>2026-08-29</lastmod>
     <changefreq>daily</changefreq>
@@ -338,6 +344,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.neuralhorizonsai.com/blog/ai-agent-accountability-who-owns-the-decision/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.neuralhorizonsai.com/blog/we-evaluated-8-ai-agents-only-2-passed/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.neuralhorizonsai.com/blog/wednesday-ai-insights-22-july-2026/</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
@@ -469,5 +487,11 @@
     <lastmod>2026-08-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.neuralhorizonsai.com/her-horizons/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

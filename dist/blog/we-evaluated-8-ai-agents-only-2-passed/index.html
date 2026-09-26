@@ -1,215 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Data Just Caught Up To The Death Spiral | Neural Horizons AI</title>
-<meta name="description" content="New 2026 research from Publicis Sapient, MIT NANDA, and RAND puts a number on the AI Death Spiral thesis — and the UAE's 16 September CBUAE deadline makes the diagnosis non-optional.">
-
-<!-- Open Graph -->
-<meta property="og:type" content="article">
-<meta property="og:title" content="The Data Just Caught Up To The Death Spiral">
-<meta property="og:description" content="New 2026 research puts a number on the AI Death Spiral thesis — and the UAE's 16 September CBUAE deadline makes the diagnosis non-optional.">
-<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/ai-death-spiral-new-evidence-2026/">
+<title>We Evaluated 8 AI Agents for a Client. Only 2 Passed. | Neural Horizons AI</title>
+<meta name="description" content="A four-gate readiness framework for deciding which agentic AI ideas are actually ready to build — used on a real engagement where 8 candidate agents went in and only 2 came out cleared.">
+<link rel="canonical" href="https://www.neuralhorizonsai.com/blog/we-evaluated-8-ai-agents-only-2-passed/">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<meta property="og:title" content="We Evaluated 8 AI Agents for a Client. Only 2 Passed. | Neural Horizons AI">
+<meta property="og:description" content="A four-gate readiness framework for deciding which agentic AI ideas are actually ready to build — the same one used on a real engagement where only 2 of 8 candidate agents cleared.">
 <meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
-<meta property="og:site_name" content="Neural Horizons AI">
-
-<!-- Twitter -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/we-evaluated-8-ai-agents-only-2-passed/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Data Just Caught Up To The Death Spiral">
-<meta name="twitter:description" content="New 2026 research puts a number on the AI Death Spiral thesis — and the UAE's 16 September CBUAE deadline makes the diagnosis non-optional.">
-<meta name="twitter:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "The Data Just Caught Up To The Death Spiral",
-  "description": "New 2026 research from Publicis Sapient, MIT NANDA, and RAND puts a number on the AI Death Spiral thesis — and the UAE's 16 September CBUAE deadline makes the diagnosis non-optional.",
-  "datePublished": "2026-09-08",
-  "dateModified": "2026-09-08",
-  "author": {
-    "@type": "Person",
-    "name": "Lisa Warren",
-    "url": "https://www.neuralhorizonsai.com/about/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Neural Horizons AI",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.neuralhorizonsai.com/images/og-default.png"
-    }
-  },
-  "image": "https://www.neuralhorizonsai.com/images/og-default.png",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.neuralhorizonsai.com/blog/ai-death-spiral-new-evidence-2026/"
-  }
-}
-</script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"We Evaluated 8 AI Agents for a Client. Only 2 Passed. Here's the Test We Used.","author":{"@type":"Person","name":"Lisa Warren"},"publisher":{"@type":"Organization","name":"Neural Horizons AI","url":"https://www.neuralhorizonsai.com"},"datePublished":"2026-09-26","url":"https://www.neuralhorizonsai.com/blog/we-evaluated-8-ai-agents-only-2-passed/"}</script>
 <style>
   :root{
-    --bg:#0A0A0F;
-    --bg-panel:#12172B;
-    --white:#FFFFFF;
-    --muted:#A6ADC8;
-    --purple:#7C3AED;
-    --purple2:#8A2BE2;
-    --green:#00FF88;
-    --green2:#05C793;
-    --leak:#d11e2e; /* Death Spiral series accent */
+    --white:#12172B; --bg:#FFFFFF; --cloud:#334155; --smoke:#5B6478; --steel:#7C8598;
+    --space:#5B6478; --graphite:#6E7180; --arsenic:#40424D; --phantom:#F1F3F9; --black:#000000;
+    --grad: linear-gradient(90deg,#05C793 0%, #2563EB 50%, #7C3AED 100%);
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--white);
-    font-family:'Manrope', -apple-system, sans-serif;
-    line-height:1.65;
-  }
-  .wrap{max-width:760px;margin:0 auto;padding:64px 24px 96px;}
-  .kicker{
-    display:inline-block;
-    color:var(--leak);
-    font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    font-size:13px;
-    margin-bottom:18px;
-  }
-  h1{
-    font-size:clamp(32px,5vw,48px);
-    font-weight:800;
-    line-height:1.12;
-    margin:0 0 20px;
-    background:linear-gradient(90deg,var(--purple2),var(--green));
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
-  .dek{
-    font-size:19px;
-    color:var(--muted);
-    margin:0 0 28px;
-    max-width:640px;
-  }
-  .meta{
-    font-size:14px;
-    color:var(--muted);
-    border-top:1px solid #232842;
-    border-bottom:1px solid #232842;
-    padding:14px 0;
-    margin-bottom:40px;
-  }
-  h2.section{
-    font-size:14px;
-    font-weight:800;
-    letter-spacing:.06em;
-    color:var(--leak);
-    text-transform:uppercase;
-    margin:52px 0 18px;
-  }
-  h2.section .num{color:var(--white);opacity:.4;margin-right:8px;}
-  p{font-size:17px;color:#E4E6F1;margin:0 0 18px;}
-  strong{color:var(--white);}
-  .signal-box{
-    background:var(--bg-panel);
-    border:1px solid #232842;
-    border-left:3px solid var(--leak);
-    border-radius:6px;
-    padding:22px 24px;
-    margin:28px 0;
-  }
-  .signal-box .label{
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--leak);
-    margin-bottom:10px;
-    display:block;
-  }
-  .signal-box p{margin:0;font-size:17px;color:var(--white);}
-  .stat-row{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    margin:24px 0 32px;
-  }
-  .stat-card{
-    flex:1 1 200px;
-    background:var(--bg-panel);
-    border:1px solid #232842;
-    border-radius:8px;
-    padding:20px;
-  }
-  .stat-card .num{
-    font-size:34px;
-    font-weight:800;
-    background:linear-gradient(90deg,var(--purple2),var(--green));
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    display:block;
-    margin-bottom:6px;
-  }
-  .stat-card .cap{font-size:14px;color:var(--muted);}
-  ul.arrows{list-style:none;margin:24px 0;padding:0;}
-  ul.arrows li{
-    padding-left:28px;
-    position:relative;
-    margin-bottom:14px;
-    font-size:17px;
-    color:#E4E6F1;
-  }
-  ul.arrows li::before{
-    content:"→";
-    position:absolute;
-    left:0;
-    color:var(--green);
-    font-weight:800;
-  }
-  .cta{
-    margin-top:56px;
-    padding:32px;
-    background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(0,255,136,.08));
-    border:1px solid #2c3358;
-    border-radius:10px;
-  }
-  .cta h3{margin:0 0 10px;font-size:22px;}
-  .cta p{color:var(--muted);margin-bottom:20px;}
-  .cta a{
-    display:inline-block;
-    background:var(--leak);
-    color:var(--white);
-    text-decoration:none;
-    font-weight:700;
-    padding:12px 22px;
-    border-radius:6px;
-    margin-right:12px;
-    margin-bottom:10px;
-  }
-  .cta a.secondary{
-    background:transparent;
-    border:1px solid #3a4270;
-    color:var(--white);
-  }
-  .sources{
-    margin-top:56px;
-    padding-top:24px;
-    border-top:1px solid #232842;
-    font-size:14px;
-    color:var(--muted);
-  }
-  .sources h4{color:var(--white);font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
-  .sources a{color:var(--muted);}
-  .sources li{margin-bottom:8px;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--cloud);font-family:'Manrope',sans-serif;font-weight:400;line-height:1.7;}
+  a{color:inherit;}
+  .container{max-width:800px;margin:0 auto;padding:0 24px;}
+  .wide{max-width:1040px;}
+  header{position:sticky;top:0;z-index:50;background:rgba(18,23,43,0.18);backdrop-filter:blur(8px);border-bottom:1px solid var(--phantom);}
+  .nav{max-width:1040px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand img{height:30px;width:auto;display:block;}
+  .brand span{font-size:17px;font-weight:700;color:var(--white);letter-spacing:-0.01em;}
+  nav.links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:500;color:var(--space);}
+  nav.links a{text-decoration:none;}
+  nav.links a:hover{color:var(--white);}
+  .cta-btn{background:var(--grad);color:#04110c;font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:100px;text-decoration:none;white-space:nowrap;}
+  @media (max-width:720px){ nav.links a:not(.cta-btn){display:none;} }
+  .article-head{padding:56px 0 32px;border-bottom:1px solid var(--phantom);}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tag{font-size:12px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:6px 12px;border-radius:100px;border:1px solid var(--arsenic);color:var(--steel);}
+  .tag.accent{border:none;background:var(--grad);color:#04110c;}
+  h1{font-size:44px;line-height:1.12;font-weight:800;color:var(--white);letter-spacing:-0.02em;margin:0 0 18px;}
+  .dek{font-size:19px;color:var(--space);margin:0 0 28px;max-width:680px;}
+  .byline{display:flex;align-items:center;gap:12px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#04110c;flex:none;}
+  .byline .name{font-weight:700;color:var(--white);font-size:15px;}
+  .byline .meta{font-size:13.5px;color:var(--space);}
+  .related-strip{margin-top:26px;padding:16px 18px;border:1px solid var(--arsenic);border-radius:12px;display:flex;align-items:center;gap:12px;background:var(--phantom);flex-wrap:wrap;}
+  .related-strip .dot{width:8px;height:8px;border-radius:50%;background:var(--grad);flex:none;}
+  .related-strip a{font-size:14px;font-weight:600;color:var(--white);text-decoration:underline;text-decoration-color:var(--arsenic);}
+  .related-strip span.lbl{font-size:13px;color:var(--space);}
+  .article-body{padding:44px 0;}
+  h2{font-size:28px;font-weight:700;color:var(--white);letter-spacing:-0.01em;margin:44px 0 16px;}
+  h2:first-child{margin-top:0;}
+  h3{font-size:19px;font-weight:700;color:var(--white);margin:24px 0 12px;}
+  p{font-size:16.5px;color:var(--smoke);margin:0 0 18px;}
+  ul{margin:0 0 18px;padding-left:20px;}
+  li{font-size:16px;color:var(--smoke);margin-bottom:10px;}
+  li::marker{color:#2563EB;}
+  strong{color:var(--white);font-weight:700;}
+  blockquote{margin:32px 0;padding:4px 0 4px 24px;border-left:3px solid;border-image:var(--grad) 1;}
+  blockquote p{font-size:19px;color:var(--white);font-style:italic;margin:0 0 10px;line-height:1.5;}
+  blockquote cite{font-size:13.5px;color:var(--space);font-style:normal;font-weight:600;}
+  .callout{background:var(--phantom);border:1px solid var(--arsenic);border-radius:16px;padding:30px 30px 10px;margin:8px 0 28px;}
+  .callout ul{padding-left:0;list-style:none;margin:0;}
+  .callout li{position:relative;padding-left:26px;margin-bottom:18px;}
+  .callout li::before{content:"";position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:50%;background:var(--grad);}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0 30px;}
+  @media (max-width:640px){ .stat-row{grid-template-columns:1fr 1fr;} }
+  .stat{border:1px solid var(--arsenic);border-radius:14px;padding:20px;}
+  .stat .num{font-size:24px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:4px;}
+  .stat .lbl{font-size:12.5px;color:var(--space);}
+  .quote-box{background:var(--phantom);border:1px solid var(--arsenic);border-radius:16px;padding:32px;margin:32px 0;}
+  .quote-box p.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--space);margin:0 0 14px;}
+  .quote-box p.qtext{font-size:20px;color:var(--white);font-style:italic;line-height:1.5;margin:0 0 14px;}
+  .quote-box cite{font-size:13.5px;color:var(--space);font-style:normal;font-weight:600;}
+  .cta-block{text-align:center;padding:52px 0;border-top:1px solid var(--phantom);border-bottom:1px solid var(--phantom);}
+  .cta-block h2{margin-top:0;}
+  .cta-block p{max-width:520px;margin:0 auto 26px;}
+  .cta-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .btn-primary{background:var(--grad);color:#04110c;font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:100px;text-decoration:none;}
+  .btn-secondary{border:1px solid var(--arsenic);color:var(--white);font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:100px;text-decoration:none;}
+  .cta-fine{font-size:13px;color:var(--graphite);margin-top:18px;margin-bottom:0;}
+  .sources{padding:40px 0;}
+  .sources h3{font-size:15px;letter-spacing:0.04em;text-transform:uppercase;color:var(--space);margin-bottom:16px;}
+  .sources ol{padding-left:20px;margin:0;}
+  .sources li{font-size:14px;color:var(--steel);margin-bottom:8px;}
+  .sources a{color:var(--white);text-decoration:underline;text-decoration-color:var(--arsenic);}
+  footer{padding:52px 0 40px;border-top:1px solid var(--phantom);}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;margin-bottom:36px;}
+  @media (max-width:720px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  .foot-grid h4{font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--space);margin:0 0 14px;}
+  .foot-grid p{font-size:14px;color:var(--graphite);margin:0;}
+  .foot-grid ul{list-style:none;padding:0;margin:0;}
+  .foot-grid li{margin-bottom:10px;}
+  .foot-grid a{font-size:14px;color:var(--steel);text-decoration:none;}
+  .foot-grid a:hover{color:var(--white);}
+  .foot-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--phantom);padding-top:24px;}
+  .foot-bottom .flogo{display:flex;align-items:center;gap:8px;}
+  .foot-bottom .flogo img{height:22px;}
+  .foot-bottom .flogo span{font-weight:700;color:var(--white);font-size:14px;}
+  .foot-bottom .copy{font-size:13px;color:var(--graphite);}
 </style>
 <link rel="stylesheet" href="/assets/css/tailwind-home.min.css">
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
@@ -310,81 +208,152 @@ body{padding-top:84px;}
     </div>
 </div>
 
-<div class="wrap">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <span class="kicker">The AI Death Spiral · New Evidence</span>
-  <h1>The Data Just Caught Up To The Death Spiral</h1>
-  <p class="dek">This thesis argued that companies aren't failing at AI because the technology doesn't work — they're failing because the organization won't let it. New 2026 research just put a number on that. Here's the evidence, and the UAE deadline that makes it non-optional.</p>
-  <div class="meta">Lisa Warren · Neural Horizons AI · Updated 8 September 2026</div>
-
-  <h2 class="section"><span class="num">⬡ 01 —</span>The Diagnosis Just Became a Statistic</h2>
-  <p>The original Death Spiral argument was uncomfortable on purpose: most UAE and GCC companies stalling on AI are not stalling because the model is weak. They're stalling because the spreadsheet fiefdom, the undocumented system, the pilot nobody resourced, and the "we're not ready" reflex are all still standing.</p>
-  <p>That was a diagnosis built on pattern-matching across client work. It is now backed by a named, dated study.</p>
-  <p><strong>Publicis Sapient's 2026 Global Enterprise AI Report</strong> — published 17 June 2026, surveying 1,550 AI decision-makers across six markets including the UAE, at companies with 500+ employees and $100M+ in revenue — asked what's actually blocking AI value. The top answer wasn't the model, the vendor, or the budget.</p>
-
-  <div class="signal-box">
-    <span class="label">Signal</span>
-    <p>22% of enterprise AI decision-makers name <strong>the way their organization operates</strong> as the primary barrier to AI success — not the technology. Meanwhile 73% report AI in regular or majority use, but only 10% call it core to how the business runs.</p>
+<div id="top" class="container article-head">
+  <div class="tag-row">
+    <span class="tag accent">AI Governance</span>
+    <span class="tag">Agentic AI</span>
+    <span class="tag">FMCG</span>
+    <span class="tag">CEO</span>
   </div>
-
-  <h2 class="section"><span class="num">⬡ 02 —</span>Three More Numbers Saying the Same Thing</h2>
-  <p>This isn't one report making noise. Three separate 2026 studies converge on the identical failure mode: pilots that work in isolation and die on the way to production.</p>
-
-  <div class="stat-row">
-    <div class="stat-card">
-      <span class="num">95%</span>
-      <span class="cap">of organizations report no measurable P&amp;L return from generative AI pilots — MIT Project NANDA</span>
-    </div>
-    <div class="stat-card">
-      <span class="num">14%</span>
-      <span class="cap">of active AI agent pilots reach production at meaningful scale — March 2026 survey of 650 enterprise tech leaders</span>
-    </div>
-    <div class="stat-card">
-      <span class="num">80%</span>
-      <span class="cap">of AI projects fail to deliver their intended business value — RAND research</span>
+  <h1>We Evaluated 8 AI Agents for a Client. Only 2 Passed. Here's the Test We Used.</h1>
+  <p class="dek">Eight agentic AI ideas were on the table for a recent client. All eight were genuinely good ideas. Only two were actually ready to build. Here's the four-gate framework that made the call — and why saying no to six agents was the thing that protected the two that mattered.</p>
+  <div class="byline">
+    <div class="avatar">LW</div>
+    <div>
+      <div class="name">Lisa Warren</div>
+      <div class="meta">Founder &amp; CEO, Neural Horizons AI · September 26, 2026</div>
     </div>
   </div>
+</div>
 
-  <p>Read the named barriers behind those numbers and you're reading the six signatures back almost word for word: data silos across functions, governance arriving as an afterthought, unclear internal ownership, incomplete workflow documentation, and executive sponsorship that doesn't survive contact with the second budget cycle.</p>
+<div class="container article-body">
 
-  <h2 class="section"><span class="num">⬡ 03 —</span>Why the UAE Can't Defer This Past Q3</h2>
-  <p>Here's what's changed since the original piece: the UAE just turned "we're not ready" into a compliance liability with a fixed date attached.</p>
-  <p>The New CBUAE Law (Federal Decree-Law No. 6 of 2025) came into force on 16 September 2025, with a one-year regularization deadline of <strong>16 September 2026</strong>. Administrative penalties reach up to <strong>AED 1 billion</strong>. The Central Bank's own AI Guidance Note, issued 11 February 2026, is explicit about what "governed" now means: documented AI governance frameworks proportionate to institution size, board-level accountability for AI outcomes, annual bias testing, third-party audit rights, and a maintained AI model inventory.</p>
-  <p>That last point is the one boards keep skipping. A model inventory means someone in your organization can currently name every AI system in production, who owns it, and what decision it influences. Most can't.</p>
+  <p>A few weeks ago I wrote about Gartner's forecast that over 40% of agentic AI projects will be cancelled by 2027 — and why the three named causes (escalating costs, unclear business value, inadequate risk controls) are governance failures, not technology failures. This week I want to show what the fix actually looks like in practice, because we just ran it on a real engagement.</p>
+  <p>A regional FMCG manufacturer had eight candidate AI agents on the table — order validation, demand-signal planning, customer messaging, vendor scoring, network optimisation, and more. Leadership's instinct was reasonable: build them, fast, and start capturing value. Our job was to test that instinct before a single line of code was written.</p>
 
-  <div class="signal-box">
-    <span class="label">Signal</span>
-    <p>44% of Middle East respondents reported an AI data-sovereignty-related incident in the past 12 months — the highest rate of any region surveyed, ahead of Europe at 32% and Canada at 23%.</p>
-  </div>
-
-  <h2 class="section"><span class="num">⬡ 04 —</span>What This Means for Your Q4</h2>
-  <p>The Death Spiral thesis was never an argument against AI. It was an argument against pretending the blocker is technical when it's organizational. The 2026 data closes that argument. The regulatory calendar closes the runway.</p>
-
-  <ul class="arrows">
-    <li>The barrier is organizational, not technical — 22% say so directly, and the adoption-versus-integration gap (73% vs. 10%) confirms it structurally.</li>
-    <li>Pilot-to-production remains the choke point: as few as 14% of agent pilots reach meaningful scale.</li>
-    <li>16 September 2026 is a hard UAE compliance date for AI governance in financial services, with penalties up to AED 1 billion.</li>
-    <li>A maintained AI model inventory and board-level accountability are no longer best practice — they're the minimum the regulator now expects on paper.</li>
-  </ul>
-
-  <div class="cta">
-    <h3>If your board pack still doesn't answer this</h3>
-    <p>The original Death Spiral thesis, and the fixed-scope engagement built to answer exactly one hard question before your next board cycle.</p>
-    <a href="https://www.neuralhorizonsai.com/blog/the-ai-death-spiral/">Read the Death Spiral thesis</a>
-    <a href="https://www.neuralhorizonsai.com/blog/one-question-call/" class="secondary">Book the One-Question Call</a>
-  </div>
-
-  <div class="sources">
-    <h4>Sources</h4>
+  <h2>Key Takeaways</h2>
+  <div class="callout">
     <ul>
-      <li><a href="https://www.publicissapient.com/company/news/ai-adoption-enterprise-readiness-report-2026">Publicis Sapient — 2026 Global Enterprise AI Report</a> (17 June 2026)</li>
-      <li>MIT Project NANDA — generative AI pilot P&amp;L return findings, cited via <a href="https://www.webpronews.com/why-95-of-ai-pilots-stall-the-organizational-barriers-blocking-scale-in-2026/">WebProNews</a> (25 June 2026)</li>
-      <li>RAND — AI project value-delivery research, cited via the same WebProNews summary</li>
-      <li><a href="https://www.kiteworks.com/regulatory-compliance/uae-financial-ai-compliance-2026-stack/">Kiteworks — UAE Financial AI Compliance: The Stack Tightening Toward September 2026</a> (13 May 2026)</li>
+      <li><strong>The framework:</strong> every candidate agent was scored against four gates — Data (does the information actually exist?), Defined (is there one agreed meaning for what it's deciding?), Governance (is there a named human owner?), and Free (is it blocked by another system's migration?).</li>
+      <li><strong>The result:</strong> of 8 candidates, only 2 cleared every gate. Both were tied to named, quantified value: one addressing roughly AED 5.49M in network inefficiency, the other addressing losses inside a roughly AED 2.82M cancelled-order figure.</li>
+      <li><strong>The other six weren't failures — they were accurate diagnoses.</strong> Three were blocked purely by a missing governance owner, fixable in weeks at zero engineering cost. Two were waiting on a system migration already in motion. One had no agreed definition at all across the departments that would use it.</li>
+      <li><strong>The cheapest fix is usually skipped first.</strong> A named owner and an agreed definition cost nothing to put in place, yet they were the single biggest blocker across the eight candidates — not data, not budget, not technology.</li>
     </ul>
   </div>
 
+  <h2>Why eight good ideas isn't the same as eight ready ideas</h2>
+  <p>Every one of the eight agent concepts on that list was a legitimate business idea. None of them were hype, and none were "agent washing" in Gartner's sense — rebranded chatbots dressed up as autonomous systems. The problem wasn't the ideas. It was the gap between an idea being good and an idea being ready, and nobody had built a way to tell the difference before committing budget.</p>
+  <p>That gap is exactly where Gartner's 40% cancellation forecast lives. Escalating costs happen when a team builds against data that turns out to be wrong. Unclear business value happens when nobody agreed what the agent was actually deciding. Inadequate risk controls happen when there's no named human accountable for what the agent does. All three are visible before you write any code — if you go looking for them.</p>
+
+  <h2>The four gates</h2>
+  <p>We score every candidate agent against four binary-ish questions, using evidence from the client's own systems rather than a vendor's demo or a stakeholder's optimism.</p>
+  <ul>
+    <li><strong>Data.</strong> Does the specific information this agent needs exist today, in a form it can actually use — not "could exist with a project," but exists now.</li>
+    <li><strong>Defined.</strong> Is there one agreed definition for what the agent is deciding? An agent cannot act consistently on a term that three departments each define differently — and in our case, one candidate failed here outright: three functions used the same word for a cancelled order, and none of them meant the same thing by it.</li>
+    <li><strong>Governance.</strong> Is there a named human who owns this agent's outcome and a checkpoint where they approve its actions? No owner means no build, regardless of how ready the technology is.</li>
+    <li><strong>Free.</strong> Is the agent blocked by a dependency on another system or migration still in progress? If so, it waits. Building on top of a moving foundation just guarantees a rebuild later.</li>
+  </ul>
+  <p>Four green lights means build now. Anything else means the agent isn't cancelled — it's sequenced, with a clear, usually inexpensive fix identified before it goes anywhere near a development budget.</p>
+
+  <blockquote>
+    <p>"Saying no to six agents wasn't caution. It was how we protected the budget behind the two that could actually survive contact with real data."</p>
+    <cite>— Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite>
+  </blockquote>
+
+  <div class="stat-row">
+    <div class="stat"><span class="num">8</span><span class="lbl">candidate agents evaluated</span></div>
+    <div class="stat"><span class="num">2</span><span class="lbl">cleared every gate</span></div>
+    <div class="stat"><span class="num">3</span><span class="lbl">blocked only by a missing owner</span></div>
+    <div class="stat"><span class="num">AED 5.49M</span><span class="lbl">value at stake, top-cleared agent</span></div>
+  </div>
+
+  <h2>What this means for your own agent backlog</h2>
+  <p>If your organisation already has a list of agentic AI ideas waiting for budget, the highest-leverage thing you can do this week isn't to build the most exciting one first. It's to run all of them through these four gates and see what the list actually looks like once you take data quality, definitions, governance and system dependencies seriously.</p>
+  <p>Most lists come back looking like this client's: a couple of ideas genuinely ready to go, and several more that are one cheap governance fix away from being ready. That's not a disappointing result. It's the result that keeps you off the wrong side of Gartner's 2027 number.</p>
+
+  <div class="related-strip">
+    <span class="dot"></span>
+    <span class="lbl">Related reading</span>
+    <a href="/case-studies/fmcg-agentic-ai-readiness/">Read the full case study: how this readiness framework played out on a real engagement →</a>
+  </div>
+
+  <h2>The three questions worth asking before you build anything</h2>
+  <ul>
+    <li>Can you name, in one sentence, the human who is accountable if this agent does something unexpected?</li>
+    <li>Would every department that touches this agent's decision define the key term the same way, right now, without checking with each other first?</li>
+    <li>Is the data this agent needs sitting in a system that isn't mid-migration, mid-cleanup, or mid-anything?</li>
+  </ul>
+  <p>If the honest answer to any of the three is no, you haven't found a reason to cancel the idea. You've found the cheapest possible moment to fix it — before the budget, not after it.</p>
+
 </div>
+
+<div class="container cta-block">
+  <h2>Move from headlines to implementation</h2>
+  <p>If you have a backlog of agentic AI ideas and no way to tell which ones are actually ready, that's the first thing worth fixing — before the next build, not after the next write-off.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="/contact/">Contact Us</a>
+    <a class="btn-secondary" href="https://wa.me/971585697562">Book a One-Question Call</a>
+  </div>
+  <p class="cta-fine">One question, no fluff — you'll walk away knowing which of your AI ideas are actually ready.</p>
+</div>
+
+<div class="container sources">
+  <h3>Sources</h3>
+  <ol>
+    <li><a href="https://www.neuralhorizonsai.com/case-studies/fmcg-agentic-ai-readiness/" target="_blank" rel="noopener">How a Regional FMCG Manufacturer Avoided Building the Wrong AI Agents — Neural Horizons AI case study</a></li>
+    <li><a href="https://www.neuralhorizonsai.com/blog/dont-cancel-your-agentic-ai-project-gartner-40-percent/" target="_blank" rel="noopener">Don't Cancel Your Agentic AI Project — Gartner's 40% Number Explained — Neural Horizons AI</a></li>
+    <li><a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener">Gartner Predicts Over 40% of Agentic AI Projects Will Be Canceled by End of 2027 — Gartner</a></li>
+  </ol>
+</div>
+
+<footer>
+  <div class="container wide">
+    <div class="foot-grid">
+      <div>
+        <h4>Neural Horizons AI</h4>
+        <p>Specialist AI &amp; digital transformation consultancy. We close revenue leaks and break down silos. Serving clients globally.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/case-studies/">Case Studies</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/contact/">Contact Us</a></li>
+          <li><a href="/services/ai-strategy/">AI Strategy</a></li>
+          <li><a href="/services/digital-transformation/">Digital Transformation</a></li>
+          <li><a href="/agentic-ai">Agentic AI Build</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/liwarren1/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61579054417326" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/lisa.warren.638471/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="flogo">
+        <img src="/images/logo-mark.svg" alt="Neural Horizons AI logo">
+        <span>Empowering Your Future with Seamless AI and Marketing Integration</span>
+      </div>
+      <div class="copy">© 2026 Neural Horizons AI. All Rights Reserved.</div>
+    </div>
+  </div>
+</footer>
+
 <script>
 const mobileMenuBtn=document.getElementById('mobileMenuBtn');
 const mobileMenu=document.getElementById('mobileMenu');
