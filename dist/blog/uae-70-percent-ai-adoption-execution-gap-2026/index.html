@@ -578,11 +578,6 @@ body{padding-top:84px;}
     const h = document.documentElement;
     prog.style.width = Math.min(h.scrollTop / (h.scrollHeight - h.clientHeight) * 100, 100) + '%';
   }, { passive: true });
-  document.getElementById('hamburger').addEventListener('click', () => {
-    const m = document.getElementById('mobile-menu');
-    m.classList.toggle('hidden');
-    m.classList.toggle('open');
-  });
 </script>
 
 <script>
