@@ -812,12 +812,12 @@ nav.fixed{top:38px;}
         <div class="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto zonar-grid zonar-wide">
 
             <div style="position:relative;" class="zonar-shot-col">
-<!-- ZONAR LIVE PREVIEW WIDGET v2 -->
+                <!-- ZONAR LIVE PREVIEW WIDGET -->
 <div class="zw-frame">
   <div class="zw-topbar">
     <div class="zw-topbar-left">
       <span class="zw-dot"></span>
-      <span class="zw-badge-text">ZONAR&trade; &middot; LIVE PREVIEW</span>
+      <span class="zw-badge-text">ZONAR&trade; &middot; INTERACTIVE PREVIEW</span>
     </div>
     <div class="zw-topbar-right">
       <span class="zw-clock" id="zwClock">00:00:00</span>
@@ -832,27 +832,18 @@ nav.fixed{top:38px;}
   </div>
 
   <div class="zw-stats-row">
-    <div class="zw-stat" id="zwStatLeak">
+    <div class="zw-stat">
       <div class="zw-stat-label">Revenue leak detected</div>
       <div class="zw-stat-value zw-red" id="zwLeak">AED 0/month</div>
     </div>
-    <div class="zw-stat" id="zwStatWf">
+    <div class="zw-stat">
       <div class="zw-stat-label">Active workflows</div>
       <div class="zw-stat-value zw-purple" id="zwWorkflows">0</div>
     </div>
-    <div class="zw-stat" id="zwStatResp">
+    <div class="zw-stat">
       <div class="zw-stat-label">Lead response time</div>
       <div class="zw-stat-value zw-green" id="zwResponse">&mdash;</div>
     </div>
-  </div>
-
-  <!-- LIVE ACTIVITY FEED — always visible, regardless of tab -->
-  <div class="zw-feed-wrap">
-    <div class="zw-feed-head">
-      <span class="zw-feed-title"><span class="zw-dot" style="width:6px;height:6px;"></span>Live activity</span>
-      <button type="button" class="zw-sim-btn" id="zwSimBtn">&#9654; Simulate a new leak</button>
-    </div>
-    <div class="zw-feed" id="zwFeed"></div>
   </div>
 
   <!-- DASHBOARD PANEL -->
@@ -861,13 +852,12 @@ nav.fixed{top:38px;}
       <div class="zw-card">
         <div class="zw-card-title">Forecast vs. actuals</div>
         <div class="zw-bars">
-          <div class="zw-bar-row" data-tip="Forecast AED 96K &middot; Actual AED 90K"><span class="zw-bar-lbl">Jan</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:62%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:58%;"></span></span></div>
-          <div class="zw-bar-row" data-tip="Forecast AED 108K &middot; Actual AED 114K"><span class="zw-bar-lbl">Feb</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:70%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:74%;"></span></span></div>
-          <div class="zw-bar-row" data-tip="Forecast AED 102K &middot; Actual AED 125K"><span class="zw-bar-lbl">Mar</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:66%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:81%;"></span></span></div>
-          <div class="zw-bar-row" data-tip="Forecast AED 116K &middot; Actual AED 139K"><span class="zw-bar-lbl">Apr</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:75%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:90%;"></span></span></div>
+          <div class="zw-bar-row"><span class="zw-bar-lbl">Jan</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:62%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:58%;"></span></span></div>
+          <div class="zw-bar-row"><span class="zw-bar-lbl">Feb</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:70%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:74%;"></span></span></div>
+          <div class="zw-bar-row"><span class="zw-bar-lbl">Mar</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:66%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:81%;"></span></span></div>
+          <div class="zw-bar-row"><span class="zw-bar-lbl">Apr</span><span class="zw-bar-track"><span class="zw-bar-fill" style="width:75%;background:#8A93A8;"></span><span class="zw-bar-fill zw-bar-fill-2" style="width:90%;"></span></span></div>
         </div>
         <div class="zw-legend"><span><i style="background:#8A93A8;"></i>Forecast</span><span><i style="background:#05C793;"></i>Actual</span></div>
-        <p class="zw-hint">Hover a bar for exact values</p>
       </div>
       <div class="zw-card zw-card-center">
         <div class="zw-card-title">Opportunities, ranked</div>
@@ -882,6 +872,10 @@ nav.fixed{top:38px;}
         </div>
       </div>
     </div>
+    <button type="button" class="zw-callout-btn" id="zwCalloutBtn" aria-expanded="false">
+      <span class="zw-dot"></span>Leak flagged in AED, live
+    </button>
+    <div class="zw-callout-pop" id="zwCalloutPop">Zonar&trade; catches revenue leaks the moment they happen &mdash; quoted value vs. actual delivery, flagged in AED, not buried in a spreadsheet.</div>
   </div>
 
   <!-- PIPELINE PANEL -->
@@ -932,7 +926,7 @@ nav.fixed{top:38px;}
     </div>
   </div>
 
-  <p class="zw-caption">Illustrative preview of the Zonar&trade; dashboard &mdash; live simulation, not real client data</p>
+  <p class="zw-caption">Illustrative preview of the Zonar&trade; dashboard &mdash; switch tabs, tap the live callout for detail</p>
 </div>
 
 <style>
@@ -951,29 +945,13 @@ nav.fixed{top:38px;}
 .zw-tab.is-active{background:rgba(255,255,255,0.09);color:#fff;}
 .zw-tab:hover:not(.is-active){color:#D3D6E0;}
 
-.zw-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.zw-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 14px;transition:border-color 0.3s,background 0.3s;}
-.zw-stat.zw-flash{border-color:rgba(239,68,68,0.6);background:rgba(239,68,68,0.08);}
+.zw-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.zw-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 14px;}
 .zw-stat-label{color:#8A93A8;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;}
 .zw-stat-value{font-size:1.05rem;font-weight:900;font-variant-numeric:tabular-nums;}
 .zw-red{color:#EF4444;}
 .zw-purple{color:#A78BFA;}
 .zw-green{color:#05C793;}
-
-.zw-feed-wrap{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
-.zw-feed-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
-.zw-feed-title{display:flex;align-items:center;gap:7px;color:#D3D6E0;font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;}
-.zw-sim-btn{background:rgba(5,199,147,0.12);border:1px solid rgba(5,199,147,0.35);color:#05C793;font-family:inherit;font-size:0.66rem;font-weight:800;padding:6px 12px;border-radius:9999px;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-.zw-sim-btn:hover{background:rgba(5,199,147,0.22);}
-.zw-sim-btn:active{transform:scale(0.97);}
-.zw-feed{display:flex;flex-direction:column;gap:6px;min-height:108px;}
-.zw-feed-item{display:flex;align-items:flex-start;gap:8px;font-size:0.72rem;color:#B8BFCE;padding:7px 9px;background:rgba(255,255,255,0.025);border-radius:8px;animation:zwFeedIn 0.35s ease;}
-@keyframes zwFeedIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
-.zw-feed-item .zw-feed-time{color:#5B6478;font-variant-numeric:tabular-nums;flex-shrink:0;font-size:0.66rem;margin-top:1px;}
-.zw-feed-item .zw-feed-dot{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0;}
-.zw-feed-item.zw-feed-alert .zw-feed-dot{background:#EF4444;}
-.zw-feed-item.zw-feed-ok .zw-feed-dot{background:#05C793;}
-.zw-feed-item.zw-feed-info .zw-feed-dot{background:#A78BFA;}
 
 .zw-panel{display:none;position:relative;}
 .zw-panel.is-active{display:block;}
@@ -983,22 +961,19 @@ nav.fixed{top:38px;}
 .zw-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;}
 .zw-card-title{color:#D3D6E0;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:14px;}
 .zw-bars{display:flex;flex-direction:column;gap:10px;}
-.zw-bar-row{display:flex;align-items:center;gap:8px;position:relative;cursor:pointer;padding:2px 0;border-radius:6px;transition:background 0.15s;}
-.zw-bar-row:hover{background:rgba(255,255,255,0.04);}
-.zw-bar-row[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:38px;top:-30px;background:#1c1f2b;color:#fff;font-size:0.62rem;font-weight:600;padding:6px 10px;border-radius:6px;white-space:nowrap;z-index:5;box-shadow:0 8px 18px rgba(0,0,0,0.35);}
+.zw-bar-row{display:flex;align-items:center;gap:8px;}
 .zw-bar-lbl{color:#8A93A8;font-size:0.68rem;font-weight:700;width:32px;flex-shrink:0;}
 .zw-bar-track{position:relative;flex:1;height:7px;background:rgba(255,255,255,0.08);border-radius:9999px;overflow:hidden;}
-.zw-bar-fill{position:absolute;top:0;left:0;height:100%;border-radius:9999px;transition:width 0.6s ease;}
+.zw-bar-fill{position:absolute;top:0;left:0;height:100%;border-radius:9999px;}
 .zw-bar-fill-2{background:#05C793;opacity:0.9;}
 .zw-bar-val{color:#D3D6E0;font-size:0.64rem;font-weight:700;width:64px;text-align:right;flex-shrink:0;}
 .zw-legend{display:flex;gap:16px;margin-top:12px;}
 .zw-legend span{display:flex;align-items:center;gap:6px;color:#8A93A8;font-size:0.62rem;font-weight:700;}
 .zw-legend i{width:8px;height:8px;border-radius:2px;display:inline-block;}
-.zw-hint{color:#5B6478;font-size:0.62rem;margin:10px 0 0;font-style:italic;}
 
 .zw-card-center{display:flex;flex-direction:column;align-items:center;}
 .zw-donut-wrap{position:relative;width:110px;height:110px;margin:4px 0 14px;}
-.zw-donut{width:100%;height:100%;border-radius:50%;background:conic-gradient(#05C793 0% 82%, rgba(255,255,255,0.08) 82% 100%);display:flex;align-items:center;justify-content:center;transition:background 0.6s;}
+.zw-donut{width:100%;height:100%;border-radius:50%;background:conic-gradient(#05C793 0% 82%, rgba(255,255,255,0.08) 82% 100%);display:flex;align-items:center;justify-content:center;}
 .zw-donut::before{content:"";position:absolute;top:12px;left:12px;right:12px;bottom:12px;background:#12141c;border-radius:50%;}
 .zw-donut-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;}
 .zw-donut-label span{display:block;color:#fff;font-size:1.15rem;font-weight:900;}
@@ -1006,6 +981,10 @@ nav.fixed{top:38px;}
 .zw-opp-list{width:100%;display:flex;flex-direction:column;gap:8px;}
 .zw-opp{display:flex;align-items:center;gap:8px;color:#D3D6E0;font-size:0.68rem;font-weight:600;}
 .zw-opp-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+.zw-callout-btn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:rgba(5,199,147,0.1);border:1px solid rgba(5,199,147,0.3);color:#05C793;font-family:inherit;font-size:0.7rem;font-weight:700;padding:8px 14px;border-radius:9999px;cursor:pointer;}
+.zw-callout-pop{display:none;margin-top:10px;background:#fff;color:#5B6478;border-radius:12px;padding:14px 16px;font-size:0.78rem;font-weight:500;line-height:1.5;}
+.zw-callout-pop.is-open{display:block;}
 
 .zw-pipeline-stages{display:flex;align-items:center;justify-content:space-between;gap:4px;}
 .zw-stage{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 10px;text-align:center;flex:1;}
@@ -1056,6 +1035,16 @@ nav.fixed{top:38px;}
     });
   });
 
+  // callout
+  var calloutBtn = root.querySelector('#zwCalloutBtn');
+  var calloutPop = root.querySelector('#zwCalloutPop');
+  if(calloutBtn && calloutPop){
+    calloutBtn.addEventListener('click', function(){
+      var open = calloutPop.classList.toggle('is-open');
+      calloutBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
   // live clock
   var clockEl = root.querySelector('#zwClock');
   function tickClock(){
@@ -1068,120 +1057,27 @@ nav.fixed{top:38px;}
   tickClock();
   setInterval(tickClock, 1000);
 
-  // ---- state ----
-  var state = {
-    leak: 0,
-    workflows: 0,
-    responseSet: false
-  };
-
-  function animateNumber(el, from, to, prefix, suffix, duration){
+  // animated stat counters (illustrative)
+  function animateNumber(el, target, prefix, suffix, duration){
     if(!el) return;
+    var start = 0;
     var startTime = null;
     function step(ts){
       if(!startTime) startTime = ts;
       var progress = Math.min((ts - startTime) / duration, 1);
       var eased = 1 - Math.pow(1 - progress, 3);
-      var val = Math.round(from + (to - from) * eased);
+      var val = Math.round(start + (target - start) * eased);
       el.textContent = prefix + val.toLocaleString('en-US') + suffix;
       if(progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
-
   var leakEl = root.querySelector('#zwLeak');
   var wfEl = root.querySelector('#zwWorkflows');
   var respEl = root.querySelector('#zwResponse');
-  var leakStatBox = root.querySelector('#zwStatLeak');
-  var wfStatBox = root.querySelector('#zwStatWf');
-
-  function flashBox(box){
-    if(!box) return;
-    box.classList.add('zw-flash');
-    setTimeout(function(){ box.classList.remove('zw-flash'); }, 900);
-  }
-
-  function bumpLeak(amount, doFlash){
-    var newVal = state.leak + amount;
-    animateNumber(leakEl, state.leak, newVal, 'AED ', '/month', 900);
-    state.leak = newVal;
-    if(doFlash) flashBox(leakStatBox);
-  }
-
-  function setWorkflows(newVal){
-    animateNumber(wfEl, state.workflows, newVal, '', '', 500);
-    state.workflows = newVal;
-    flashBox(wfStatBox);
-  }
-
-  // initial load animation
-  bumpLeak(14200, false);
-  setTimeout(function(){ setWorkflows(12); }, 500);
-  setTimeout(function(){ if(respEl) respEl.textContent = '4.2 min'; }, 900);
-
-  // ---- live activity feed ----
-  var feedEl = root.querySelector('#zwFeed');
-  var feedEvents = [
-    {type:'alert', text:'Order #4471 flagged &mdash; AED 2,300 quoted vs. delivered'},
-    {type:'ok', text:'Workflow "Lead routing" processed 6 new leads'},
-    {type:'info', text:'Forecast updated: March actuals now +4% vs. plan'},
-    {type:'alert', text:'Depot mismatch detected on 3 pending orders'},
-    {type:'ok', text:'Cancelled-order agent resolved 2 disputes automatically'},
-    {type:'info', text:'New opportunity ranked: Retail client, AED 18K'},
-    {type:'alert', text:'Order #4488 flagged &mdash; AED 1,150 quoted vs. delivered'},
-    {type:'ok', text:'Workflow "Cross-department reporting" synced 1 more system'},
-    {type:'info', text:'Lead response time improved to 3.9 min this hour'}
-  ];
-  var feedIndex = 0;
-  var MAX_FEED_ITEMS = 4;
-
-  function pad2(n){ return String(n).padStart(2,'0'); }
-
-  function pushFeedEvent(ev){
-    var d = new Date();
-    var time = pad2(d.getHours())+':'+pad2(d.getMinutes())+':'+pad2(d.getSeconds());
-    var item = document.createElement('div');
-    item.className = 'zw-feed-item zw-feed-' + ev.type;
-    item.innerHTML = '<span class="zw-feed-dot"></span><span class="zw-feed-time">'+time+'</span><span>'+ev.text+'</span>';
-    feedEl.insertBefore(item, feedEl.firstChild);
-    while(feedEl.children.length > MAX_FEED_ITEMS){
-      feedEl.removeChild(feedEl.lastChild);
-    }
-  }
-
-  function pushRandomEvent(){
-    var ev = feedEvents[feedIndex % feedEvents.length];
-    feedIndex++;
-    pushFeedEvent(ev);
-    if(ev.type === 'alert'){
-      bumpLeak(Math.floor(400 + Math.random()*900), true);
-    } else if(ev.type === 'ok' && Math.random() > 0.5){
-      var delta = Math.random() > 0.5 ? 1 : -1;
-      setWorkflows(Math.max(8, state.workflows + delta));
-    }
-  }
-
-  // seed the feed with a couple of entries immediately
-  setTimeout(function(){ pushFeedEvent(feedEvents[0]); }, 1200);
-  setTimeout(function(){ pushFeedEvent(feedEvents[1]); feedIndex = 2; }, 2600);
-
-  // auto-cycle every ~5.5s
-  var autoTimer = setInterval(pushRandomEvent, 5500);
-
-  // manual simulate button — immediate, dramatic
-  var simBtn = root.querySelector('#zwSimBtn');
-  if(simBtn){
-    simBtn.addEventListener('click', function(){
-      pushFeedEvent({type:'alert', text:'New leak detected &mdash; AED '+(1200+Math.floor(Math.random()*2600)).toLocaleString('en-US')+' quoted vs. delivered'});
-      bumpLeak(1200 + Math.floor(Math.random()*2600), true);
-      simBtn.textContent = '\u2713 Simulated';
-      simBtn.disabled = true;
-      setTimeout(function(){
-        simBtn.textContent = '\u25B6 Simulate a new leak';
-        simBtn.disabled = false;
-      }, 1800);
-    });
-  }
+  animateNumber(leakEl, 14200, 'AED ', '/month', 1400);
+  animateNumber(wfEl, 12, '', '', 1000);
+  setTimeout(function(){ if(respEl) respEl.textContent = '4.2 min'; }, 700);
 })();
 </script>
 
@@ -1554,10 +1450,17 @@ async function nlSubmitHome(e){
   var email = document.getElementById('nlEmailHome').value.trim();
   if(!email) return false;
   try {
-    var res = await fetch('/api/newsletter', {
+    var res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({email: email, source: 'homepage'})
+      headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify({
+        access_key: '41ab1943-e2b9-4fe3-a13c-4b199f397504',
+        subject: 'New Friday AI Insights subscriber',
+        from_name: 'Neural Horizons AI Newsletter',
+        email: email,
+        message: 'New subscriber for Friday AI Insights: ' + email,
+        source: 'homepage-newsletter'
+      })
     });
     if (!res.ok) throw new Error('not ok');
   } catch (err) {
