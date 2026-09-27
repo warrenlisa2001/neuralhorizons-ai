@@ -678,11 +678,6 @@ body{padding-top:84px;}
     prog.style.width = Math.min(h.scrollTop / (h.scrollHeight - h.clientHeight) * 100, 100) + '%';
   }, { passive: true });
 
-  // Mobile hamburger
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
-    document.getElementById('mobile-menu').classList.toggle('open');
-  });
 </script>
 
 <script>
