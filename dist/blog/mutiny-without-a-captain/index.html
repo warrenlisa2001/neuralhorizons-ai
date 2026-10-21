@@ -199,18 +199,21 @@ figure.quote-fig figcaption{font-size:13px;color:var(--space);margin-top:10px;te
 </style>
 <style>/* NHAI-POLISH: beats the Tailwind reset (headings, lists, .container) */
 html,body{overflow-x:clip;}
-.article-head.container,.article-body.container,.cta-block.container,.sources.container{width:100%;max-width:760px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px;}
-.article-head.container{position:relative;padding-top:76px;padding-bottom:60px;background:#0B1020;box-shadow:0 0 0 100vmax #0B1020;clip-path:inset(0 -100vmax);border-bottom:0;}
-.article-head.container::after{content:"";position:absolute;left:-100vmax;right:-100vmax;bottom:0;height:4px;background:linear-gradient(90deg,#05C793,#2563EB,#7C3AED);}
-.article-head .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px;}
-.article-head .tag{border:1px solid rgba(255,255,255,.28);color:#C5CCE0;font-size:11.5px;font-weight:700;letter-spacing:.08em;padding:7px 14px;border-radius:999px;}
-.article-head .tag.accent{background:linear-gradient(90deg,#00FF88,#05C793);color:#04110c;border:0;}
-.article-head h1{font-size:clamp(32px,5.4vw,52px);line-height:1.1;font-weight:800;letter-spacing:-.025em;color:#fff;margin:0 0 24px;}
-.article-head .dek{font-size:clamp(17px,2.2vw,20px);line-height:1.6;color:#B8C0DA;font-weight:400;margin:0 0 34px;max-width:680px;}
-.article-head .byline{display:flex;align-items:center;gap:14px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14);}
-.article-head .avatar{width:48px;height:48px;font-size:15px;}
-.article-head .byline .name{color:#fff;font-size:16px;font-weight:700;}
-.article-head .byline .meta{color:#9AA4BF;font-size:13.5px;line-height:1.5;}
+.hero{position:relative;background:#0B1020 url(/images/mutiny-without-a-captain-hero.jpg) 72% center/cover no-repeat;min-height:600px;display:flex;align-items:center;overflow:hidden;border-bottom:4px solid transparent;border-image:linear-gradient(90deg,#05C793,#2563EB,#7C3AED) 1;}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0B1020 0%,rgba(11,16,32,.94) 34%,rgba(11,16,32,.55) 62%,rgba(11,16,32,.12) 100%);}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(180deg,transparent,rgba(11,16,32,.55));}
+.hero-in{position:relative;z-index:1;width:100%;max-width:1080px;margin:0 auto;padding:96px 24px 88px;}
+.hero-copy{max-width:640px;}
+.hero .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px;}
+.hero .tag{border:1px solid rgba(255,255,255,.35);color:#E1E6F5;font-size:11.5px;font-weight:700;letter-spacing:.08em;padding:7px 14px;border-radius:999px;background:rgba(11,16,32,.45);backdrop-filter:blur(4px);}
+.hero .tag.accent{background:linear-gradient(90deg,#00FF88,#05C793);color:#04110c;border:0;}
+.hero h1{font-size:clamp(32px,4.8vw,54px);line-height:1.08;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0 0 24px;text-shadow:0 2px 24px rgba(0,0,0,.35);}
+.hero .dek{font-size:clamp(17px,2vw,20px);line-height:1.6;color:#D3D9EC;font-weight:400;margin:0 0 34px;}
+.hero .byline{display:flex;align-items:center;gap:14px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);}
+.hero .avatar{width:48px;height:48px;font-size:15px;}
+.hero .byline .name{color:#fff;font-size:16px;font-weight:700;}
+.hero .byline .meta{color:#B8C0DA;font-size:13.5px;line-height:1.5;}
+@media (max-width:720px){.hero{min-height:0;background-position:70% top;background-size:auto 55%;}.hero::before{background:linear-gradient(180deg,rgba(11,16,32,.2) 0%,#0B1020 46%);}.hero-in{padding:190px 20px 48px;}}
 .article-body.container{padding-top:56px;padding-bottom:40px;}
 .article-body>p{font-size:18px;line-height:1.8;color:#3B4458;margin:0 0 24px;}
 .article-body>p strong,.article-body>ul strong,.article-body>ol strong{color:#12172B;font-weight:700;}
@@ -334,7 +337,7 @@ html,body{overflow-x:clip;}
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<div id="top" class="container article-head">
+<section id="top" class="hero"><div class="hero-in"><div class="hero-copy">
   <div class="tag-row">
     <span class="tag accent">Leadership</span>
     <span class="tag">AI Strategy</span>
@@ -350,7 +353,7 @@ html,body{overflow-x:clip;}
       <div class="meta">Founder &amp; CEO, Neural Horizons AI &middot; October 21, 2026 &middot; 7 min read</div>
     </div>
   </div>
-</div>
+</div></div></section>
 
 <div class="container article-body">
 
