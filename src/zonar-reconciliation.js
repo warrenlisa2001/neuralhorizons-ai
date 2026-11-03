@@ -14,7 +14,7 @@ function cleanId(value) {
 
 function finiteNumber(value) {
   if (value === null || value === undefined || String(value).trim() === '') return null;
-  const normal = String(value).trim().replace(/,/g, '').replace(/^\\((.*)\\)$/, '-$1');
+  const normal = String(value).trim().replace(/,/g, '').replace(/^\((.*)\)$/, '-$1');
   const number = Number(normal);
   return Number.isFinite(number) ? number : null;
 }
@@ -22,7 +22,7 @@ function finiteNumber(value) {
 function indexRows(rows, dataset, idField, exceptions) {
   const index = new Map();
   rows.forEach((row, offset) => {
-    const rowNumber = offset + 2;
+    const rowNumber = offset + 2; // CSV header is row 1.
     const id = cleanId(row?.[idField]);
     if (!id) {
       exceptions.push({ code: 'MISSING_RECORD_ID', severity: 'high', dataset, row: rowNumber, field: idField });
