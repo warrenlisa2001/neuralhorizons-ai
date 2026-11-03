@@ -83,11 +83,11 @@ CREATE TABLE IF NOT EXISTS processing_jobs (
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
 );
 
--- Audit rows are append-only by application policy. Do not cascade-delete them.
+-- Audit rows are append-only at the database layer. Do not cascade-delete them.
 CREATE TABLE IF NOT EXISTS audit_events (
   id TEXT PRIMARY KEY,
-  tenant_id TEXT REFERENCES tenants(id) ON DELETE RESTRICT,
-  actor_user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+  tenant_id TEXT NOT NULL REFERENCES tenants(id) ON DELETE RESTRICT,
+  actor_user_id TEXT REFERENCES users(id) ON DELETE RESTRICT,
   event_type TEXT NOT NULL,
   resource_type TEXT,
   resource_id TEXT,
@@ -115,3 +115,65 @@ CREATE INDEX IF NOT EXISTS idx_audit_events_tenant_created
   ON audit_events(tenant_id, created_at);
 CREATE INDEX IF NOT EXISTS idx_audit_events_actor_created
   ON audit_events(actor_user_id, created_at);
+
+
+-- An actor recorded on a tenant event must have an active membership in that tenant.
+CREATE TRIGGER IF NOT EXISTS trg_audit_actor_tenant_membership
+BEFORE INSERT ON audit_events
+WHEN NEW.actor_user_id IS NOT NULL
+ AND NOT EXISTS (
+   SELECT 1 FROM memberships m
+   INNER JOIN users u ON u.id = m.user_id
+   INNER JOIN tenants t ON t.id = m.tenant_id
+   WHERE m.tenant_id = NEW.tenant_id
+     AND m.user_id = NEW.actor_user_id
+     AND m.status = 'active'
+     AND u.status = 'active'
+     AND t.status = 'active'
+ )
+BEGIN
+  SELECT RAISE(ABORT, 'audit actor must have active membership in tenant');
+END;
+
+-- Prevent ordinary application SQL from altering or deleting audit history.
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_update
+BEFORE UPDATE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_delete
+BEFORE DELETE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
+
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_actor_tenant_membership
+BEFORE INSERT ON audit_events
+WHEN NEW.actor_user_id IS NOT NULL
+ AND NOT EXISTS (
+   SELECT 1 FROM memberships m
+   INNER JOIN users u ON u.id = m.user_id
+   INNER JOIN tenants t ON t.id = m.tenant_id
+   WHERE m.tenant_id = NEW.tenant_id
+     AND m.user_id = NEW.actor_user_id
+     AND m.status = 'active'
+     AND u.status = 'active'
+     AND t.status = 'active'
+ )
+BEGIN
+  SELECT RAISE(ABORT, 'audit actor must have active membership in tenant');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_update
+BEFORE UPDATE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_delete
+BEFORE DELETE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
