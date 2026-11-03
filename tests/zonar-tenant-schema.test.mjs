@@ -84,3 +84,43 @@ test('audit history is immutable through ordinary SQL statements', () => {
     db.close();
   }
 });
+
+test('file and processing-job foreign keys prevent cross-tenant resource links', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-b', 'Business B');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-a', 'https://issuer.example', 'subject-a');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-a', 'user-a', 'tenant_owner');
+    db.prepare("INSERT INTO tenant_files (id, tenant_id, uploaded_by_user_id, original_filename, object_key, content_type, byte_size) VALUES (?, ?, ?, ?, ?, ?, ?)")
+      .run('file-a', 'tenant-a', 'user-a', 'a.csv', 'tenant-a/file-a', 'text/csv', 10);
+    const insertJob = db.prepare("INSERT INTO processing_jobs (id, tenant_id, file_id, requested_by_user_id, processor_version) VALUES (?, ?, ?, ?, ?)");
+    insertJob.run('job-a', 'tenant-a', 'file-a', 'user-a', '0.1.0');
+    assert.throws(() => insertJob.run('job-cross', 'tenant-b', 'file-a', null, '0.1.0'), /FOREIGN KEY/);
+    assert.throws(() => db.prepare("UPDATE tenant_files SET tenant_id = ? WHERE id = ?").run('tenant-b', 'file-a'), /ownership is immutable/);
+    assert.throws(() => db.prepare("UPDATE processing_jobs SET tenant_id = ? WHERE id = ?").run('tenant-b', 'job-a'), /ownership is immutable/);
+  } finally {
+    db.close();
+  }
+});
+
+test('file uploader and job requester must be active members of the owning tenant', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-b', 'Business B');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-a', 'https://issuer.example', 'subject-a');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-b', 'https://issuer.example', 'subject-b');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-a', 'user-a', 'tenant_owner');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-b', 'user-b', 'tenant_owner');
+    const insertFile = db.prepare("INSERT INTO tenant_files (id, tenant_id, uploaded_by_user_id, original_filename, object_key, content_type, byte_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    assert.throws(() => insertFile.run('file-bad', 'tenant-a', 'user-b', 'b.csv', 'tenant-a/bad', 'text/csv', 10), /uploader must have active membership/);
+    insertFile.run('file-a', 'tenant-a', 'user-a', 'a.csv', 'tenant-a/file-a', 'text/csv', 10);
+    const insertJob = db.prepare("INSERT INTO processing_jobs (id, tenant_id, file_id, requested_by_user_id, processor_version) VALUES (?, ?, ?, ?, ?)");
+    assert.throws(() => insertJob.run('job-bad', 'tenant-a', 'file-a', 'user-b', '0.1.0'), /requester must have active membership/);
+  } finally {
+    db.close();
+  }
+});

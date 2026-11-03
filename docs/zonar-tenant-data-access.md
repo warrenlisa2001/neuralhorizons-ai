@@ -11,6 +11,8 @@
 - Every file/job read is constrained by both `tenant_id` and resource ID.
 - File listings exclude deleted rows and use parameterized, bounded pagination.
 - Job creation uses a single `INSERT ... SELECT` statement that verifies the file belongs to the same tenant and is in an eligible state at insert time.
+- The database also enforces a composite `(tenant_id, file_id)` foreign key, preventing a job from referencing another tenant's file even if inserted outside the repository helper.
+- File uploader and job requester identities must have active membership in the owning tenant when records are created; file/job tenant ownership cannot be reassigned.
 - Job status transitions are allow-listed and compare-and-set against the expected prior state, with tenant ID included in the update predicate.
 - No dynamic user-provided SQL is accepted.
 
