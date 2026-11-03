@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Zonar OS | Operations Workspace</title>
+<style>
+:root{color-scheme:dark;--bg:#080d12;--panel:#101922;--panel2:#14212b;--line:#233440;--muted:#91a4b1;--text:#edf5f5;--green:#00e49a;--purple:#9b83ff;--amber:#ffbd59;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}.side{border-right:1px solid var(--line);padding:26px 18px;background:#0b1218}.brand{font-size:20px;font-weight:800;letter-spacing:.08em}.brand span{color:var(--green)}.subbrand{font-size:10px;color:var(--muted);letter-spacing:.18em;margin:2px 0 34px}.nav-label{color:#718692;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin:22px 10px 8px}.nav a{display:block;color:#b7c6ce;text-decoration:none;padding:10px 12px;border-radius:8px;margin:3px 0}.nav a.active,.nav a:hover{background:#14242c;color:var(--green)}.side-note{position:sticky;top:calc(100vh - 115px);margin-top:80px;padding:12px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:11px}.main{min-width:0}.top{height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#0b1218}.crumb{color:var(--muted);font-size:12px}.tenant{display:flex;align-items:center;gap:10px;font-size:12px}.avatar{width:30px;height:30px;border-radius:50%;background:#253a42;color:var(--green);display:grid;place-items:center;font-weight:700}.content{max-width:1450px;margin:auto;padding:34px}.heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:26px}.eyebrow{color:var(--green);font-size:10px;letter-spacing:.18em;font-weight:700;text-transform:uppercase}.h1{font-size:28px;line-height:1.2;margin:5px 0 6px}.muted{color:var(--muted)}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#14212b;color:var(--text);padding:10px 14px;border-radius:8px;cursor:pointer}.btn.primary{background:var(--green);color:#06120e;border-color:var(--green);font-weight:800}.btn:hover{filter:brightness(1.12)}.notice{border:1px solid #315044;background:#10241d;color:#bfeedd;padding:12px 15px;border-radius:9px;margin-bottom:22px;font-size:12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:17px;min-width:0}.metric-label{font-size:11px;color:var(--muted)}.metric{font-size:27px;font-weight:750;letter-spacing:-.04em;margin:8px 0 3px}.metric-foot{font-size:11px;color:var(--muted)}.positive{color:var(--green)}.warning{color:var(--amber)}.negative{color:var(--red)}.section{margin-top:22px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.section-title{font-size:15px;font-weight:700}.two{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.bars{display:flex;align-items:end;gap:12px;height:175px;padding:18px 5px 0;border-bottom:1px solid var(--line)}.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:end}.bar{width:min(100%,40px);border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--green),#087f65);min-height:3px}.bar-label{font-size:10px;color:var(--muted)}.bar-value{font-size:10px;color:#c8d5db}.insight{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.insight:last-child{border:0}.dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;background:var(--amber)}.insight strong{display:block;font-size:12px;margin-bottom:3px}.insight p{margin:0;color:var(--muted);font-size:11px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:11px}th{text-align:left;color:var(--muted);font-weight:600;background:#131f28}th,td{padding:11px 12px;border-bottom:1px solid var(--line)}td{color:#d8e2e6}.pill{display:inline-block;padding:3px 7px;border-radius:99px;font-size:10px;background:#1b302a;color:var(--green)}.pill.warn{background:#352a18;color:var(--amber)}.upload{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.upload p{margin:5px 0 0;color:var(--muted);font-size:11px}.file-label{display:inline-flex;align-items:center;gap:8px;background:#172630;border:1px dashed #48606b;padding:11px 14px;border-radius:8px;cursor:pointer}.file-label input{max-width:200px;font-size:11px}.status{font-size:11px;color:var(--muted);margin-top:10px;min-height:17px}.foot{color:#637783;font-size:10px;margin-top:26px}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}}
+@media(max-width:700px){.shell{grid-template-columns:1fr}.side{display:none}.top{padding:0 18px}.content{padding:22px 16px}.heading{display:block}.actions{margin-top:16px}.grid{gap:9px}.card{padding:13px}.metric{font-size:22px}.h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+  <div class="brand">ZONAR<span>OS</span></div><div class="subbrand">BUSINESS INTELLIGENCE</div>
+  <nav class="nav">
+    <div class="nav-label">Workspace</div>
+    <a class="active" href="#overview">▦ &nbsp; Overview</a>
+    <a href="#performance">⌁ &nbsp; Performance</a>
+    <a href="#insights">✧ &nbsp; Intelligence</a>
+    <a href="#data">⇧ &nbsp; Data &amp; uploads</a>
+    <div class="nav-label">Manage</div>
+    <a href="#actions">✓ &nbsp; Action queue</a>
+  </nav>
+  <div class="side-note"><strong style="color:#dce8eb">DEMO WORKSPACE</strong><br>Sample data is illustrative. Uploaded CSV files are processed locally in this browser and are not sent to a server.</div>
+</aside>
+<main class="main">
+<header class="top"><div class="crumb">Neural Horizons AI <span style="color:#4b6571">/</span> Zonar OS <span style="color:#4b6571">/</span> Workspace</div><div class="tenant"><span class="pill">DEMO TENANT</span><div class="avatar">D</div><span>Demo Operations</span></div></header>
+<div class="content">
+<section id="overview">
+<div class="heading"><div><div class="eyebrow">Operations intelligence</div><h1 class="h1">Business overview</h1><div class="muted" style="font-size:12px">A live working preview using illustrative order and fulfilment data.</div></div><div class="actions"><button class="btn" id="resetBtn">Reset sample data</button><a class="btn primary" href="#data" style="text-decoration:none">＋ Analyse your CSV</a></div></div>
+<div class="notice"><strong>Sandbox mode:</strong> This workspace uses synthetic sample records. Nothing is stored, and no customer data is transmitted. Authentication, tenant provisioning and persistent storage will be connected in later deployment stages.</div>
+<div class="grid">
+  <div class="card"><div class="metric-label">Orders analysed</div><div class="metric" id="ordersMetric">1,284</div><div class="metric-foot">Records in current dataset</div></div>
+  <div class="card"><div class="metric-label">Order value</div><div class="metric" id="valueMetric">AED 2.84M</div><div class="metric-foot">Based on supplied order values</div></div>
+  <div class="card"><div class="metric-label">Fulfilment gap</div><div class="metric warning" id="gapMetric">AED 186K</div><div class="metric-foot">Estimated value of undelivered quantities</div></div>
+  <div class="card"><div class="metric-label">Records requiring review</div><div class="metric" id="reviewMetric">37</div><div class="metric-foot">Missing or inconsistent key fields</div></div>
+</div>
+</section>
+<section class="section two" id="performance">
+<div class="card"><div class="section-head"><div><div class="section-title">Order value by period</div><div class="muted" style="font-size:10px">Illustrative distribution from the loaded dataset</div></div><span class="pill">TREND</span></div><div class="bars" id="chart"></div></div>
+<div class="card" id="insights"><div class="section-head"><div class="section-title">Intelligence signals</div><span class="pill warn" id="signalCount">3 signals</span></div><div id="signalList"></div></div>
+</section>
+<section class="section card" id="data">
+<div class="upload"><div><div class="section-title">Data intake &amp; profiling</div><p>Load an order-level CSV to analyse its structure and calculate a first-pass operational profile.</p></div><label class="file-label">⇧ Choose CSV <input id="csvFile" type="file" accept=".csv,text/csv"></label></div>
+<div class="status" id="uploadStatus" role="status" aria-live="polite">Sample dataset loaded. Choose a CSV to replace it.</div>
+<div class="section-head" style="margin-top:18px"><div class="section-title">Dataset preview</div><span class="muted" id="datasetLabel" style="font-size:10px">Sample orders · 8 records shown</span></div>
+<div class="table-wrap"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
+</section>
+<section class="section card" id="actions">
+<div class="section-head"><div class="section-title">Recommended next actions</div><span class="pill">PRIORITISED</span></div>
+<div id="actionList">
+<div class="insight"><span class="dot"></span><div><strong>Investigate undelivered order quantities</strong><p>Compare order, dispatch and delivery records to isolate fulfilment exceptions.</p></div></div>
+<div class="insight"><span class="dot" style="background:var(--purple)"></span><div><strong>Resolve incomplete source fields</strong><p>Improve customer, SKU and order-date completeness before deeper analysis.</p></div></div>
+<div class="insight"><span class="dot" style="background:var(--green)"></span><div><strong>Connect the next operational dataset</strong><p>Bring invoice or delivery records into the same analysis to validate the exposure.</p></div></div>
+</div>
+</section>
+<div class="foot">ZONAR OS WORKSPACE PREVIEW · LOCAL BROWSER PROCESSING · NO CUSTOMER DATA PERSISTENCE</div>
+</div></main></div>
+<script>
+(function(){
+'use strict';
+const sample=[
+{order_id:'SO-10481',customer_id:'C-203',sku:'SKU-18',order_date:'2026-10-01',quantity_ordered:120,quantity_delivered:120,unit_price:85,order_value:10200},
+{order_id:'SO-10482',customer_id:'C-118',sku:'SKU-04',order_date:'2026-10-02',quantity_ordered:240,quantity_delivered:180,unit_price:42,order_value:10080},
+{order_id:'SO-10483',customer_id:'C-203',sku:'SKU-12',order_date:'2026-10-04',quantity_ordered:80,quantity_delivered:80,unit_price:125,order_value:10000},
+{order_id:'SO-10484',customer_id:'',sku:'SKU-07',order_date:'2026-10-05',quantity_ordered:160,quantity_delivered:110,unit_price:64,order_value:10240},
+{order_id:'SO-10485',customer_id:'C-091',sku:'SKU-22',order_date:'2026-10-07',quantity_ordered:300,quantity_delivered:250,unit_price:35,order_value:10500},
+{order_id:'SO-10486',customer_id:'C-144',sku:'SKU-03',order_date:'2026-10-09',quantity_ordered:90,quantity_delivered:90,unit_price:155,order_value:13950},
+{order_id:'SO-10487',customer_id:'C-118',sku:'SKU-09',order_date:'2026-10-11',quantity_ordered:200,quantity_delivered:140,unit_price:58,order_value:11600},
+{order_id:'SO-10488',customer_id:'C-077',sku:'SKU-15',order_date:'2026-10-12',quantity_ordered:150,quantity_delivered:150,unit_price:72,order_value:10800}
+];
+let records=sample.slice(),headers=Object.keys(sample[0]),sourceName='Sample orders';
+const aliases={order_id:['order_id','order_number','order_no','sales_order','transaction_id'],customer_id:['customer_id','client_id','account_id','customer_code'],sku:['sku','item_code','product_code','stock_code'],order_date:['order_date','date_ordered','created_at'],quantity_ordered:['quantity_ordered','ordered_quantity','order_qty','qty_ordered'],quantity_delivered:['quantity_delivered','delivered_quantity','delivery_qty','qty_delivered'],unit_price:['unit_price','selling_price','price_per_unit','rate'],order_value:['order_value','total_order_value','sales_value','net_amount']};
+const money=n=>'AED '+(n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?Math.round(n/1000)+'K':Math.round(n).toLocaleString());
+const number=v=>{const n=Number(String(v??'').replace(/[,\s]/g,''));return Number.isFinite(n)?n:0};
+const norm=s=>String(s??'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+function csvRows(text){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'&&text[i+1]==='"'){cell+='"';i++;}else if(c==='"')quoted=false;else cell+=c;}
+ else if(c==='"'&&cell==='')quoted=true;else if(c===','){row.push(cell);cell='';}
+ else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell='';}
+ else cell+=c;}
+ if(quoted)throw new Error('A quoted field was not closed.');row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows;
+}
+function mapRows(rows){
+ if(rows.length<2)throw new Error('The CSV needs a header row and at least one data row.');
+ const hs=rows[0].map(x=>x.replace(/^\uFEFF/,'').trim());if(hs.length>100)throw new Error('The file has more than 100 columns.');
+ const keys=hs.map(norm);if(keys.some(x=>!x))throw new Error('Every column needs a non-empty header.');
+ if(new Set(keys).size!==keys.length)throw new Error('Duplicate column headers were found. Rename them and upload again.');
+ const data=rows.slice(1);if(data.length>10000)throw new Error('The demo workspace supports up to 10,000 data rows per file.');
+ const malformed=data.filter(r=>r.length!==hs.length).length;
+ const mapped={};for(const [field,names] of Object.entries(aliases)){const i=keys.findIndex(k=>names.includes(k));mapped[field]=i<0?-1:i;}
+ const out=data.filter(r=>r.length===hs.length).map(r=>Object.fromEntries(hs.map((h,i)=>[h,r[i]])));
+ return {headers:hs,records:out,mapped,malformed};
+}
+function get(record,field){const idx=fieldIndex[field];return idx<0?undefined:record[headers[idx]];}
+let fieldIndex={};
+function rebuild(){
+ fieldIndex={};const keys=headers.map(norm);for(const [field,names] of Object.entries(aliases))fieldIndex[field]=keys.findIndex(k=>names.includes(k));
+ const count=records.length;
+ const total=records.reduce((s,r)=>s+(fieldIndex.order_value>=0?number(get(r,'order_value')):number(get(r,'quantity_ordered'))*number(get(r,'unit_price'))),0);
+ const gap=records.reduce((s,r)=>s+Math.max(0,number(get(r,'quantity_ordered'))-number(get(r,'quantity_delivered')))*number(get(r,'unit_price')),0);
+ const review=records.filter(r=>!get(r,'order_id')||!get(r,'customer_id')||!get(r,'sku')||!get(r,'order_date')).length;
+ document.getElementById('ordersMetric').textContent=count.toLocaleString();
+ document.getElementById('valueMetric').textContent=money(total);
+ document.getElementById('gapMetric').textContent=money(gap);
+ document.getElementById('reviewMetric').textContent=review.toLocaleString();
+ renderTable();renderSignals(gap,review);renderChart();
+ document.getElementById('datasetLabel').textContent=sourceName+' · '+Math.min(8,count)+' records shown';
+}
+function renderTable(){
+ const show=headers.slice(0,8);const head=document.getElementById('tableHead');head.replaceChildren();
+ const tr=document.createElement('tr');show.forEach(h=>{const th=document.createElement('th');th.textContent=h;tr.append(th)});head.append(tr);
+ const body=document.getElementById('tableBody');body.replaceChildren();
+ records.slice(0,8).forEach(r=>{const row=document.createElement('tr');show.forEach(h=>{const td=document.createElement('td');td.textContent=String(r[h]??'');row.append(td)});body.append(row)});
+}
+function renderSignals(gap,review){
+ const signals=[];if(gap>0)signals.push(['Fulfilment gap detected',money(gap)+' estimated value of undelivered quantities.']);if(review>0)signals.push(['Records need data-quality review',review+' records are missing one or more key fields.']);if(fieldIndex.quantity_ordered<0||fieldIndex.quantity_delivered<0)signals.push(['Delivery comparison unavailable','Map ordered and delivered quantity columns to calculate fulfilment gaps.']);if(!signals.length)signals.push(['No first-pass exceptions detected','The selected fields passed the basic checks. Validate against source systems before acting.']);
+ const list=document.getElementById('signalList');list.replaceChildren();signals.forEach((s,i)=>{const wrap=document.createElement('div');wrap.className='insight';const dot=document.createElement('span');dot.className='dot';if(i===1)dot.style.background='var(--purple)';const content=document.createElement('div');const strong=document.createElement('strong');strong.textContent=s[0];const p=document.createElement('p');p.textContent=s[1];content.append(strong,p);wrap.append(dot,content);list.append(wrap)});document.getElementById('signalCount').textContent=signals.length+' signals';
+}
+function renderChart(){
+ const bins={};records.forEach(r=>{const raw=get(r,'order_date');const d=raw?String(raw).slice(0,7):'Unspecified';const value=fieldIndex.order_value>=0?number(get(r,'order_value')):number(get(r,'quantity_ordered'))*number(get(r,'unit_price'));bins[d]=(bins[d]||0)+value});
+ const entries=Object.entries(bins).sort((a,b)=>a[0].localeCompare(b[0])).slice(-7);const max=Math.max(1,...entries.map(x=>x[1]));const chart=document.getElementById('chart');chart.replaceChildren();
+ entries.forEach(([label,value])=>{const wrap=document.createElement('div');wrap.className='bar-wrap';const val=document.createElement('div');val.className='bar-value';val.textContent=money(value);const bar=document.createElement('div');bar.className='bar';bar.style.height=Math.max(3,value/max*100)+'%';bar.title=label+': '+money(value);const name=document.createElement('div');name.className='bar-label';name.textContent=label==='Unspecified'?'N/A':label.slice(5);wrap.append(val,bar,name);chart.append(wrap)});
+}
+document.getElementById('csvFile').addEventListener('change',async event=>{
+ const file=event.target.files&&event.target.files[0];if(!file)return;const status=document.getElementById('uploadStatus');
+ if(file.size>2*1024*1024){status.textContent='File exceeds the 2 MB demo limit.';event.target.value='';return;}
+ try{const parsed=mapRows(csvRows(await file.text()));records=parsed.records;headers=parsed.headers;sourceName=file.name;rebuild();status.textContent='Profile complete: '+records.length+' valid-width rows loaded locally. '+parsed.malformed+' malformed rows were skipped. No file was uploaded to a server.';}
+ catch(err){status.textContent='Could not profile this CSV: '+err.message;}
+ event.target.value='';
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{records=sample.slice();headers=Object.keys(sample[0]);sourceName='Sample orders';document.getElementById('uploadStatus').textContent='Sample dataset restored.';rebuild()});
+rebuild();
+})();
+</script>
+</body>
+</html>
