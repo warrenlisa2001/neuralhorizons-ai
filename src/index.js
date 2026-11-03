@@ -206,9 +206,20 @@ function zonarNormaliseHeader(value) {
 async function handleZonarProfile(request, env) {
   if (request.method !== 'POST') return zonarJson({ error: 'METHOD_NOT_ALLOWED' }, 405);
   const token = request.headers.get('Authorization') || '';
-  if (!env.ZONAR_UPLOAD_TOKEN || !token.startsWith('Bearer ') ||
+  // Distinguish deployment configuration from an invalid client credential.
+  // Never include the configured secret or supplied token in a response or log.
+  if (!env.ZONAR_UPLOAD_TOKEN) {
+    return zonarJson({
+      error: 'AUTH_CONFIGURATION_MISSING',
+      message: 'Zonar upload authentication is not configured on this Worker.'
+    }, 503);
+  }
+  if (!token.startsWith('Bearer ') ||
       !zonarTokenMatches(token.slice(7), env.ZONAR_UPLOAD_TOKEN)) {
-    return zonarJson({ error: 'UNAUTHORISED', message: 'Zonar upload access is not configured or authorised.' }, 401);
+    return zonarJson({
+      error: 'UNAUTHORISED',
+      message: 'The supplied Zonar upload token is not valid.'
+    }, 401);
   }
   const type = (request.headers.get('Content-Type') || '').toLowerCase();
   if (!type.startsWith('text/csv') && !type.startsWith('text/plain')) {
