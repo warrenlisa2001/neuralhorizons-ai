@@ -32,6 +32,9 @@ on:
       - "tests/zonar-tenant-schema.test.mjs"
       - "tests/zonar-auth.test.mjs"
       - "tests/zonar-permissions.test.mjs"
+      - "tests/zonar-tenant-access-route.test.mjs"
+      - "tests/zonar-tenant-data.test.mjs"
+      - "tests/zonar-audit.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
 
 jobs:
