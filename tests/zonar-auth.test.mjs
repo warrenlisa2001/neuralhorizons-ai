@@ -9,8 +9,8 @@ const encoder = new TextEncoder();
 const b64url = value => Buffer.from(value).toString('base64url');
 const jsonPart = value => b64url(JSON.stringify(value));
 
-async function createToken(privateKey, claims, kid = 'test-key') {
-  const header = jsonPart({ alg: 'RS256', typ: 'JWT', kid });
+async function createToken(privateKey, claims, kid = 'test-key', headerOverrides = {}) {
+  const header = jsonPart({ alg: 'RS256', typ: 'JWT', kid, ...headerOverrides });
   const payload = jsonPart(claims);
   const input = encoder.encode(header + '.' + payload);
   const signature = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', privateKey, input);
@@ -30,9 +30,14 @@ async function fixture() {
   jwk.use = 'sig';
   jwk.alg = 'RS256';
   const oldFetch = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ keys: [jwk] }), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  let publishedKeys = [jwk];
+  let fetchCount = 0;
+  globalThis.fetch = async () => {
+    fetchCount++;
+    return new Response(JSON.stringify({ keys: publishedKeys }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  };
   const now = Math.floor(Date.now() / 1000);
   const env = {
     ZONAR_ISSUER: 'https://identity.example/',
@@ -59,7 +64,12 @@ async function fixture() {
   const token = await createToken(pair.privateKey, {
     iss: env.ZONAR_ISSUER, aud: env.ZONAR_AUDIENCE, sub: 'user-123', exp: now + 300
   });
-  return { env, token, privateKey: pair.privateKey, now, restore: () => { globalThis.fetch = oldFetch; } };
+  return {
+    env, token, privateKey: pair.privateKey, jwk, now,
+    publishKeys: keys => { publishedKeys = keys; },
+    getFetchCount: () => fetchCount,
+    restore: () => { globalThis.fetch = oldFetch; }
+  };
 }
 
 test('valid identity receives only its active tenant membership', async () => {
@@ -117,5 +127,105 @@ test('missing bearer token fails closed', async () => {
   try {
     const result = await authenticateZonarTenant(new Request('https://api.example'), f.env, 'tenant-a');
     assert.equal(result.status, 401);
+  } finally { f.restore(); }
+});
+
+test('unknown signing key refreshes cached JWKS once for key rotation', async () => {
+  const f = await fixture();
+  try {
+    const first = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(first.ok, true);
+    const rotated = await crypto.subtle.generateKey(
+      { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' },
+      true, ['sign', 'verify']);
+    const nextJwk = await crypto.subtle.exportKey('jwk', rotated.publicKey);
+    Object.assign(nextJwk, { kid: 'rotated-key', use: 'sig', alg: 'RS256' });
+    f.publishKeys([nextJwk]);
+    const rotatedToken = await createToken(rotated.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300
+    }, 'rotated-key');
+    const result = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + rotatedToken } }), f.env, 'tenant-a');
+    assert.equal(result.ok, true);
+    assert.equal(f.getFetchCount(), 2);
+  } finally { f.restore(); }
+});
+
+test('rejects critical or unsupported JOSE header parameters', async () => {
+  const f = await fixture();
+  try {
+    const token = await createToken(f.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300
+    }, 'test-key', { crit: ['b64'], b64: false });
+    const result = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + token } }), f.env, 'tenant-a');
+    assert.equal(result.status, 401);
+  } finally { f.restore(); }
+});
+
+test('rejects malformed and duplicate-kid JWKS documents', async () => {
+  const f = await fixture();
+  try {
+    f.publishKeys([f.jwk, { ...f.jwk }]);
+    const result = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(result.status, 401);
+  } finally { f.restore(); }
+});
+
+test('rejects an oversized JWKS response before parsing', async () => {
+  const f = await fixture();
+  const oldFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response(' '.repeat(65537), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const result = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(result.status, 401);
+  } finally {
+    globalThis.fetch = oldFetch;
+    f.restore();
+  }
+});
+
+test('tenant identifiers are validated before identity-provider or database work', async () => {
+  const f = await fixture();
+  try {
+    const result = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant/a');
+    assert.deepEqual(result, { ok: false, status: 400, error: 'INVALID_TENANT' });
+    assert.equal(f.getFetchCount(), 0);
+  } finally { f.restore(); }
+});
+
+test('bearer scheme is case-insensitive but token whitespace is rejected', async () => {
+  const f = await fixture();
+  try {
+    const accepted = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(accepted.ok, true);
+    const rejected = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token + ' extra' } }), f.env, 'tenant-a');
+    assert.equal(rejected.status, 401);
+  } finally { f.restore(); }
+});
+
+test('unknown-kid refresh cooldown prevents repeated JWKS fetches', async () => {
+  const f = await fixture();
+  try {
+    const first = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(first.ok, true);
+    const unknownTokens = await Promise.all(['unknown-one', 'unknown-two'].map(kid => createToken(f.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300
+    }, kid)));
+    for (const token of unknownTokens) {
+      const result = await authenticateZonarTenant(
+        new Request('https://api.example', { headers: { Authorization: 'Bearer ' + token } }), f.env, 'tenant-a');
+      assert.equal(result.status, 401);
+    }
+    assert.equal(f.getFetchCount(), 2);
   } finally { f.restore(); }
 });
