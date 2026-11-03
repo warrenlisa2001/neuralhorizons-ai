@@ -224,11 +224,7 @@ async function handleZonarProfile(request, env) {
   if (!token.startsWith('Bearer ')) {
     return zonarJson({
       error: 'UNAUTHORISED',
-      message: 'Authorization header missing or Bearer prefix invalid.',
-      diagnostic: {
-        authorization_header_present: Boolean(authorization),
-        bearer_prefix_present: false
-      }
+      message: 'Valid authentication is required.'
     }, 401);
   }
 
@@ -239,14 +235,7 @@ async function handleZonarProfile(request, env) {
   if (!zonarTokenMatches(suppliedToken, configuredToken)) {
     return zonarJson({
       error: 'UNAUTHORISED',
-      message: 'Token comparison failed.',
-      diagnostic: {
-        authorization_header_present: true,
-        bearer_prefix_present: true,
-        supplied_token_length: suppliedToken.length,
-        configured_token_length: configuredToken.length,
-        token_lengths_match: suppliedToken.length === configuredToken.length
-      }
+      message: 'Valid authentication is required.'
     }, 401);
   }
 
