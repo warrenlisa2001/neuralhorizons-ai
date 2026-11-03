@@ -50,6 +50,9 @@ async function verifyZonarAccessToken(token, env) {
   if (!env.ZONAR_ISSUER || !env.ZONAR_AUDIENCE || !env.ZONAR_JWKS_URL) {
     throw new Error('AUTH_CONFIGURATION_MISSING');
   }
+  let jwksUrl;
+  try { jwksUrl = new URL(env.ZONAR_JWKS_URL); } catch { throw new Error('AUTH_CONFIGURATION_MISSING'); }
+  if (jwksUrl.protocol !== 'https:') throw new Error('AUTH_CONFIGURATION_MISSING');
 
   const parts = token.split('.');
   if (parts.length !== 3) throw new Error('INVALID_TOKEN');
@@ -75,8 +78,8 @@ async function verifyZonarAccessToken(token, env) {
   if (claims.iss !== env.ZONAR_ISSUER ||
       !audienceValid ||
       typeof claims.sub !== 'string' || !claims.sub ||
-      typeof claims.exp !== 'number' || claims.exp <= now ||
-      (claims.nbf !== undefined && (typeof claims.nbf !== 'number' || claims.nbf > now))) {
+      typeof claims.exp !== 'number' || !Number.isFinite(claims.exp) || claims.exp <= now ||
+      (claims.nbf !== undefined && (typeof claims.nbf !== 'number' || !Number.isFinite(claims.nbf) || claims.nbf > now))) {
     throw new Error('INVALID_TOKEN');
   }
 
