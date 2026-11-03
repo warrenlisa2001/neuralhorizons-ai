@@ -50,3 +50,37 @@ test('identity subjects and invitation token hashes are unique', () => {
     db.close();
   }
 });
+
+test('audit events require a tenant and an active same-tenant actor', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-b', 'Business B');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-a', 'https://issuer.example', 'subject-a');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-b', 'https://issuer.example', 'subject-b');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-a', 'user-a', 'tenant_owner');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-b', 'user-b', 'tenant_owner');
+
+    const insert = db.prepare("INSERT INTO audit_events (id, tenant_id, actor_user_id, event_type, outcome) VALUES (?, ?, ?, ?, ?)");
+    insert.run('event-a', 'tenant-a', 'user-a', 'tenant.created', 'success');
+    assert.throws(() => insert.run('event-cross', 'tenant-a', 'user-b', 'tenant.created', 'success'), /active membership/);
+    assert.throws(() => insert.run('event-null', null, null, 'system.event', 'success'), /NOT NULL/);
+  } finally {
+    db.close();
+  }
+});
+
+test('audit history is immutable through ordinary SQL statements', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO audit_events (id, tenant_id, event_type, outcome) VALUES (?, ?, ?, ?)").run('event-a', 'tenant-a', 'tenant.created', 'success');
+    assert.throws(() => db.prepare("UPDATE audit_events SET outcome = ? WHERE id = ?").run('failure', 'event-a'), /immutable/);
+    assert.throws(() => db.prepare("DELETE FROM audit_events WHERE id = ?").run('event-a'), /immutable/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS count FROM audit_events").get().count, 1);
+  } finally {
+    db.close();
+  }
+});
