@@ -98,10 +98,9 @@ test('sets defensive security headers on API responses', async () => {
   assert.equal(response.headers.get('Cache-Control'), 'no-store');
 });
 
-test('rejects an oversized declared request body before reading it', async () => {
-  const response = await send('small body', {
-    extraHeaders: { 'Content-Length': String(2 * 1024 * 1024 + 1) }
-  });
+test('rejects an oversized upload while streaming the request body', async () => {
+  const oversizedCsv = 'x'.repeat(2 * 1024 * 1024 + 1);
+  const response = await send(oversizedCsv);
   assert.equal(response.status, 413);
   assert.equal((await response.json()).error, 'UPLOAD_TOO_LARGE');
 });
