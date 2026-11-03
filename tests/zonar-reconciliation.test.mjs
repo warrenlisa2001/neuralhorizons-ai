@@ -74,3 +74,17 @@ test('handles blank numeric fields as unknown rather than zero', () => {
   assert.equal(result.reconciled[0].invoice_value, null);
   assert.equal(result.summary.exception_count, 0);
 });
+
+
+test('keeps financial and quantity values unknown when an order has no linked records', () => {
+  const result = reconcileDatasets({
+    orders: [{ order_id: 'O-EMPTY', quantity_ordered: '12', order_value: '240' }]
+  });
+  assert.equal(result.reconciled[0].quantity_invoiced, null);
+  assert.equal(result.reconciled[0].quantity_delivered, null);
+  assert.equal(result.reconciled[0].invoice_value, null);
+  assert.equal(result.reconciled[0].status, 'incomplete');
+  assert.equal(result.summary.linked_order_count, 0);
+  assert.ok(result.exceptions.some(item => item.code === 'ORDER_NOT_INVOICED'));
+  assert.ok(result.exceptions.some(item => item.code === 'ORDER_NOT_DELIVERED'));
+});
