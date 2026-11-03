@@ -17,9 +17,22 @@ function send(body, { method = 'POST', token = TOKEN, contentType = 'text/csv' }
   }), { ZONAR_UPLOAD_TOKEN: TOKEN }, {});
 }
 
-test('rejects requests without the configured token', async () => {
+test('rejects requests without the configured token and exposes no diagnostics', async () => {
   const response = await send('order_id,quantity_ordered\nA1,2', { token: null });
   assert.equal(response.status, 401);
+  const body = await response.json();
+  assert.equal(body.error, 'UNAUTHORISED');
+  assert.equal(body.diagnostic, undefined);
+  assert.equal(JSON.stringify(body).includes(TOKEN), false);
+});
+
+test('rejects incorrect tokens without revealing token details', async () => {
+  const response = await send('order_id,quantity_ordered\nA1,2', { token: 'incorrect-test-token' });
+  assert.equal(response.status, 401);
+  const body = await response.json();
+  assert.equal(body.error, 'UNAUTHORISED');
+  assert.equal(body.diagnostic, undefined);
+  assert.equal(JSON.stringify(body).includes('length'), false);
 });
 
 test('profiles CSV headers, rows, mappings and preview', async () => {
