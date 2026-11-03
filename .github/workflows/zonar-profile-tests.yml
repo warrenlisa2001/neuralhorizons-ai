@@ -11,6 +11,7 @@ on:
       - "tests/zonar-tenant-schema.test.mjs"
       - "tests/zonar-auth.test.mjs"
       - "tests/zonar-permissions.test.mjs"
+      - "tests/zonar-tenant-access-route.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
   push:
     branches:
@@ -38,4 +39,4 @@ jobs:
         with:
           node-version: 22
       - name: Run Zonar security, schema, authentication and permissions tests
-        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs
