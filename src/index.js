@@ -158,7 +158,15 @@ const ZONAR_ALIASES = {
 function zonarJson(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'Referrer-Policy': 'no-referrer',
+      'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
+      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
+    }
   });
 }
 
@@ -237,6 +245,17 @@ async function handleZonarProfile(request, env) {
       error: 'UNAUTHORISED',
       message: 'Valid authentication is required.'
     }, 401);
+  }
+
+  // Reject an oversized declared body early; streaming byte enforcement below
+  // remains authoritative because Content-Length is client-supplied.
+  const declaredLength = request.headers.get('Content-Length');
+  if (declaredLength !== null && /^\\d+$/.test(declaredLength) &&
+      Number(declaredLength) > ZONAR_MAX_BYTES) {
+    return zonarJson({
+      error: 'UPLOAD_TOO_LARGE',
+      max_bytes: ZONAR_MAX_BYTES
+    }, 413);
   }
 
   // Check the uploaded file content type.

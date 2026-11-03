@@ -7,14 +7,20 @@ const workerModule = await import('data:text/javascript;base64,' + Buffer.from(s
 const worker = workerModule.default;
 const TOKEN = 'local-test-token';
 
-function send(body, { method = 'POST', token = TOKEN, contentType = 'text/csv' } = {}) {
-  const headers = { 'Content-Type': contentType };
+function send(body, {
+  method = 'POST',
+  token = TOKEN,
+  contentType = 'text/csv',
+  extraHeaders = {},
+  env = { ZONAR_UPLOAD_TOKEN: TOKEN }
+} = {}) {
+  const headers = { 'Content-Type': contentType, ...extraHeaders };
   if (token) headers.Authorization = 'Bearer ' + token;
   return worker.fetch(new Request('https://example.test/api/zonar/profile', {
     method,
     headers,
     body: method === 'GET' ? undefined : body
-  }), { ZONAR_UPLOAD_TOKEN: TOKEN }, {});
+  }), env, {});
 }
 
 test('rejects requests without the configured token and exposes no diagnostics', async () => {
@@ -79,4 +85,34 @@ test('rejects non-POST methods', async () => {
 test('rejects unsupported media types', async () => {
   const response = await send('a,b\n1,2', { contentType: 'application/json' });
   assert.equal(response.status, 415);
+});
+
+
+test('sets defensive security headers on API responses', async () => {
+  const response = await send('order_id,quantity_ordered\\nA1,2');
+  assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
+  assert.equal(response.headers.get('X-Frame-Options'), 'DENY');
+  assert.equal(response.headers.get('Referrer-Policy'), 'no-referrer');
+  assert.equal(response.headers.get('Content-Security-Policy'), "default-src 'none'; frame-ancestors 'none'");
+  assert.equal(response.headers.get('Permissions-Policy'), 'camera=(), microphone=(), geolocation=()');
+  assert.equal(response.headers.get('Cache-Control'), 'no-store');
+});
+
+test('rejects an oversized upload while streaming the request body', async () => {
+  const oversizedCsv = 'x'.repeat(2 * 1024 * 1024 + 1);
+  const response = await send(oversizedCsv);
+  assert.equal(response.status, 413);
+  assert.equal((await response.json()).error, 'UPLOAD_TOO_LARGE');
+});
+
+test('rejects invalid UTF-8 input', async () => {
+  const response = await send(new Uint8Array([0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x2c, 0x78, 0x0a, 0xff]));
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).error, 'INVALID_ENCODING');
+});
+
+test('fails closed when the upload secret is not configured', async () => {
+  const response = await send('order_id,quantity_ordered\\nA1,2', { env: {} });
+  assert.equal(response.status, 503);
+  assert.equal((await response.json()).error, 'AUTH_CONFIGURATION_MISSING');
 });
