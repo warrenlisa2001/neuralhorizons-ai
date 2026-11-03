@@ -17,6 +17,8 @@ async function createToken(privateKey, claims, kid = 'test-key') {
   return header + '.' + payload + '.' + b64url(signature);
 }
 
+let fixtureNumber = 0;
+
 async function fixture() {
   const pair = await crypto.subtle.generateKey(
     { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' },
@@ -35,7 +37,7 @@ async function fixture() {
   const env = {
     ZONAR_ISSUER: 'https://identity.example/',
     ZONAR_AUDIENCE: 'zonar-api',
-    ZONAR_JWKS_URL: 'https://identity.example/.well-known/jwks.json',
+    ZONAR_JWKS_URL: 'https://identity.example/.well-known/jwks.json?fixture=' + (++fixtureNumber),
     ZONAR_DB: {
       prepare(sql) {
         assert.match(sql, /m\.tenant_id = \?3/);
