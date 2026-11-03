@@ -4,11 +4,9 @@ on:
   pull_request:
     paths:
       - "src/index.js"
+      - "migrations/**"
       - "tests/zonar-profile.test.mjs"
       - "tests/zonar-tenant-schema.test.mjs"
-      - "migrations/**"
-      - "tests/zonar-tenant-schema.test.mjs"
-      - "migrations/**"
       - ".github/workflows/zonar-profile-tests.yml"
   push:
     branches:
@@ -16,7 +14,9 @@ on:
       - "feature/zonar-csv-profile"
     paths:
       - "src/index.js"
+      - "migrations/**"
       - "tests/zonar-profile.test.mjs"
+      - "tests/zonar-tenant-schema.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
 
 jobs:
