@@ -54,4 +54,4 @@ jobs:
         with:
           node-version: 22
       - name: Run Zonar security, schema, authentication and permissions tests
-        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-reconciliation.test.mjs
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-reconciliation.test.mjs tests/zonar-csv-ingestion.test.mjs
