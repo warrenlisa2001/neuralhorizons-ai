@@ -34,6 +34,6 @@ Never trust a role, tenant ID, user ID or permission supplied by the client. Eve
 
 ## Limits
 
-This is the permission policy module and its unit tests. It does not yet protect existing routes automatically, because the existing CSV profiler is a temporary shared-token, memory-only endpoint and there are no persistent tenant data routes. The policy must be wired into every tenant-scoped handler before customer data is stored or processed.
+A first protected route is now wired at `GET /api/zonar/tenants/{tenantId}/access`. It verifies the bearer JWT, checks active membership in the requested tenant, applies `tenant:read`, and returns only the verified tenant ID and role. Cross-tenant access is denied. The route is currently fail-closed because no identity provider or D1 binding has been configured. The existing CSV profiler remains a separate temporary shared-token, memory-only endpoint. Every future tenant-scoped handler must repeat the authentication and permission checks before accessing customer data.
 
 Role names and permissions are an initial product policy and should be reviewed before enabling external customer accounts.
