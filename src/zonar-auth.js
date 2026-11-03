@@ -4,6 +4,8 @@
 const MAX_BEARER_TOKEN_LENGTH = 8192;
 const MAX_JWKS_BYTES = 64 * 1024;
 const JWKS_CACHE_TTL_MS = 5 * 60 * 1000;
+const JWKS_UNKNOWN_KID_REFRESH_COOLDOWN_MS = 30 * 1000;
+let lastUnknownKidRefresh = { url: null, at: 0 };
 let jwksCache = { url: null, expiresAt: 0, keys: null };
 
 function base64UrlToBytes(value) {
@@ -130,11 +132,16 @@ async function verifyZonarAccessToken(token, env) {
     throw new Error('INVALID_TOKEN');
   }
 
+  const hadFreshCache = jwksCache.url === env.ZONAR_JWKS_URL &&
+    jwksCache.expiresAt > Date.now() && Array.isArray(jwksCache.keys);
   let keys = await loadJwks(env.ZONAR_JWKS_URL);
   let jwk = keys.find(key => key.kid === header.kid);
-  // Refresh once on an unknown kid so legitimate signing-key rotation is not
-  // blocked by the five-minute isolate cache. A second miss remains a denial.
-  if (!jwk) {
+  // Refresh only when a previously cached set lacks the kid. Cool down forced
+  // refreshes so attacker-chosen kids cannot turn every request into a fetch.
+  if (!jwk && hadFreshCache &&
+      (lastUnknownKidRefresh.url !== env.ZONAR_JWKS_URL ||
+       Date.now() - lastUnknownKidRefresh.at >= JWKS_UNKNOWN_KID_REFRESH_COOLDOWN_MS)) {
+    lastUnknownKidRefresh = { url: env.ZONAR_JWKS_URL, at: Date.now() };
     keys = await loadJwks(env.ZONAR_JWKS_URL, true);
     jwk = keys.find(key => key.kid === header.kid);
   }
