@@ -147,3 +147,33 @@ BEFORE DELETE ON audit_events
 BEGIN
   SELECT RAISE(ABORT, 'audit events are immutable');
 END;
+
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_actor_tenant_membership
+BEFORE INSERT ON audit_events
+WHEN NEW.actor_user_id IS NOT NULL
+ AND NOT EXISTS (
+   SELECT 1 FROM memberships m
+   INNER JOIN users u ON u.id = m.user_id
+   INNER JOIN tenants t ON t.id = m.tenant_id
+   WHERE m.tenant_id = NEW.tenant_id
+     AND m.user_id = NEW.actor_user_id
+     AND m.status = 'active'
+     AND u.status = 'active'
+     AND t.status = 'active'
+ )
+BEGIN
+  SELECT RAISE(ABORT, 'audit actor must have active membership in tenant');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_update
+BEFORE UPDATE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_delete
+BEFORE DELETE ON audit_events
+BEGIN
+  SELECT RAISE(ABORT, 'audit events are immutable');
+END;
