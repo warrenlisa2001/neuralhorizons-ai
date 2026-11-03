@@ -29,7 +29,8 @@ const ALLOWED_DETAIL_KEYS = new Set([
 
 function serializeSafeDetails(details) {
   if (details == null) return null;
-  if (!details || typeof details !== 'object' || Array.isArray(details)) {
+  if (!details || typeof details !== 'object' || Array.isArray(details) ||
+      (Object.getPrototypeOf(details) !== Object.prototype && Object.getPrototypeOf(details) !== null)) {
     throw new TypeError('Audit details must be a plain object');
   }
   const keys = Object.keys(details);
@@ -38,6 +39,10 @@ function serializeSafeDetails(details) {
   for (const key of keys) {
     if (!ALLOWED_DETAIL_KEYS.has(key)) throw new TypeError('Unsupported audit detail field');
     const value = details[key];
+    if ((key === 'count' || key === 'bytes') &&
+        (!Number.isSafeInteger(value) || value < 0)) {
+      throw new TypeError('Invalid audit detail value');
+    }
     if (value === null || typeof value === 'boolean' ||
         (typeof value === 'number' && Number.isFinite(value))) {
       safe[key] = value;
@@ -79,7 +84,15 @@ export async function appendTenantAuditEvent(db, input) {
     `INSERT INTO audit_events
        (id, tenant_id, actor_user_id, event_type, resource_type,
         resource_id, request_id, outcome, details_json)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)`
+     SELECT ?1, t.id, ?3, ?4, ?5, ?6, ?7, ?8, ?9
+     FROM tenants t
+     WHERE t.id = ?2 AND t.status = 'active'
+       AND (?3 IS NULL OR EXISTS (
+         SELECT 1 FROM users u
+         INNER JOIN memberships m ON m.user_id = u.id
+         WHERE u.id = ?3 AND u.status = 'active'
+           AND m.tenant_id = t.id AND m.status = 'active'
+       ))`
   ).bind(id, tenantId, actorUserId, eventType, resourceType,
     resourceId, requestId, input.outcome, detailsJson).run());
 
