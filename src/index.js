@@ -1,3 +1,6 @@
+import { authenticateZonarTenant } from './zonar-auth.js';
+import { authorizeZonarAction } from './zonar-permissions.js';
+
 // Neural Horizons AI — Cloudflare Worker
 // Serves the static site (dist/) and a small live AI-news API used by the
 // homepage ticker (#nhTicker). The news endpoint pulls real, dated headlines
@@ -132,6 +135,13 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
+    }
+    const tenantAccessMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/access$/);
+    if (tenantAccessMatch) {
+      let tenantId;
+      try { tenantId = decodeURIComponent(tenantAccessMatch[1]); }
+      catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
+      return handleZonarTenantAccess(request, env, tenantId);
     }
     if (url.pathname === '/api/zonar/profile') {
       return handleZonarProfile(request, env);
@@ -408,4 +418,33 @@ async function handleZonarProfile(request, env) {
 
     return zonarJson({ error: 'PROFILE_FAILED' }, 400);
   }
+}
+
+
+/**
+ * Minimal authenticated tenant-access endpoint.
+ * It exposes only the current tenant ID and verified role; no customer records.
+ */
+export async function handleZonarTenantAccess(request, env, tenantId) {
+  if (request.method !== 'GET') {
+    return zonarJson({ error: 'METHOD_NOT_ALLOWED' }, 405);
+  }
+
+  const authentication = await authenticateZonarTenant(request, env, tenantId);
+  if (!authentication.ok) {
+    return zonarJson({ error: authentication.error }, authentication.status);
+  }
+
+  const authorization = authorizeZonarAction(authentication, 'tenant:read');
+  if (!authorization.ok) {
+    return zonarJson({ error: authorization.error }, authorization.status);
+  }
+
+  return zonarJson({
+    success: true,
+    tenant: {
+      id: authorization.tenantId,
+      role: authorization.role
+    }
+  });
 }
