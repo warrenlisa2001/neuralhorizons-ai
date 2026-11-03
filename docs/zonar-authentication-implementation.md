@@ -43,8 +43,10 @@ Never accept a tenant ID from an untrusted request body as proof of access. Neve
 - No identity provider has been selected, connected or configured.
 - No D1 database has been created or bound.
 - The existing CSV profile endpoint still uses its temporary shared upload token and remains memory-only.
-- This helper is not yet wired into a customer-facing route.
-- It does not implement login, invitation acceptance, MFA policy, role-to-action policy, session management or user provisioning.
+- A first protected tenant access route is implemented at `GET /api/zonar/tenants/{tenantId}/access`; it verifies identity and membership and applies `tenant:read`.
+- Role-to-action policy is implemented in `src/zonar-permissions.js`.
+- Tenant-scoped D1 repository primitives are implemented separately in `src/zonar-tenant-data.js`, but are not yet wired into customer-facing file/job routes.
+- It does not implement login UI, invitation acceptance, MFA policy, session management or user provisioning.
 - No R2 storage, tenant file persistence, backup or restore has been enabled.
 - Unit tests validate token verification and cross-tenant membership denial with a mocked JWKS endpoint and database; they are not a penetration test or live provider integration test.
 
