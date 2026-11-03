@@ -6,7 +6,7 @@
 
 ## Controls
 
-- Append operations require a server-derived tenant ID and optional server-derived actor ID.
+- Append operations require a server-derived tenant ID and optional server-derived actor ID. The insert itself checks that the tenant is active and, when an actor is supplied, that the actor is an active user with an active membership in that same tenant.
 - Event type and outcome are validated; all values are parameter-bound.
 - Detail payloads are restricted to an explicit metadata key allow-list. Access tokens, passwords, email addresses and arbitrary free-form fields are not accepted.
 - Audit reads always filter by tenant ID and use bounded, stable pagination.
