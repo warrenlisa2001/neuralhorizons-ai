@@ -32,6 +32,8 @@ test('audit append binds tenant, actor and safe metadata as parameters', async (
   });
   assert.deepEqual(result, { created: true });
   assert.match(db.calls[0].sql, /INSERT INTO audit_events/);
+  assert.match(db.calls[0].sql, /FROM tenants t[\\s\\S]*t.status = 'active'/);
+  assert.match(db.calls[0].sql, /m.tenant_id = t.id AND m.status = 'active'/);
   assert.deepEqual(db.calls[0].bindings, [
     'event-1', 'tenant-a', 'user-a', 'file.uploaded', 'file', 'file-1',
     'req-1', 'success', JSON.stringify({ action: 'upload', file_id: 'file-1', bytes: 1024 })
@@ -98,4 +100,15 @@ test('audit D1 failures surface to caller', async () => {
     id: 'event-1', tenantId: 'tenant-a', eventType: 'file.uploaded',
     outcome: 'success'
   }), /D1 operation failed/);
+});
+
+test('audit append rejects non-plain details and negative counters', async () => {
+  await assert.rejects(() => appendTenantAuditEvent(fakeDb(), {
+    id: 'event-3', tenantId: 'tenant-a', eventType: 'file.uploaded',
+    outcome: 'success', details: new Date()
+  }), /plain object/);
+  await assert.rejects(() => appendTenantAuditEvent(fakeDb(), {
+    id: 'event-4', tenantId: 'tenant-a', eventType: 'file.uploaded',
+    outcome: 'success', details: { bytes: -1 }
+  }), /Invalid audit detail value/);
 });
