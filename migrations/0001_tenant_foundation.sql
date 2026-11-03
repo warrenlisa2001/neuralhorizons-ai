@@ -65,13 +65,14 @@ CREATE TABLE IF NOT EXISTS tenant_files (
   status TEXT NOT NULL DEFAULT 'received'
     CHECK (status IN ('received', 'processing', 'processed', 'failed', 'quarantined', 'deletion_pending', 'deleted')),
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
-  deleted_at TEXT
+  deleted_at TEXT,
+  UNIQUE (tenant_id, id)
 );
 
 CREATE TABLE IF NOT EXISTS processing_jobs (
   id TEXT PRIMARY KEY,
   tenant_id TEXT NOT NULL REFERENCES tenants(id) ON DELETE RESTRICT,
-  file_id TEXT NOT NULL REFERENCES tenant_files(id) ON DELETE RESTRICT,
+  file_id TEXT NOT NULL,
   requested_by_user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
   processor_version TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'queued'
@@ -80,7 +81,8 @@ CREATE TABLE IF NOT EXISTS processing_jobs (
   error_code TEXT,
   started_at TEXT,
   completed_at TEXT,
-  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+  FOREIGN KEY (tenant_id, file_id) REFERENCES tenant_files(tenant_id, id) ON DELETE RESTRICT
 );
 
 -- Audit rows are append-only at the database layer. Do not cascade-delete them.
@@ -149,31 +151,52 @@ BEGIN
 END;
 
 
-CREATE TRIGGER IF NOT EXISTS trg_audit_actor_tenant_membership
-BEFORE INSERT ON audit_events
-WHEN NEW.actor_user_id IS NOT NULL
+-- File ownership and recorded uploader must agree at insertion.
+CREATE TRIGGER IF NOT EXISTS trg_tenant_file_uploader_membership
+BEFORE INSERT ON tenant_files
+WHEN NEW.uploaded_by_user_id IS NOT NULL
  AND NOT EXISTS (
    SELECT 1 FROM memberships m
    INNER JOIN users u ON u.id = m.user_id
    INNER JOIN tenants t ON t.id = m.tenant_id
    WHERE m.tenant_id = NEW.tenant_id
-     AND m.user_id = NEW.actor_user_id
+     AND m.user_id = NEW.uploaded_by_user_id
      AND m.status = 'active'
      AND u.status = 'active'
      AND t.status = 'active'
  )
 BEGIN
-  SELECT RAISE(ABORT, 'audit actor must have active membership in tenant');
+  SELECT RAISE(ABORT, 'file uploader must have active membership in tenant');
 END;
 
-CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_update
-BEFORE UPDATE ON audit_events
+CREATE TRIGGER IF NOT EXISTS trg_tenant_file_owner_immutable
+BEFORE UPDATE OF id, tenant_id ON tenant_files
+WHEN NEW.id <> OLD.id OR NEW.tenant_id <> OLD.tenant_id
 BEGIN
-  SELECT RAISE(ABORT, 'audit events are immutable');
+  SELECT RAISE(ABORT, 'file tenant ownership is immutable');
 END;
 
-CREATE TRIGGER IF NOT EXISTS trg_audit_events_no_delete
-BEFORE DELETE ON audit_events
+-- Job requester must belong to the same tenant as the referenced file.
+CREATE TRIGGER IF NOT EXISTS trg_processing_job_requester_membership
+BEFORE INSERT ON processing_jobs
+WHEN NEW.requested_by_user_id IS NOT NULL
+ AND NOT EXISTS (
+   SELECT 1 FROM memberships m
+   INNER JOIN users u ON u.id = m.user_id
+   INNER JOIN tenants t ON t.id = m.tenant_id
+   WHERE m.tenant_id = NEW.tenant_id
+     AND m.user_id = NEW.requested_by_user_id
+     AND m.status = 'active'
+     AND u.status = 'active'
+     AND t.status = 'active'
+ )
 BEGIN
-  SELECT RAISE(ABORT, 'audit events are immutable');
+  SELECT RAISE(ABORT, 'job requester must have active membership in tenant');
+END;
+
+CREATE TRIGGER IF NOT EXISTS trg_processing_job_owner_immutable
+BEFORE UPDATE OF id, tenant_id, file_id ON processing_jobs
+WHEN NEW.id <> OLD.id OR NEW.tenant_id <> OLD.tenant_id OR NEW.file_id <> OLD.file_id
+BEGIN
+  SELECT RAISE(ABORT, 'processing job tenant ownership is immutable');
 END;
