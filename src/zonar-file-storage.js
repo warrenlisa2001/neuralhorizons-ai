@@ -150,6 +150,16 @@ export async function handleZonarTenantFiles(request, env, tenantId) {
       }
     }, 201);
   } catch {
+    // Compensate both stores if metadata or audit persistence fails after the
+    // object write. Keep a tombstone rather than leaving a visible row whose
+    // R2 object has been removed.
+    try {
+      await env.ZONAR_DB.prepare(
+        `UPDATE tenant_files
+         SET status = 'deleted', deleted_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+         WHERE tenant_id = ?1 AND id = ?2 AND status = 'received'`
+      ).bind(allowed.tenantId, fileId).run();
+    } catch {}
     try { await env.ZONAR_FILES.delete(objectKey); } catch {}
     return json({ error: 'FILE_UPLOAD_FAILED' }, 503);
   }
