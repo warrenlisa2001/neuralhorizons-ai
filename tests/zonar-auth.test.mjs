@@ -9,8 +9,8 @@ const encoder = new TextEncoder();
 const b64url = value => Buffer.from(value).toString('base64url');
 const jsonPart = value => b64url(JSON.stringify(value));
 
-async function createToken(privateKey, claims, kid = 'test-key') {
-  const header = jsonPart({ alg: 'RS256', typ: 'JWT', kid });
+async function createToken(privateKey, claims, kid = 'test-key', headerOverrides = {}) {
+  const header = jsonPart({ alg: 'RS256', typ: 'JWT', kid, ...headerOverrides });
   const payload = jsonPart(claims);
   const input = encoder.encode(header + '.' + payload);
   const signature = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', privateKey, input);
@@ -30,9 +30,14 @@ async function fixture() {
   jwk.use = 'sig';
   jwk.alg = 'RS256';
   const oldFetch = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ keys: [jwk] }), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  let publishedKeys = [jwk];
+  let fetchCount = 0;
+  globalThis.fetch = async () => {
+    fetchCount++;
+    return new Response(JSON.stringify({ keys: publishedKeys }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  };
   const now = Math.floor(Date.now() / 1000);
   const env = {
     ZONAR_ISSUER: 'https://identity.example/',
@@ -59,7 +64,12 @@ async function fixture() {
   const token = await createToken(pair.privateKey, {
     iss: env.ZONAR_ISSUER, aud: env.ZONAR_AUDIENCE, sub: 'user-123', exp: now + 300
   });
-  return { env, token, privateKey: pair.privateKey, jwk, now,\n    publishKeys: keys => { publishedKeys = keys; },\n    getFetchCount: () => fetchCount,\n    restore: () => { globalThis.fetch = oldFetch; } };
+  return {
+    env, token, privateKey: pair.privateKey, jwk, now,
+    publishKeys: keys => { publishedKeys = keys; },
+    getFetchCount: () => fetchCount,
+    restore: () => { globalThis.fetch = oldFetch; }
+  };
 }
 
 test('valid identity receives only its active tenant membership', async () => {
@@ -199,5 +209,23 @@ test('bearer scheme is case-insensitive but token whitespace is rejected', async
     const rejected = await authenticateZonarTenant(
       new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token + ' extra' } }), f.env, 'tenant-a');
     assert.equal(rejected.status, 401);
+  } finally { f.restore(); }
+});
+
+test('unknown-kid refresh cooldown prevents repeated JWKS fetches', async () => {
+  const f = await fixture();
+  try {
+    const first = await authenticateZonarTenant(
+      new Request('https://api.example', { headers: { Authorization: 'Bearer ' + f.token } }), f.env, 'tenant-a');
+    assert.equal(first.ok, true);
+    const unknownTokens = await Promise.all(['unknown-one', 'unknown-two'].map(kid => createToken(f.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300
+    }, kid)));
+    for (const token of unknownTokens) {
+      const result = await authenticateZonarTenant(
+        new Request('https://api.example', { headers: { Authorization: 'Bearer ' + token } }), f.env, 'tenant-a');
+      assert.equal(result.status, 401);
+    }
+    assert.equal(f.getFetchCount(), 2);
   } finally { f.restore(); }
 });
