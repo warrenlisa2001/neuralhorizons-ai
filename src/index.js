@@ -1,5 +1,6 @@
 import { authenticateZonarTenant } from './zonar-auth.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
+import { handleZonarTenantFiles } from './zonar-file-storage.js';
 
 // Neural Horizons AI — Cloudflare Worker
 // Serves the static site (dist/) and a small live AI-news API used by the
@@ -135,6 +136,13 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
+    }
+    const tenantFilesMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/files$/);
+    if (tenantFilesMatch) {
+      let tenantId;
+      try { tenantId = decodeURIComponent(tenantFilesMatch[1]); }
+      catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
+      return handleZonarTenantFiles(request, env, tenantId);
     }
     const tenantAccessMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/access$/);
     if (tenantAccessMatch) {
