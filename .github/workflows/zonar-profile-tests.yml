@@ -5,10 +5,12 @@ on:
     paths:
       - "src/index.js"
       - "src/zonar-auth.js"
+      - "src/zonar-permissions.js"
       - "migrations/**"
       - "tests/zonar-profile.test.mjs"
       - "tests/zonar-tenant-schema.test.mjs"
       - "tests/zonar-auth.test.mjs"
+      - "tests/zonar-permissions.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
   push:
     branches:
@@ -17,10 +19,12 @@ on:
     paths:
       - "src/index.js"
       - "src/zonar-auth.js"
+      - "src/zonar-permissions.js"
       - "migrations/**"
       - "tests/zonar-profile.test.mjs"
       - "tests/zonar-tenant-schema.test.mjs"
       - "tests/zonar-auth.test.mjs"
+      - "tests/zonar-permissions.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
 
 jobs:
@@ -33,5 +37,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run Zonar security, schema and tenant auth tests
-        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs
+      - name: Run Zonar security, schema, authentication and permissions tests
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs
