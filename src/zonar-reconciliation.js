@@ -37,16 +37,6 @@ function indexRows(rows, dataset, idField, exceptions) {
   return index;
 }
 
-/**
- * Reconcile canonical orders, invoices and deliveries.
- * Required:
- *   orders: [{order_id, quantity_ordered, order_value?}]
- *   invoices: [{invoice_id, order_id, quantity_invoiced?, invoice_value?}]
- *   deliveries: [{delivery_id, order_id, quantity_delivered?}]
- *
- * Optional numeric tolerance applies to value comparisons. No fuzzy matching
- * is performed: ambiguous or absent keys are surfaced as exceptions.
- */
 export function reconcileDatasets(input = {}, options = {}) {
   const orders = Array.isArray(input.orders) ? input.orders : [];
   const invoices = Array.isArray(input.invoices) ? input.invoices : [];
@@ -96,10 +86,16 @@ export function reconcileDatasets(input = {}, options = {}) {
     const linkedInvoices = invoicesByOrder.get(order.__id) || [];
     const linkedDeliveries = deliveriesByOrder.get(order.__id) || [];
     const orderedQty = finiteNumber(order.quantity_ordered);
-    const invoicedQty = linkedInvoices.reduce((sum, row) => sum + (finiteNumber(row.quantity_invoiced) ?? 0), 0);
-    const deliveredQty = linkedDeliveries.reduce((sum, row) => sum + (finiteNumber(row.quantity_delivered) ?? 0), 0);
+    const invoiceQtyValues = linkedInvoices.map(row => finiteNumber(row.quantity_invoiced));
+    const deliveryQtyValues = linkedDeliveries.map(row => finiteNumber(row.quantity_delivered));
+    const invoiceValueValues = linkedInvoices.map(row => finiteNumber(row.invoice_value));
+    const invoicedQty = invoiceQtyValues.reduce((sum, value) => sum + (value ?? 0), 0);
+    const deliveredQty = deliveryQtyValues.reduce((sum, value) => sum + (value ?? 0), 0);
     const orderValue = finiteNumber(order.order_value);
-    const invoiceValue = linkedInvoices.reduce((sum, row) => sum + (finiteNumber(row.invoice_value) ?? 0), 0);
+    const invoiceValue = invoiceValueValues.reduce((sum, value) => sum + (value ?? 0), 0);
+    const allInvoiceQtyKnown = linkedInvoices.length > 0 && invoiceQtyValues.every(value => value !== null);
+    const allDeliveryQtyKnown = linkedDeliveries.length > 0 && deliveryQtyValues.every(value => value !== null);
+    const allInvoiceValuesKnown = linkedInvoices.length > 0 && invoiceValueValues.every(value => value !== null);
 
     if (!linkedInvoices.length) {
       exceptions.push({ code: 'ORDER_NOT_INVOICED', severity: 'medium', dataset: 'orders', row: order.__row, order_id: order.__id });
@@ -107,19 +103,13 @@ export function reconcileDatasets(input = {}, options = {}) {
     if (!linkedDeliveries.length) {
       exceptions.push({ code: 'ORDER_NOT_DELIVERED', severity: 'medium', dataset: 'orders', row: order.__row, order_id: order.__id });
     }
-    if (orderedQty !== null && linkedInvoices.length &&
-        linkedInvoices.every(row => finiteNumber(row.quantity_invoiced) !== null) &&
-        Math.abs(orderedQty - invoicedQty) > 0.000001) {
+    if (orderedQty !== null && allInvoiceQtyKnown && Math.abs(orderedQty - invoicedQty) > 0.000001) {
       exceptions.push({ code: 'ORDER_INVOICE_QUANTITY_MISMATCH', severity: 'high', dataset: 'orders', row: order.__row, order_id: order.__id, expected: orderedQty, actual: invoicedQty });
     }
-    if (orderedQty !== null && linkedDeliveries.length &&
-        linkedDeliveries.every(row => finiteNumber(row.quantity_delivered) !== null) &&
-        Math.abs(orderedQty - deliveredQty) > 0.000001) {
+    if (orderedQty !== null && allDeliveryQtyKnown && Math.abs(orderedQty - deliveredQty) > 0.000001) {
       exceptions.push({ code: 'ORDER_DELIVERY_QUANTITY_MISMATCH', severity: 'high', dataset: 'orders', row: order.__row, order_id: order.__id, expected: orderedQty, actual: deliveredQty });
     }
-    if (orderValue !== null && linkedInvoices.length &&
-        linkedInvoices.every(row => finiteNumber(row.invoice_value) !== null) &&
-        Math.abs(orderValue - invoiceValue) > tolerance) {
+    if (orderValue !== null && allInvoiceValuesKnown && Math.abs(orderValue - invoiceValue) > tolerance) {
       exceptions.push({ code: 'ORDER_INVOICE_VALUE_MISMATCH', severity: 'high', dataset: 'orders', row: order.__row, order_id: order.__id, expected: orderValue, actual: invoiceValue });
     }
 
@@ -129,10 +119,10 @@ export function reconcileDatasets(input = {}, options = {}) {
       invoice_ids: linkedInvoices.map(row => row.__id),
       delivery_ids: linkedDeliveries.map(row => row.__id),
       quantity_ordered: orderedQty,
-      quantity_invoiced: linkedInvoices.every(row => finiteNumber(row.quantity_invoiced) !== null) ? invoicedQty : null,
-      quantity_delivered: linkedDeliveries.every(row => finiteNumber(row.quantity_delivered) !== null) ? deliveredQty : null,
+      quantity_invoiced: allInvoiceQtyKnown ? invoicedQty : null,
+      quantity_delivered: allDeliveryQtyKnown ? deliveredQty : null,
       order_value: orderValue,
-      invoice_value: linkedInvoices.every(row => finiteNumber(row.invoice_value) !== null) ? invoiceValue : null,
+      invoice_value: allInvoiceValuesKnown ? invoiceValue : null,
       status: linkedInvoices.length && linkedDeliveries.length ? 'linked' : 'incomplete'
     });
   }

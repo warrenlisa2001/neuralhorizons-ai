@@ -74,3 +74,27 @@ test('handles blank numeric fields as unknown rather than zero', () => {
   assert.equal(result.reconciled[0].invoice_value, null);
   assert.equal(result.summary.exception_count, 0);
 });
+
+test('keeps financial and quantity values unknown when an order has no linked records', () => {
+  const result = reconcileDatasets({
+    orders: [{ order_id: 'O-EMPTY', quantity_ordered: '12', order_value: '240' }]
+  });
+  assert.equal(result.reconciled[0].quantity_invoiced, null);
+  assert.equal(result.reconciled[0].quantity_delivered, null);
+  assert.equal(result.reconciled[0].invoice_value, null);
+  assert.equal(result.reconciled[0].status, 'incomplete');
+  assert.equal(result.summary.linked_order_count, 0);
+  assert.ok(result.exceptions.some(item => item.code === 'ORDER_NOT_INVOICED'));
+  assert.ok(result.exceptions.some(item => item.code === 'ORDER_NOT_DELIVERED'));
+});
+
+test('parses accounting-style parentheses as negative numeric values', () => {
+  const result = reconcileDatasets({
+    orders: [{ order_id: 'O-NEG', quantity_ordered: '(2)', order_value: '(25.50)' }],
+    invoices: [{ invoice_id: 'I-NEG', order_id: 'O-NEG', quantity_invoiced: '-2', invoice_value: '-25.50' }],
+    deliveries: [{ delivery_id: 'D-NEG', order_id: 'O-NEG', quantity_delivered: '-2' }]
+  });
+  assert.equal(result.reconciled[0].quantity_ordered, -2);
+  assert.equal(result.reconciled[0].order_value, -25.5);
+  assert.equal(result.summary.exception_count, 0);
+});
