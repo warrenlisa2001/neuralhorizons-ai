@@ -136,7 +136,7 @@ export default {
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
     }
-    const tenantAccessMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/access$/);
+    const tenantAccessMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/access$/);
     if (tenantAccessMatch) {
       let tenantId;
       try { tenantId = decodeURIComponent(tenantAccessMatch[1]); }
