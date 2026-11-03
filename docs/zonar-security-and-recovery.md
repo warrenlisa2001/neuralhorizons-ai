@@ -15,6 +15,20 @@ Security, backup and recoverability are product requirements for Zonar. This doc
 - The public Zonar page is a static HTML page; the current repository search did not identify a production upload form connected to the profile endpoint.
 - A single shared bearer secret is a temporary integration control, not a complete user access-management system.
 
+## Multi-business tenancy decision
+
+Zonar is being designed as a multi-business platform from the beginning. Each business (tenant) must have a private workspace and its own users, data, files, processing history and audit records.
+
+Mandatory tenant-isolation rules:
+- Every tenant-owned record and object must carry a server-assigned tenant identifier.
+- The server must derive tenant access from the authenticated identity and its membership; never trust a tenant identifier supplied by the browser as proof of access.
+- Every read, write, export, delete, background job and agent action must enforce tenant membership and permissions.
+- Storage object keys and database queries must be tenant-scoped, with deny-by-default access.
+- Users must not be able to enumerate other tenants, access their files, infer their records through error messages, or change tenant ownership.
+- Administrative and support access must be separately permissioned, logged and reviewable.
+- Automated tests must attempt cross-tenant reads, writes, exports, object access and identifier substitution, and confirm denial.
+- Tenant isolation must be verified before customer data is accepted or agents are connected.
+
 ## Security baseline
 
 ### Identity and access
