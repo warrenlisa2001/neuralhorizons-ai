@@ -3,7 +3,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const source = await readFile(new URL('../src/index.js', import.meta.url), 'utf8');
-const workerModule = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+const authModuleUrl = new URL('../src/zonar-auth.js', import.meta.url).href;
+const permissionsModuleUrl = new URL('../src/zonar-permissions.js', import.meta.url).href;
+const executableSource = source
+  .replaceAll("'./zonar-auth.js'", JSON.stringify(authModuleUrl))
+  .replaceAll("'./zonar-permissions.js'", JSON.stringify(permissionsModuleUrl));
+const workerModule = await import('data:text/javascript;base64,' + Buffer.from(executableSource).toString('base64'));
 const worker = workerModule.default;
 const TOKEN = 'local-test-token';
 
