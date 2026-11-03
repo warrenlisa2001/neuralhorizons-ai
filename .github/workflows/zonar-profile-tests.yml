@@ -1,10 +1,14 @@
-name: Zonar CSV profile tests
+name: Zonar security and tenant tests
 
 on:
   pull_request:
     paths:
       - "src/index.js"
+      - "src/zonar-auth.js"
+      - "migrations/**"
       - "tests/zonar-profile.test.mjs"
+      - "tests/zonar-tenant-schema.test.mjs"
+      - "tests/zonar-auth.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
   push:
     branches:
@@ -12,7 +16,11 @@ on:
       - "feature/zonar-csv-profile"
     paths:
       - "src/index.js"
+      - "src/zonar-auth.js"
+      - "migrations/**"
       - "tests/zonar-profile.test.mjs"
+      - "tests/zonar-tenant-schema.test.mjs"
+      - "tests/zonar-auth.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
 
 jobs:
@@ -25,5 +33,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run Zonar CSV profile tests
-        run: node --test tests/zonar-profile.test.mjs
+      - name: Run Zonar security, schema and tenant auth tests
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs
