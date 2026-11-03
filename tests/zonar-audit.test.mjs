@@ -32,7 +32,7 @@ test('audit append binds tenant, actor and safe metadata as parameters', async (
   });
   assert.deepEqual(result, { created: true });
   assert.match(db.calls[0].sql, /INSERT INTO audit_events/);
-  assert.match(db.calls[0].sql, /FROM tenants t[\\s\\S]*t.status = 'active'/);
+  assert.match(db.calls[0].sql, /FROM tenants t[\s\S]*t.status = 'active'/);
   assert.match(db.calls[0].sql, /m.tenant_id = t.id AND m.status = 'active'/);
   assert.deepEqual(db.calls[0].bindings, [
     'event-1', 'tenant-a', 'user-a', 'file.uploaded', 'file', 'file-1',
