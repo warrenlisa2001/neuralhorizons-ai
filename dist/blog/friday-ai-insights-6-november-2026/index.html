@@ -1,1 +1,1331 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Friday AI Insights: AI Moves from the Screen into the Real World | Neural Horizons AI</title>
+
+<meta name="description" content="This week in AI: OpenAI's GPT-6 Astra designs hardware, a $28 billion AI infrastructure lease, new open-weight models, agentic coding and the future of enterprise AI.">
+
+<meta name="keywords" content="AI insights, agentic AI, enterprise AI, GPT-6 Astra, open-weight AI, AI infrastructure, robotics, multi-agent AI, AI transformation, UAE AI, Neural Horizons AI, HALU, Zonar OS">
+
+<meta property="og:title" content="Friday AI Insights: AI Moves from the Screen into the Real World">
+<meta property="og:description" content="From AI-designed hardware and open-weight models to data-centre infrastructure and enterprise orchestration, AI is moving beyond the screen.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/friday-ai-insights-6-november-2026/">
+
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.neuralhorizonsai.com/blog/friday-ai-insights-6-november-2026/">
+
+<style>
+:root {
+  --black: #0A0A0F;
+  --green: #00FF88;
+  --purple: #8A2BE2;
+  --white: #FFFFFF;
+  --muted: #A8A8B5;
+  --panel: #14141D;
+  --border: rgba(255,255,255,0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.hero {
+  padding: 105px 0 90px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(138,43,226,.20), transparent 38%),
+    radial-gradient(ellipse at 15% 90%, rgba(0,255,136,.12), transparent 40%),
+    var(--black);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content { max-width: 850px; }
+
+.kicker,
+.section-label {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+  font-weight: 800;
+}
+
+.hero h1 span,
+h2 span { color: var(--green); }
+
+.hero p {
+  color: #D1D1DA;
+  font-size: 19px;
+  max-width: 720px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta span:first-child { color: var(--green); }
+
+.intro {
+  max-width: 850px;
+  margin: auto;
+  padding: 70px 28px 50px;
+}
+
+.intro p {
+  font-size: 18px;
+  color: #D6D6DE;
+}
+
+.section {
+  padding: 65px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+
+p {
+  color: #C6C6D0;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 19px;
+  color: #D8D8E0;
+  max-width: 850px;
+}
+
+.highlight {
+  border-left: 3px solid var(--green);
+  background: var(--panel);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.highlight p {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 35px 0;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 25px 22px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.stat span {
+  display: block;
+  color: #C6C6D0;
+  font-size: 14px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.text-panel {
+  min-height: 230px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(138,43,226,.16), transparent 50%),
+    var(--panel);
+}
+
+.text-panel strong {
+  color: var(--green);
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.case-study {
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(0,255,136,.09), transparent 40%),
+    linear-gradient(135deg, #151522, #101A18);
+  border: 1px solid rgba(0,255,136,.3);
+  border-radius: 16px;
+  padding: 42px;
+  margin: 35px 0;
+}
+
+.case-study .stats { grid-template-columns: repeat(4, 1fr); }
+
+.case-study .stat { background: rgba(0,0,0,.28); }
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.product {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.product.halu { border-top: 3px solid var(--green); }
+.product.zonar { border-top: 3px solid var(--purple); }
+
+.product-tag {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.zonar .product-tag { color: #B98AFF; }
+
+ul {
+  padding-left: 20px;
+  color: #C6C6D0;
+}
+
+li { margin-bottom: 9px; }
+
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--black);
+  padding: 13px 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: var(--white);
+  text-decoration: none;
+}
+
+.button-outline {
+  display: inline-block;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.cta {
+  text-align: center;
+  padding: 75px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,.12), transparent 65%),
+    #101018;
+  border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+  max-width: 750px;
+  margin: 0 auto 20px;
+}
+
+.cta p {
+  max-width: 680px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+}
+
+.sources {
+  padding: 35px 0 55px;
+  border-top: 1px solid var(--border);
+}
+
+.sources h3 { font-size: 17px; }
+
+.sources ul {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sources a { color: #B98AFF; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 75px 0; }
+  .hero h1 { letter-spacing: -1px; }
+
+  .stats,
+  .case-study .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-column,
+  .product-grid { grid-template-columns: 1fr; }
+
+  .case-study { padding: 26px 20px; }
+  .section { padding: 48px 0; }
+}
+
+@media (max-width: 420px) {
+  .stats,
+  .case-study .stats { gap: 10px; }
+
+  .stat { padding: 18px 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="kicker">Neural Horizons AI | Friday AI Insights</div>
+
+      <h1>
+        AI Is Moving Beyond the Screen.
+        <span>It's Starting to Shape the Real World.</span>
+      </h1>
+
+      <p>
+        This week, AI moved into new territory. From designing physical
+        hardware and powering large-scale infrastructure to open-weight
+        models, agentic coding and robotics, the developments point to
+        a bigger shift in how intelligence will be built into business
+        and everyday operations.
+      </p>
+
+      <div class="meta">
+        <span>6 NOVEMBER 2026</span>
+        <span>•</span>
+        <span>WEEKLY AI BRIEFING</span>
+        <span>•</span>
+        <span>UAE | GLOBAL</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="intro">
+  <p>Welcome to this week's Friday AI Insights.</p>
+
+  <p>
+    The AI conversation is expanding. We are moving beyond chatbots,
+    copilots and individual productivity tools towards systems that
+    can help design products, coordinate complex workflows, write
+    and execute code, and interact with the physical world.
+  </p>
+
+  <p>
+    At the same time, the infrastructure required to support this
+    progress is becoming a major business story in its own right.
+    Compute capacity, energy, data foundations and model choice are
+    increasingly strategic considerations.
+  </p>
+
+  <p>
+    The question for business leaders is no longer simply what AI
+    can do. It is where these capabilities can make a meaningful
+    difference — and what needs to be in place to use them responsibly
+    and profitably.
+  </p>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">01 | AI enters the physical world</div>
+
+  <h2>
+    OpenAI's GPT-6 Astra helps design a device.
+    <span>From concept to prototype in under a week.</span>
+  </h2>
+
+  <p class="lead">
+    One of the most interesting developments this week came from
+    OpenAI, which described how GPT-6 Astra helped two team members
+    design a hardware device for interacting with Codex.
+  </p>
+
+  <p>
+    The project went well beyond generating a concept or sketch.
+    OpenAI used Astra to define functional requirements and work
+    through several parts of the design process, including the
+    enclosure, internal structures, electrical components, printed
+    circuit board layout, user interface, firmware and software
+    integrations.
+  </p>
+
+  <p>
+    Two team members completed the design work in under a week
+    alongside their other responsibilities. A contract manufacturer
+    then produced a small batch of prototypes in under a month.
+  </p>
+
+  <p>
+    The important detail is that this was not a fully autonomous
+    manufacturing process. OpenAI says the device still required
+    several rounds of human review and iteration before it was
+    ready for manufacturing. Astra did not consistently account
+    for production constraints, tolerances and assembly details.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Why this matters:</strong> AI is beginning to contribute
+      across disciplines that traditionally require separate design,
+      engineering and software workflows. The opportunity is not
+      simply faster content or code generation. It is the ability
+      to accelerate complex product development.
+    </p>
+  </div>
+
+  <p>
+    For businesses, this raises interesting questions about product
+    development cycles, prototyping costs, engineering capacity
+    and how teams can use AI to move from an idea to a testable
+    solution more quickly.
+  </p>
+
+  <a class="read-link"
+    href="https://openai.com/index/accelerating-engineering-for-the-physical-world/"
+    target="_blank" rel="noopener">
+    Read OpenAI's engineering announcement →
+  </a>
+
+  <p class="small-note">
+    OpenAI's account describes an internal prototype project. It should
+    not be interpreted as evidence that AI can independently take
+    a product through manufacturing without engineering oversight.
+  </p>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">02 | The UAE AI landscape</div>
+
+  <h2>
+    ADNOC, OpenAI and G42:
+    <span>AI moves into the heart of the energy business.</span>
+  </h2>
+
+  <p class="lead">
+    Abu Dhabi is continuing to position itself at the centre of
+    enterprise AI adoption. ADNOC's multi-year partnership with
+    OpenAI and G42 is a significant example of AI being applied
+    across a complex industrial value chain.
+  </p>
+
+  <p>
+    Announced at ADIPEC on 2 November, the partnership will use
+    OpenAI technology and G42's UAE-based computing infrastructure
+    to coordinate AI agents across business operations.
+  </p>
+
+  <p>
+    The initial focus includes field master planning and connecting
+    commercial and operational decisions across production, processing,
+    refining, logistics, sales and trading.
+  </p>
+
+  <p>
+    The ambition is significant: rather than optimising individual
+    activities in isolation, AI agents will help evaluate the wider
+    impact of decisions across the business.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>The bigger point:</strong> the next stage of enterprise AI
+      is not simply about making individual teams faster. It is about
+      connecting intelligence so that decisions in one part of a business
+      can inform decisions everywhere else.
+    </p>
+  </div>
+
+  <p>
+    ADNOC also confirmed that more than 40,000 employees have access
+    to ChatGPT Enterprise, with adoption exceeding 97%. This is a
+    powerful signal of the scale at which AI is becoming embedded
+    in major organisations.
+  </p>
+
+  <a class="read-link"
+    href="https://www.adnoc.ae/media-center/news/2026/11/adnoc-signs-landmark-partnership-agreement-with-openai"
+    target="_blank" rel="noopener">
+    Read ADNOC's announcement →
+  </a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">03 | Enterprise AI adoption</div>
+
+  <h2>
+    Multi-agent AI is gaining momentum.
+    <span>But enterprise-wide execution is still rare.</span>
+  </h2>
+
+  <div class="two-column">
+    <div>
+      <p class="lead">
+        New research from Capgemini highlights the growing move
+        towards multi-agent AI across financial services.
+      </p>
+
+      <p>
+        Its World Cloud Report for Financial Services 2027, published
+        on 5 November, found that 59% of financial institutions surveyed
+        are piloting or deploying multi-agent AI systems.
+      </p>
+
+      <p>
+        Yet only 10% have achieved enterprise-wide orchestration —
+        the level of coordination needed to run agents across
+        the organisation.
+      </p>
+
+      <p>
+        The report also points to technology debt, cloud foundations,
+        governance and security as important barriers to scaling.
+      </p>
+    </div>
+
+    <div class="text-panel">
+      <strong>From AI pilots to orchestration</strong>
+      <p>
+        The next challenge is coordinating agents, data, systems
+        and decisions across the enterprise.
+      </p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <strong>59%</strong>
+      <span>Of financial institutions are piloting or deploying multi-agent AI.</span>
+    </div>
+
+    <div class="stat">
+      <strong>10%</strong>
+      <span>Have achieved enterprise-wide agent orchestration.</span>
+    </div>
+
+    <div class="stat">
+      <strong>90%</strong>
+      <span>Are using or planning intelligent model routing.</span>
+    </div>
+  </div>
+
+  <p>
+    Perhaps the most important finding is that adoption does not
+    automatically translate into returns. Capgemini reports that
+    roughly half of financial services firms cannot consistently
+    demonstrate a return on their agentic AI initiatives.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Our perspective:</strong> the challenge is no longer
+      simply getting access to AI. It is establishing the data,
+      governance, architecture and accountability required to make
+      AI work across the business — and proving what it delivers.
+    </p>
+  </div>
+
+  <a class="read-link"
+    href="https://www.capgemini.com/us-en/news/press-releases/financial-institutions-accelerate-transition-to-multi-agent-ai-in-drive-for-bottom-line-value/"
+    target="_blank" rel="noopener">
+    Read the Capgemini findings →
+  </a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">04 | AI infrastructure and open models</div>
+
+  <h2>
+    The AI race is expanding.
+    <span>Infrastructure, model choice and execution all matter.</span>
+  </h2>
+
+  <p class="lead">
+    This week's developments reveal another side of the AI transition:
+    the models are evolving, but so are the economics and infrastructure
+    required to build and deploy them.
+  </p>
+
+  <h3>A $28 billion AI infrastructure deal in Texas</h3>
+
+  <p>
+    Riot Platforms has signed a 15-year powered-land lease with a
+    frontier AI lab for its Corsicana campus in Texas. The agreement
+    covers 910 MW of critical IT capacity and is expected to generate
+    approximately $28 billion in total contract revenue over the
+    initial lease term.
+  </p>
+
+  <p>
+    The project is expected to be delivered in phases, beginning
+    in 2027. The tenant will develop and operate the data-centre
+    compute deployment, while Riot provides the land, powered
+    infrastructure and related facilities.
+  </p>
+
+  <p>
+    The scale is significant. AI infrastructure is no longer just
+    a technology procurement issue. It is becoming a major question
+    of energy availability, capital investment, land, construction
+    and long-term capacity planning.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>The business implication:</strong> the cost and availability
+      of compute will influence which AI capabilities organisations
+      can access, where they deploy them and how they structure
+      their long-term technology strategies.
+    </p>
+  </div>
+
+  <a class="read-link"
+    href="https://www.riotplatforms.com/riot-platforms-reports-third-quarter-2026-financial-results-and-strategic-highlights/"
+    target="_blank" rel="noopener">
+    Read Riot Platforms' announcement →
+  </a>
+
+  <p class="small-note">
+    The approximately $28 billion figure is the projected total
+    contract value over the initial 15-year term, not an upfront
+    investment. The agreement also includes extension options.
+  </p>
+
+  <div class="two-column">
+    <div>
+      <h3>Kimi K3.1 Pro: another development in open-weight AI</h3>
+
+      <p>
+        Moonshot AI's Kimi K3.1 Pro is part of the growing movement
+        towards powerful models whose weights can be made available
+        for external deployment and adaptation.
+      </p>
+
+      <p>
+        The model is described as having 2.8 trillion total parameters,
+        with 104 billion active per token, and a context window of
+        approximately one million tokens.
+      </p>
+
+      <p>
+        For enterprise leaders, the significance is the expanding
+        range of model choices. Open-weight models may offer greater
+        control over deployment, customisation and infrastructure
+        decisions, depending on licensing and technical requirements.
+      </p>
+    </div>
+
+    <div class="text-panel">
+      <strong>More model choice. More responsibility.</strong>
+      <p>
+        Open weights do not automatically mean low-cost deployment.
+        Organisations still need to consider hardware, hosting,
+        security, licensing, maintenance and operational support.
+      </p>
+    </div>
+  </div>
+
+  <a class="read-link"
+    href="https://ai.lounge.ai/news/kimi-k3-1-pro-model-weights-are-out"
+    target="_blank" rel="noopener">
+    Read the Kimi K3.1 Pro update →
+  </a>
+
+  <h3 style="margin-top:42px;">Ripple-65B: a smaller model makes a big coding claim</h3>
+
+  <p>
+    Ricursive Intelligence has released Ripple-65B Preview, a
+    65-billion-parameter open-weight model designed with a particular
+    focus on reasoning and agentic coding.
+  </p>
+
+  <p>
+    Ricursive reports a score of 80.52 on Terminal-Bench 2.1,
+    claiming US open-weight state-of-the-art performance against
+    the models included in its comparison. The company also says
+    the model supports up to a one-million-token context window.
+  </p>
+
+  <p>
+    The interesting point is not simply the benchmark score.
+    Ripple is a reminder that model size alone does not determine
+    usefulness. Architecture, training, inference efficiency,
+    hardware requirements and the task being performed all matter.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Our perspective:</strong> enterprises should not select
+      a model based on headline benchmarks alone. The right model
+      is the one that performs reliably on the organisation's actual
+      workflows, within its cost, security and governance requirements.
+    </p>
+  </div>
+
+  <a class="read-link"
+    href="https://www.ricursive.com/ripple"
+    target="_blank" rel="noopener">
+    Read Ricursive's Ripple-65B announcement →
+  </a>
+
+  <p class="small-note">
+    Terminal-Bench results cited here are reported by Ricursive.
+    Benchmark performance can vary with evaluation harness,
+    configuration and testing conditions.
+  </p>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">05 | Robotics and physical AI</div>
+
+  <h2>
+    Meet Stringman.
+    <span>An $800 open-source room-scale robot.</span>
+  </h2>
+
+  <p class="lead">
+    Not every important development in AI is happening inside
+    a data centre or on a computer screen. Robotics continues
+    to explore how intelligent systems can interact with the
+    physical environment.
+  </p>
+
+  <p>
+    Stringman is an open-source room-scale gripper robot built
+    around a cable-driven design. Its reported cost is approximately
+    $800, with the project sharing hardware and software resources
+    for others to explore and develop.
+  </p>
+
+  <p>
+    The design is interesting because it takes a different approach
+    to physical movement and manipulation. Rather than relying
+    on a conventional robotic arm, its cable-driven arrangement
+    offers a way to move a gripper through a larger working space.
+  </p>
+
+  <p>
+    It is an experimental project, not a ready-made industrial
+    automation solution. But it is another example of how accessible
+    hardware, open designs and AI research are contributing to
+    the wider robotics ecosystem.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Why keep an eye on this:</strong> as robotics becomes
+      more accessible, businesses will have more opportunities
+      to explore automation in environments where traditional
+      industrial robotics may be too expensive or inflexible.
+    </p>
+  </div>
+
+  <a class="read-link"
+    href="https://ai.lounge.ai/news/stringman-an-800-open-source-room-scale-gripper-robot"
+    target="_blank" rel="noopener">
+    Read the Stringman story →
+  </a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">06 | Data and infrastructure</div>
+
+  <h2>
+    AI agents need more than data.
+    <span>They need to understand the business behind it.</span>
+  </h2>
+
+  <p class="lead">
+    Oracle's announcement of new capabilities for its Autonomous AI
+    Lakehouse highlights the importance of business context in
+    enterprise AI.
+  </p>
+
+  <p>
+    The updates include a business semantic layer designed to give
+    AI agents and users better access to business context, alongside
+    expanded support for data across enterprise environments.
+  </p>
+
+  <p>
+    Giving an agent access to information does not mean it understands
+    what that information represents, how the organisation defines it,
+    or which rules govern its use.
+  </p>
+
+  <p>
+    Different departments may use the same business term but define
+    it differently. An AI agent working across those departments
+    needs consistent definitions and reliable context before it can
+    make useful decisions.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>The takeaway:</strong> enterprise AI depends on business
+      context. Data quality, shared definitions, permissions and
+      governance are essential to making intelligent systems useful.
+    </p>
+  </div>
+
+  <a class="read-link"
+    href="https://www.oracle.com/news/announcement/ai-world-oracle-advances-autonomous-ai-lakehouse-with-business-semantic-layer-and-expanded-support-for-iceberg-data-2026-10-26/"
+    target="_blank" rel="noopener">
+    Read Oracle's announcement →
+  </a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">07 | From insight to implementation</div>
+
+  <div class="case-study">
+
+    <div class="section-label">Neural Horizons AI | FMCG case study</div>
+
+    <h2>
+      Before building AI agents, we asked a different question:
+      <span>Which ones were actually ready?</span>
+    </h2>
+
+    <p class="lead">
+      In a regional FMCG and manufacturing engagement, our readiness
+      evaluation examined 541,194 invoice lines and assessed eight
+      proposed AI agents against four practical readiness gates.
+    </p>
+
+    <p>
+      The diagnostic uncovered significant value at stake across
+      the operation. More than 20,000 orders had been cancelled
+      after the delivery plan was already built, representing
+      approximately AED 2.82 million in the year examined.
+    </p>
+
+    <p>
+      A separate network inefficiency represented approximately
+      AED 5.49 million in annual value at stake. Peak van-sales
+      returns were also running at 28.8%.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>541,194</strong>
+        <span>Invoice lines examined.</span>
+      </div>
+
+      <div class="stat">
+        <strong>8</strong>
+        <span>Candidate AI agents assessed.</span>
+      </div>
+
+      <div class="stat">
+        <strong>2</strong>
+        <span>Agents cleared all readiness gates for immediate build.</span>
+      </div>
+
+      <div class="stat">
+        <strong>AED 5.49M</strong>
+        <span>Annual value at stake from identified network inefficiency.</span>
+      </div>
+    </div>
+
+    <h3>Why only two agents passed</h3>
+
+    <p>Every proposed agent was assessed against four gates:</p>
+
+    <ul>
+      <li><strong>Data:</strong> Does the required data exist, and is it reliable?</li>
+      <li><strong>Definition:</strong> Is there an agreed definition of what the agent is deciding?</li>
+      <li><strong>Governance:</strong> Is there a named human owner and approval process?</li>
+      <li><strong>Freedom to act:</strong> Is the agent blocked by another system or migration dependency?</li>
+    </ul>
+
+    <p>
+      Two agents cleared all four gates: one focused on network
+      and cost-to-serve optimisation, and another on cancelled-order
+      validation. The remaining six required further data, governance
+      or system readiness work before development.
+    </p>
+
+    <div class="highlight">
+      <p>
+        <strong>The lesson:</strong> a good AI idea is not necessarily
+        a ready AI use case. Establishing readiness before development
+        protects investment, focuses resources and gives leadership
+        a clearer path to measurable outcomes.
+      </p>
+    </div>
+
+    <p>
+      Phase 2 is progressing through a 100-day implementation plan.
+      The two approved agents are moving into build, while readiness
+      gaps affecting the remaining use cases are addressed in parallel.
+    </p>
+
+    <p class="small-note">
+      The figures represent findings and value identified during
+      the diagnostic. They are not presented as realised savings.
+      Implementation is in progress.
+    </p>
+
+    <a class="button"
+      href="https://www.neuralhorizonsai.com/case-studies/fmcg-agentic-ai-readiness/"
+      target="_blank" rel="noopener">
+      Read the full case study
+    </a>
+
+  </div>
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">08 | What we're building</div>
+
+  <h2>
+    Moving from disconnected tools to
+    <span>connected business intelligence.</span>
+  </h2>
+
+  <p class="lead">
+    At Neural Horizons AI, we believe the opportunity is not about
+    adding another layer of technology to an already complicated
+    business. It is about connecting the systems, information and
+    workflows that already exist — and enabling them to work more
+    intelligently together.
+  </p>
+
+  <p>
+    This thinking is behind two interconnected products we are
+    developing: HALU™ and Zonar OS™.
+  </p>
+
+  <div class="product-grid">
+
+    <div class="product halu">
+      <div class="product-tag">Autonomous agent layer</div>
+
+      <h3>HALU™</h3>
+
+      <p>
+        HALU™ is the autonomous agent designed to monitor business
+        activity, identify issues and opportunities, generate actions
+        and route intelligence to the right people.
+      </p>
+
+      <ul>
+        <li>Monitors activity across departments.</li>
+        <li>Identifies potential revenue leaks and operational issues.</li>
+        <li>Generates actionable insights and recommendations.</li>
+        <li>Escalates decisions where human approval is required.</li>
+        <li>Works with existing business tools and systems.</li>
+      </ul>
+
+      <a class="button"
+        href="https://www.neuralhorizonsai.com/platform/">
+        Explore HALU™
+      </a>
+    </div>
+
+    <div class="product zonar">
+      <div class="product-tag">AI operating platform</div>
+
+      <h3>Zonar OS™</h3>
+
+      <p>
+        Zonar OS™ is the AI operating platform that connects data,
+        integrations, workflows and intelligence across the
+        organisation. It provides the infrastructure for
+        coordinated AI activity at enterprise level.
+      </p>
+
+      <ul>
+        <li>Connects business data and systems.</li>
+        <li>Supports multi-department workflow orchestration.</li>
+        <li>Provides integration and enterprise infrastructure.</li>
+        <li>Supports custom AI models and business logic.</li>
+        <li>Provides the platform foundation for HALU™.</li>
+      </ul>
+
+      <a class="button"
+        href="https://www.neuralhorizonsai.com/platform/">
+        Explore Zonar OS™
+      </a>
+    </div>
+
+  </div>
+
+  <div class="highlight">
+    <p>
+      <strong>Two products. One connected approach.</strong>
+      HALU™ is the autonomous agent layer. Zonar OS™ is the
+      operating platform that connects and powers it.
+    </p>
+  </div>
+
+  <p>
+    We are building around a straightforward principle:
+    understand the business problem first, establish where the
+    value exists, and then determine how AI can help deliver it.
+  </p>
+
+  <a class="read-link"
+    href="https://www.neuralhorizonsai.com/platform/">
+    Discover the Neural Horizons AI platform →
+  </a>
+
+</div>
+</section>
+
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">09 | The bigger picture</div>
+
+  <h2>
+    The next AI advantage will come from
+    <span>how businesses connect the dots.</span>
+  </h2>
+
+  <p class="lead">
+    This week's developments point in the same direction:
+    AI is becoming more capable, more connected and increasingly
+    embedded in the physical and commercial world.
+  </p>
+
+  <p>
+    OpenAI's hardware experiment shows how AI can contribute
+    across product design and engineering. Riot's infrastructure
+    agreement demonstrates the scale of investment required to
+    support frontier AI. New open-weight models are expanding
+    the choices available to developers and enterprises, while
+    agentic coding and robotics are pushing the boundaries of
+    what intelligent systems can do.
+  </p>
+
+  <p>
+    At the enterprise level, ADNOC is connecting intelligence
+    across an entire energy value chain. Financial institutions
+    are moving towards multi-agent systems, while discovering
+    that orchestration, governance and measurable returns remain
+    difficult to achieve. Technology providers are strengthening
+    the data foundations that agents need to understand business context.
+  </p>
+
+  <p>
+    The opportunity is substantial, but so is the responsibility
+    to implement AI with purpose.
+  </p>
+
+  <p>
+    Businesses do not need more disconnected pilots, dashboards
+    or tools that solve one problem while creating another.
+    They need a clear understanding of where value is being lost,
+    which processes are ready to change, and how intelligence
+    can connect the organisation.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Our view at Neural Horizons AI:</strong>
+      Start with the business problem. Understand the data.
+      Establish readiness. Build around measurable outcomes.
+      AI is simply one tool — the value comes from what it
+      enables the business to do.
+    </p>
+  </div>
+
+</div>
+</section>
+
+
+<section class="cta">
+<div class="container">
+
+  <div class="section-label">Let's find the opportunity</div>
+
+  <h2>
+    Where could AI create measurable value in your business?
+  </h2>
+
+  <p>
+    Start with a conversation about your operations, data,
+    disconnected processes and the opportunities that may
+    already exist inside your business.
+  </p>
+
+  <a class="button"
+    href="https://www.neuralhorizonsai.com/ai-audit/">
+    Explore the Free AI Audit
+  </a>
+
+  <br>
+
+  <a class="button-outline"
+    href="https://www.neuralhorizonsai.com/">
+    Visit Neural Horizons AI
+  </a>
+
+</div>
+</section>
+
+
+<section class="sources">
+<div class="container">
+
+  <h3>Sources and further reading</h3>
+
+  <ul>
+    <li>
+      <a href="https://openai.com/index/accelerating-engineering-for-the-physical-world/"
+        target="_blank" rel="noopener">
+        OpenAI — Accelerating engineering for the physical world
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.adnoc.ae/media-center/news/2026/11/adnoc-signs-landmark-partnership-agreement-with-openai"
+        target="_blank" rel="noopener">
+        ADNOC — Partnership with OpenAI and G42
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.capgemini.com/us-en/news/press-releases/financial-institutions-accelerate-transition-to-multi-agent-ai-in-drive-for-bottom-line-value/"
+        target="_blank" rel="noopener">
+        Capgemini — Financial institutions accelerate transition to multi-agent AI
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.capgemini.com/insights/research-library/world-cloud-report/"
+        target="_blank" rel="noopener">
+        Capgemini Research Institute — World Cloud Report
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.riotplatforms.com/riot-platforms-reports-third-quarter-2026-financial-results-and-strategic-highlights/"
+        target="_blank" rel="noopener">
+        Riot Platforms — Third-quarter 2026 results and data-centre lease
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.sec.gov/Archives/edgar/data/1167419/000110465926122417/riot-20260930x10q.htm"
+        target="_blank" rel="noopener">
+        SEC — Riot Platforms quarterly filing and Corsicana lease details
+      </a>
+    </li>
+
+    <li>
+      <a href="https://ai.lounge.ai/news/kimi-k3-1-pro-model-weights-are-out"
+        target="_blank" rel="noopener">
+        AI Lounge — Kimi K3.1 Pro model weights
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.ricursive.com/ripple"
+        target="_blank" rel="noopener">
+        Ricursive Intelligence — Introducing Ripple-65B Preview
+      </a>
+    </li>
+
+    <li>
+      <a href="https://huggingface.co/ricursiveAI/Ripple-65B-Preview"
+        target="_blank" rel="noopener">
+        Hugging Face — Ripple-65B Preview model card
+      </a>
+    </li>
+
+    <li>
+      <a href="https://ai.lounge.ai/news/stringman-an-800-open-source-room-scale-gripper-robot"
+        target="_blank" rel="noopener">
+        AI Lounge — Stringman open-source room-scale gripper robot
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.oracle.com/news/announcement/ai-world-oracle-advances-autonomous-ai-lakehouse-with-business-semantic-layer-and-expanded-support-for-iceberg-data-2026-10-26/"
+        target="_blank" rel="noopener">
+        Oracle — Autonomous AI Lakehouse and business semantic layer
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.neuralhorizonsai.com/case-studies/fmcg-agentic-ai-readiness/"
+        target="_blank" rel="noopener">
+        Neural Horizons AI — FMCG Agentic AI Readiness Case Study
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.neuralhorizonsai.com/platform/"
+        target="_blank" rel="noopener">
+        Neural Horizons AI — HALU™ and Zonar OS™
+      </a>
+    </li>
+  </ul>
+
+  <p class="small-note">
+    Friday AI Insights is published by Neural Horizons AI.
+    External claims and benchmark results are attributed to their
+    respective publishers. Company-reported performance figures
+    should be interpreted in the context of their stated methodology.
+    The views expressed are intended to support informed discussion
+    about AI strategy, implementation and business transformation.
+  </p>
+
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    © 2026 Neural Horizons AI. All rights reserved.
+    <br>
+    <a href="https://www.neuralhorizonsai.com/">www.neuralhorizonsai.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
