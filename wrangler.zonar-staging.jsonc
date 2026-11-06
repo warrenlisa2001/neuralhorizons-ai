@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zonar-staging",
+  "compatibility_date": "2026-05-16",
+  "main": "src/index.js",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "ZONAR_DB",
+      "database_name": "zonar-staging-db",
+      "database_id": "REPLACE_WITH_STAGING_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "ZONAR_FILES",
+      "bucket_name": "zonar-staging-files"
+    }
+  ],
+  "vars": {
+    "ZONAR_ISSUER": "https://login.microsoftonline.com/c6993c9c-10dd-4cfe-ba91-157272624bd6/v2.0",
+    "ZONAR_AUDIENCE": "68673793-9332-440b-ab12-d181b1128a17",
+    "ZONAR_JWKS_URL": "https://login.microsoftonline.com/c6993c9c-10dd-4cfe-ba91-157272624bd6/discovery/v2.0/keys",
+    "ZONAR_REQUIRED_SCOPE": "access_as_user"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
