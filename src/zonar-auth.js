@@ -125,7 +125,12 @@ async function verifyZonarAccessToken(token, env) {
   const now = Math.floor(Date.now() / 1000);
   const audienceValid = claims.aud === env.ZONAR_AUDIENCE ||
     (Array.isArray(claims.aud) && claims.aud.includes(env.ZONAR_AUDIENCE));
-  if (claims.iss !== env.ZONAR_ISSUER || !audienceValid ||
+  if (!env.ZONAR_REQUIRED_SCOPE || typeof env.ZONAR_REQUIRED_SCOPE !== 'string') {
+    throw new Error('AUTH_CONFIGURATION_MISSING');
+  }
+  const delegatedScopes = typeof claims.scp === 'string' ? claims.scp.split(/\\s+/) : [];
+  if (!delegatedScopes.includes(env.ZONAR_REQUIRED_SCOPE) ||
+      claims.iss !== env.ZONAR_ISSUER || !audienceValid ||
       typeof claims.sub !== 'string' || !claims.sub || claims.sub.length > 512 ||
       typeof claims.exp !== 'number' || !Number.isFinite(claims.exp) || claims.exp <= now ||
       (claims.nbf !== undefined && (typeof claims.nbf !== 'number' || !Number.isFinite(claims.nbf) || claims.nbf > now))) {
@@ -162,6 +167,27 @@ async function verifyZonarAccessToken(token, env) {
   const valid = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', publicKey, signature, signingInput);
   if (!valid) throw new Error('INVALID_TOKEN');
   return { issuer: claims.iss, subject: claims.sub };
+}
+
+/**
+ * Authenticate a delegated ZONAR API token without assuming a customer tenant.
+ * The API scope is mandatory; an ID token or unrelated access token is rejected.
+ */
+export async function authenticateZonarIdentity(request, env) {
+  const authorization = request.headers.get('Authorization') || '';
+  const bearer = authorization.match(/^Bearer ([^\\s]+)$/i);
+  if (!bearer || authorization.length > MAX_BEARER_TOKEN_LENGTH + 7) {
+    return { ok: false, status: 401, error: 'UNAUTHORISED' };
+  }
+  try {
+    const identity = await verifyZonarAccessToken(bearer[1], env);
+    return { ok: true, identity };
+  } catch (error) {
+    if (error.message === 'AUTH_CONFIGURATION_MISSING') {
+      return { ok: false, status: 503, error: 'TENANT_AUTH_NOT_CONFIGURED' };
+    }
+    return { ok: false, status: 401, error: 'UNAUTHORISED' };
+  }
 }
 
 /**
