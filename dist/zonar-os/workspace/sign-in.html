@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ZONAR | Secure sign in</title>
+<style>
+:root{color-scheme:dark;--bg:#080d12;--panel:#101922;--line:#233440;--muted:#91a4b1;--text:#edf5f5;--green:#00e49a;--purple:#9b83ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,#14242c 0%,var(--bg) 62%);color:var(--text);font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+main{width:min(100%,520px);padding:34px;background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 80px #0006}
+.brand{font-size:24px;font-weight:800;letter-spacing:.08em}.brand span{color:var(--green)}.eyebrow{margin-top:28px;color:var(--green);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}h1{font-size:27px;line-height:1.2;margin:8px 0}.muted{color:var(--muted)}button{font:inherit;cursor:pointer}.primary{width:100%;margin-top:22px;padding:13px 16px;border:1px solid var(--green);border-radius:8px;background:var(--green);color:#06120e;font-weight:800}.workspace{display:block;width:100%;margin-top:10px;padding:13px 14px;text-align:left;border:1px solid var(--line);border-radius:8px;background:#14212b;color:var(--text)}.workspace strong{display:block}.workspace small{color:var(--muted)}.status{margin-top:18px;padding:12px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:12px;overflow-wrap:anywhere}.error{border-color:#71444a;color:#ffc1c5}.fine{font-size:11px;color:var(--muted);margin-top:22px}
+</style>
+<script src="https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js"></script>
+</head>
+<body>
+<main>
+  <div class="brand">ZONAR<span>OS</span></div>
+  <div class="eyebrow">Secure workspace access</div>
+  <h1>Sign in to ZONAR</h1>
+  <p class="muted">Use your authorised Neural Horizons AI account. ZONAR checks your identity and retrieves only the workspaces assigned to your account.</p>
+  <button class="primary" id="signIn">Continue with Microsoft</button>
+  <div id="result" aria-live="polite"></div>
+  <p class="fine">Protected by Microsoft Entra ID. Access to a Microsoft account alone does not grant access to a ZONAR customer workspace.</p>
+</main>
+<script>
+(() => {
+  'use strict';
+  const config = {
+    auth: {
+      clientId: '3a58f4fa-a366-4b64-9798-d2d5995183b5',
+      authority: 'https://login.microsoftonline.com/c6993c9c-10dd-4cfe-ba91-157272624bd6',
+      redirectUri: window.location.origin + '/zonar-os/workspace/sign-in.html'
+    },
+    cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false }
+  };
+  const apiScope = 'api://68673793-9332-440b-ab12-d181b1128a17/access_as_user';
+  const result = document.getElementById('result');
+  const signIn = document.getElementById('signIn');
+  const show = (message, error = false) => {
+    result.replaceChildren();
+    const box = document.createElement('div');
+    box.className = 'status' + (error ? ' error' : '');
+    box.textContent = message;
+    result.append(box);
+  };
+  const app = new msal.PublicClientApplication(config);
+  async function loadWorkspaces(account) {
+    show('Verifying your ZONAR access…');
+    try {
+      const token = await app.acquireTokenSilent({ account, scopes: [apiScope] });
+      const response = await fetch('/api/zonar/me', {
+        headers: { Authorization: 'Bearer ' + token.accessToken },
+        cache: 'no-store'
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        if (response.status === 503) {
+          show('Sign-in succeeded, but staging tenant services are not configured yet. Workspace access is not available until the staging D1 database and authentication settings are connected.', true);
+        } else {
+          show('ZONAR could not verify workspace access. Please sign in again or contact your administrator.', true);
+        }
+        return;
+      }
+      result.replaceChildren();
+      if (!Array.isArray(data.workspaces) || data.workspaces.length === 0) {
+        show('Your Microsoft identity was verified, but no active ZONAR workspace is assigned to this account. An administrator must provision your user and workspace membership. Signing in does not automatically create access.', true);
+        return;
+      }
+      const intro = document.createElement('p');
+      intro.className = 'muted';
+      intro.textContent = 'Identity verified. Active workspaces assigned to your account:';
+      result.append(intro);
+      data.workspaces.forEach(workspace => {
+        const button = document.createElement('button');
+        button.className = 'workspace';
+        const name = document.createElement('strong');
+        name.textContent = workspace.name;
+        const role = document.createElement('small');
+        role.textContent = 'Role: ' + workspace.role;
+        button.append(name, role);
+        button.addEventListener('click', () => {
+          sessionStorage.setItem('zonar.selectedWorkspace', workspace.id);
+          show('Workspace membership verified. The authenticated workspace interface is the next integration step; this staging sign-in check does not expose demo data as customer data.');
+        });
+        result.append(button);
+      });
+    } catch (error) {
+      show('Could not complete secure sign-in: ' + (error && error.errorCode ? error.errorCode : 'Please try again.'), true);
+    }
+  }
+  signIn.addEventListener('click', () => app.loginRedirect({
+    scopes: ['openid', 'profile', apiScope],
+    prompt: 'select_account'
+  }));
+  app.handleRedirectPromise().then(response => {
+    const account = response?.account || app.getAllAccounts()[0];
+    if (account) {
+      signIn.hidden = true;
+      loadWorkspaces(account);
+    }
+  }).catch(() => show('Microsoft sign-in could not be completed. Please try again.', true));
+})();
+</script>
+</body>
+</html>
