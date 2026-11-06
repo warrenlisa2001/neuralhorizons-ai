@@ -1,4 +1,5 @@
 import { authenticateZonarTenant } from './zonar-auth.js';
+import { handleZonarIdentity } from './zonar-identity.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { handleZonarTenantFiles } from './zonar-file-storage.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
@@ -168,6 +169,9 @@ export default {
       try { tenantId = decodeURIComponent(tenantAccessMatch[1]); }
       catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
       return handleZonarTenantAccess(request, env, tenantId);
+    }
+    if (url.pathname === '/api/zonar/me') {
+      return handleZonarIdentity(request, env);
     }
     if (url.pathname === '/api/zonar/profile') {
       return handleZonarProfile(request, env);
