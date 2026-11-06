@@ -10,8 +10,15 @@ on:
       - "src/zonar-audit.js"
       - "src/zonar-file-storage.js"
       - "src/zonar-reconciliation.js"
+      - "src/zonar-reconciliation-pipeline.js"
+      - "src/zonar-reconciliation-runs.js"
+      - "src/zonar-reconciliation-results.js"
+      - "tests/zonar-reconciliation-runs.test.mjs"
+      - "src/zonar-csv-ingestion.js"
       - "tests/zonar-file-storage.test.mjs"
       - "tests/zonar-reconciliation.test.mjs"
+      - "tests/zonar-reconciliation-pipeline.test.mjs"
+      - "tests/zonar-csv-ingestion.test.mjs"
       - "migrations/**"
       - "tests/zonar-profile.test.mjs"
       - "tests/zonar-tenant-schema.test.mjs"
@@ -27,12 +34,21 @@ on:
     branches:
       - main
       - "feature/zonar-csv-profile"
+      - "feature/zonar-csv-ingestion-foundation"
+      - "feature/zonar-reconciliation-pipeline"
     paths:
       - "src/index.js"
       - "src/zonar-auth.js"
       - "src/zonar-permissions.js"
       - "src/zonar-tenant-data.js"
       - "src/zonar-audit.js"
+      - "src/zonar-file-storage.js"
+      - "src/zonar-reconciliation.js"
+      - "src/zonar-reconciliation-pipeline.js"
+      - "src/zonar-reconciliation-runs.js"
+      - "src/zonar-reconciliation-results.js"
+      - "tests/zonar-reconciliation-runs.test.mjs"
+      - "src/zonar-csv-ingestion.js"
       - "migrations/**"
       - "tests/zonar-profile.test.mjs"
       - "tests/zonar-tenant-schema.test.mjs"
@@ -41,6 +57,11 @@ on:
       - "tests/zonar-tenant-access-route.test.mjs"
       - "tests/zonar-tenant-data.test.mjs"
       - "tests/zonar-audit.test.mjs"
+      - "tests/zonar-workspace.test.mjs"
+      - "tests/zonar-file-storage.test.mjs"
+      - "tests/zonar-reconciliation.test.mjs"
+      - "tests/zonar-reconciliation-pipeline.test.mjs"
+      - "tests/zonar-csv-ingestion.test.mjs"
       - ".github/workflows/zonar-profile-tests.yml"
 
 jobs:
@@ -53,5 +74,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run Zonar security, schema, authentication and permissions tests
-        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-reconciliation.test.mjs
+      - name: Run Zonar security, schema, authentication, ingestion and reconciliation tests
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-reconciliation.test.mjs tests/zonar-csv-ingestion.test.mjs tests/zonar-reconciliation-pipeline.test.mjs tests/zonar-reconciliation-runs.test.mjs
