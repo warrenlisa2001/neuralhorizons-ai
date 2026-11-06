@@ -146,7 +146,7 @@ export default {
       catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
       return handleZonarTenantFiles(request, env, tenantId);
     }
-    const reconciliationResultMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/reconciliation-runs\\/([^/]+)$/);
+    const reconciliationResultMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs\/([^/]+)$/);
     if (reconciliationResultMatch) {
       let tenantId, runId;
       try {
@@ -155,7 +155,7 @@ export default {
       } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
       return handleZonarReconciliationResult(request, env, tenantId, runId);
     }
-    const reconciliationRunMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/reconciliation-runs$/);
+    const reconciliationRunMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs$/);
     if (reconciliationRunMatch) {
       let tenantId;
       try { tenantId = decodeURIComponent(reconciliationRunMatch[1]); }
