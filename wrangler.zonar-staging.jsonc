@@ -13,7 +13,7 @@
     {
       "binding": "ZONAR_DB",
       "database_name": "zonar-staging-db",
-      "database_id": "REPLACE_WITH_STAGING_D1_DATABASE_ID",
+      "database_id": "67a07ade-3b53-4960-b169-a9e1440994f1",
       "migrations_dir": "migrations"
     }
   ],
