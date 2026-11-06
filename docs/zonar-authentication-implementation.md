@@ -1,6 +1,6 @@
 # Zonar authentication and tenant authorization implementation
 
-## Implemented in this change
+## Implemented
 
 `src/zonar-auth.js` provides a provider-neutral authentication boundary for Cloudflare Workers:
 
@@ -23,12 +23,13 @@ Set these values only after an identity provider has been selected and its exact
 - `ZONAR_AUDIENCE`: exact API audience expected in access tokens.
 - `ZONAR_JWKS_URL`: HTTPS URL for the provider's signing-key JWKS.
 - `ZONAR_DB`: D1 binding to the Zonar database.
+- `ZONAR_FILES`: private R2 bucket binding used for tenant uploads and reconciliation results.
 
-These are not configured by this code change. Do not use guessed values. The JWKS URL should be controlled by the selected identity provider; redirects are rejected. The Worker caches the JWKS for five minutes in its isolate.
+These values and bindings are not configured in the repository's current `wrangler.jsonc`. Do not use guessed values. The JWKS URL should be controlled by the selected identity provider; redirects are rejected. The Worker caches the JWKS for five minutes in its isolate.
 
 ## Tenant authorization contract
 
-Every future tenant-scoped handler must:
+Every tenant-scoped handler must:
 
 1. Determine the requested tenant from a trusted route/resource context.
 2. Call `authenticateZonarTenant(request, env, requestedTenantId)`.
@@ -38,16 +39,24 @@ Every future tenant-scoped handler must:
 
 Never accept a tenant ID from an untrusted request body as proof of access. Never auto-create a membership from a JWT claim. Provision user and membership rows through a separately authorized onboarding process.
 
-## Current limitations / not yet enabled
+## Current implementation status
+
+- The protected tenant-access route is implemented at `GET /api/zonar/tenants/{tenantId}/access`.
+- Tenant-scoped CSV upload/list handling is implemented at `/api/zonar/tenants/{tenantId}/files`; it uses the D1 and R2 bindings and the shared OIDC tenant-authentication boundary.
+- Reconciliation run creation and result retrieval are implemented at `/api/zonar/tenants/{tenantId}/reconciliation-runs` and `/api/zonar/tenants/{tenantId}/reconciliation-runs/{runId}`.
+- Role-to-action policy is implemented in `src/zonar-permissions.js`; tenant-scoped D1 repository primitives and audit helpers are used by the routes.
+- Unit tests validate token verification, tenant membership and route behavior using mocked JWKS/D1/R2 dependencies. They are not a live identity-provider integration test or penetration test.
+
+## Not yet enabled / remaining limitations
 
 - No identity provider has been selected, connected or configured.
-- No D1 database has been created or bound.
-- The existing CSV profile endpoint still uses its temporary shared upload token and remains memory-only.
-- A first protected tenant access route is implemented at `GET /api/zonar/tenants/{tenantId}/access`; it verifies identity and membership and applies `tenant:read`.
-- Role-to-action policy is implemented in `src/zonar-permissions.js`.
-- Tenant-scoped D1 repository primitives are implemented separately in `src/zonar-tenant-data.js`, but are not yet wired into customer-facing file/job routes.
-- It does not implement login UI, invitation acceptance, MFA policy, session management or user provisioning.
-- No R2 storage, tenant file persistence, backup or restore has been enabled.
-- Unit tests validate token verification and cross-tenant membership denial with a mocked JWKS endpoint and database; they are not a penetration test or live provider integration test.
+- No live D1 database or R2 bucket is declared in the current Worker configuration.
+- The tenant schema and reconciliation-run migrations exist in the repository but have not been applied to a live ZONAR database.
+- No production or staging user/membership provisioning process has been executed.
+- No live Cloudflare staging end-to-end test has been evidenced.
+- The legacy `/api/zonar/profile` endpoint remains a separate shared-token profile/preview path and is not the tenant-scoped persistent ingestion workflow.
+- Login UI, invitation acceptance, MFA policy, session management and user provisioning workflows are not implemented here.
+- Queue-based processing, retries, cancellation, idempotency, progress polling, HALU integration and production observability remain future work.
+- Unit tests do not replace cross-tenant negative testing against a live isolated environment, a security review or a backup/restore exercise.
 
-Do not enable customer data ingestion until a real provider and D1 binding are configured, the helper is integrated into every tenant-scoped operation, cross-tenant negative tests cover every resource/action, and backup/restore controls have passed an actual restore exercise.
+Do not enable customer data ingestion until a real identity provider and isolated D1/R2 resources are configured, migrations are applied and verified, every tenant-scoped route has passed live cross-tenant negative tests, and backup/restore controls have passed an actual restore exercise.
