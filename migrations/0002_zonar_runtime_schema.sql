@@ -7,8 +7,6 @@
 -- audit, and reconciliation handlers. It replaces the manually-created
 -- staging schema and adds the reconciliation_runs table required by runtime.
 
-PRAGMA foreign_keys = ON;
-
 -- Child tables first. This migration is permitted only after confirming all
 -- eight existing ZONAR tables are empty.
 DROP TABLE IF EXISTS reconciliation_runs;
