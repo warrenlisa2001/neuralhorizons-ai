@@ -6,10 +6,14 @@ const source = await readFile(new URL('../src/index.js', import.meta.url), 'utf8
 const authModuleUrl = new URL('../src/zonar-auth.js', import.meta.url).href;
 const permissionsModuleUrl = new URL('../src/zonar-permissions.js', import.meta.url).href;
 const fileStorageModuleUrl = new URL('../src/zonar-file-storage.js', import.meta.url).href;
+const reconciliationRunsModuleUrl = new URL('../src/zonar-reconciliation-runs.js', import.meta.url).href;
+const reconciliationResultsModuleUrl = new URL('../src/zonar-reconciliation-results.js', import.meta.url).href;
 const executableSource = source
   .replaceAll("'./zonar-auth.js'", JSON.stringify(authModuleUrl))
   .replaceAll("'./zonar-permissions.js'", JSON.stringify(permissionsModuleUrl))
-  .replaceAll("'./zonar-file-storage.js'", JSON.stringify(fileStorageModuleUrl));
+  .replaceAll("'./zonar-file-storage.js'", JSON.stringify(fileStorageModuleUrl))
+  .replaceAll("'./zonar-reconciliation-runs.js'", JSON.stringify(reconciliationRunsModuleUrl))
+  .replaceAll("'./zonar-reconciliation-results.js'", JSON.stringify(reconciliationResultsModuleUrl));
 const workerModule = await import('data:text/javascript;base64,' + Buffer.from(executableSource).toString('base64'));
 const worker = workerModule.default;
 const TOKEN = 'local-test-token';
