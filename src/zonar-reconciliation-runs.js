@@ -168,17 +168,24 @@ export async function handleZonarReconciliationRun(request, env, tenantId) {
       throw new Error('RUN_STATE_UPDATE_FAILED');
     }
 
-    await appendTenantAuditEvent(env.ZONAR_DB, {
-      id: crypto.randomUUID().replace(/-/g, ''),
-      tenantId: allowed.tenantId,
-      actorUserId: allowed.userId,
-      eventType: 'reconciliation.completed',
-      resourceType: 'reconciliation_run',
-      resourceId: runId,
-      requestId,
-      outcome: 'success',
-      details: { action: 'reconcile_three_datasets', job_id: runId, count: result.summary?.exception_count ?? 0 }
-    });
+    let auditRecorded = false;
+    try {
+      const audit = await appendTenantAuditEvent(env.ZONAR_DB, {
+        id: crypto.randomUUID().replace(/-/g, ''),
+        tenantId: allowed.tenantId,
+        actorUserId: allowed.userId,
+        eventType: 'reconciliation.completed',
+        resourceType: 'reconciliation_run',
+        resourceId: runId,
+        requestId,
+        outcome: 'success',
+        details: { action: 'reconcile_three_datasets', job_id: runId, count: result.summary?.exception_count ?? 0 }
+      });
+      auditRecorded = audit.created === true;
+    } catch {
+      // A persisted, integrity-checked result remains successful if the
+      // secondary audit write is temporarily unavailable; disclose the gap.
+    }
 
     return json({
       success: true,
@@ -187,6 +194,7 @@ export async function handleZonarReconciliationRun(request, env, tenantId) {
         status: 'succeeded',
         processor_version: ZONAR_RECONCILIATION_PIPELINE_VERSION,
         result_sha256_hex: resultSha,
+        audit_recorded: auditRecorded,
         summary: result.summary
       }
     }, 201);
