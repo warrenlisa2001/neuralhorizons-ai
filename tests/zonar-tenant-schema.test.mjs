@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 
-const migration = readFileSync(new URL('../migrations/0001_tenant_foundation.sql', import.meta.url), 'utf8');
+const migration = readFileSync(new URL('../migrations/0001_tenant_foundation.sql', import.meta.url), 'utf8') + '\\n' +\n  readFileSync(new URL('../migrations/0002_reconciliation_runs.sql', import.meta.url), 'utf8');
 
 test('tenant foundation migration creates required tables and indexes', () => {
   const db = new DatabaseSync(':memory:');
   try {
     db.exec(migration);
     const tables = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all().map(x => x.name);
-    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events']) {
+    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events', 'reconciliation_runs']) {
       assert.ok(tables.includes(name), `missing table: ${name}`);
     }
     const indexes = db.prepare("SELECT name FROM sqlite_master WHERE type = 'index'").all().map(x => x.name);
@@ -120,6 +120,33 @@ test('file uploader and job requester must be active members of the owning tenan
     insertFile.run('file-a', 'tenant-a', 'user-a', 'a.csv', 'tenant-a/file-a', 'text/csv', 10);
     const insertJob = db.prepare("INSERT INTO processing_jobs (id, tenant_id, file_id, requested_by_user_id, processor_version) VALUES (?, ?, ?, ?, ?)");
     assert.throws(() => insertJob.run('job-bad', 'tenant-a', 'file-a', 'user-b', '0.1.0'), /requester must have active membership/);
+  } finally {
+    db.close();
+  }
+});
+
+
+test('reconciliation runs enforce tenant-owned source files and immutable provenance', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-b', 'Business B');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-a', 'https://issuer.example', 'subject-a');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-a', 'user-a', 'tenant_owner');
+    const insertFile = db.prepare("INSERT INTO tenant_files (id, tenant_id, uploaded_by_user_id, original_filename, object_key, content_type, byte_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    for (const id of ['orders', 'invoices', 'deliveries']) {
+      insertFile.run(id, 'tenant-a', 'user-a', id + '.csv', 'tenant-a/' + id, 'text/csv', 10);
+    }
+    insertFile.run('foreign-file', 'tenant-b', null, 'foreign.csv', 'tenant-b/foreign', 'text/csv', 10);
+    const insertRun = db.prepare(`INSERT INTO reconciliation_runs
+      (id, tenant_id, requested_by_user_id, processor_version, orders_file_id,
+       invoices_file_id, deliveries_file_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`);
+    insertRun.run('run-a', 'tenant-a', 'user-a', '0.1.0', 'orders', 'invoices', 'deliveries');
+    assert.throws(() => insertRun.run('run-cross', 'tenant-a', 'user-a', '0.1.0', 'orders', 'invoices', 'foreign-file'), /FOREIGN KEY/);
+    assert.throws(() => db.prepare("UPDATE reconciliation_runs SET tenant_id = ? WHERE id = ?").run('tenant-b', 'run-a'), /ownership and sources are immutable/);
+    assert.throws(() => db.prepare("UPDATE reconciliation_runs SET orders_file_id = ? WHERE id = ?").run('foreign-file', 'run-a'), /ownership and sources are immutable/);
   } finally {
     db.close();
   }
