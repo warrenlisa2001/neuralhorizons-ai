@@ -27,10 +27,26 @@ async function readRequest(request) {
     throw Object.assign(new Error('REQUEST_TOO_LARGE'), { status: 413 });
   }
   if (!request.body) throw Object.assign(new Error('INVALID_REQUEST'), { status: 400 });
-  const bytes = await request.arrayBuffer();
-  if (bytes.byteLength > MAX_REQUEST_BYTES) {
-    throw Object.assign(new Error('REQUEST_TOO_LARGE'), { status: 413 });
+  const reader = request.body.getReader();
+  const chunks = [];
+  let size = 0;
+  try {
+    while (true) {
+      const part = await reader.read();
+      if (part.done) break;
+      size += part.value.byteLength;
+      if (size > MAX_REQUEST_BYTES) {
+        await reader.cancel();
+        throw Object.assign(new Error('REQUEST_TOO_LARGE'), { status: 413 });
+      }
+      chunks.push(part.value);
+    }
+  } finally {
+    reader.releaseLock();
   }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
   try {
     return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   } catch {
