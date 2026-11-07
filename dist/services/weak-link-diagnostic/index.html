@@ -410,7 +410,7 @@ html,body{overflow-x:clip}
     </div>
   </div>
   <div class="wl-hero-calculator" id="leak-calculator">
-    <div class="wl-calc-head"><span>FREE BUSINESS CHECK · 60 SECONDS</span><h2>What could disconnected operations be costing you?</h2><p>Answer four questions for an illustrative annual exposure range.</p></div>
+    <div class="wl-calc-head"><span>FREE BUSINESS CHECK · 60 SECONDS</span><h2>What could disconnected operations be costing you?</h2><p>Answer four questions to estimate your potential annual financial exposure.</p></div>
     <div class="wl-calc-fields">
       <label>1. Approximate annual revenue
         <select id="calcRevenue"><option value="3000000">Under AED 10M (model uses AED 3M)</option><option value="20000000">AED 10M–50M (model uses AED 20M)</option><option value="75000000" selected>AED 50M–100M (model uses AED 75M)</option><option value="150000000">AED 100M+ (model uses AED 150M)</option></select>
@@ -425,9 +425,10 @@ html,body{overflow-x:clip}
         <select id="calcHours"><option value="1">Under 3 hours a week</option><option value="1.08" selected>3–8 hours a week</option><option value="1.15">More than 8 hours a week</option></select>
       </label>
     </div>
-    <div class="wl-calc-result"><span>Illustrative annual exposure range</span><strong id="calcResult">Calculating…</strong><small id="calcMonthly"></small></div>
-    <details class="wl-calc-method"><summary>How is this calculated?</summary><p>The model starts with a 1% baseline assumption, adds a silo factor (1.5%, 3% or 4.5%), then adjusts that rate using the AI maturity and reporting-time multipliers selected above.</p><p><strong>Midpoint = modelled revenue × (1% + silo factor) × AI multiplier × reporting multiplier.</strong> The displayed range is 75%–135% of that midpoint, rounded to the nearest AED 5,000. Revenue brackets use the representative values shown in each option.</p><p>These are transparent scenario assumptions, not measured losses, verified industry averages or a prediction. The result is a conversation starter; actual exposure must be established from your business records.</p></details>
-    <a class="wl-calc-cta" href="https://calendly.com/warrenlisa2001/30min">Discuss your result with Lisa →</a>
+    <div class="wl-calc-result"><span>Potential annual financial exposure · illustrative estimate</span><strong id="calcResult">Calculating…</strong><small id="calcMonthly"></small><p class="wl-calc-explainer">If the conditions described in your answers persist, they could represent this level of potential financial exposure over 12 months.</p></div>
+    <p class="wl-calc-next-step"><strong>The estimate shows the potential scale.</strong> The next step is finding exactly where the money is being lost.</p>
+    <details class="wl-calc-method"><summary>How is this calculated?</summary><p>The model starts with a 1% baseline assumption, adds a silo factor (1.5%, 3% or 4.5%), then adjusts that rate using the AI maturity and reporting-time multipliers selected above.</p><p><strong>Midpoint = modelled revenue × (1% + silo factor) × AI multiplier × reporting multiplier.</strong> The displayed range is 75%–135% of that midpoint, rounded to the nearest AED 5,000. Revenue brackets use the representative values shown in each option.</p><p>This is an illustrative scenario based on your answers and the assumptions shown. It is not a verified financial loss, a forecast or a guaranteed saving. Actual exposure must be validated against business data.</p></details>
+    <a class="wl-calc-cta" href="https://calendly.com/warrenlisa2001/30min">Find the weak links behind your number →</a>
   </div>
 </div></section>
 
@@ -693,7 +694,7 @@ document.querySelectorAll('#mobileMenu a').forEach(link=>{link.addEventListener(
     var low=Math.round((midpoint*.75)/5000)*5000;
     var high=Math.round((midpoint*1.35)/5000)*5000;
     document.getElementById('calcResult').textContent=fmt(low)+' – '+fmt(high);
-    document.getElementById('calcMonthly').textContent='Equivalent scenario range: '+fmt(low/12)+' – '+fmt(high/12)+' per month.';
+    document.getElementById('calcMonthly').textContent='Equivalent to approximately '+fmt(low/12)+' – '+fmt(high/12)+' per month.';
   }
   els.forEach(function(el){el.addEventListener('change',calculate);});
   calculate();
