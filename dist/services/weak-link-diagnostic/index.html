@@ -259,6 +259,30 @@ html,body{overflow-x:clip}
  .wl section#estimate .wl-calc{padding:18px;}
 }
 </style>
+<style>
+.wl-hero .wl-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.92fr);gap:38px;align-items:center;padding-top:54px;padding-bottom:58px;}
+.wl-hero-copy h1{font-size:clamp(34px,4.6vw,54px);max-width:560px;}
+.wl-hero-copy>p{font-size:17px;max-width:530px;}
+.wl-hero-copy .wl-stats{gap:22px;margin-top:30px;padding-top:22px;}
+.wl-hero-copy .wl-stats b{font-size:27px;}
+.wl-hero-calculator{background:#fff;color:#12172B;border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.28);}
+.wl-calc-head>span{font-size:10px;letter-spacing:.12em;font-weight:800;color:#087E68;}
+.wl-calc-head h2{font-size:23px;line-height:1.2;margin:8px 0;color:#12172B;}
+.wl-calc-head p{font-size:13px;line-height:1.45;color:#5B6478;margin:0 0 14px;}
+.wl-calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;}
+.wl-calc-fields label{display:block;font-size:12px;line-height:1.35;font-weight:800;color:#29334B;}
+.wl-calc-fields select{display:block;width:100%;margin-top:6px;min-height:42px;padding:8px 30px 8px 10px;border:1px solid #DCE2ED;border-radius:9px;background:#fff;color:#29334B;font:500 12px Manrope,sans-serif;}
+.wl-calc-result{margin-top:16px;padding:14px 16px;border-radius:12px;background:#0B1020;color:#fff;}
+.wl-calc-result span,.wl-calc-result small{display:block;font-size:11px;color:#B8C2DC;}
+.wl-calc-result strong{display:block;font-size:clamp(24px,3vw,34px);line-height:1.2;margin:4px 0;color:#00D9A0;}
+.wl-calc-method{margin-top:12px;font-size:12px;color:#5B6478;line-height:1.5;}
+.wl-calc-method summary{cursor:pointer;font-weight:800;color:#29334B;}
+.wl-calc-method p{font-size:12px;line-height:1.5;margin:8px 0 0;color:#5B6478;}
+.wl-calc-method strong{color:#29334B;}
+.wl-calc-cta{display:inline-block;margin-top:12px;font-size:13px;font-weight:800;color:#2563EB;text-decoration:none;}
+@media(max-width:850px){.wl-hero .wl-hero-grid{grid-template-columns:1fr;gap:28px;padding-top:48px;padding-bottom:48px;}.wl-hero-copy h1{max-width:680px;}.wl-hero-calculator{max-width:680px;}}
+@media(max-width:520px){.wl-hero .wl-hero-grid{padding:38px 20px 42px;}.wl-calc-fields{grid-template-columns:1fr;gap:10px;}.wl-hero-calculator{padding:19px;}.wl-calc-head h2{font-size:21px;}}
+</style>
 </head>
 <body>
 <nav class="fixed w-full top-0 z-50 nav-blur border-b" style="border-color:#E7EAF3;">
@@ -348,30 +372,43 @@ html,body{overflow-x:clip}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main class="wl">
-<section class="wl-hero" id="top"><div class="in">
-  <span class="tag"><i></i>Exclusive executive offer · UAE &amp; GCC</span>
-  <h1>Find where your business is <em>leaking money</em> in 2 weeks.</h1>
-  <p>The AI Weak-Link Diagnostic: a fixed-fee diagnosis for UAE and GCC leadership teams. You get the leak in AED, the AI use cases that are safe to start, and a 100-day plan your CEO and CFO can sign.</p>
-  <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="hero-book">Book a 30-minute call</a><a class="wl-btn s" href="#estimate">Estimate your leak</a></div>
-  <div class="wl-stats">
-    <div><b>2 weeks</b><span>kickoff to board readout</span></div>
-    <div><b>0 of 8</b><span>use cases blocked by technology in a recent diagnosis</span></div>
-    <div><b>Fixed fee</b><span>agreed before we start</span></div>
+<section class="wl-hero" id="top"><div class="in wl-hero-grid">
+  <div class="wl-hero-copy">
+    <span class="tag"><i></i>Exclusive executive offer · UAE &amp; GCC</span>
+    <h1>Find where your business is <em>leaking money</em> in 2 weeks.</h1>
+    <p>The AI Weak-Link Diagnostic gives UAE and GCC leadership teams an evidence-led view of operational leakage, AI readiness and the actions that should come next.</p>
+    <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="hero-book">Book a 30-minute call</a></div>
+    <div class="wl-stats">
+      <div><b>2 weeks</b><span>kickoff to board readout</span></div>
+      <div><b>0 of 8</b><span>use cases blocked by technology in a recent diagnosis</span></div>
+      <div><b>Fixed fee</b><span>agreed before we start</span></div>
+    </div>
+  </div>
+  <div class="wl-hero-calculator" id="leak-calculator">
+    <div class="wl-calc-head"><span>FREE BUSINESS CHECK · 60 SECONDS</span><h2>What could disconnected operations be costing you?</h2><p>Answer four questions for an illustrative annual exposure range.</p></div>
+    <div class="wl-calc-fields">
+      <label>1. Approximate annual revenue
+        <select id="calcRevenue"><option value="3000000">Under AED 10M (model uses AED 3M)</option><option value="20000000">AED 10M–50M (model uses AED 20M)</option><option value="75000000" selected>AED 50M–100M (model uses AED 75M)</option><option value="150000000">AED 100M+ (model uses AED 150M)</option></select>
+      </label>
+      <label>2. How disconnected are your departments?
+        <select id="calcSilos"><option value="0.015">1–2 departments — mostly connected</option><option value="0.03" selected>3–4 departments — some gaps</option><option value="0.045">5+ departments — largely separate</option></select>
+      </label>
+      <label>3. How is AI currently used?
+        <select id="calcAI"><option value="1.15">Mostly manual / no meaningful AI use</option><option value="1.05" selected>A few disconnected AI tools</option><option value="1">One platform across most teams</option><option value="0.55">Bespoke AI built around our workflows</option></select>
+      </label>
+      <label>4. Leadership time spent compiling reports
+        <select id="calcHours"><option value="1">Under 3 hours a week</option><option value="1.08" selected>3–8 hours a week</option><option value="1.15">More than 8 hours a week</option></select>
+      </label>
+    </div>
+    <div class="wl-calc-result"><span>Illustrative annual exposure range</span><strong id="calcResult">Calculating…</strong><small id="calcMonthly"></small></div>
+    <details class="wl-calc-method"><summary>How is this calculated?</summary><p>The model starts with a 1% baseline assumption, adds a silo factor (1.5%, 3% or 4.5%), then adjusts that rate using the AI maturity and reporting-time multipliers selected above.</p><p><strong>Midpoint = modelled revenue × (1% + silo factor) × AI multiplier × reporting multiplier.</strong> The displayed range is 75%–135% of that midpoint, rounded to the nearest AED 5,000. Revenue brackets use the representative values shown in each option.</p><p>These are transparent scenario assumptions, not measured losses, verified industry averages or a prediction. The result is a conversation starter; actual exposure must be established from your business records.</p></details>
+    <a class="wl-calc-cta" href="https://calendly.com/warrenlisa2001/30min">Discuss your result with Lisa →</a>
   </div>
 </div></section>
 
 <section id="estimate"><div class="in">
-  <div class="head"><span class="eyebrow">Try it</span><h2>What would a small leak cost you?</h2><p class="lead">This is simple arithmetic, not a measurement of your business. The diagnosis is what finds the real number.</p></div>
-  <div class="wl-grid c2" style="align-items:start">
-    <div class="wl-calc">
-      <h3>Revenue leak estimator</h3>
-      <label>Annual revenue <span id="revV">AED 500M</span></label>
-      <input id="rev" type="range" min="20" max="5000" step="10" value="500">
-      <label>Share lost between departments <span id="pctV">1.0%</span></label>
-      <input id="pct" type="range" min="0.2" max="5" step="0.1" value="1">
-      <div class="wl-out"><small>Potential leak per year</small><b id="leak">AED 5.0M</b><small id="leakm">About AED 417K every month.</small></div>
-      <p class="wl-note">Illustrative only. Diagnostic fees start at AED 20,000.</p>
-    </div>
+  <div class="head"><span class="eyebrow">Check your operating discipline</span><h2>The 5-minute leadership test</h2><p class="lead">Can your leadership team answer these questions instantly — and agree on the answers?</p></div>
+  <div class="wl-grid" style="align-items:start">
     <div class="wl-calc wl-test">
       <h3>The 5-minute test</h3>
       <p style="font-size:15px">Tick each question your leadership team can answer instantly and agree on.</p>
@@ -473,16 +510,6 @@ html,body{overflow-x:clip}
 
 <script>
 (function(){
-  function fmt(m){return m>=1?'AED '+(m>=100?Math.round(m):m.toFixed(1))+'M':'AED '+Math.round(m*1000)+'K';}
-  var r=document.getElementById('rev'),p=document.getElementById('pct');
-  function calc(){
-    var rev=+r.value,pc=+p.value,leak=rev*pc/100;
-    document.getElementById('revV').textContent=rev>=1000?'AED '+(rev/1000).toFixed(1)+'B':'AED '+rev+'M';
-    document.getElementById('pctV').textContent=pc.toFixed(1)+'%';
-    document.getElementById('leak').textContent=fmt(leak);
-    document.getElementById('leakm').textContent='About '+fmt(leak/12)+' every month.';
-  }
-  if(r&&p){r.addEventListener('input',calc);p.addEventListener('input',calc);calc();}
   var boxes=document.querySelectorAll('.wl-test input'),v=document.getElementById('verdict');
   function test(){
     var yes=0;boxes.forEach(function(b){if(b.checked)yes++;});
@@ -598,6 +625,32 @@ document.querySelectorAll('#mobileMenu a').forEach(link=>{link.addEventListener(
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape') closeAll(null);
   });
+})();
+</script>
+<script>
+(function(){
+  var ids=['calcRevenue','calcSilos','calcAI','calcHours'];
+  var els=ids.map(function(id){return document.getElementById(id);});
+  if(els.some(function(el){return !el;})) return;
+  function fmt(n){
+    if(n>=1000000){var m=n/1000000;return 'AED '+(m>=100?Math.round(m):m.toFixed(1))+'M';}
+    if(n>=1000)return 'AED '+Math.round(n/1000)+'K';
+    return 'AED '+Math.round(n);
+  }
+  function calculate(){
+    var revenue=Number(els[0].value);
+    var siloFactor=Number(els[1].value);
+    var aiMultiplier=Number(els[2].value);
+    var reportingMultiplier=Number(els[3].value);
+    var rate=(0.01+siloFactor)*aiMultiplier*reportingMultiplier;
+    var midpoint=revenue*rate;
+    var low=Math.round((midpoint*.75)/5000)*5000;
+    var high=Math.round((midpoint*1.35)/5000)*5000;
+    document.getElementById('calcResult').textContent=fmt(low)+' – '+fmt(high);
+    document.getElementById('calcMonthly').textContent='Equivalent scenario range: '+fmt(low/12)+' – '+fmt(high/12)+' per month.';
+  }
+  els.forEach(function(el){el.addEventListener('change',calculate);});
+  calculate();
 })();
 </script>
 </body>
