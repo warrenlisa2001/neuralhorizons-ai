@@ -306,6 +306,33 @@ html,body{overflow-x:clip}
 @media(max-width:760px){.wl-proof-grid{grid-template-columns:1fr 1fr}.wl-proof-bottom{grid-template-columns:1fr}}
 @media(max-width:520px){.wl-proof-grid{grid-template-columns:1fr}.wl-proof{padding:42px 0!important}.wl-proof-card{padding:17px}}
 
+
+/* Rotating client results */
+.wl-results-rotator{background:#fff;color:#12172B;border-radius:16px;padding:24px;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 28px rgba(0,0,0,.12);}
+.wl-results-stage{position:relative;min-height:205px;}
+.wl-result-slide[hidden]{display:none!important;}
+.wl-result-slide{animation:wlResultIn .35s ease both;}
+@keyframes wlResultIn{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.wl-result-type{display:block;color:#526078;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px;}
+.wl-result-slide blockquote{margin:0;padding:0;border:0;}
+.wl-result-slide blockquote p{font-size:clamp(16px,1.6vw,19px);line-height:1.55;color:#12172B;font-style:normal;margin:0 0 12px;}
+.wl-result-slide cite{font-size:12px;color:#5B6478;font-style:normal;font-weight:700;}
+.wl-result-slide>a{display:inline-block;margin-top:14px;color:#2563EB;font-size:13px;font-weight:800;text-decoration:none;}
+.wl-result-number{display:block;color:#00A878;font-size:clamp(38px,5vw,54px);font-weight:900;line-height:1.05;letter-spacing:-.04em;margin:3px 0 7px;}
+.wl-result-slide h3{font-size:20px;line-height:1.25;color:#12172B;margin:0 0 9px;}
+.wl-result-slide>p{font-size:14px;line-height:1.55;color:#526078;margin:0;max-width:620px;}
+.wl-results-controls{display:flex;align-items:center;gap:14px;border-top:1px solid #E7EAF0;padding-top:15px;margin-top:15px;}
+.wl-results-dots{display:flex;align-items:center;gap:7px;margin-right:auto;}
+.wl-results-dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#CBD2DE;cursor:pointer;}
+.wl-results-dots button.is-active{width:22px;border-radius:8px;background:#00A878;}
+.wl-results-arrows{display:flex;gap:7px;}
+.wl-results-arrows button{width:32px;height:32px;border:1px solid #D9DFE9;border-radius:50%;background:#fff;color:#182137;font-size:17px;cursor:pointer;}
+.wl-results-arrows button:hover,.wl-results-arrows button:focus-visible{border-color:#00A878;color:#008B65;outline:2px solid transparent;}
+.wl-results-count{font-size:11px;color:#778196;font-weight:700;min-width:24px;text-align:right;}
+@media(max-width:850px){.wl-proof-bottom{grid-template-columns:1fr;}.wl-results-rotator{min-height:280px;}}
+@media(max-width:520px){.wl-results-rotator{padding:19px;min-height:315px;}.wl-results-stage{min-height:230px;}.wl-results-controls{gap:9px;}.wl-results-count{display:none;}}
+@media(prefers-reduced-motion:reduce){.wl-result-slide{animation:none;}}
+
 </style>
 </head>
 <body>
@@ -433,25 +460,70 @@ html,body{overflow-x:clip}
 </div></section>
 
 
-<section class="wl-proof" id="client-results"><div class="in">
-  <span class="eyebrow">Client results</span>
-  <h2>Results clients can point to.</h2>
-  <div class="wl-proof-bottom" style="margin-top:18px">
-    <div class="wl-proof-quote">
-      <blockquote><p>“Lisa and the Neural Horizons team completely changed how we think about AI. We went from zero AI adoption to having three automated workflows running within 60 days. The ROI was visible within the first month.”</p><cite>Sarah M. · CMO, Regional Retail Group</cite></blockquote>
-      <a href="/case-studies/retail-ai-automation/">Read the client story →</a>
-    </div>
-    <div class="wl-proof-about">
-      <strong>20+ years of commercial and transformation experience.</strong>
-      <p>Led personally by Lisa Warren, Founder of Neural Horizons AI.</p>
-      <a href="/about">Meet Lisa →</a>
+<section class="wl-proof" id="client-results">
+  <div class="in">
+    <span class="eyebrow">Client results</span>
+    <h2>Results clients can point to.</h2>
+    <p class="proof-intro">Real-world outcomes across AI automation, operational performance and commercial growth.</p>
+    <div class="wl-proof-bottom" style="margin-top:18px">
+      <div class="wl-results-rotator" aria-roledescription="carousel" aria-label="Client results and outcomes">
+        <div class="wl-results-stage" aria-live="polite">
+          <article class="wl-result-slide is-active" data-slide="0">
+            <span class="wl-result-type">Client testimonial</span>
+            <blockquote><p>“Lisa and the Neural Horizons team completely changed how we think about AI. We went from zero AI adoption to having three automated workflows running within 60 days. The ROI was visible within the first month.”</p><cite>Sarah M. · CMO, Regional Retail Group</cite></blockquote>
+            <a href="/case-studies/retail-ai-automation/">Read the client story →</a>
+          </article>
+          <article class="wl-result-slide" data-slide="1" hidden>
+            <span class="wl-result-type">AI automation · Regional Retail Group</span>
+            <strong class="wl-result-number">60 hours</strong>
+            <h3>Saved every week.</h3>
+            <p>Three agentic AI workflows moved from proof of concept to go-live in 60 days, with ROI visible in the first month.</p>
+            <a href="/case-studies/retail-ai-automation/">Explore the retail AI case study →</a>
+          </article>
+          <article class="wl-result-slide" data-slide="2" hidden>
+            <span class="wl-result-type">Operational performance · Family Office F&amp;B</span>
+            <strong class="wl-result-number">AED 5.49M</strong>
+            <h3>Annual operational inefficiency identified.</h3>
+            <p>A structured operational review exposed material value at stake across processes and hand-offs. This is identified potential exposure, not realised savings.</p>
+            <a href="/case-studies/fmcg-agentic-ai-readiness/">Explore the operational findings →</a>
+          </article>
+          <article class="wl-result-slide" data-slide="3" hidden>
+            <span class="wl-result-type">Commercial growth</span>
+            <strong class="wl-result-number">$2.3M</strong>
+            <h3>Incremental revenue generated.</h3>
+            <p>Commercial and marketing initiatives focused on turning strategy into measurable business growth.</p>
+          </article>
+          <article class="wl-result-slide" data-slide="4" hidden>
+            <span class="wl-result-type">Corporate digital transformation</span>
+            <strong class="wl-result-number">+50%</strong>
+            <h3>Digital performance uplift.</h3>
+            <p>Strategic digital transformation focused on improving platform performance and the customer experience.</p>
+            <a href="/case-studies/asset-management-digital-transformation/">Explore the transformation results →</a>
+          </article>
+        </div>
+        <div class="wl-results-controls">
+          <div class="wl-results-dots" role="group" aria-label="Choose a result">
+            <button type="button" class="is-active" data-go="0" aria-label="Show client testimonial" aria-pressed="true"></button>
+            <button type="button" data-go="1" aria-label="Show 60 hours saved" aria-pressed="false"></button>
+            <button type="button" data-go="2" aria-label="Show AED 5.49 million identified" aria-pressed="false"></button>
+            <button type="button" data-go="3" aria-label="Show 2.3 million dollars incremental revenue" aria-pressed="false"></button>
+            <button type="button" data-go="4" aria-label="Show 50 percent digital performance uplift" aria-pressed="false"></button>
+          </div>
+          <div class="wl-results-arrows">
+            <button type="button" class="wl-results-prev" aria-label="Previous result">←</button>
+            <button type="button" class="wl-results-next" aria-label="Next result">→</button>
+          </div>
+          <span class="wl-results-count" aria-hidden="true">1 / 5</span>
+        </div>
+      </div>
+      <div class="wl-proof-about">
+        <strong>20+ years of commercial and transformation experience.</strong>
+        <p>Led personally by Lisa Warren, Founder of Neural Horizons AI.</p>
+        <a href="/about">Meet Lisa →</a>
+      </div>
     </div>
   </div>
-  <div class="wl-proof-links">
-    <a href="/case-studies/fmcg-agentic-ai-readiness/">Family office F&amp;B · Explore the operational findings →</a>
-    <a href="/case-studies/asset-management-digital-transformation/">Corporate digital transformation · Explore the results →</a>
-  </div>
-</div></section>
+</section>
 
 <section id="estimate"><div class="in">
   <div class="head"><span class="eyebrow">Check your operating discipline</span><h2>The 5-minute leadership test</h2><p class="lead">Can your leadership team answer these questions instantly — and agree on the answers?</p></div>
@@ -698,6 +770,34 @@ document.querySelectorAll('#mobileMenu a').forEach(link=>{link.addEventListener(
   }
   els.forEach(function(el){el.addEventListener('change',calculate);});
   calculate();
+})();
+</script>
+
+<script>
+(function(){
+  var root=document.querySelector('.wl-results-rotator');
+  if(!root)return;
+  var slides=Array.prototype.slice.call(root.querySelectorAll('.wl-result-slide'));
+  var dots=Array.prototype.slice.call(root.querySelectorAll('[data-go]'));
+  var count=root.querySelector('.wl-results-count');
+  var current=0,timer=null,paused=false;
+  function show(index){
+    current=(index+slides.length)%slides.length;
+    slides.forEach(function(slide,i){slide.hidden=i!==current;slide.classList.toggle('is-active',i===current);});
+    dots.forEach(function(dot,i){dot.classList.toggle('is-active',i===current);dot.setAttribute('aria-pressed',i===current?'true':'false');});
+    if(count)count.textContent=(current+1)+' / '+slides.length;
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  function start(){stop();if(!paused&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){timer=setInterval(function(){show(current+1);},7000);}}
+  dots.forEach(function(dot){dot.addEventListener('click',function(){show(Number(dot.getAttribute('data-go')));start();});});
+  root.querySelector('.wl-results-prev').addEventListener('click',function(){show(current-1);start();});
+  root.querySelector('.wl-results-next').addEventListener('click',function(){show(current+1);start();});
+  root.addEventListener('mouseenter',function(){paused=true;stop();});
+  root.addEventListener('mouseleave',function(){paused=false;start();});
+  root.addEventListener('focusin',function(){paused=true;stop();});
+  root.addEventListener('focusout',function(e){if(!root.contains(e.relatedTarget)){paused=false;start();}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else start();});
+  show(0);start();
 })();
 </script>
 </body>
