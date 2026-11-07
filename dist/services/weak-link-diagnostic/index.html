@@ -223,6 +223,41 @@ html,body{overflow-x:clip}
 .wl-price .amt{font-size:26px;line-height:1.2;}
 .wl-price .amt small{display:block;margin-top:2px;}
 .wl .wl-note{margin-top:22px;}
+
+/* Above-the-fold conversion layout */
+.wl-hero .in{padding:34px 24px 38px;}
+.wl-hero .tag{margin-bottom:12px;padding:5px 12px;font-size:11.5px;}
+.wl-hero h1{font-size:clamp(34px,4.4vw,52px);margin-bottom:12px;max-width:800px;}
+.wl-hero p{font-size:16px;line-height:1.5;max-width:760px;margin-bottom:0;}
+.wl-hero .wl-btns{margin-top:16px;}
+.wl-hero .wl-btn{padding:11px 20px;font-size:14px;}
+.wl-stats{gap:26px;margin-top:20px;padding-top:16px;}
+.wl-stats b{font-size:24px;}
+.wl-stats span{font-size:11.5px;}
+.wl section#estimate{padding:28px 0 38px;scroll-margin-top:90px;}
+.wl section#estimate .head{max-width:900px;margin-bottom:18px;}
+.wl section#estimate .head .eyebrow{margin-bottom:6px;}
+.wl section#estimate .head h2{font-size:clamp(24px,3vw,32px);margin-bottom:6px;}
+.wl section#estimate .head p{font-size:14px;line-height:1.45;margin:0;}
+.wl section#estimate .wl-grid{gap:16px;}
+.wl section#estimate .wl-calc{padding:20px;border-radius:16px;}
+.wl section#estimate .wl-calc h3{font-size:18px;margin-bottom:6px;}
+.wl section#estimate .wl-calc label{font-size:13px;margin:10px 0 5px;}
+.wl section#estimate .wl-out{margin-top:14px;padding:14px 16px;}
+.wl section#estimate .wl-out b{font-size:clamp(28px,4vw,40px);}
+.wl section#estimate .wl-test p{font-size:13px!important;line-height:1.4;margin-bottom:8px;}
+.wl section#estimate .wl-test label.t{padding:8px 10px;margin-bottom:6px;font-size:13px;line-height:1.35;}
+.wl section#estimate .wl-verdict{margin-top:10px;padding:11px 13px;font-size:13px;}
+.wl section#estimate .wl-note{font-size:11px;margin-top:8px;}
+@media(max-width:760px){
+ .wl-hero .in{padding:28px 20px 30px;}
+ .wl-hero h1{font-size:36px;}
+ .wl-hero .wl-stats{gap:14px 20px;margin-top:16px;padding-top:14px;}
+ .wl-stats b{font-size:21px;}
+ .wl section#estimate{padding:24px 0 30px;}
+ .wl section#estimate .wl-grid.c2{grid-template-columns:1fr;}
+ .wl section#estimate .wl-calc{padding:18px;}
+}
 </style>
 </head>
 <body>
@@ -325,6 +360,31 @@ html,body{overflow-x:clip}
   </div>
 </div></section>
 
+<section id="estimate"><div class="in">
+  <div class="head"><span class="eyebrow">Try it</span><h2>What would a small leak cost you?</h2><p class="lead">This is simple arithmetic, not a measurement of your business. The diagnosis is what finds the real number.</p></div>
+  <div class="wl-grid c2" style="align-items:start">
+    <div class="wl-calc">
+      <h3>Revenue leak estimator</h3>
+      <label>Annual revenue <span id="revV">AED 500M</span></label>
+      <input id="rev" type="range" min="20" max="5000" step="10" value="500">
+      <label>Share lost between departments <span id="pctV">1.0%</span></label>
+      <input id="pct" type="range" min="0.2" max="5" step="0.1" value="1">
+      <div class="wl-out"><small>Potential leak per year</small><b id="leak">AED 5.0M</b><small id="leakm">About AED 417K every month.</small></div>
+      <p class="wl-note">Illustrative only. Diagnostic fees start at AED 20,000.</p>
+    </div>
+    <div class="wl-calc wl-test">
+      <h3>The 5-minute test</h3>
+      <p style="font-size:15px">Tick each question your leadership team can answer instantly and agree on.</p>
+      <label class="t"><input type="checkbox"> Which product or channel earns us the most margin?</label>
+      <label class="t"><input type="checkbox"> Who owns the definition of our most-used operational term?</label>
+      <label class="t"><input type="checkbox"> Which forecast is the plan of record?</label>
+      <label class="t"><input type="checkbox"> Can we see stock at the moment an order is taken?</label>
+      <label class="t"><input type="checkbox"> When something goes wrong, does the first conversation start with why, not whose fault?</label>
+      <div class="wl-verdict" id="verdict">Tick the questions you can answer.</div>
+    </div>
+  </div>
+</div></section>
+
 <section><div class="in">
   <div class="head"><span class="eyebrow">Sound familiar?</span><h2>Every department has a reason it isn't theirs.</h2><p class="lead">Money leaks in the gaps between teams, and nobody owns the gap. In a recent engagement with a large regional enterprise, I sat down with every department and heard the same story eleven times.</p></div>
   <div class="wl-grid c2">
@@ -371,30 +431,7 @@ html,body{overflow-x:clip}
   </div>
 </div></section>
 
-<section id="estimate"><div class="in">
-  <div class="head"><span class="eyebrow">Try it</span><h2>What would a small leak cost you?</h2><p class="lead">This is simple arithmetic, not a measurement of your business. The diagnosis is what finds the real number.</p></div>
-  <div class="wl-grid c2" style="align-items:start">
-    <div class="wl-calc">
-      <h3>Revenue leak estimator</h3>
-      <label>Annual revenue <span id="revV">AED 500M</span></label>
-      <input id="rev" type="range" min="20" max="5000" step="10" value="500">
-      <label>Share lost between departments <span id="pctV">1.0%</span></label>
-      <input id="pct" type="range" min="0.2" max="5" step="0.1" value="1">
-      <div class="wl-out"><small>Potential leak per year</small><b id="leak">AED 5.0M</b><small id="leakm">About AED 417K every month.</small></div>
-      <p class="wl-note">Illustrative only. Diagnostic fees start at AED 20,000.</p>
-    </div>
-    <div class="wl-calc wl-test">
-      <h3>The 5-minute test</h3>
-      <p style="font-size:15px">Tick each question your leadership team can answer instantly and agree on.</p>
-      <label class="t"><input type="checkbox"> Which product or channel earns us the most margin?</label>
-      <label class="t"><input type="checkbox"> Who owns the definition of our most-used operational term?</label>
-      <label class="t"><input type="checkbox"> Which forecast is the plan of record?</label>
-      <label class="t"><input type="checkbox"> Can we see stock at the moment an order is taken?</label>
-      <label class="t"><input type="checkbox"> When something goes wrong, does the first conversation start with why, not whose fault?</label>
-      <div class="wl-verdict" id="verdict">Tick the questions you can answer.</div>
-    </div>
-  </div>
-</div></section>
+
 
 <section class="soft"><div class="in">
   <div class="wl-grid c2">
@@ -418,7 +455,7 @@ html,body{overflow-x:clip}
 <section class="soft"><div class="in">
   <div class="wl-who">
     <img src="/images/lisa-warren-2026.jpg" alt="Lisa Warren, Founder and CEO of Neural Horizons AI" width="104" height="104">
-    <div><span class="eyebrow">Who you work with</span><h3>Lisa Warren, Founder &amp; CEO, Neural Horizons AI</h3><p style="margin:0">AI leader with 20+ years across FMCG, banking, SaaS and consulting. I have led agentic AI transformation for a large UAE enterprise, and I hold an MSc in Digital Transformation and a Stanford AI Leadership Programme. I work directly with you. No junior hand-offs.</p></div>
+    <div><span class="eyebrow">Who you work with</span><h3>Lisa Warren, Founder &amp; CEO, Neural Horizons AI</h3><p style="margin:0">AI leader with 20+ years across FMCG, banking, SaaS and consulting. I have led agentic AI transformation for a large UAE enterprise, and I hold a Master’s in Digital Marketing and completed the Stanford AI Leadership Programme. I work directly with you. No junior hand-offs.</p></div>
   </div>
 </div></section>
 
@@ -431,7 +468,7 @@ html,body{overflow-x:clip}
   <span class="eyebrow">Next step</span>
   <h2>Find your weak links before the facts find you.</h2>
   <p>I take 3 diagnostics per quarter. Book a 30-minute call and I will tell you straight whether it is a fit. No pitch. A diagnosis.</p>
-  <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="final-book">Book a 30-minute call</a><a class="wl-btn s" href="https://wa.me/971585697562?text=Hi%20Lisa%2C%20I%27d%20like%20to%20book%20a%2030-minute%20call%20about%20the%20AI%20Weak-Link%20Diagnostic.">WhatsApp me</a><a class="wl-btn s" href="mailto:lisa@neuralhorizonsai.com?subject=WEAK%20LINK">Email &ldquo;WEAK LINK&rdquo;</a></div>
+  <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="final-book">Book a 30-minute call</a><a class="wl-btn s" href="https://wa.me/971585738525?text=Hi%20Lisa%2C%20I%27d%20like%20to%20book%20a%2030-minute%20call%20about%20the%20AI%20Weak-Link%20Diagnostic.">WhatsApp me</a><a class="wl-btn s" href="mailto:lisa@neuralhorizonsai.com?subject=WEAK%20LINK">Email &ldquo;WEAK LINK&rdquo;</a></div>
 </div></section>
 
 <script>
