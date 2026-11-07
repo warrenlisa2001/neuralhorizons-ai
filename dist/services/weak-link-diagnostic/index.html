@@ -282,6 +282,30 @@ html,body{overflow-x:clip}
 .wl-calc-cta{display:inline-block;margin-top:12px;font-size:13px;font-weight:800;color:#2563EB;text-decoration:none;}
 @media(max-width:850px){.wl-hero .wl-hero-grid{grid-template-columns:1fr;gap:28px;padding-top:48px;padding-bottom:48px;}.wl-hero-copy h1{max-width:680px;}.wl-hero-calculator{max-width:680px;}}
 @media(max-width:520px){.wl-hero .wl-hero-grid{padding:38px 20px 42px;}.wl-calc-fields{grid-template-columns:1fr;gap:10px;}.wl-hero-calculator{padding:19px;}.wl-calc-head h2{font-size:21px;}}
+
+/* Compact client proof and testimonial section */
+.wl-proof{background:#0B1020;padding:54px 0!important;color:#fff;}
+.wl-proof .eyebrow{color:#00FF88;}
+.wl-proof h2{color:#fff;font-size:clamp(26px,3.6vw,38px);margin-bottom:10px;}
+.wl-proof .proof-intro{color:#B8C2DC;font-size:15px;max-width:620px;margin:0 0 24px;}
+.wl-proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.wl-proof-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:20px;}
+.wl-proof-card b{display:block;color:#00FF88;font-size:clamp(25px,3vw,34px);line-height:1.1;margin-bottom:7px;}
+.wl-proof-card span{display:block;color:#fff;font-size:13px;font-weight:800;line-height:1.4;}
+.wl-proof-card small{display:block;color:#AAB7D2;font-size:11.5px;line-height:1.45;margin-top:7px;}
+.wl-proof-bottom{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:18px;align-items:stretch;}
+.wl-proof-quote,.wl-proof-about{border-radius:16px;padding:22px;background:#fff;color:#12172B;}
+.wl-proof-quote blockquote{margin:0;padding:0;border:0;}
+.wl-proof-quote blockquote p{font-size:16px;line-height:1.5;color:#12172B;font-style:normal;margin:0 0 10px;}
+.wl-proof-quote cite{font-size:12px;color:#5B6478;font-style:normal;font-weight:700;}
+.wl-proof-quote a,.wl-proof-about a{display:inline-block;margin-top:10px;color:#2563EB;font-size:13px;font-weight:800;text-decoration:none;}
+.wl-proof-about{background:linear-gradient(135deg,#102B28,#171B39);color:#fff;display:flex;flex-direction:column;justify-content:center;}
+.wl-proof-about strong{font-size:18px;color:#fff;line-height:1.3;}
+.wl-proof-about p{font-size:13px;color:#C7D1E8;margin:8px 0 0;}
+.wl-proof-about a{color:#00FF88;}
+@media(max-width:760px){.wl-proof-grid{grid-template-columns:1fr 1fr}.wl-proof-bottom{grid-template-columns:1fr}}
+@media(max-width:520px){.wl-proof-grid{grid-template-columns:1fr}.wl-proof{padding:42px 0!important}.wl-proof-card{padding:17px}}
+
 </style>
 </head>
 <body>
@@ -379,9 +403,9 @@ html,body{overflow-x:clip}
     <p>The AI Weak-Link Diagnostic gives UAE and GCC leadership teams an evidence-led view of operational leakage, AI readiness and the actions that should come next.</p>
     <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="hero-book">Book a 30-minute call</a></div>
     <div class="wl-stats">
-      <div><b>2 weeks</b><span>kickoff to board readout</span></div>
-      <div><b>0 of 8</b><span>use cases blocked by technology in a recent diagnosis</span></div>
-      <div><b>Fixed fee</b><span>agreed before we start</span></div>
+      <div><b>60 hours</b><span>saved every week through AI automation</span></div>
+      <div><b>AED 5.49M</b><span>annual network inefficiency identified at Masafi</span></div>
+      <div><b>+50%</b><span>digital performance uplift for a global asset manager</span></div>
     </div>
   </div>
   <div class="wl-hero-calculator" id="leak-calculator">
@@ -403,6 +427,29 @@ html,body{overflow-x:clip}
     <div class="wl-calc-result"><span>Illustrative annual exposure range</span><strong id="calcResult">Calculating…</strong><small id="calcMonthly"></small></div>
     <details class="wl-calc-method"><summary>How is this calculated?</summary><p>The model starts with a 1% baseline assumption, adds a silo factor (1.5%, 3% or 4.5%), then adjusts that rate using the AI maturity and reporting-time multipliers selected above.</p><p><strong>Midpoint = modelled revenue × (1% + silo factor) × AI multiplier × reporting multiplier.</strong> The displayed range is 75%–135% of that midpoint, rounded to the nearest AED 5,000. Revenue brackets use the representative values shown in each option.</p><p>These are transparent scenario assumptions, not measured losses, verified industry averages or a prediction. The result is a conversation starter; actual exposure must be established from your business records.</p></details>
     <a class="wl-calc-cta" href="https://calendly.com/warrenlisa2001/30min">Discuss your result with Lisa →</a>
+  </div>
+</div></section>
+
+
+<section class="wl-proof" id="client-results"><div class="in">
+  <span class="eyebrow">Client results</span>
+  <h2>Real work. Measurable outcomes.</h2>
+  <p class="proof-intro">From time saved to value identified, these are results from real client engagements.</p>
+  <div class="wl-proof-grid">
+    <div class="wl-proof-card"><b>60 hours</b><span>Saved every week</span><small>Three AI workflows deployed for a regional retail group.</small></div>
+    <div class="wl-proof-card"><b>AED 5.49M</b><span>Annual value at stake identified</span><small>Network inefficiency uncovered in the Masafi FMCG engagement.</small><a href="/case-studies/fmcg-agentic-ai-readiness/" style="display:inline-block;margin-top:8px;color:#00FF88;font-size:12px;font-weight:800;text-decoration:none;">Read the case study →</a></div>
+    <div class="wl-proof-card"><b>+50%</b><span>Digital performance uplift</span><small>Global asset management transformation.</small></div>
+  </div>
+  <div class="wl-proof-bottom">
+    <div class="wl-proof-quote">
+      <blockquote><p>“Lisa and the Neural Horizons team completely changed how we think about AI. We went from zero AI adoption to having three automated workflows running within 60 days. The ROI was visible within the first month.”</p><cite>Sarah M. · CMO, Regional Retail Group</cite></blockquote>
+      <a href="/case-studies/retail-ai-automation/">Read the client case study →</a>
+    </div>
+    <div class="wl-proof-about">
+      <strong>20+ years of commercial and transformation experience.</strong>
+      <p>Led personally by Lisa Warren, Founder of Neural Horizons AI.</p>
+      <a href="/about">Meet Lisa →</a>
+    </div>
   </div>
 </div></section>
 
