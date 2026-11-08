@@ -65,6 +65,7 @@ test('lease recovery safely reports no work without a D1 binding', async () => {
 test('outbox dispatcher publishes only a versioned run identifier', async () => {
   const sent = [];
   const db = {
+    async batch(items) { return items.map(() => ({ success: true, meta: { changes: 1 } })); },
     prepare(sql) {
       return {
         sql,
@@ -92,6 +93,7 @@ test('outbox dispatcher publishes only a versioned run identifier', async () => 
 test('outbox dispatcher returns failed sends to pending with a safe error code', async () => {
   const statements = [];
   const db = {
+    async batch(items) { return items.map(() => ({ success: true, meta: { changes: 1 } })); },
     prepare(sql) {
       return {
         sql,
