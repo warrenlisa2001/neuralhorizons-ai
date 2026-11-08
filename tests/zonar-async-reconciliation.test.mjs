@@ -61,3 +61,82 @@ test('queue consumer retries when storage bindings are not configured', async ()
 test('lease recovery safely reports no work without a D1 binding', async () => {
   assert.deepEqual(await recoverZonarReconciliationLeases({}), { recovered: 0, failed: 0 });
 });
+
+test('outbox dispatcher publishes only a versioned run identifier', async () => {
+  const sent = [];
+  const db = {
+    prepare(sql) {
+      return {
+        sql,
+        bind(...values) {
+          return {
+            values,
+            async run() { return { success: true, meta: { changes: 1 } }; },
+            async all() { return { results: [{ id: 'outbox_1' }] }; },
+            async first() {
+              return { id: 'outbox_1', run_id: 'run_1', tenant_id: 'tenant_1', attempt_count: 1 };
+            }
+          };
+        }
+      };
+    }
+  };
+  const result = await dispatchZonarReconciliationOutbox({
+    ZONAR_DB: db,
+    ZONAR_RECONCILIATION_QUEUE: { async send(message) { sent.push(message); } }
+  });
+  assert.deepEqual(result, { dispatched: 1, deferred: 0 });
+  assert.deepEqual(sent, [{ version: 1, run_id: 'run_1' }]);
+});
+
+test('outbox dispatcher returns failed sends to pending with a safe error code', async () => {
+  const statements = [];
+  const db = {
+    prepare(sql) {
+      return {
+        sql,
+        bind(...values) {
+          return {
+            values,
+            async run() { statements.push({ sql, values }); return { success: true, meta: { changes: 1 } }; },
+            async all() { return { results: [{ id: 'outbox_2' }] }; },
+            async first() {
+              return { id: 'outbox_2', run_id: 'run_2', tenant_id: 'tenant_2', attempt_count: 2 };
+            }
+          };
+        }
+      };
+    }
+  };
+  const result = await dispatchZonarReconciliationOutbox({
+    ZONAR_DB: db,
+    ZONAR_RECONCILIATION_QUEUE: { async send() { throw new Error('private provider error'); } }
+  });
+  assert.deepEqual(result, { dispatched: 0, deferred: 1 });
+  assert.ok(statements.some(item => item.sql.includes("status='pending'") && item.sql.includes("QUEUE_SEND_FAILED")));
+  assert.equal(statements.some(item => JSON.stringify(item).includes('private provider error')), false);
+});
+
+test('expired run recovery atomically resets the run and its outbox delivery', async () => {
+  let batchStatements = [];
+  const db = {
+    prepare(sql) {
+      return {
+        sql,
+        bind(...values) {
+          return {
+            sql, values,
+            async all() { return { results: [{ id: 'run_3', tenant_id: 'tenant_3', attempt_count: 1, max_attempts: 5 }] }; },
+            async run() { return { success: true, meta: { changes: 1 } }; }
+          };
+        }
+      };
+    },
+    async batch(statements) { batchStatements = statements; return statements.map(() => ({ success: true, meta: { changes: 1 } })); }
+  };
+  const result = await recoverZonarReconciliationLeases({ ZONAR_DB: db }, new Date('2026-11-08T18:00:00.000Z'));
+  assert.deepEqual(result, { recovered: 1, failed: 0 });
+  assert.equal(batchStatements.length, 2);
+  assert.ok(batchStatements[0].sql.includes("status='queued'"));
+  assert.ok(batchStatements[1].sql.includes("status='pending'"));
+});
