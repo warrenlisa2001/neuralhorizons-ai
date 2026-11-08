@@ -97,7 +97,7 @@ async function createSession(request, env, tenantId, allowed) {
 }
 
 async function uploadPart(request, env, tenantId, allowed, uploadId, partNumber) {
-  if (!SAFE_ID.test(uploadId) || !/^\\d+$/.test(partNumber)) return json({ error: 'INVALID_UPLOAD_PART' }, 400);
+  if (!SAFE_ID.test(uploadId) || !/^\d+$/.test(partNumber)) return json({ error: 'INVALID_UPLOAD_PART' }, 400);
   const number = Number(partNumber);
   if (!Number.isInteger(number) || number < 1 || number > MAX_PARTS) return json({ error: 'INVALID_UPLOAD_PART' }, 400);
   const session = await env.ZONAR_DB.prepare(
@@ -115,7 +115,7 @@ async function uploadPart(request, env, tenantId, allowed, uploadId, partNumber)
     ? session.chunk_bytes
     : session.expected_bytes - session.chunk_bytes * (session.part_count - 1);
   const declared = request.headers.get('Content-Length');
-  if (declared && /^\\d+$/.test(declared) && Number(declared) !== expectedPartBytes) {
+  if (declared && /^\d+$/.test(declared) && Number(declared) !== expectedPartBytes) {
     return json({ error: 'INVALID_PART_SIZE', expected_bytes: expectedPartBytes }, 400);
   }
   if (!request.body) return json({ error: 'EMPTY_PART' }, 400);
@@ -174,6 +174,35 @@ async function uploadPart(request, env, tenantId, allowed, uploadId, partNumber)
     ).bind(uploadId, number, 'reserved').run();
     return json({ error: 'PART_UPLOAD_FAILED' }, 503);
   }
+}
+
+async function getSessionStatus(env, allowed, uploadId) {
+  const session = await env.ZONAR_DB.prepare(
+    `SELECT id, filename, expected_bytes, chunk_bytes, part_count, status,
+            expires_at, completed_file_id, created_at, updated_at
+     FROM tenant_upload_sessions
+     WHERE id = ?1 AND tenant_id = ?2 AND user_id = ?3 LIMIT 1`
+  ).bind(uploadId, allowed.tenantId, allowed.userId).first();
+  if (!session) return json({ error: 'UPLOAD_SESSION_NOT_FOUND' }, 404);
+  const result = await env.ZONAR_DB.prepare(
+    `SELECT part_number, byte_size, sha256_hex, status
+     FROM tenant_upload_parts WHERE upload_id = ?1 ORDER BY part_number ASC`
+  ).bind(uploadId).all();
+  const parts = Array.isArray(result.results) ? result.results : [];
+  return json({
+    success: true,
+    upload: {
+      id: session.id, filename: session.filename,
+      expected_bytes: session.expected_bytes, chunk_bytes: session.chunk_bytes,
+      part_count: session.part_count, status: session.status,
+      expires_at: session.expires_at, completed_file_id: session.completed_file_id,
+      created_at: session.created_at, updated_at: session.updated_at
+    },
+    uploaded_parts: parts.filter(part => part.status === 'uploaded').map(part => ({
+      part_number: part.part_number, byte_size: part.byte_size, sha256_hex: part.sha256_hex
+    })),
+    uploaded_part_count: parts.filter(part => part.status === 'uploaded').length
+  });
 }
 
 async function completeSession(request, env, tenantId, allowed, uploadId) {
@@ -304,6 +333,7 @@ export async function handleZonarResumableUpload(request, env, tenantId, uploadI
 
   if (!uploadId && request.method === 'POST') return createSession(request, env, tenantId, allowed);
   if (!uploadId || !SAFE_ID.test(uploadId)) return json({ error: 'INVALID_UPLOAD_ID' }, 400);
+  if (!action && request.method === 'GET') return getSessionStatus(env, allowed, uploadId);
   if (action === 'parts' && request.method === 'PUT') return uploadPart(request, env, tenantId, allowed, uploadId, partNumber);
   if (action === 'complete' && request.method === 'POST') return completeSession(request, env, tenantId, allowed, uploadId);
   if (action === 'abort' && request.method === 'DELETE') return abortSession(env, tenantId, allowed, uploadId);
