@@ -40,6 +40,7 @@ before(async () => {
   env = {
     ZONAR_ISSUER: 'https://route-identity.example/',
     ZONAR_AUDIENCE: 'zonar-api',
+    ZONAR_REQUIRED_SCOPE: 'zonar.api',
     ZONAR_JWKS_URL: 'https://route-identity.example/jwks.json',
     ZONAR_DB: {
       prepare() {
@@ -59,7 +60,7 @@ before(async () => {
     }
   };
   token = await makeToken({
-    iss: env.ZONAR_ISSUER, aud: env.ZONAR_AUDIENCE, sub: 'route-user', exp: now + 300
+    iss: env.ZONAR_ISSUER, aud: env.ZONAR_AUDIENCE, sub: 'route-user', scp: 'zonar.api', exp: now + 300
   });
 });
 
