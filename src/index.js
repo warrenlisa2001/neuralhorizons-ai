@@ -167,7 +167,7 @@ export default {
       } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
       return handleZonarReconciliationResult(request, env, tenantId, runId);
     }
-    const asyncReconciliationMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/reconciliation-jobs$/);
+    const asyncReconciliationMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-jobs$/);
     if (asyncReconciliationMatch) {
       let tenantId;
       try { tenantId = decodeURIComponent(asyncReconciliationMatch[1]); }
