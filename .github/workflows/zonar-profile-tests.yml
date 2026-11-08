@@ -9,6 +9,8 @@ on:
       - "src/zonar-tenant-data.js"
       - "src/zonar-audit.js"
       - "src/zonar-file-storage.js"
+      - "src/zonar-resumable-uploads.js"
+      - "tests/zonar-resumable-uploads.test.mjs"
       - "src/zonar-reconciliation.js"
       - "src/zonar-reconciliation-pipeline.js"
       - "src/zonar-reconciliation-runs.js"
@@ -26,6 +28,7 @@ on:
       - "src/zonar-csv-stream.js"
       - "tests/zonar-csv-stream.test.mjs"
       - "tests/zonar-file-storage.test.mjs"
+      - "tests/zonar-resumable-uploads.test.mjs"
       - "tests/zonar-reconciliation.test.mjs"
       - "tests/zonar-reconciliation-pipeline.test.mjs"
       - "tests/zonar-csv-ingestion.test.mjs"
@@ -91,4 +94,4 @@ jobs:
         with:
           node-version: 22
       - name: Run Zonar security, schema, authentication, ingestion and reconciliation tests
-        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-reconciliation.test.mjs tests/zonar-csv-ingestion.test.mjs tests/zonar-csv-stream.test.mjs tests/zonar-reconciliation-pipeline.test.mjs tests/zonar-reconciliation-runs.test.mjs tests/zonar-operational-schema.test.mjs tests/zonar-operational-events.test.mjs tests/zonar-async-reconciliation.test.mjs
+        run: node --test tests/zonar-profile.test.mjs tests/zonar-tenant-schema.test.mjs tests/zonar-auth.test.mjs tests/zonar-permissions.test.mjs tests/zonar-tenant-access-route.test.mjs tests/zonar-tenant-data.test.mjs tests/zonar-audit.test.mjs tests/zonar-workspace.test.mjs tests/zonar-file-storage.test.mjs tests/zonar-resumable-uploads.test.mjs tests/zonar-reconciliation.test.mjs tests/zonar-csv-ingestion.test.mjs tests/zonar-csv-stream.test.mjs tests/zonar-reconciliation-pipeline.test.mjs tests/zonar-reconciliation-runs.test.mjs tests/zonar-operational-schema.test.mjs tests/zonar-operational-events.test.mjs tests/zonar-async-reconciliation.test.mjs
