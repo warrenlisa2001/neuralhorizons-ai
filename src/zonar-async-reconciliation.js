@@ -81,6 +81,23 @@ export async function handleZonarAsyncReconciliationEnqueue(request, env, tenant
   }
   const idempotencyKey = suppliedKey || crypto.randomUUID().replace(/-/g, '');
   const [ordersId, invoicesId, deliveriesId] = ids;
+  // The current reconciliation consumer only supports the legacy bounded
+  // parser and whole-object SHA-256 verification. Do not queue multipart or
+  // oversized files until the streaming processor can verify their manifests.
+  const sourceRows = await env.ZONAR_DB.prepare(
+    `SELECT id, status, byte_size, sha256_hex
+     FROM tenant_files
+     WHERE tenant_id = ?1 AND id IN (?2, ?3, ?4)`
+  ).bind(allowed.tenantId, ordersId, invoicesId, deliveriesId).all();
+  const sources = Array.isArray(sourceRows.results) ? sourceRows.results : [];
+  if (sources.length !== 3) return json({ error: 'SOURCE_FILES_NOT_AVAILABLE' }, 404);
+  if (sources.some(file => !['received', 'processed'].includes(file.status) ||
+      !file.sha256_hex || Number(file.byte_size) > MAX_SOURCE_BYTES)) {
+    return json({
+      error: 'SOURCE_FILES_NOT_READY_FOR_CURRENT_PROCESSOR',
+      max_source_bytes: MAX_SOURCE_BYTES
+    }, 409);
+  }
   const fingerprint = await sha256Hex(JSON.stringify({
     tenant_id: allowed.tenantId, orders_file_id: ordersId,
     invoices_file_id: invoicesId, deliveries_file_id: deliveriesId,
