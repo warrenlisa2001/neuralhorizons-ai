@@ -45,3 +45,27 @@ WHEN NEW.resolved_by_user_id IS NOT NULL
 BEGIN
   SELECT RAISE(ABORT, 'event resolution actor must have active tenant membership');
 END;
+
+-- Keep event origin and source facts immutable while allowing controlled status fields to change.
+DROP TRIGGER IF EXISTS trg_operational_event_source_immutable;
+CREATE TRIGGER trg_operational_event_source_immutable
+BEFORE UPDATE OF id, tenant_id, source_kind, source_run_id, source_ref, event_code,
+                 severity, summary, exposure_minor_units, currency_code,
+                 occurred_at, recorded_at, details_json
+ON operational_events
+WHEN NEW.id <> OLD.id
+  OR NEW.tenant_id <> OLD.tenant_id
+  OR NEW.source_kind <> OLD.source_kind
+  OR COALESCE(NEW.source_run_id, '') <> COALESCE(OLD.source_run_id, '')
+  OR COALESCE(NEW.source_ref, '') <> COALESCE(OLD.source_ref, '')
+  OR NEW.event_code <> OLD.event_code
+  OR NEW.severity <> OLD.severity
+  OR NEW.summary <> OLD.summary
+  OR COALESCE(NEW.exposure_minor_units, -1) <> COALESCE(OLD.exposure_minor_units, -1)
+  OR COALESCE(NEW.currency_code, '') <> COALESCE(OLD.currency_code, '')
+  OR COALESCE(NEW.occurred_at, '') <> COALESCE(OLD.occurred_at, '')
+  OR NEW.recorded_at <> OLD.recorded_at
+  OR COALESCE(NEW.details_json, '') <> COALESCE(OLD.details_json, '')
+BEGIN
+  SELECT RAISE(ABORT, 'operational event provenance is immutable');
+END;
