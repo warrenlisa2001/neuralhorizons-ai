@@ -24,7 +24,7 @@ A successful enqueue returns `202 Accepted`, a run ID, and the existing tenant-s
 
 ## Runtime lifecycle
 
-1. D1 batch writes the queued reconciliation run and its outbox row together.
+1. D1 batch writes the queued reconciliation run and its outbox row together. Migration 0006 bounds dispatch attempts (default 10); exhausted or orphaned outbox items are marked dead-letter for operator review.
 2. The scheduled handler recovers expired consumer leases and dispatches a bounded batch of pending outbox rows.
 3. The dispatcher leases rows with compare-and-set updates and sends only `{ version: 1, run_id }` to the Queue. Delivery is at-least-once.
 4. The Queue consumer claims queued runs with a random lease token, resolves file ownership in D1, verifies R2 size and SHA-256, and runs the existing deterministic reconciliation pipeline.
@@ -36,7 +36,7 @@ Queue messages and outbox rows contain no CSV rows, customer PII, object keys, b
 ## Required Cloudflare bindings (not provisioned by this change)
 
 The Worker code expects:
-- `ZONAR_DB`: the intended D1 database, with migrations 0001–0005 applied in order.
+- `ZONAR_DB`: the intended D1 database, with migrations 0001–0006 applied in order.
 - `ZONAR_FILES`: the tenant source/result R2 bucket.
 - `ZONAR_RECONCILIATION_QUEUE`: a Cloudflare Queue producer binding, with a consumer configured to invoke the Worker's exported `queue` handler.
 - `ZONAR_ASYNC_ENABLED=true`: an explicit feature flag. The enqueue endpoint returns `503` unless the flag, D1, R2 and Queue producer are all present; the scheduled handler is also gated by this flag.
@@ -54,4 +54,4 @@ The actual queue name, D1 database ID, R2 bucket, consumer retry/DLQ policy, con
 
 ## Verification still required
 
-CI unit/schema tests must pass. Before production use, provision a non-production D1/R2/Queue environment, apply migrations deliberately, configure authentication, and run end-to-end tests for idempotency, duplicate delivery, queue-send failure, lease expiry, retry exhaustion, stale-worker fencing, tenant isolation, result integrity, and status polling.
+CI unit/schema tests must pass, including bounded dispatch retries and exclusion of non-queued runs. Before production use, provision a non-production D1/R2/Queue environment, apply migrations deliberately, configure authentication, and run end-to-end tests for idempotency, duplicate delivery, queue-send failure, lease expiry, retry exhaustion, stale-worker fencing, tenant isolation, result integrity, and status polling.
