@@ -145,18 +145,33 @@ function isoAfter(seconds) {
 export async function dispatchZonarReconciliationOutbox(env, now = new Date()) {
   const db = env.ZONAR_DB;
   const queue = env.ZONAR_RECONCILIATION_QUEUE;
-  if (!db?.prepare || !queue?.send) return { dispatched: 0, deferred: 0 };
-  await db.prepare(
-    `UPDATE reconciliation_outbox
-     SET status='pending', lease_token=NULL, lease_expires_at=NULL,
-         available_at=?1, updated_at=?1
-     WHERE status='leased' AND lease_expires_at IS NOT NULL AND lease_expires_at<=?1`
-  ).bind(now.toISOString()).run();
+  if (!db?.prepare || !queue?.send || typeof db.batch !== 'function') return { dispatched: 0, deferred: 0 };
+  const stamp = now.toISOString();
+  await db.batch([
+    db.prepare(
+      `UPDATE reconciliation_outbox
+       SET status=CASE WHEN attempt_count>=max_dispatch_attempts THEN 'dead_letter' ELSE 'pending' END,
+           lease_token=NULL, lease_expires_at=NULL, available_at=?1,
+           last_error_code=CASE WHEN attempt_count>=max_dispatch_attempts THEN 'DISPATCH_RETRIES_EXHAUSTED' ELSE last_error_code END,
+           updated_at=?1
+       WHERE status='leased' AND lease_expires_at IS NOT NULL AND lease_expires_at<=?1`
+    ).bind(stamp),
+    db.prepare(
+      `UPDATE reconciliation_outbox
+       SET status='dead_letter', last_error_code='RUN_NOT_QUEUED', updated_at=?1
+       WHERE status='pending'
+         AND EXISTS (SELECT 1 FROM reconciliation_runs r
+                     WHERE r.tenant_id=reconciliation_outbox.tenant_id
+                       AND r.id=reconciliation_outbox.run_id AND r.status<>'queued')`
+    ).bind(stamp)
+  ]);
   const candidates = await db.prepare(
-    `SELECT id FROM reconciliation_outbox
-     WHERE status='pending' AND available_at<=?1
-     ORDER BY created_at LIMIT ?2`
-  ).bind(now.toISOString(), OUTBOX_BATCH_SIZE).all();
+    `SELECT o.id FROM reconciliation_outbox o
+     JOIN reconciliation_runs r ON r.tenant_id=o.tenant_id AND r.id=o.run_id
+     WHERE o.status='pending' AND o.available_at<=?1
+       AND o.attempt_count<o.max_dispatch_attempts AND r.status='queued'
+     ORDER BY o.created_at LIMIT ?2`
+  ).bind(stamp, OUTBOX_BATCH_SIZE).all();
   let dispatched = 0, deferred = 0;
   for (const candidate of candidates.results || []) {
     const leaseToken = crypto.randomUUID().replace(/-/g, '');
@@ -165,8 +180,9 @@ export async function dispatchZonarReconciliationOutbox(env, now = new Date()) {
        SET status='leased', lease_token=?1, lease_expires_at=?2,
            attempt_count=attempt_count+1, updated_at=?3
        WHERE id=?4 AND status='pending' AND available_at<=?3
-       RETURNING id, run_id, tenant_id, attempt_count`
-    ).bind(leaseToken, isoAfter(LEASE_SECONDS), now.toISOString(), candidate.id).first();
+         AND attempt_count<max_dispatch_attempts
+       RETURNING id, run_id, tenant_id, attempt_count, max_dispatch_attempts`
+    ).bind(leaseToken, isoAfter(LEASE_SECONDS), stamp, candidate.id).first();
     if (!claimed) continue;
     try {
       await queue.send({ version: 1, run_id: claimed.run_id });
@@ -175,16 +191,18 @@ export async function dispatchZonarReconciliationOutbox(env, now = new Date()) {
          SET status='dispatched', lease_token=NULL, lease_expires_at=NULL,
              dispatched_at=?1, updated_at=?1
          WHERE id=?2 AND status='leased' AND lease_token=?3`
-      ).bind(now.toISOString(), claimed.id, leaseToken).run();
+      ).bind(stamp, claimed.id, leaseToken).run();
       dispatched++;
     } catch {
       const delay = Math.min(900, 5 * (2 ** Math.min(claimed.attempt_count, 7)));
       await db.prepare(
         `UPDATE reconciliation_outbox
-         SET status='pending', lease_token=NULL, lease_expires_at=NULL,
-             available_at=?1, last_error_code='QUEUE_SEND_FAILED', updated_at=?2
+         SET status=CASE WHEN attempt_count>=max_dispatch_attempts THEN 'dead_letter' ELSE 'pending' END,
+             lease_token=NULL, lease_expires_at=NULL, available_at=?1,
+             last_error_code=CASE WHEN attempt_count>=max_dispatch_attempts THEN 'DISPATCH_RETRIES_EXHAUSTED' ELSE 'QUEUE_SEND_FAILED' END,
+             updated_at=?2
          WHERE id=?3 AND status='leased' AND lease_token=?4`
-      ).bind(isoAfter(delay), now.toISOString(), claimed.id, leaseToken).run();
+      ).bind(isoAfter(delay), stamp, claimed.id, leaseToken).run();
       deferred++;
     }
   }
