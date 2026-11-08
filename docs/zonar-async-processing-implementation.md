@@ -31,9 +31,9 @@ Migration `0007_resumable_upload_sessions.sql` adds tenant-owned upload sessions
 - `POST /api/zonar/tenants/{tenantId}/files/uploads/{uploadId}/complete` finalises the R2 multipart object and creates the tenant file record.
 - `DELETE /api/zonar/tenants/{tenantId}/files/uploads/{uploadId}/abort` aborts an unfinished multipart upload.
 
-The current deliberately conservative envelope is 1 GiB per file, 8 MiB per part, up to 128 parts, and 24-hour session expiry. Every part is size-checked and SHA-256 hashed in the Worker; D1 stores the part number, byte count, digest and R2 ETag. Part reservations prevent duplicate concurrent part numbers from silently overwriting one another. Finalisation requires a contiguous complete part set and verifies the completed R2 object size before creating the tenant file record. Repeating a completion request after a successful database commit returns the same tenant-owned file record rather than creating a duplicate. A request handles at most one 8 MiB part in memory; it does not assemble the entire file in Worker memory.
+The current deliberately conservative envelope is 1 GiB per file, 8 MiB per part, up to 128 parts, and 24-hour session expiry. When the scheduled trigger is configured and the upload feature flag is enabled, a bounded scheduled cleanup aborts expired incomplete multipart sessions. Every part is size-checked and SHA-256 hashed in the Worker; D1 stores the part number, byte count, digest and R2 ETag. Part reservations prevent duplicate concurrent part numbers from silently overwriting one another. Finalisation requires a contiguous complete part set and verifies the completed R2 object size before creating the tenant file record. Repeating a completion request after a successful database commit returns the same tenant-owned file record rather than creating a duplicate. A request handles at most one 8 MiB part in memory; it does not assemble the entire file in Worker memory.
 
-The endpoint requires the existing verified tenant identity and `files:upload` permission. Upload sessions are scoped to the initiating user and tenant. The current async reconciliation enqueue deliberately rejects files without a server-verified whole-object SHA-256 or files larger than its existing 2 MiB processing ceiling. This prevents newly uploaded multipart files from being queued into a consumer that cannot yet validate or stream them. This API is not yet wired into the browser workspace, and no live D1 migration or R2 multipart configuration has been applied. The 1 GiB ceiling is an implementation guardrail, not a production capacity or throughput guarantee.
+The endpoint is gated by `ZONAR_RESUMABLE_UPLOADS_ENABLED=true` and requires the existing verified tenant identity and `files:upload` permission. Upload sessions are scoped to the initiating user and tenant. The current async reconciliation enqueue deliberately rejects files without a server-verified whole-object SHA-256 or files larger than its existing 2 MiB processing ceiling. This prevents newly uploaded multipart files from being queued into a consumer that cannot yet validate or stream them. This API is not yet wired into the browser workspace, and no live D1 migration or R2 multipart configuration has been applied. The 1 GiB ceiling is an implementation guardrail, not a production capacity or throughput guarantee.
 
 ## Runtime lifecycle
 
@@ -52,10 +52,11 @@ The Worker code expects:
 - `ZONAR_DB`: the intended D1 database, with migrations 0001–0007 applied in order.
 - `ZONAR_FILES`: the tenant source/result R2 bucket.
 - `ZONAR_RECONCILIATION_QUEUE`: a Cloudflare Queue producer binding, with a consumer configured to invoke the Worker's exported `queue` handler.
+- `ZONAR_RESUMABLE_UPLOADS_ENABLED=true`: explicit activation for the multipart upload API and its scheduled expiry cleanup; enable only after migration 0007 and the R2 multipart binding are verified.
 - `ZONAR_ASYNC_ENABLED=true`: an explicit feature flag. The enqueue endpoint returns `503` unless the flag, D1, R2 and Queue producer are all present; the scheduled handler is also gated by this flag.
 - A scheduled trigger invoking the Worker's exported `scheduled` handler (recommended every minute). Set the feature flag only after the trigger and queue consumer are configured and verified.
 
-The actual queue name, D1 database ID, R2 bucket, consumer retry/DLQ policy, concurrency, cron schedule, and production identity-provider values must be taken from the real Cloudflare environment. This PR does not invent or provision them.
+The actual queue name, D1 database ID, R2 bucket, consumer retry/DLQ policy, concurrency, cron schedule, and production identity-provider values must be taken from the real Cloudflare environment. The same scheduled trigger must invoke expired-upload cleanup. This PR does not invent or provision them.
 
 ## Deliberate limits and release boundary
 
