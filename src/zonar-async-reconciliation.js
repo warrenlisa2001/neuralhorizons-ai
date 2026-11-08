@@ -192,7 +192,9 @@ async function readVerifiedCsv(bucket, file) {
   if (Number(file.byte_size) > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
   const object = await bucket.get(file.object_key);
   if (!object) throw new Error('SOURCE_OBJECT_MISSING');
+  if (Number(object.size) > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
   const bytes = await object.arrayBuffer();
+  if (bytes.byteLength > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
   if (bytes.byteLength !== Number(file.byte_size)) throw new Error('SOURCE_SIZE_MISMATCH');
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   const actual = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
@@ -268,12 +270,13 @@ export async function processZonarReconciliationMessage(message, env) {
       ...result.summary, operational_event_count: events.inserted,
       operational_event_attempt_count: events.attempted
     });
+    const completedAt = new Date().toISOString();
     const updated = await db.prepare(
       `UPDATE reconciliation_runs
        SET status='succeeded', result_object_key=?1, result_sha256_hex=?2,
            summary_json=?3, completed_at=?4, lease_token=NULL, lease_expires_at=NULL, updated_at=?4
        WHERE tenant_id=?5 AND id=?6 AND status='running' AND lease_token=?7 AND lease_expires_at>?4`
-    ).bind(resultKey, resultSha, summary, now, run.tenant_id, run.id, leaseToken).run();
+    ).bind(resultKey, resultSha, summary, completedAt, run.tenant_id, run.id, leaseToken).run();
     if (Number(updated?.meta?.changes || 0) !== 1) {
       await bucket.delete?.(resultKey);
       message.ack?.();
@@ -291,8 +294,14 @@ export async function processZonarReconciliationMessage(message, env) {
     return { acknowledged: true, status: 'succeeded' };
   } catch (error) {
     if (resultKey) { try { await bucket.delete?.(resultKey); } catch {} }
-    const retryable = !['SOURCE_FILES_NOT_AVAILABLE','SOURCE_OBJECT_MISSING','SOURCE_SIZE_MISMATCH',
-      'SOURCE_INTEGRITY_FAILED','RESULT_TOO_LARGE','SOURCE_TOO_LARGE'].includes(error?.message);
+    const permanentErrors = new Set([
+      'SOURCE_FILES_NOT_AVAILABLE', 'SOURCE_OBJECT_MISSING', 'SOURCE_SIZE_MISMATCH',
+      'SOURCE_INTEGRITY_FAILED', 'SOURCE_ENCODING_INVALID', 'RESULT_TOO_LARGE', 'SOURCE_TOO_LARGE',
+      'UPLOAD_TOO_LARGE', 'EMPTY_FILE', 'NO_DATA_ROWS', 'TOO_MANY_ROWS', 'TOO_MANY_COLUMNS',
+      'INVALID_CSV', 'INVALID_NUMERIC_VALUE', 'REQUIRED_COLUMN_MISSING', 'MALFORMED_ROW',
+      'DUPLICATE_HEADER', 'BLANK_HEADER', 'AMBIGUOUS_FIELD_MAPPING', 'INVALID_DATASET'
+    ]);
+    const retryable = !permanentErrors.has(error?.message);
     const exhausted = Number(run.attempt_count) >= Number(run.max_attempts);
     if (retryable && !exhausted) {
       await db.prepare(
