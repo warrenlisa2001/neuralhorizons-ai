@@ -230,8 +230,18 @@ export async function processZonarReconciliationMessage(message, env) {
 
   if (!run) {
     const existing = await db.prepare(
-      'SELECT status, lease_expires_at FROM reconciliation_runs WHERE id=?1 LIMIT 1'
+      'SELECT status, lease_expires_at, attempt_count, max_attempts, tenant_id FROM reconciliation_runs WHERE id=?1 LIMIT 1'
     ).bind(payload.run_id).first();
+    if (existing?.status === 'queued' &&
+        Number(existing.attempt_count) >= Number(existing.max_attempts)) {
+      await db.prepare(
+        `UPDATE reconciliation_runs SET status='failed', error_code='RETRIES_EXHAUSTED',
+           completed_at=?1, updated_at=?1
+         WHERE tenant_id=?2 AND id=?3 AND status='queued' AND attempt_count>=max_attempts`
+      ).bind(new Date().toISOString(), existing.tenant_id, payload.run_id).run();
+      message.ack?.();
+      return { acknowledged: true, status: 'failed' };
+    }
     if (existing?.status === 'queued') {
       message.retry?.({ delaySeconds: 15 });
       return { acknowledged: false, reason: 'CLAIM_RACE' };
@@ -316,7 +326,7 @@ export async function processZonarReconciliationMessage(message, env) {
         db.prepare(
           `UPDATE reconciliation_outbox SET status='pending', lease_token=NULL, lease_expires_at=NULL,
              available_at=?1, dispatched_at=NULL, updated_at=?2
-           WHERE tenant_id=?3 AND run_id=?4 AND status='dispatched'
+           WHERE tenant_id=?3 AND run_id=?4 AND status IN ('dispatched','leased')
              AND EXISTS (SELECT 1 FROM reconciliation_runs
                          WHERE tenant_id=?3 AND id=?4 AND status='queued')`
         ).bind(retryAt, retryStamp, run.tenant_id, run.id)
