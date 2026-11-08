@@ -147,7 +147,7 @@ export async function handleZonarOperationalEvents(request, env, tenantId, event
     const allowed = authorizeZonarAction(authentication, 'events:manage');
     if (!allowed.ok) return json({ error: allowed.error }, allowed.status);
     const declared = request.headers.get('Content-Length');
-    if (declared && /^\\d+$/.test(declared) && Number(declared) > MAX_BODY_BYTES) {
+    if (declared && /^\d+$/.test(declared) && Number(declared) > MAX_BODY_BYTES) {
       return json({ error: 'REQUEST_TOO_LARGE' }, 413);
     }
     let body;
