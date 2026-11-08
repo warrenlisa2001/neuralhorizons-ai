@@ -58,7 +58,10 @@ async function sha256Hex(value) {
 export async function handleZonarAsyncReconciliationEnqueue(request, env, tenantId) {
   if (request.method !== 'POST') return json({ error: 'METHOD_NOT_ALLOWED' }, 405);
   if (!SAFE_ID.test(tenantId || '')) return json({ error: 'INVALID_TENANT' }, 400);
-  if (!env.ZONAR_DB?.prepare || typeof env.ZONAR_DB.batch !== 'function') {
+  if (env.ZONAR_ASYNC_ENABLED !== 'true' ||
+      !env.ZONAR_DB?.prepare || typeof env.ZONAR_DB.batch !== 'function' ||
+      !env.ZONAR_FILES?.get || !env.ZONAR_FILES?.put ||
+      !env.ZONAR_RECONCILIATION_QUEUE?.send) {
     return json({ error: 'ASYNC_PROCESSING_NOT_CONFIGURED' }, 503);
   }
   const authentication = await authenticateZonarTenant(request, env, tenantId);
