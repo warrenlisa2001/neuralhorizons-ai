@@ -199,7 +199,8 @@ async function readVerifiedCsv(bucket, file) {
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   const actual = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
   if (!file.sha256_hex || actual !== file.sha256_hex) throw new Error('SOURCE_INTEGRITY_FAILED');
-  return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  try { return new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
+  catch { throw new Error('SOURCE_ENCODING_INVALID'); }
 }
 
 /** Queue consumer. A lease token fences stale consumers from committing results. */
@@ -304,13 +305,24 @@ export async function processZonarReconciliationMessage(message, env) {
     const retryable = !permanentErrors.has(error?.message);
     const exhausted = Number(run.attempt_count) >= Number(run.max_attempts);
     if (retryable && !exhausted) {
-      await db.prepare(
-        `UPDATE reconciliation_runs SET status='queued', lease_token=NULL, lease_expires_at=NULL,
-           error_code=?1, updated_at=?2
-         WHERE tenant_id=?3 AND id=?4 AND status='running' AND lease_token=?5 AND lease_expires_at>?2`
-      ).bind('PROCESSING_RETRY', new Date().toISOString(), run.tenant_id, run.id, leaseToken).run();
-      message.retry?.({ delaySeconds: Math.min(300, 10 * (2 ** Math.min(run.attempt_count - 1, 5))) });
-      return { acknowledged: false, reason: 'RETRY_SCHEDULED' };
+      const retryAt = isoAfter(Math.min(300, 10 * (2 ** Math.min(run.attempt_count - 1, 5))));
+      const retryStamp = new Date().toISOString();
+      await db.batch([
+        db.prepare(
+          `UPDATE reconciliation_runs SET status='queued', lease_token=NULL, lease_expires_at=NULL,
+             error_code='PROCESSING_RETRY', updated_at=?1
+           WHERE tenant_id=?2 AND id=?3 AND status='running' AND lease_token=?4 AND lease_expires_at>?1`
+        ).bind(retryStamp, run.tenant_id, run.id, leaseToken),
+        db.prepare(
+          `UPDATE reconciliation_outbox SET status='pending', lease_token=NULL, lease_expires_at=NULL,
+             available_at=?1, dispatched_at=NULL, updated_at=?2
+           WHERE tenant_id=?3 AND run_id=?4 AND status='dispatched'
+             AND EXISTS (SELECT 1 FROM reconciliation_runs
+                         WHERE tenant_id=?3 AND id=?4 AND status='queued')`
+        ).bind(retryAt, retryStamp, run.tenant_id, run.id)
+      ]);
+      message.ack?.();
+      return { acknowledged: true, reason: 'RETRY_SCHEDULED' };
     }
     await db.prepare(
       `UPDATE reconciliation_runs SET status='failed', error_code=?1,
@@ -342,16 +354,20 @@ export async function recoverZonarReconciliationLeases(env, now = new Date()) {
       ).bind(stamp, row.tenant_id, row.id).run();
       failed++;
     } else {
-      await env.ZONAR_DB.prepare(
-        `UPDATE reconciliation_runs SET status='queued', error_code='LEASE_RECOVERED',
-           lease_token=NULL, lease_expires_at=NULL, updated_at=?1
-         WHERE tenant_id=?2 AND id=?3 AND status='running' AND lease_expires_at<=?1`
-      ).bind(stamp, row.tenant_id, row.id).run();
-      await env.ZONAR_DB.prepare(
-        `UPDATE reconciliation_outbox SET status='pending', lease_token=NULL, lease_expires_at=NULL,
-           available_at=?1, dispatched_at=NULL, updated_at=?1
-         WHERE tenant_id=?2 AND run_id=?3 AND status IN ('dispatched','leased')`
-      ).bind(stamp, row.tenant_id, row.id).run();
+      await env.ZONAR_DB.batch([
+        env.ZONAR_DB.prepare(
+          `UPDATE reconciliation_runs SET status='queued', error_code='LEASE_RECOVERED',
+             lease_token=NULL, lease_expires_at=NULL, updated_at=?1
+           WHERE tenant_id=?2 AND id=?3 AND status='running' AND lease_expires_at<=?1`
+        ).bind(stamp, row.tenant_id, row.id),
+        env.ZONAR_DB.prepare(
+          `UPDATE reconciliation_outbox SET status='pending', lease_token=NULL, lease_expires_at=NULL,
+             available_at=?1, dispatched_at=NULL, updated_at=?1
+           WHERE tenant_id=?2 AND run_id=?3 AND status IN ('dispatched','leased')
+             AND EXISTS (SELECT 1 FROM reconciliation_runs
+                         WHERE tenant_id=?2 AND id=?3 AND status='queued')`
+        ).bind(stamp, row.tenant_id, row.id)
+      ]);
       recovered++;
     }
   }
