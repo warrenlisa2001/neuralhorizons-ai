@@ -4,6 +4,7 @@ import { authorizeZonarAction } from './zonar-permissions.js';
 import { handleZonarTenantFiles } from './zonar-file-storage.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
 import { handleZonarReconciliationResult } from './zonar-reconciliation-results.js';
+import { handleZonarOperationalEvents } from './zonar-operational-events.js';
 
 // Neural Horizons AI — Cloudflare Worker
 // Serves the static site (dist/) and a small live AI-news API used by the
@@ -146,6 +147,15 @@ export default {
       try { tenantId = decodeURIComponent(tenantFilesMatch[1]); }
       catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
       return handleZonarTenantFiles(request, env, tenantId);
+    }
+    const operationalEventMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/operational-events(?:\\/([^/]+))?$/);
+    if (operationalEventMatch) {
+      let tenantId, eventId = null;
+      try {
+        tenantId = decodeURIComponent(operationalEventMatch[1]);
+        eventId = operationalEventMatch[2] ? decodeURIComponent(operationalEventMatch[2]) : null;
+      } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
+      return handleZonarOperationalEvents(request, env, tenantId, eventId);
     }
     const reconciliationResultMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs\/([^/]+)$/);
     if (reconciliationResultMatch) {
