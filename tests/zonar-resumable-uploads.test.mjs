@@ -26,7 +26,7 @@ test('resumable upload requires tenant authentication configuration', async () =
     ZONAR_FILES: { createMultipartUpload() {}, resumeMultipartUpload() {} }
   };
   const response = await handleZonarResumableUpload(
-    new Request('https://api.example/api/zonar/tenants/tenant-a/files/uploads', { method: 'POST', body: '{}' }),
+    new Request('https://api.example/api/zonar/tenants/tenant-a/files/uploads', { method: 'POST', body: '{}', headers: { Authorization: 'Bearer test-token' } }),
     env, 'tenant-a'
   );
   assert.equal(response.status, 503);
