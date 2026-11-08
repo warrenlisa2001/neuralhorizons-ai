@@ -24,6 +24,29 @@ function safeDetails(exception) {
     .map(key => [key, exception[key]]));
 }
 
+async function readBoundedJson(request) {
+  const reader = request.body?.getReader();
+  if (!reader) throw new Error('INVALID_JSON');
+  const chunks = [];
+  let size = 0;
+  try {
+    while (true) {
+      const part = await reader.read();
+      if (part.done) break;
+      size += part.value.byteLength;
+      if (size > MAX_BODY_BYTES) {
+        await reader.cancel();
+        throw new Error('REQUEST_TOO_LARGE');
+      }
+      chunks.push(part.value);
+    }
+  } finally { reader.releaseLock(); }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
+}
+
 function eventSummary(exception) {
   const labels = {
     MISSING_RECORD_ID: 'A source record is missing its identifier',
@@ -128,11 +151,11 @@ export async function handleZonarOperationalEvents(request, env, tenantId, event
       return json({ error: 'REQUEST_TOO_LARGE' }, 413);
     }
     let body;
-    try {
-      const bytes = await request.arrayBuffer();
-      if (bytes.byteLength > MAX_BODY_BYTES) return json({ error: 'REQUEST_TOO_LARGE' }, 413);
-      body = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-    } catch { return json({ error: 'INVALID_JSON' }, 400); }
+    try { body = await readBoundedJson(request); }
+    catch (error) {
+      return json({ error: error.message === 'REQUEST_TOO_LARGE' ? 'REQUEST_TOO_LARGE' : 'INVALID_JSON' },
+        error.message === 'REQUEST_TOO_LARGE' ? 413 : 400);
+    }
     if (!body || Object.keys(body).length !== 1 ||
         !['acknowledged', 'resolved', 'dismissed'].includes(body.status)) {
       return json({ error: 'INVALID_EVENT_TRANSITION' }, 400);
