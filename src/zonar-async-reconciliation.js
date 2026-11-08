@@ -143,6 +143,12 @@ export async function dispatchZonarReconciliationOutbox(env, now = new Date()) {
   const db = env.ZONAR_DB;
   const queue = env.ZONAR_RECONCILIATION_QUEUE;
   if (!db?.prepare || !queue?.send) return { dispatched: 0, deferred: 0 };
+  await db.prepare(
+    `UPDATE reconciliation_outbox
+     SET status='pending', lease_token=NULL, lease_expires_at=NULL,
+         available_at=?1, updated_at=?1
+     WHERE status='leased' AND lease_expires_at IS NOT NULL AND lease_expires_at<=?1`
+  ).bind(now.toISOString()).run();
   const candidates = await db.prepare(
     `SELECT id FROM reconciliation_outbox
      WHERE status='pending' AND available_at<=?1
@@ -266,7 +272,7 @@ export async function processZonarReconciliationMessage(message, env) {
       `UPDATE reconciliation_runs
        SET status='succeeded', result_object_key=?1, result_sha256_hex=?2,
            summary_json=?3, completed_at=?4, lease_token=NULL, lease_expires_at=NULL, updated_at=?4
-       WHERE tenant_id=?5 AND id=?6 AND status='running' AND lease_token=?7`
+       WHERE tenant_id=?5 AND id=?6 AND status='running' AND lease_token=?7 AND lease_expires_at>?4`
     ).bind(resultKey, resultSha, summary, now, run.tenant_id, run.id, leaseToken).run();
     if (Number(updated?.meta?.changes || 0) !== 1) {
       await bucket.delete?.(resultKey);
@@ -292,7 +298,7 @@ export async function processZonarReconciliationMessage(message, env) {
       await db.prepare(
         `UPDATE reconciliation_runs SET status='queued', lease_token=NULL, lease_expires_at=NULL,
            error_code=?1, updated_at=?2
-         WHERE tenant_id=?3 AND id=?4 AND status='running' AND lease_token=?5`
+         WHERE tenant_id=?3 AND id=?4 AND status='running' AND lease_token=?5 AND lease_expires_at>?2`
       ).bind('PROCESSING_RETRY', new Date().toISOString(), run.tenant_id, run.id, leaseToken).run();
       message.retry?.({ delaySeconds: Math.min(300, 10 * (2 ** Math.min(run.attempt_count - 1, 5))) });
       return { acknowledged: false, reason: 'RETRY_SCHEDULED' };
