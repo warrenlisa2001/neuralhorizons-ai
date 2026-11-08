@@ -5,6 +5,7 @@ import { handleZonarTenantFiles } from './zonar-file-storage.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
 import { handleZonarReconciliationResult } from './zonar-reconciliation-results.js';
 import { handleZonarOperationalEvents } from './zonar-operational-events.js';
+import { handleZonarAsyncReconciliationEnqueue, handleZonarReconciliationQueueBatch, recoverZonarReconciliationLeases, dispatchZonarReconciliationOutbox } from './zonar-async-reconciliation.js';
 
 // Neural Horizons AI — Cloudflare Worker
 // Serves the static site (dist/) and a small live AI-news API used by the
@@ -166,6 +167,13 @@ export default {
       } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
       return handleZonarReconciliationResult(request, env, tenantId, runId);
     }
+    const asyncReconciliationMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/reconciliation-jobs$/);
+    if (asyncReconciliationMatch) {
+      let tenantId;
+      try { tenantId = decodeURIComponent(asyncReconciliationMatch[1]); }
+      catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
+      return handleZonarAsyncReconciliationEnqueue(request, env, tenantId);
+    }
     const reconciliationRunMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs$/);
     if (reconciliationRunMatch) {
       let tenantId;
@@ -187,9 +195,18 @@ export default {
       return handleZonarProfile(request, env);
     }
     return env.ASSETS.fetch(request);
+  },
+  async queue(batch, env) {
+    return handleZonarReconciliationQueueBatch(batch, env);
+  },
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil((async () => {
+      await recoverZonarReconciliationLeases(env);
+      await dispatchZonarReconciliationOutbox(env);
+    })());
   }
 };
-
+ 
 const ZONAR_MAX_BYTES = 2 * 1024 * 1024;
 const ZONAR_MAX_ROWS = 10000;
 const ZONAR_ALIASES = {
