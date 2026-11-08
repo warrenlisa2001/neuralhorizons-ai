@@ -200,6 +200,7 @@ export default {
     return handleZonarReconciliationQueueBatch(batch, env);
   },
   async scheduled(controller, env, ctx) {
+    if (env.ZONAR_ASYNC_ENABLED !== 'true') return;
     ctx.waitUntil((async () => {
       await recoverZonarReconciliationLeases(env);
       await dispatchZonarReconciliationOutbox(env);
