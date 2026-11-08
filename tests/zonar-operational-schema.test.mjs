@@ -6,7 +6,8 @@ import { DatabaseSync } from 'node:sqlite';
 const migration = [
   '0001_tenant_foundation.sql',
   '0002_reconciliation_runs.sql',
-  '0003_operational_intelligence.sql'
+  '0003_operational_intelligence.sql',
+  '0004_operational_event_delivery.sql'
 ].map(name => readFileSync(new URL('../migrations/' + name, import.meta.url), 'utf8')).join('\n');
 
 function seededDb() {
@@ -96,5 +97,49 @@ test('metric snapshots are tenant-scoped and immutable', () => {
       .run('snapshot-cross', 'tenant-b', 'run-a', 'reconciliation', '{}'), /FOREIGN KEY/);
     assert.throws(() => db.prepare("UPDATE metric_snapshots SET metrics_json = '{}' WHERE id = 'snapshot-a'").run(), /immutable/);
     assert.throws(() => db.prepare("DELETE FROM metric_snapshots WHERE id = 'snapshot-a'").run(), /immutable/);
+  } finally { db.close(); }
+});
+
+test('operational event source references are deduplicated per tenant and run', () => {
+  const db = seededDb();
+  try {
+    const insert = db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, source_ref, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
+    insert.run('event-one', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    assert.throws(() => insert.run('event-two', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Duplicate event'));
+  } finally { db.close(); }
+});
+
+test('event acknowledgement records the active tenant actor and preserves source facts', () => {
+  const db = seededDb();
+  try {
+    db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, source_ref, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run('event-a', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    db.prepare(`UPDATE operational_events
+      SET status = 'acknowledged', acknowledged_at = '2026-11-08T10:00:00Z',
+          acknowledged_by_user_id = 'user-a', updated_at = '2026-11-08T10:00:00Z'
+      WHERE id = 'event-a'`).run();
+    assert.throws(() => db.prepare(`UPDATE operational_events
+      SET summary = 'Altered source facts' WHERE id = 'event-a'`).run(), /provenance is immutable/);
+    const event = db.prepare('SELECT status, acknowledged_by_user_id FROM operational_events WHERE id = ?').get('event-a');
+    assert.equal(event.status, 'acknowledged');
+    assert.equal(event.acknowledged_by_user_id, 'user-a');
+  } finally { db.close(); }
+});
+
+test('event acknowledgement rejects an actor without tenant membership', () => {
+  const db = seededDb();
+  try {
+    db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`)
+      .run('event-a', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    assert.throws(() => db.prepare(`UPDATE operational_events
+      SET status = 'acknowledged', acknowledged_at = '2026-11-08T10:00:00Z',
+          acknowledged_by_user_id = 'user-b'
+      WHERE id = 'event-a'`).run(), /active tenant membership/);
   } finally { db.close(); }
 });
