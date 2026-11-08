@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS tenant_upload_parts (
   part_number INTEGER NOT NULL CHECK (part_number BETWEEN 1 AND 128),
   byte_size INTEGER NOT NULL CHECK (byte_size > 0 AND byte_size <= 8388608),
   sha256_hex TEXT NOT NULL CHECK (length(sha256_hex) = 64),
-  etag TEXT NOT NULL,
+  etag TEXT,
+  status TEXT NOT NULL DEFAULT 'reserved' CHECK (status IN ('reserved', 'uploaded')),
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   PRIMARY KEY (upload_id, part_number)
 );
