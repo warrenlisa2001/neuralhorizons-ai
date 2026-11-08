@@ -115,7 +115,7 @@ test('outbox dispatcher returns failed sends to pending with a safe error code',
     ZONAR_RECONCILIATION_QUEUE: { async send() { throw new Error('private provider error'); } }
   });
   assert.deepEqual(result, { dispatched: 0, deferred: 1 });
-  assert.ok(statements.some(item => item.sql.includes("status='pending'") && item.sql.includes("QUEUE_SEND_FAILED")));
+  assert.ok(statements.some(item => item.sql.includes("status=CASE") && item.sql.includes("QUEUE_SEND_FAILED") && item.sql.includes("max_dispatch_attempts")));
   assert.equal(statements.some(item => JSON.stringify(item).includes('private provider error')), false);
 });
 
