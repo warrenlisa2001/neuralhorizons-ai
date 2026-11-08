@@ -2,6 +2,7 @@ import { authenticateZonarTenant } from './zonar-auth.js';
 import { handleZonarIdentity } from './zonar-identity.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { handleZonarTenantFiles } from './zonar-file-storage.js';
+import { handleZonarResumableUpload } from './zonar-resumable-uploads.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
 import { handleZonarReconciliationResult } from './zonar-reconciliation-results.js';
 import { handleZonarOperationalEvents } from './zonar-operational-events.js';
@@ -141,6 +142,18 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
+    }
+    const resumableUploadMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/files\/uploads(?:\/([^/]+)(?:\/parts\/(\d+)|\/(complete|abort))?)?$/);
+    if (resumableUploadMatch) {
+      let tenantId, uploadId = null;
+      try {
+        tenantId = decodeURIComponent(resumableUploadMatch[1]);
+        uploadId = resumableUploadMatch[2] ? decodeURIComponent(resumableUploadMatch[2]) : null;
+      } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
+      return handleZonarResumableUpload(
+        request, env, tenantId, uploadId,
+        resumableUploadMatch[3] || null, resumableUploadMatch[4] || null
+      );
     }
     const tenantFilesMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/files$/);
     if (tenantFilesMatch) {
