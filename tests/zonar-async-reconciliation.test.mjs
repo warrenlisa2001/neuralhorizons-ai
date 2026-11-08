@@ -159,3 +159,61 @@ test('async enqueue remains disabled until the feature flag and every runtime bi
   assert.equal(missingQueue.status, 503);
   assert.equal((await missingQueue.json()).error, 'ASYNC_PROCESSING_NOT_CONFIGURED');
 });
+
+test('outbox dispatch dead-letters after the configured maximum attempts', async () => {
+  const statements = [];
+  const db = {
+    prepare(sql) {
+      return {
+        sql,
+        bind(...values) {
+          return {
+            sql, values,
+            async run() { statements.push({ sql, values }); return { success: true, meta: { changes: 1 } }; },
+            async all() { return { results: [{ id: 'outbox_exhausted' }] }; },
+            async first() {
+              return {
+                id: 'outbox_exhausted', run_id: 'run_exhausted',
+                tenant_id: 'tenant_1', attempt_count: 10, max_dispatch_attempts: 10
+              };
+            }
+          };
+        }
+      };
+    },
+    async batch(items) { return items.map(() => ({ success: true, meta: { changes: 1 } })); }
+  };
+  const result = await dispatchZonarReconciliationOutbox({
+    ZONAR_DB: db,
+    ZONAR_RECONCILIATION_QUEUE: { async send() { throw new Error('queue unavailable'); } }
+  });
+  assert.deepEqual(result, { dispatched: 0, deferred: 1 });
+  const failedSend = statements.find(item => item.sql.includes('QUEUE_SEND_FAILED'));
+  assert.ok(failedSend);
+  assert.ok(failedSend.sql.includes("THEN 'dead_letter'"));
+  assert.ok(failedSend.sql.includes('max_dispatch_attempts'));
+});
+
+test('outbox dispatch selects only pending jobs whose reconciliation run is queued', async () => {
+  let candidateSql = '';
+  const db = {
+    prepare(sql) {
+      return {
+        sql,
+        bind() {
+          return {
+            async run() { return { success: true, meta: { changes: 0 } }; },
+            async all() { candidateSql = sql; return { results: [] }; }
+          };
+        }
+      };
+    },
+    async batch(items) { return items.map(() => ({ success: true, meta: { changes: 0 } })); }
+  };
+  await dispatchZonarReconciliationOutbox({
+    ZONAR_DB: db,
+    ZONAR_RECONCILIATION_QUEUE: { async send() {} }
+  });
+  assert.ok(candidateSql.includes("r.status='queued'"));
+  assert.ok(candidateSql.includes('o.attempt_count<o.max_dispatch_attempts'));
+});
