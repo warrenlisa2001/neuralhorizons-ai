@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 
 const migration = readFileSync(new URL('../migrations/0001_tenant_foundation.sql', import.meta.url), 'utf8') + '\n' +
-  readFileSync(new URL('../migrations/0002_reconciliation_runs.sql', import.meta.url), 'utf8') + '\\n' +
+  readFileSync(new URL('../migrations/0002_reconciliation_runs.sql', import.meta.url), 'utf8') + '\n' +
   readFileSync(new URL('../migrations/0007_resumable_upload_sessions.sql', import.meta.url), 'utf8');
 
 test('tenant foundation migration creates required tables and indexes', () => {
