@@ -22,6 +22,19 @@ An optional `Idempotency-Key` header (or `idempotency_key` body field) makes ret
 
 A successful enqueue returns `202 Accepted`, a run ID, and the existing tenant-scoped reconciliation-run status URL. The existing synchronous `POST /reconciliation-runs` route is intentionally unchanged during this rollout.
 
+## Resumable source uploads
+
+Migration `0007_resumable_upload_sessions.sql` adds tenant-owned upload sessions and unique per-part checkpoints. The new API is separate from the legacy bounded upload route:
+
+- `POST /api/zonar/tenants/{tenantId}/files/uploads` creates a 24-hour session. The JSON body contains `filename` and `byte_size`.
+- `PUT /api/zonar/tenants/{tenantId}/files/uploads/{uploadId}/parts/{partNumber}` uploads one part.
+- `POST /api/zonar/tenants/{tenantId}/files/uploads/{uploadId}/complete` finalises the R2 multipart object and creates the tenant file record.
+- `DELETE /api/zonar/tenants/{tenantId}/files/uploads/{uploadId}/abort` aborts an unfinished multipart upload.
+
+The current deliberately conservative envelope is 1 GiB per file, 8 MiB per part, up to 128 parts, and 24-hour session expiry. Every part is size-checked and SHA-256 hashed in the Worker; D1 stores the part number, byte count, digest and R2 ETag. Part reservations prevent duplicate concurrent part numbers from silently overwriting one another. Finalisation requires a contiguous complete part set and verifies the completed R2 object size before creating the tenant file record. A request handles at most one 8 MiB part in memory; it does not assemble the entire file in Worker memory.
+
+The endpoint requires the existing verified tenant identity and `files:upload` permission. Upload sessions are scoped to the initiating user and tenant. This API is not yet wired into the browser workspace, and no live D1 migration or R2 multipart configuration has been applied. The 1 GiB ceiling is an implementation guardrail, not a production capacity or throughput guarantee.
+
 ## Runtime lifecycle
 
 1. D1 batch writes the queued reconciliation run and its outbox row together. Migration 0006 bounds dispatch attempts (default 10); exhausted or orphaned outbox items are marked dead-letter for operator review.
@@ -36,7 +49,7 @@ Queue messages and outbox rows contain no CSV rows, customer PII, object keys, b
 ## Required Cloudflare bindings (not provisioned by this change)
 
 The Worker code expects:
-- `ZONAR_DB`: the intended D1 database, with migrations 0001–0006 applied in order.
+- `ZONAR_DB`: the intended D1 database, with migrations 0001–0007 applied in order.
 - `ZONAR_FILES`: the tenant source/result R2 bucket.
 - `ZONAR_RECONCILIATION_QUEUE`: a Cloudflare Queue producer binding, with a consumer configured to invoke the Worker's exported `queue` handler.
 - `ZONAR_ASYNC_ENABLED=true`: an explicit feature flag. The enqueue endpoint returns `503` unless the flag, D1, R2 and Queue producer are all present; the scheduled handler is also gated by this flag.
@@ -46,8 +59,8 @@ The actual queue name, D1 database ID, R2 bucket, consumer retry/DLQ policy, con
 
 ## Deliberate limits and release boundary
 
-- Source processing still uses the existing 2 MiB / 10,000-row / 100-column CSV parser limits. Async execution does not remove those limits.
-- This increment still reads each bounded source object into memory. Resumable streaming/chunked ingestion and materially larger production limits are a separate required phase.
+- The legacy upload and source-processing paths still use the existing 2 MiB / 10,000-row / 100-column CSV limits. The new multipart API stores large files in R2 but does not yet stream them through reconciliation; async execution does not remove those limits.
+- The new upload endpoint is chunked and resumable at the storage boundary, but large-file parsing, bounded batch persistence, resumable row checkpoints and end-to-end reconciliation remain outstanding. The current reconciliation worker still reads bounded source objects into memory.
 - No migration is applied to a live D1 database; no production binding, Queue, DLQ, scheduled trigger or identity provider is configured here.
 - No production deployment or customer-facing release is authorized by this code change.
 - The synchronous route remains available until the async route has passed isolated-tenant end-to-end tests and a deliberate cutover decision.
