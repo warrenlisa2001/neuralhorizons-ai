@@ -26,6 +26,7 @@ const ROLE_PERMISSIONS = Object.freeze({
     'tenant:read',
     'files:read',
     'jobs:read',
+    'events:read',
     'exports:create',
     'settings:read'
   ]),
@@ -33,12 +34,14 @@ const ROLE_PERMISSIONS = Object.freeze({
     'tenant:read',
     'files:read', 'files:upload',
     'jobs:read', 'jobs:run',
+    'events:read', 'events:manage',
     'settings:read'
   ]),
   viewer: Object.freeze([
     'tenant:read',
     'files:read',
     'jobs:read',
+    'events:read',
     'settings:read'
   ])
 });
