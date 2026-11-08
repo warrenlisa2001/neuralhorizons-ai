@@ -2,7 +2,7 @@ import { authenticateZonarTenant } from './zonar-auth.js';
 import { handleZonarIdentity } from './zonar-identity.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { handleZonarTenantFiles } from './zonar-file-storage.js';
-import { handleZonarResumableUpload } from './zonar-resumable-uploads.js';
+import { handleZonarResumableUpload, expireZonarUploadSessions } from './zonar-resumable-uploads.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
 import { handleZonarReconciliationResult } from './zonar-reconciliation-results.js';
 import { handleZonarOperationalEvents } from './zonar-operational-events.js';
@@ -213,10 +213,16 @@ export default {
     return handleZonarReconciliationQueueBatch(batch, env);
   },
   async scheduled(controller, env, ctx) {
-    if (env.ZONAR_ASYNC_ENABLED !== 'true') return;
+    if (env.ZONAR_ASYNC_ENABLED !== 'true' &&
+        env.ZONAR_RESUMABLE_UPLOADS_ENABLED !== 'true') return;
     ctx.waitUntil((async () => {
-      await recoverZonarReconciliationLeases(env);
-      await dispatchZonarReconciliationOutbox(env);
+      if (env.ZONAR_ASYNC_ENABLED === 'true') {
+        await recoverZonarReconciliationLeases(env);
+        await dispatchZonarReconciliationOutbox(env);
+      }
+      if (env.ZONAR_RESUMABLE_UPLOADS_ENABLED === 'true') {
+        await expireZonarUploadSessions(env);
+      }
     })());
   }
 };
