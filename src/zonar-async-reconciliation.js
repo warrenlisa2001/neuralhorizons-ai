@@ -84,11 +84,16 @@ export async function handleZonarAsyncReconciliationEnqueue(request, env, tenant
   // The current reconciliation consumer only supports the legacy bounded
   // parser and whole-object SHA-256 verification. Do not queue multipart or
   // oversized files until the streaming processor can verify their manifests.
-  const sourceRows = await env.ZONAR_DB.prepare(
-    `SELECT id, status, byte_size, sha256_hex
-     FROM tenant_files
-     WHERE tenant_id = ?1 AND id IN (?2, ?3, ?4)`
-  ).bind(allowed.tenantId, ordersId, invoicesId, deliveriesId).all();
+  let sourceRows;
+  try {
+    sourceRows = await env.ZONAR_DB.prepare(
+      `SELECT id, status, byte_size, sha256_hex
+       FROM tenant_files
+       WHERE tenant_id = ?1 AND id IN (?2, ?3, ?4)`
+    ).bind(allowed.tenantId, ordersId, invoicesId, deliveriesId).all();
+  } catch {
+    return json({ error: 'SOURCE_LOOKUP_UNAVAILABLE' }, 503);
+  }
   const sources = Array.isArray(sourceRows.results) ? sourceRows.results : [];
   if (sources.length !== 3) return json({ error: 'SOURCE_FILES_NOT_AVAILABLE' }, 404);
   if (sources.some(file => !['received', 'processed'].includes(file.status) ||
