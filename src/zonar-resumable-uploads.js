@@ -35,7 +35,7 @@ function sha256Hex(bytes) {
 }
 
 function bindingsReady(env) {
-  return Boolean(env.ZONAR_DB?.prepare && env.ZONAR_DB?.batch &&
+  return env.ZONAR_RESUMABLE_UPLOADS_ENABLED === 'true' && Boolean(env.ZONAR_DB?.prepare && env.ZONAR_DB?.batch &&
     env.ZONAR_FILES?.createMultipartUpload && env.ZONAR_FILES?.resumeMultipartUpload);
 }
 
@@ -308,4 +308,33 @@ export async function handleZonarResumableUpload(request, env, tenantId, uploadI
   if (action === 'complete' && request.method === 'POST') return completeSession(request, env, tenantId, allowed, uploadId);
   if (action === 'abort' && request.method === 'DELETE') return abortSession(env, tenantId, allowed, uploadId);
   return json({ error: 'METHOD_NOT_ALLOWED' }, 405);
+}
+
+
+/** Abort expired incomplete multipart uploads in a bounded scheduled batch. */
+export async function expireZonarUploadSessions(env, now = new Date()) {
+  const db = env.ZONAR_DB;
+  const bucket = env.ZONAR_FILES;
+  if (env.ZONAR_RESUMABLE_UPLOADS_ENABLED !== 'true' ||
+      !db?.prepare || !bucket?.resumeMultipartUpload) return { expired: 0, deferred: 0 };
+  const stamp = now.toISOString();
+  const result = await db.prepare(
+    `SELECT id, object_key, r2_upload_id, tenant_id
+     FROM tenant_upload_sessions
+     WHERE status = 'active' AND expires_at <= ?1
+     ORDER BY expires_at LIMIT 20`
+  ).bind(stamp).all();
+  let expired = 0, deferred = 0;
+  for (const session of result.results || []) {
+    try {
+      await bucket.resumeMultipartUpload(session.object_key, session.r2_upload_id).abort();
+      const update = await db.prepare(
+        `UPDATE tenant_upload_sessions SET status = 'expired',
+         updated_at = ?1 WHERE id = ?2 AND tenant_id = ?3
+         AND status = 'active' AND expires_at <= ?1`
+      ).bind(stamp, session.id, session.tenant_id).run();
+      if (Number(update.meta?.changes ?? 0) === 1) expired++;
+    } catch { deferred++; }
+  }
+  return { expired, deferred };
 }
