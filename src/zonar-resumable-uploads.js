@@ -183,6 +183,20 @@ async function completeSession(request, env, tenantId, allowed, uploadId) {
      WHERE id = ?1 AND tenant_id = ?2 AND user_id = ?3 LIMIT 1`
   ).bind(uploadId, allowed.tenantId, allowed.userId).first();
   if (!session) return json({ error: 'UPLOAD_SESSION_NOT_FOUND' }, 404);
+  if (session.status === 'completed' && session.completed_file_id) {
+    const existingFile = await env.ZONAR_DB.prepare(
+      `SELECT id, original_filename, content_type, byte_size, status
+       FROM tenant_files WHERE tenant_id = ?1 AND id = ?2
+         AND deleted_at IS NULL AND status <> 'deleted' LIMIT 1`
+    ).bind(allowed.tenantId, session.completed_file_id).first();
+    if (!existingFile) return json({ error: 'COMPLETED_FILE_UNAVAILABLE' }, 503);
+    return json({
+      success: true, already_completed: true,
+      file: { id: existingFile.id, filename: existingFile.original_filename,
+        content_type: existingFile.content_type, byte_size: existingFile.byte_size,
+        status: existingFile.status }
+    }, 200);
+  }
   if (session.status !== 'active') return json({ error: 'UPLOAD_SESSION_NOT_ACTIVE' }, 409);
   if (Date.parse(session.expires_at) <= Date.now()) return json({ error: 'UPLOAD_SESSION_EXPIRED' }, 410);
 
