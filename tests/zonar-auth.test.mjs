@@ -11,7 +11,7 @@ const jsonPart = value => b64url(JSON.stringify(value));
 
 async function createToken(privateKey, claims, kid = 'test-key', headerOverrides = {}) {
   const header = jsonPart({ alg: 'RS256', typ: 'JWT', kid, ...headerOverrides });
-  const payload = jsonPart(claims);
+  const payload = jsonPart({ scp: 'zonar.api', ...claims });
   const input = encoder.encode(header + '.' + payload);
   const signature = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', privateKey, input);
   return header + '.' + payload + '.' + b64url(signature);
@@ -42,6 +42,7 @@ async function fixture() {
   const env = {
     ZONAR_ISSUER: 'https://identity.example/',
     ZONAR_AUDIENCE: 'zonar-api',
+    ZONAR_REQUIRED_SCOPE: 'zonar.api',
     ZONAR_JWKS_URL: 'https://identity.example/.well-known/jwks.json?fixture=' + (++fixtureNumber),
     ZONAR_DB: {
       prepare(sql) {
