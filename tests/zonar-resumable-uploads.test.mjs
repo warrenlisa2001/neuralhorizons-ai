@@ -22,6 +22,7 @@ test('resumable upload fails closed unless D1 and R2 multipart bindings exist', 
 
 test('resumable upload requires tenant authentication configuration', async () => {
   const env = {
+    ZONAR_RESUMABLE_UPLOADS_ENABLED: 'true',
     ZONAR_DB: { prepare() {}, batch() {} },
     ZONAR_FILES: { createMultipartUpload() {}, resumeMultipartUpload() {} }
   };
@@ -31,4 +32,9 @@ test('resumable upload requires tenant authentication configuration', async () =
   );
   assert.equal(response.status, 503);
   assert.deepEqual(await response.json(), { error: 'TENANT_AUTH_NOT_CONFIGURED' });
+});
+
+test('expired upload cleanup remains idle until explicitly enabled', async () => {
+  const { expireZonarUploadSessions } = await import('../src/zonar-resumable-uploads.js');
+  assert.deepEqual(await expireZonarUploadSessions({}), { expired: 0, deferred: 0 });
 });
