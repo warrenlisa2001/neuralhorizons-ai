@@ -8,6 +8,7 @@ const ROLE_PERMISSIONS = Object.freeze({
     'members:read', 'members:invite', 'members:revoke',
     'files:read', 'files:upload', 'files:delete',
     'jobs:read', 'jobs:run',
+    'events:read', 'events:manage',
     'exports:create',
     'audit:read',
     'settings:read', 'settings:manage'
