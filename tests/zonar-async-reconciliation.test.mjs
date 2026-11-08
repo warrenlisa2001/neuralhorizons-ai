@@ -140,3 +140,22 @@ test('expired run recovery atomically resets the run and its outbox delivery', a
   assert.ok(batchStatements[0].sql.includes("status='queued'"));
   assert.ok(batchStatements[1].sql.includes("status='pending'"));
 });
+
+test('async enqueue remains disabled until the feature flag and every runtime binding exist', async () => {
+  const db = { prepare() {}, batch() {} };
+  const response = await handleZonarAsyncReconciliationEnqueue(request(), {
+    ZONAR_DB: db,
+    ZONAR_FILES: { get() {}, put() {} },
+    ZONAR_RECONCILIATION_QUEUE: { send() {} }
+  }, 'acme');
+  assert.equal(response.status, 503);
+  assert.equal((await response.json()).error, 'ASYNC_PROCESSING_NOT_CONFIGURED');
+
+  const missingQueue = await handleZonarAsyncReconciliationEnqueue(request(), {
+    ZONAR_ASYNC_ENABLED: 'true',
+    ZONAR_DB: db,
+    ZONAR_FILES: { get() {}, put() {} }
+  }, 'acme');
+  assert.equal(missingQueue.status, 503);
+  assert.equal((await missingQueue.json()).error, 'ASYNC_PROCESSING_NOT_CONFIGURED');
+});
