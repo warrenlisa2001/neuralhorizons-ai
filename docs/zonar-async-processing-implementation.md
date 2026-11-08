@@ -39,7 +39,8 @@ The Worker code expects:
 - `ZONAR_DB`: the intended D1 database, with migrations 0001–0005 applied in order.
 - `ZONAR_FILES`: the tenant source/result R2 bucket.
 - `ZONAR_RECONCILIATION_QUEUE`: a Cloudflare Queue producer binding, with a consumer configured to invoke the Worker's exported `queue` handler.
-- A scheduled trigger invoking the Worker's exported `scheduled` handler (recommended every minute).
+- `ZONAR_ASYNC_ENABLED=true`: an explicit feature flag. The enqueue endpoint returns `503` unless the flag, D1, R2 and Queue producer are all present; the scheduled handler is also gated by this flag.
+- A scheduled trigger invoking the Worker's exported `scheduled` handler (recommended every minute). Set the feature flag only after the trigger and queue consumer are configured and verified.
 
 The actual queue name, D1 database ID, R2 bucket, consumer retry/DLQ policy, concurrency, cron schedule, and production identity-provider values must be taken from the real Cloudflare environment. This PR does not invent or provision them.
 
