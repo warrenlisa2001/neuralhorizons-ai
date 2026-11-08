@@ -148,7 +148,7 @@ export default {
       catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
       return handleZonarTenantFiles(request, env, tenantId);
     }
-    const operationalEventMatch = url.pathname.match(/^\\/api\\/zonar\\/tenants\\/([^/]+)\\/operational-events(?:\\/([^/]+))?$/);
+    const operationalEventMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/operational-events(?:\/([^/]+))?$/);
     if (operationalEventMatch) {
       let tenantId, eventId = null;
       try {
