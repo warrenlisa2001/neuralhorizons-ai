@@ -243,21 +243,23 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
 export async function getZonarStagedReconciliationSummary(db, input = {}) {
   assertIdentity(input);
   const { tenantId, runId } = input;
-  const [results, exceptions] = await Promise.all([
+  const [results, exceptions, sourceCounts] = await Promise.all([
     db.prepare(`SELECT COUNT(*) AS order_count,
-        SUM(CASE WHEN status='linked' THEN 1 ELSE 0 END) AS linked_order_count,
-        SUM(invoice_count) AS invoice_count,SUM(delivery_count) AS delivery_count
+        SUM(CASE WHEN status='linked' THEN 1 ELSE 0 END) AS linked_order_count
       FROM reconciliation_order_results WHERE tenant_id=?1 AND run_id=?2`).bind(tenantId,runId).first(),
     db.prepare(`SELECT COUNT(*) AS exception_count,
         SUM(CASE WHEN severity='high' THEN 1 ELSE 0 END) AS high_count,
         SUM(CASE WHEN severity='medium' THEN 1 ELSE 0 END) AS medium_count,
         SUM(CASE WHEN severity='low' THEN 1 ELSE 0 END) AS low_count
-      FROM reconciliation_exceptions WHERE tenant_id=?1 AND run_id=?2`).bind(tenantId,runId).first()
+      FROM reconciliation_exceptions WHERE tenant_id=?1 AND run_id=?2`).bind(tenantId,runId).first(),
+    db.prepare(`SELECT dataset,COUNT(DISTINCT record_id) AS record_count
+      FROM reconciliation_staging_rows WHERE tenant_id=?1 AND run_id=?2 AND record_id IS NOT NULL
+      GROUP BY dataset`).bind(tenantId,runId).all()
   ]);
   return {
     order_count:Number(results?.order_count || 0),
-    invoice_count:Number(results?.invoice_count || 0),
-    delivery_count:Number(results?.delivery_count || 0),
+    invoice_count:Number((sourceCounts?.results || []).find(row=>row.dataset==='invoices')?.record_count || 0),
+    delivery_count:Number((sourceCounts?.results || []).find(row=>row.dataset==='deliveries')?.record_count || 0),
     linked_order_count:Number(results?.linked_order_count || 0),
     exception_count:Number(exceptions?.exception_count || 0),
     severity_counts:{
