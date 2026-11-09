@@ -55,6 +55,18 @@ export async function persistZonarStagingBatch(db, input) {
   }
   const first = ordered[0].row_number;
   const last = ordered[ordered.length - 1].row_number;
+  const checkpoint = await db.prepare(
+    `SELECT status, last_row_number FROM reconciliation_dataset_progress
+     WHERE tenant_id=?1 AND run_id=?2 AND dataset=?3`
+  ).bind(tenantId, runId, dataset).first();
+  if (!checkpoint || !['pending', 'ingesting'].includes(checkpoint.status)) {
+    throw new Error('STAGING_DATASET_NOT_WRITABLE');
+  }
+  const lastCommitted = Number(checkpoint.last_row_number || 0);
+  const isReplay = last <= lastCommitted;
+  if (!isReplay && first !== lastCommitted + 2) {
+    throw new Error('STAGING_BATCH_CHECKPOINT_GAP');
+  }
   const hashes = new Map();
   for (const item of ordered) hashes.set(item.row_number, await digestRecord(item.record));
   const statements = ordered.map(item => {
@@ -104,6 +116,15 @@ export async function completeZonarDatasetProgress(db, input) {
   if (![tenantId, runId].every(value => typeof value === 'string' && SAFE_ID.test(value)) ||
       !DATASETS.has(dataset) || !Number.isInteger(expectedRowCount) || expectedRowCount < 1) {
     throw new Error('INVALID_STAGING_COMPLETION');
+  }
+  const staged = await db.prepare(
+    `SELECT COUNT(*) AS row_count, MIN(row_number) AS first_row, MAX(row_number) AS last_row
+     FROM reconciliation_staging_rows
+     WHERE tenant_id=?1 AND run_id=?2 AND dataset=?3`
+  ).bind(tenantId, runId, dataset).first();
+  if (Number(staged?.row_count || 0) !== expectedRowCount ||
+      Number(staged?.first_row || 0) !== 2 || Number(staged?.last_row || 0) !== expectedRowCount + 1) {
+    throw new Error('STAGING_COMPLETION_ROW_COUNT_MISMATCH');
   }
   const result = await db.prepare(
     `UPDATE reconciliation_dataset_progress
