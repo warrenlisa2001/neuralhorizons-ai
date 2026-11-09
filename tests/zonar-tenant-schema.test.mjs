@@ -14,7 +14,7 @@ test('tenant foundation migration creates required tables and indexes', () => {
   try {
     db.exec(migration);
     const tables = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all().map(x => x.name);
-    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events', 'reconciliation_runs', 'tenant_upload_sessions', 'tenant_upload_parts', 'reconciliation_dataset_progress', 'reconciliation_staging_rows', 'reconciliation_engine_progress', 'reconciliation_order_results', 'reconciliation_exceptions']) {
+    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events', 'reconciliation_runs', 'tenant_upload_sessions', 'tenant_upload_parts', 'reconciliation_dataset_progress', 'reconciliation_staging_rows', 'reconciliation_engine_progress', 'reconciliation_order_results', 'reconciliation_result_links', 'reconciliation_exceptions']) {
       assert.ok(tables.includes(name), `missing table: ${name}`);
     }
     const indexes = db.prepare("SELECT name FROM sqlite_master WHERE type = 'index'").all().map(x => x.name);
