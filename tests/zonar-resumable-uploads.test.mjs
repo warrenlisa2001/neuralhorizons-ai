@@ -74,9 +74,10 @@ test('completed R2 object is verified against each persisted multipart SHA-256',
 test('completed R2 object rejects a part whose bytes differ from the upload manifest', async () => {
   const bytes = new TextEncoder().encode('actual');
   const expected = new TextEncoder().encode('expect');
+  const expectedHash = await hash(expected);
   await assert.rejects(
     () => verifyCompletedObjectParts(bucketFor([bytes]), 'object-key', [{
-      part_number: 1, byte_size: expected.byteLength, sha256_hex: await hash(expected)
+      part_number: 1, byte_size: expected.byteLength, sha256_hex: expectedHash
     }], bytes.byteLength),
     error => error.message === 'COMPLETED_PART_INTEGRITY_FAILED'
   );
@@ -84,9 +85,10 @@ test('completed R2 object rejects a part whose bytes differ from the upload mani
 
 test('completed R2 object rejects a manifest with incomplete byte coverage', async () => {
   const bytes = new TextEncoder().encode('abc');
+  const firstTwoHash = await hash(bytes.subarray(0, 2));
   await assert.rejects(
     () => verifyCompletedObjectParts(bucketFor([bytes]), 'object-key', [{
-      part_number: 1, byte_size: 2, sha256_hex: await hash(bytes.subarray(0, 2))
+      part_number: 1, byte_size: 2, sha256_hex: firstTwoHash
     }], 3),
     error => error.message === 'COMPLETED_OBJECT_SIZE_MISMATCH'
   );
