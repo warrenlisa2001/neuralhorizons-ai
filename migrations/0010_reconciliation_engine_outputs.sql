@@ -31,6 +31,18 @@ CREATE TABLE IF NOT EXISTS reconciliation_order_results (
   UNIQUE (tenant_id, run_id, order_row_number)
 );
 
+CREATE TABLE IF NOT EXISTS reconciliation_result_links (
+  tenant_id TEXT NOT NULL,
+  run_id TEXT NOT NULL,
+  order_id TEXT NOT NULL,
+  dataset TEXT NOT NULL CHECK (dataset IN ('invoices','deliveries')),
+  linked_record_id TEXT NOT NULL,
+  source_row_number INTEGER NOT NULL CHECK (source_row_number >= 2),
+  PRIMARY KEY (tenant_id,run_id,order_id,dataset,linked_record_id),
+  FOREIGN KEY (tenant_id,run_id,order_id)
+    REFERENCES reconciliation_order_results(tenant_id,run_id,order_id) ON DELETE RESTRICT
+);
+
 CREATE TABLE IF NOT EXISTS reconciliation_exceptions (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   tenant_id TEXT NOT NULL REFERENCES tenants(id) ON DELETE RESTRICT,
@@ -63,7 +75,7 @@ BEFORE INSERT ON reconciliation_exceptions
 WHEN NOT EXISTS (SELECT 1 FROM reconciliation_runs r WHERE r.id=NEW.run_id AND r.tenant_id=NEW.tenant_id)
 BEGIN SELECT RAISE(ABORT, 'exception tenant/run mismatch'); END;
 
-CREATE INDEX IF NOT EXISTS idx_reconciliation_results_run_order
+CREATE INDEX IF NOT EXISTS idx_reconciliation_result_links_order\n  ON reconciliation_result_links(tenant_id,run_id,order_id,dataset);\nCREATE INDEX IF NOT EXISTS idx_reconciliation_results_run_order
   ON reconciliation_order_results(tenant_id, run_id, order_row_number);
 CREATE INDEX IF NOT EXISTS idx_reconciliation_exceptions_run_severity
   ON reconciliation_exceptions(tenant_id, run_id, severity, source_row_number);
