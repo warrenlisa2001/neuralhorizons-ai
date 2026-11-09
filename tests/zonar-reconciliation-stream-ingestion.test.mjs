@@ -83,7 +83,7 @@ test('streams parsed records into bounded durable batches and completes the data
 test('resumes by replaying identical committed batches and rejects changed staged content', async () => {
   const db = fakeDb();
   const rows = Array.from({length: 60}, (_, i) => `O-${i + 1},${i + 1}`);
-  const csv = 'order_id,quantity_ordered\\n' + rows.join('\\n');
+  const csv = 'order_id,quantity_ordered\n' + rows.join('\n');
   const initialRows = Array.from({length: 50}, (_, i) => ({
     row_number: i + 2,
     record: { order_id: `O-${i + 1}`, quantity_ordered: i + 1 }
