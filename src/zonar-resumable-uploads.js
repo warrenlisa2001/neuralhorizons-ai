@@ -294,19 +294,21 @@ async function completeSession(request, env, tenantId, allowed, uploadId) {
   ).bind(uploadId, allowed.tenantId, allowed.userId).run();
   if (Number(claim.meta?.changes ?? 0) !== 1) return json({ error: 'UPLOAD_SESSION_BUSY' }, 409);
 
-  let object;
+  let integrity;
   try {
     const upload = env.ZONAR_FILES.resumeMultipartUpload(session.object_key, session.r2_upload_id);
     await upload.complete(parts.map(part => ({ partNumber: part.part_number, etag: part.etag })));
-    object = await env.ZONAR_FILES.head(session.object_key);
+    const object = await env.ZONAR_FILES.head(session.object_key);
     if (!object || Number(object.size) !== session.expected_bytes) throw new Error('COMPLETED_OBJECT_SIZE_MISMATCH');
-  } catch {
+    integrity = await verifyCompletedObjectParts(env.ZONAR_FILES, session.object_key, parts, Number(session.expected_bytes));
+  } catch (error) {
     await env.ZONAR_DB.prepare(
-      `UPDATE tenant_upload_sessions SET status = 'active',
+      `UPDATE tenant_upload_sessions SET status = 'failed',
        updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
        WHERE id = ?1 AND tenant_id = ?2 AND status = 'completing'`
     ).bind(uploadId, allowed.tenantId).run();
-    return json({ error: 'UPLOAD_FINALIZATION_FAILED' }, 503);
+    return json({ error: error?.message === 'COMPLETED_PART_INTEGRITY_FAILED'
+      ? 'UPLOAD_INTEGRITY_VERIFICATION_FAILED' : 'UPLOAD_FINALIZATION_FAILED' }, 422);
   }
 
   const fileId = crypto.randomUUID().replace(/-/g, '');
@@ -314,11 +316,11 @@ async function completeSession(request, env, tenantId, allowed, uploadId) {
     env.ZONAR_DB.prepare(
       `INSERT INTO tenant_files
         (id, tenant_id, uploaded_by_user_id, original_filename, object_key,
-         content_type, byte_size, sha256_hex, status)
-       SELECT ?1, ?2, ?3, ?4, ?5, 'text/csv', ?6, NULL, 'received'
+         content_type, byte_size, sha256_hex, integrity_status, integrity_manifest_sha256_hex, status)
+       SELECT ?1, ?2, ?3, ?4, ?5, 'text/csv', ?6, NULL, 'verified_parts', ?7, 'received'
        WHERE EXISTS (SELECT 1 FROM tenant_upload_sessions
-         WHERE id = ?7 AND tenant_id = ?2 AND user_id = ?3 AND status = 'completing')`
-    ).bind(fileId, allowed.tenantId, allowed.userId, session.filename, session.object_key, session.expected_bytes, uploadId),
+         WHERE id = ?8 AND tenant_id = ?2 AND user_id = ?3 AND status = 'completing')`
+    ).bind(fileId, allowed.tenantId, allowed.userId, session.filename, session.object_key, session.expected_bytes, integrity.manifest_sha256_hex, uploadId),
     env.ZONAR_DB.prepare(
       `UPDATE tenant_upload_sessions SET status = 'completed', completed_file_id = ?1,
        updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
