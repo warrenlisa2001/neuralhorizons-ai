@@ -81,7 +81,8 @@ main{width:min(100%,520px);padding:34px;background:var(--panel);border:1px solid
         button.append(name, role);
         button.addEventListener('click', () => {
           sessionStorage.setItem('zonar.selectedWorkspace', workspace.id);
-          show('Workspace membership verified. The authenticated workspace interface is the next integration step; this staging sign-in check does not expose demo data as customer data.');
+          sessionStorage.setItem('zonar.selectedWorkspaceName', workspace.name);
+          window.location.assign('/zonar-os/workspace/customer.html');
         });
         result.append(button);
       });
