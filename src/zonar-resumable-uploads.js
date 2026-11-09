@@ -205,6 +205,52 @@ async function getSessionStatus(env, allowed, uploadId) {
   });
 }
 
+async function verifyCompletedObjectParts(bucket, objectKey, expectedParts, expectedBytes) {
+  const object = await bucket.get(objectKey);
+  if (!object?.body) throw new Error('COMPLETED_OBJECT_UNREADABLE');
+  if (Number(object.size) !== expectedBytes) throw new Error('COMPLETED_OBJECT_SIZE_MISMATCH');
+  const reader = object.body.getReader();
+  let partIndex = 0, partOffset = 0, total = 0;
+  let buffer = new Uint8Array(CHUNK_BYTES);
+  const manifest = [];
+  try {
+    while (true) {
+      const next = await reader.read();
+      if (next.done) break;
+      let offset = 0;
+      while (offset < next.value.byteLength) {
+        if (partIndex >= expectedParts.length) throw new Error('COMPLETED_OBJECT_SIZE_MISMATCH');
+        const expected = expectedParts[partIndex];
+        const remaining = Number(expected.byte_size) - partOffset;
+        const take = Math.min(remaining, next.value.byteLength - offset);
+        buffer.set(next.value.subarray(offset, offset + take), partOffset);
+        partOffset += take;
+        total += take;
+        offset += take;
+        if (partOffset === Number(expected.byte_size)) {
+          const actualHash = await sha256Hex(buffer.subarray(0, partOffset));
+          if (actualHash !== expected.sha256_hex) throw new Error('COMPLETED_PART_INTEGRITY_FAILED');
+          manifest.push({
+            part_number: Number(expected.part_number),
+            byte_size: Number(expected.byte_size),
+            sha256_hex: actualHash
+          });
+          partIndex++;
+          partOffset = 0;
+          buffer = new Uint8Array(CHUNK_BYTES);
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  if (total !== expectedBytes || partIndex !== expectedParts.length || partOffset !== 0) {
+    throw new Error('COMPLETED_OBJECT_SIZE_MISMATCH');
+  }
+  const manifestDigest = await sha256Hex(new TextEncoder().encode(JSON.stringify(manifest)));
+  return { byte_size: total, part_count: manifest.length, manifest_sha256_hex: manifestDigest };
+}
+
 async function completeSession(request, env, tenantId, allowed, uploadId) {
   if (!SAFE_ID.test(uploadId)) return json({ error: 'INVALID_UPLOAD_ID' }, 400);
   const session = await env.ZONAR_DB.prepare(
