@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS reconciliation_engine_progress (
   processed_order_count INTEGER NOT NULL DEFAULT 0 CHECK (processed_order_count >= 0),
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
-  PRIMARY KEY (tenant_id, run_id),
+  PRIMARY KEY (tenant_id, run_id)
 );
 
 CREATE TABLE IF NOT EXISTS reconciliation_order_results (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS reconciliation_order_results (
   status TEXT NOT NULL CHECK (status IN ('linked','incomplete')),
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   PRIMARY KEY (tenant_id, run_id, order_id),
-  UNIQUE (tenant_id, run_id, order_row_number),
+  UNIQUE (tenant_id, run_id, order_row_number)
 );
 
 CREATE TABLE IF NOT EXISTS reconciliation_exceptions (
