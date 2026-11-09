@@ -108,7 +108,7 @@ test('resumes by replaying identical committed batches and rejects changed stage
 
   const otherDb = fakeDb();
   await initialiseZonarDatasetProgress(otherDb, {
-    tenantId:'tenant_1', runId:'run_2', dataset:'orders', sourceFileId:'file_2'
+    tenantId:'tenant_1', runId:'run_2', dataset:'orders', sourceFileId:'file_1'
   });
   await persistZonarStagingBatch(otherDb, {
     tenantId:'tenant_1', runId:'run_2', dataset:'orders',
