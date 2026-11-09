@@ -235,7 +235,7 @@ test('reconciliation outputs enforce tenant/run provenance and idempotent result
     const insertResult = db.prepare(`INSERT INTO reconciliation_order_results
       (tenant_id,run_id,order_id,order_row_number,status) VALUES (?,?,?,?,?)`);
     insertResult.run('tenant-a','run-a','O-1',2,'linked');
-    assert.throws(() => insertResult.run('tenant-a','run-a','O-2',3,'linked'));
+    assert.throws(() => insertResult.run('tenant-a','run-a','O-2',2,'linked'));
     assert.throws(() => insertResult.run('tenant-b','run-a','O-3',4,'linked'), /order result tenant\/run mismatch/);
   } finally { db.close(); }
 });
