@@ -64,7 +64,8 @@ export async function persistZonarStagingBatch(db, input) {
   }
   const lastCommitted = Number(checkpoint.last_row_number || 0);
   const isReplay = last <= lastCommitted;
-  if (!isReplay && first !== lastCommitted + 2) {
+  const nextExpectedRow = lastCommitted === 0 ? 2 : lastCommitted + 1;
+  if (!isReplay && first !== nextExpectedRow) {
     throw new Error('STAGING_BATCH_CHECKPOINT_GAP');
   }
   const hashes = new Map();
