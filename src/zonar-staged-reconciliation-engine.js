@@ -192,6 +192,26 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
     FROM page p LEFT JOIN invoice_totals it ON it.order_id=p.order_id
                 LEFT JOIN delivery_totals dt ON dt.order_id=p.order_id
   `;
+  const linksSql = `
+    WITH page AS (
+      SELECT s.tenant_id,s.run_id,s.record_id AS order_id
+      FROM reconciliation_staging_rows s
+      WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='orders'
+        AND s.row_number>?3 AND s.row_number<=?4 AND s.record_id IS NOT NULL
+        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+          WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id
+            AND x.dataset='orders' AND x.record_id=s.record_id)
+    )
+    INSERT OR IGNORE INTO reconciliation_result_links
+      (tenant_id,run_id,order_id,dataset,linked_record_id,source_row_number)
+    SELECT p.tenant_id,p.run_id,p.order_id,i.dataset,i.record_id,i.row_number
+    FROM page p JOIN reconciliation_staging_rows i ON i.tenant_id=p.tenant_id
+      AND i.run_id=p.run_id AND i.order_id=p.order_id
+      AND i.dataset IN ('invoices','deliveries') AND i.record_id IS NOT NULL
+      AND i.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        WHERE x.tenant_id=i.tenant_id AND x.run_id=i.run_id
+          AND x.dataset=i.dataset AND x.record_id=i.record_id)
+  `;
   const exceptionSql = `
     INSERT OR IGNORE INTO reconciliation_exceptions
       (tenant_id,run_id,code,severity,dataset,source_row_number,record_id,order_id,expected_value,actual_value,details_json)
@@ -223,6 +243,7 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
   `;
   await db.batch([
     bind(db, resultSql, tenantId, runId, firstCursor, lastRow),
+    bind(db, linksSql, tenantId, runId, firstCursor, lastRow),
     bind(db, exceptionSql, tenantId, runId, firstCursor, lastRow, tolerance),
     bind(db, `UPDATE reconciliation_engine_progress
       SET status='running',last_order_row_number=?1,
