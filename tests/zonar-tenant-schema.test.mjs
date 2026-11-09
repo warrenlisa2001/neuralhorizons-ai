@@ -6,14 +6,15 @@ import { DatabaseSync } from 'node:sqlite';
 const migration = readFileSync(new URL('../migrations/0001_tenant_foundation.sql', import.meta.url), 'utf8') + '\n' +
   readFileSync(new URL('../migrations/0002_reconciliation_runs.sql', import.meta.url), 'utf8') + '\n' +
   readFileSync(new URL('../migrations/0007_resumable_upload_sessions.sql', import.meta.url), 'utf8') + '\n' +
-  readFileSync(new URL('../migrations/0009_reconciliation_staging.sql', import.meta.url), 'utf8');
+  readFileSync(new URL('../migrations/0009_reconciliation_staging.sql', import.meta.url), 'utf8') + '\n' +
+  readFileSync(new URL('../migrations/0010_reconciliation_engine_outputs.sql', import.meta.url), 'utf8');
 
 test('tenant foundation migration creates required tables and indexes', () => {
   const db = new DatabaseSync(':memory:');
   try {
     db.exec(migration);
     const tables = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table'").all().map(x => x.name);
-    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events', 'reconciliation_runs', 'tenant_upload_sessions', 'tenant_upload_parts', 'reconciliation_dataset_progress', 'reconciliation_staging_rows']) {
+    for (const name of ['tenants', 'users', 'memberships', 'invitations', 'tenant_files', 'processing_jobs', 'audit_events', 'reconciliation_runs', 'tenant_upload_sessions', 'tenant_upload_parts', 'reconciliation_dataset_progress', 'reconciliation_staging_rows', 'reconciliation_engine_progress', 'reconciliation_order_results', 'reconciliation_exceptions']) {
       assert.ok(tables.includes(name), `missing table: ${name}`);
     }
     const indexes = db.prepare("SELECT name FROM sqlite_master WHERE type = 'index'").all().map(x => x.name);
@@ -211,4 +212,30 @@ test('durable staging enforces source provenance, tenant scope and row uniquenes
   } finally {
     db.close();
   }
+});
+
+
+test('reconciliation outputs enforce tenant/run provenance and idempotent result keys', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    db.exec(migration);
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-a', 'Business A');
+    db.prepare("INSERT INTO tenants (id, name) VALUES (?, ?)").run('tenant-b', 'Business B');
+    db.prepare("INSERT INTO users (id, identity_issuer, identity_subject) VALUES (?, ?, ?)").run('user-a', 'https://issuer.example', 'subject-a');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-a', 'user-a', 'tenant_owner');
+    db.prepare("INSERT INTO memberships (tenant_id, user_id, role) VALUES (?, ?, ?)").run('tenant-b', 'user-a', 'tenant_owner');
+    const insertFile = db.prepare("INSERT INTO tenant_files (id, tenant_id, uploaded_by_user_id, original_filename, object_key, content_type, byte_size) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    for (const id of ['orders', 'invoices', 'deliveries']) insertFile.run(id, 'tenant-a', 'user-a', id+'.csv', 'tenant-a/'+id, 'text/csv', 10);
+    db.prepare(`INSERT INTO reconciliation_runs
+      (id, tenant_id, requested_by_user_id, processor_version, orders_file_id, invoices_file_id, deliveries_file_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`)
+      .run('run-a', 'tenant-a', 'user-a', '0.1.0', 'orders', 'invoices', 'deliveries');
+    assert.throws(() => db.prepare("INSERT INTO reconciliation_engine_progress (tenant_id,run_id) VALUES (?,?)").run('tenant-b','run-a'), /engine progress tenant\/run mismatch/);
+    db.prepare("INSERT INTO reconciliation_engine_progress (tenant_id,run_id) VALUES (?,?)").run('tenant-a','run-a');
+    const insertResult = db.prepare(`INSERT INTO reconciliation_order_results
+      (tenant_id,run_id,order_id,order_row_number,status) VALUES (?,?,?,?,?)`);
+    insertResult.run('tenant-a','run-a','O-1',2,'linked');
+    assert.throws(() => insertResult.run('tenant-a','run-a','O-2',3,'linked'));
+    assert.throws(() => insertResult.run('tenant-b','run-a','O-3',4,'linked'), /order result tenant\/run mismatch/);
+  } finally { db.close(); }
 });
