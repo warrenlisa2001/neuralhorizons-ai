@@ -37,7 +37,13 @@ function mockDb() {
             }
             return { meta: { changes: 1 } };
           },
-          async first() { return progress; },
+          async first() {
+            if (sql.includes('SELECT COUNT(*) AS row_count')) {
+              const valuesForDataset = [...rows.values()].filter(row => row.row_number >= 2);
+              return { row_count: valuesForDataset.length, first_row: valuesForDataset.length ? Math.min(...valuesForDataset.map(row => row.row_number)) : null, last_row: valuesForDataset.length ? Math.max(...valuesForDataset.map(row => row.row_number)) : null };
+            }
+            return progress;
+          },
           async all() {
             if (sql.includes('SELECT row_number, row_sha256_hex')) {
               return { results: [...rows.values()].filter(row => row.row_number >= values[3] && row.row_number <= values[4]).sort((a,b)=>a.row_number-b.row_number) };
@@ -94,7 +100,7 @@ test('rejects oversized batches and does not complete without the final checkpoi
   }), /STAGING_COMPLETION_CHECKPOINT_MISMATCH/);
 });
 
-test('marks a dataset complete only when the final row checkpoint matches', async () => {
+test('marks a dataset complete only when staged rows are contiguous and the final checkpoint matches', async () => {
   const db = mockDb();
   await initialiseZonarDatasetProgress(db, { tenantId:'tenant_1', runId:'run_1', dataset:'orders', sourceFileId:'file_1' });
   await persistZonarStagingBatch(db, {
