@@ -80,18 +80,42 @@ test('streams parsed records into bounded durable batches and completes the data
   assert.equal(db.staged.size, 120);
 });
 
-test('rejects a changed source on replay rather than silently overwriting staged rows', async () => {
+test('resumes by replaying identical committed batches and rejects changed staged content', async () => {
   const db = fakeDb();
-  const csv = 'order_id,quantity_ordered\nO-1,1\nO-2,2';
-  await ingestZonarCsvStreamToStaging(db, {
+  const rows = Array.from({length: 60}, (_, i) => `O-${i + 1},${i + 1}`);
+  const csv = 'order_id,quantity_ordered\\n' + rows.join('\\n');
+  const initialRows = Array.from({length: 50}, (_, i) => ({
+    row_number: i + 2,
+    record: { order_id: `O-${i + 1}`, quantity_ordered: i + 1 }
+  }));
+  // Simulate a worker that committed its first complete 50-row batch before interruption.
+  const { initialiseZonarDatasetProgress, persistZonarStagingBatch } =
+    await import('../src/zonar-reconciliation-staging.js');
+  await initialiseZonarDatasetProgress(db, {
+    tenantId:'tenant_1', runId:'run_1', dataset:'orders', sourceFileId:'file_1'
+  });
+  await persistZonarStagingBatch(db, {
+    tenantId:'tenant_1', runId:'run_1', dataset:'orders', rows:initialRows
+  });
+
+  const resumed = await ingestZonarCsvStreamToStaging(db, {
     tenantId:'tenant_1', runId:'run_1', dataset:'orders',
     sourceFileId:'file_1', stream:makeStream(csv)
   });
-  // A completed dataset is immutable; re-opening it cannot change its staged content.
-  const result = await ingestZonarCsvStreamToStaging(db, {
-    tenantId:'tenant_1', runId:'run_1', dataset:'orders',
-    sourceFileId:'file_1', stream:makeStream('order_id,quantity_ordered\nO-1,99')
+  assert.equal(resumed.status, 'complete');
+  assert.equal(resumed.row_count, 60);
+  assert.equal(db.staged.size, 60);
+
+  const otherDb = fakeDb();
+  await initialiseZonarDatasetProgress(otherDb, {
+    tenantId:'tenant_1', runId:'run_2', dataset:'orders', sourceFileId:'file_2'
   });
-  assert.equal(result.status, 'complete');
-  assert.equal(result.row_count, 2);
+  await persistZonarStagingBatch(otherDb, {
+    tenantId:'tenant_1', runId:'run_2', dataset:'orders',
+    rows:[{row_number:2, record:{order_id:'O-1', quantity_ordered:1}}]
+  });
+  await assert.rejects(() => persistZonarStagingBatch(otherDb, {
+    tenantId:'tenant_1', runId:'run_2', dataset:'orders',
+    rows:[{row_number:2, record:{order_id:'O-1', quantity_ordered:99}}]
+  }), /STAGING_REPLAY_CONFLICT/);
 });
