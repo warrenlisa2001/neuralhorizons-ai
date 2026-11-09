@@ -1,5 +1,3 @@
-import { createHash } from 'node:crypto';
-
 const DATASETS = new Set(['orders', 'invoices', 'deliveries']);
 const MAX_BATCH_ROWS = 50;
 const SAFE_ID = /^[A-Za-z0-9_-]{1,128}$/;
@@ -8,8 +6,10 @@ function assertDb(db) {
   if (!db?.prepare || typeof db.batch !== 'function') throw new Error('STAGING_DB_UNAVAILABLE');
 }
 
-function digestRecord(record) {
-  return createHash('sha256').update(JSON.stringify(record)).digest('hex');
+async function digestRecord(record) {
+  const bytes = new TextEncoder().encode(JSON.stringify(record));
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
 /**
@@ -55,6 +55,8 @@ export async function persistZonarStagingBatch(db, input) {
   }
   const first = ordered[0].row_number;
   const last = ordered[ordered.length - 1].row_number;
+  const hashes = new Map();
+  for (const item of ordered) hashes.set(item.row_number, await digestRecord(item.record));
   const statements = ordered.map(item => {
     const record = item.record;
     const idField = dataset === 'orders' ? 'order_id' : dataset === 'invoices' ? 'invoice_id' : 'delivery_id';
@@ -66,7 +68,7 @@ export async function persistZonarStagingBatch(db, input) {
         (tenant_id, run_id, dataset, row_number, record_id, order_id, record_json, row_sha256_hex)
        VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
        ON CONFLICT(tenant_id, run_id, dataset, row_number) DO NOTHING`
-    ).bind(tenantId, runId, dataset, item.row_number, recordId, orderId, json, digestRecord(record));
+    ).bind(tenantId, runId, dataset, item.row_number, recordId, orderId, json, hashes.get(item.row_number));
   });
   statements.push(db.prepare(
     `UPDATE reconciliation_dataset_progress
@@ -88,7 +90,7 @@ export async function persistZonarStagingBatch(db, input) {
   ).bind(tenantId, runId, dataset, first, last).all();
   const byRow = new Map((persisted.results || []).map(row => [Number(row.row_number), row.row_sha256_hex]));
   for (const item of ordered) {
-    if (byRow.get(item.row_number) !== digestRecord(item.record)) {
+    if (byRow.get(item.row_number) !== hashes.get(item.row_number)) {
       throw new Error('STAGING_REPLAY_CONFLICT');
     }
   }
