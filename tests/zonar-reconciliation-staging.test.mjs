@@ -97,7 +97,7 @@ test('rejects oversized batches and does not complete without the final checkpoi
   }), /INVALID_STAGING_BATCH/);
   await assert.rejects(() => completeZonarDatasetProgress(db, {
     tenantId:'tenant_1', runId:'run_1', dataset:'orders', expectedRowCount:2
-  }), /STAGING_COMPLETION_CHECKPOINT_MISMATCH/);
+  }), /STAGING_COMPLETION_ROW_COUNT_MISMATCH/);
 });
 
 test('marks a dataset complete only when staged rows are contiguous and the final checkpoint matches', async () => {
