@@ -50,6 +50,9 @@ test('reconciles staged datasets in bounded pages and preserves exception semant
   assert.deepEqual(c.summary,{order_count:2,invoice_count:4,delivery_count:2,linked_order_count:1,exception_count:6,severity_counts:{high:5,medium:1,low:0}});
   const rows=sqlite.prepare('SELECT order_id,invoice_count,delivery_count,status,quantity_invoiced,quantity_delivered FROM reconciliation_order_results ORDER BY order_row_number').all();
   assert.deepEqual(rows.map(x=>[x.order_id,x.invoice_count,x.delivery_count,x.status,x.quantity_invoiced,x.quantity_delivered]),[['O1',2,1,'linked',10,10],['O2',0,1,'incomplete',null,4]]);
+  const links=sqlite.prepare('SELECT dataset,linked_record_id FROM reconciliation_result_links ORDER BY order_id,dataset,linked_record_id').all();
+  assert.equal(links.length,4);
+  assert.deepEqual(links.map(x=>[x.dataset,x.linked_record_id]),[['deliveries','D1'],['invoices','I1'],['invoices','I2'],['deliveries','D2']]);
   const codes=sqlite.prepare('SELECT code FROM reconciliation_exceptions').all().map(x=>x.code).sort();
   assert.deepEqual(codes,['DUPLICATE_RECORD_ID','INVOICE_MISSING_ORDER_REFERENCE','INVOICE_WITHOUT_ORDER','MISSING_RECORD_ID','ORDER_DELIVERY_QUANTITY_MISMATCH','ORDER_NOT_INVOICED'].sort());
   const replay=await processZonarStagedReconciliationBatch(db,{tenantId:'t1',runId:'r1'});
