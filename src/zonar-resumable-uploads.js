@@ -205,7 +205,7 @@ async function getSessionStatus(env, allowed, uploadId) {
   });
 }
 
-async function verifyCompletedObjectParts(bucket, objectKey, expectedParts, expectedBytes) {
+export async function verifyCompletedObjectParts(bucket, objectKey, expectedParts, expectedBytes) {
   const object = await bucket.get(objectKey);
   if (!object?.body) throw new Error('COMPLETED_OBJECT_UNREADABLE');
   if (Number(object.size) !== expectedBytes) throw new Error('COMPLETED_OBJECT_SIZE_MISMATCH');
@@ -350,7 +350,7 @@ async function completeSession(request, env, tenantId, allowed, uploadId) {
   return json({
     success: true,
     file: { id: fileId, filename: session.filename, content_type: 'text/csv',
-      byte_size: session.expected_bytes, status: 'received' }
+      byte_size: session.expected_bytes, status: 'received', integrity_status: 'verified_parts', integrity_manifest_sha256_hex: integrity.manifest_sha256_hex }
   }, 201);
 }
 
