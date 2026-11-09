@@ -86,7 +86,7 @@ test('resumes by replaying identical committed batches and rejects changed stage
   const csv = 'order_id,quantity_ordered\n' + rows.join('\n');
   const initialRows = Array.from({length: 50}, (_, i) => ({
     row_number: i + 2,
-    record: { order_id: `O-${i + 1}`, quantity_ordered: i + 1 }
+    record: { order_id: `O-${i + 1}`, quantity_ordered: i + 1, order_value: null }
   }));
   // Simulate a worker that committed its first complete 50-row batch before interruption.
   const { initialiseZonarDatasetProgress, persistZonarStagingBatch } =
