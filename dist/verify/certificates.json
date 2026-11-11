@@ -1,0 +1,11 @@
+{
+ "records": {
+  "748822bfa481adeb87730488076aa0332e6ff5f81b13408cb8ca00ca43a47303": {
+   "name": "Sample Student",
+   "type": "Certificate of Completion",
+   "programme": "AI Agent Lab (Neural Horizons AI)",
+   "date": "Sample only",
+   "note": "This is a sample record used to test the page. It is not a real certificate."
+  }
+ }
+}
