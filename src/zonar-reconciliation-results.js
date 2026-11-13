@@ -32,8 +32,24 @@ export async function handleZonarReconciliationResult(request, env, tenantId, ru
        WHERE tenant_id = ?1 AND id = ?2 LIMIT 1`
     ).bind(allowed.tenantId, runId).first();
     if (!run) return json({ error: 'RUN_NOT_FOUND' }, 404);
-    if (run.status !== 'succeeded' || !run.result_object_key || !run.result_sha256_hex) {
+    if (run.status !== 'succeeded') {
       return json({ run: { id: run.id, status: run.status, error_code: run.error_code || null } }, 200);
+    }
+    if (!run.result_object_key && !run.result_sha256_hex) {
+      // Staged processor: findings live in D1 (order results, links, exceptions),
+      // not in an R2 blob. Only the verified summary is returned here; the
+      // paginated findings feed is a separate, versioned endpoint.
+      let summary = null;
+      try { summary = run.summary_json ? JSON.parse(run.summary_json) : null; }
+      catch { return json({ error: 'RESULT_INVALID' }, 503); }
+      return json({ success: true, run: {
+        id: run.id, status: run.status, processor_version: run.processor_version,
+        created_at: run.created_at, started_at: run.started_at, completed_at: run.completed_at,
+        result_storage: 'd1', summary
+      } }, 200);
+    }
+    if (!run.result_object_key || !run.result_sha256_hex) {
+      return json({ error: 'RESULT_INVALID' }, 503);
     }
     const object = await env.ZONAR_FILES.get(run.result_object_key);
     if (!object) return json({ error: 'RESULT_UNAVAILABLE' }, 503);

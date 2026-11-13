@@ -1,10 +1,12 @@
 # ZONAR staging infrastructure readiness
 
+> **Update (13 Nov 2026):** the "Current repository facts" below describe the original synchronous design and are out of date. The current stack (PRs #26, #29, #31) adds migrations `0001`-`0010`, queue-backed asynchronous processing with streaming staging, and a findings feed, and that code is **not on `main`**. For the up-to-date, ordered procedure see [`zonar-staging-provisioning-runbook.md`](zonar-staging-provisioning-runbook.md). The gates below remain valid as a checklist of intent.
+
 ## Purpose and release boundary
 
 This checklist defines the prerequisites for the first isolated, non-production end-to-end ZONAR test. It does not provision Cloudflare resources, select an identity provider, create credentials or deploy a Worker.
 
-The application code for tenant-scoped upload, reconciliation processing and result retrieval is present on `main`. That is not evidence that the live service is configured or ready for customer data.
+The asynchronous upload, reconciliation and findings code lives on the open ZONAR PR stack, not on `main`. Neither location is evidence that the live service is configured or ready for customer data.
 
 ## Current repository facts
 
@@ -12,8 +14,8 @@ The application code for tenant-scoped upload, reconciliation processing and res
 - It does not declare a `ZONAR_DB` D1 binding or a `ZONAR_FILES` R2 binding.
 - The authentication implementation expects `ZONAR_ISSUER`, `ZONAR_AUDIENCE`, `ZONAR_JWKS_URL` and `ZONAR_DB`.
 - Tenant file storage and reconciliation processing additionally require `ZONAR_FILES`.
-- Migrations are present: `migrations/0001_tenant_foundation.sql` followed by `migrations/0002_reconciliation_runs.sql`.
-- The reconciliation endpoint is synchronous and bounded; it is not a queue-backed production job service.
+- Migrations `0001` through `0010` exist on the PR stack (tenant foundation, runs, operational events, outbox, upload sessions, file integrity, staging, engine outputs). None is evidenced as applied to a live database.
+- The synchronous endpoint remains; the queue-backed job service (outbox, queue consumer, lease recovery) exists on the PR stack but its Wrangler staging bindings are only declared, not provisioned.
 - No live resource IDs, provider-specific identity values, migration execution records or staging test evidence are stored in this repository.
 
 ## Gate 1 — decisions and resource creation
