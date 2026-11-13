@@ -27,8 +27,28 @@
     "ZONAR_ISSUER": "https://login.microsoftonline.com/c6993c9c-10dd-4cfe-ba91-157272624bd6/v2.0",
     "ZONAR_AUDIENCE": "68673793-9332-440b-ab12-d181b1128a17",
     "ZONAR_JWKS_URL": "https://login.microsoftonline.com/c6993c9c-10dd-4cfe-ba91-157272624bd6/discovery/v2.0/keys",
-    "ZONAR_REQUIRED_SCOPE": "access_as_user"
+    "ZONAR_REQUIRED_SCOPE": "access_as_user",
+    // Both flags MUST stay "false" until the D1 database exists and migrations
+    // 0001-0010 have been applied (see docs/zonar-staging-provisioning-runbook.md).
+    "ZONAR_ASYNC_ENABLED": "false",
+    "ZONAR_RESUMABLE_UPLOADS_ENABLED": "false"
   },
+  "queues": {
+    "producers": [
+      { "binding": "ZONAR_RECONCILIATION_QUEUE", "queue": "zonar-staging-reconciliation" }
+    ],
+    "consumers": [
+      {
+        "queue": "zonar-staging-reconciliation",
+        "max_batch_size": 1,
+        "max_retries": 3,
+        "dead_letter_queue": "zonar-staging-reconciliation-dlq"
+      }
+    ]
+  },
+  // Lease recovery, outbox dispatch and expired-upload cleanup. Inert while the
+  // flags above are "false".
+  "triggers": { "crons": ["*/5 * * * *"] },
   "observability": {
     "enabled": true
   }
