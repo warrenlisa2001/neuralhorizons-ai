@@ -10,7 +10,25 @@ Config file: `wrangler.zonar-staging.jsonc` (Worker `zonar-staging`). All comman
 - The async and upload flags in the config are `"false"`. They are switched on only in step 5.
 - Entra values in `vars` (issuer, audience, JWKS URL, scope) are present in the config. Confirm them against the Entra app registration before relying on them.
 
+## 0a. Observed state of the Cloudflare account (13 Nov 2026, read-only dashboard check)
+
+| Resource | Observed | Implication |
+|---|---|---|
+| D1 `zonar-staging-db` | Exists (created 6 Nov 2026), ID `67a07ade-3b53-4960-b169-a9e1440994f1`, 172 kB, **9 tables**, 0 queries | Step 1 (create) is already done. 9 tables is consistent with only migrations `0001`-`0002` applied, but this is an inference: confirm with `migrations list` before applying anything |
+| R2 `zonar-staging-files` | Exists, **2 objects** (about 828 kB) | Step 1 (create) is already done. Check the two objects are synthetic test files before the journey test |
+| Queues | **None exist** | Create `zonar-staging-reconciliation` and `zonar-staging-reconciliation-dlq` |
+| Staging Worker | Not inspected | Confirm what, if anything, is deployed under `zonar-staging` |
+| Plan | **Workers Free** | See the limits below: this is a blocker for anything beyond toy-sized data |
+
+### Workers Free vs this design
+
+Per Cloudflare's published limits (Workers and D1 docs, checked 13 Nov 2026): Workers Free allows **50 D1 queries per invocation** (a `db.batch()` counts as one) and **10 ms CPU per invocation**; Workers Paid allows 1,000 D1 queries (10,000 subrequests) and up to 5 minutes CPU per invocation (15 minutes for a queue consumer or cron). Free also caps D1 at 100,000 rows written per day and Queues at 10,000 operations per day.
+
+Each 50-row staging batch in `persistZonarStagingBatch` issues 3 D1 calls (checkpoint read, batch write, verification read), so the 50-query ceiling allows on the order of a dozen batches (hundreds of rows) per invocation, and 10 ms CPU is unlikely to cover CSV parsing and hashing of anything sizeable. **Use a Workers Paid plan ($5/month minimum) for staging before running the three-dataset journey**, or limit the test to a handful of rows and expect `RETRIES_EXHAUSTED` failures beyond that. Upgrading is your decision and has a cost; nothing has been changed on the account.
+
 ## 1. Create resources
+
+The database and bucket already exist (see 0a); create only what is missing (the two queues). The commands below are kept for a fresh environment.
 
 ```
 npx wrangler d1 create zonar-staging-db
@@ -19,7 +37,7 @@ npx wrangler queues create zonar-staging-reconciliation
 npx wrangler queues create zonar-staging-reconciliation-dlq
 ```
 
-Put the real D1 `database_id` into `wrangler.zonar-staging.jsonc` in place of `REPLACE_WITH_STAGING_D1_DATABASE_ID`. Decide whether to commit it: a D1 ID is an identifier, not a credential, but the readiness checklist treats resource IDs conservatively. If you prefer not to commit it, keep it in a local, uncommitted copy of the config.
+Put the real D1 `database_id` (see 0a) into `wrangler.zonar-staging.jsonc` in place of `REPLACE_WITH_STAGING_D1_DATABASE_ID`. Decide whether to commit it: a D1 ID is an identifier, not a credential, but the readiness checklist treats resource IDs conservatively. If you prefer not to commit it, keep it in a local, uncommitted copy of the config.
 
 **Record:** the database ID, bucket name, queue names, account, and who created them.
 
@@ -90,7 +108,7 @@ Git SHA and Worker version ID; `migrations list` output; token claims used (neve
 
 ## 8. Known limits to measure here (not assumed)
 
-- Source cap defaults to 64 MiB / 10,000 rows (`ZONAR_MAX_SOURCE_BYTES`, `ZONAR_MAX_SOURCE_ROWS`). Real D1 latency and per-invocation subrequest limits are unmeasured. Time a 5,000-row and a 10,000-row dataset before raising the caps.
+- On Workers Free the caps below are far too high (see 0a). Source cap defaults to 64 MiB / 10,000 rows (`ZONAR_MAX_SOURCE_BYTES`, `ZONAR_MAX_SOURCE_ROWS`). Real D1 latency and per-invocation subrequest limits are unmeasured. Time a 5,000-row and a 10,000-row dataset before raising the caps.
 - Findings feed requires a signed-in tenant user with `jobs:read`. A service identity for HALU is not yet designed.
 
 ## 9. Rollback
