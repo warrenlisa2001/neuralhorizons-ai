@@ -1,13 +1,15 @@
 import { authenticateZonarTenant } from './zonar-auth.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
-import { appendTenantAuditEvent } from './zonar-audit.js';
-import { buildZonarReconciliation, ZONAR_RECONCILIATION_PIPELINE_VERSION } from './zonar-reconciliation-pipeline.js';
-import { persistZonarOperationalEvents } from './zonar-operational-events.js';
+import {
+  ZONAR_STAGED_PROCESSOR_VERSION,
+  describeZonarSourceIntegrity,
+  ensureZonarCompletionAudit,
+  runZonarStagedProcessing,
+  zonarSourceLimits
+} from './zonar-staged-run-processor.js';
 
 const SAFE_ID = /^[A-Za-z0-9_-]{1,128}$/;
 const MAX_REQUEST_BYTES = 4096;
-const MAX_SOURCE_BYTES = 2 * 1024 * 1024;
-const MAX_RESULT_BYTES = 4 * 1024 * 1024;
 const OUTBOX_BATCH_SIZE = 20;
 const LEASE_SECONDS = 300;
 
@@ -81,13 +83,14 @@ export async function handleZonarAsyncReconciliationEnqueue(request, env, tenant
   }
   const idempotencyKey = suppliedKey || crypto.randomUUID().replace(/-/g, '');
   const [ordersId, invoicesId, deliveriesId] = ids;
-  // The current reconciliation consumer only supports the legacy bounded
-  // parser and whole-object SHA-256 verification. Do not queue multipart or
-  // oversized files until the streaming processor can verify their manifests.
+  // The consumer streams objects into D1 staging, so size is bounded by the
+  // configured operational cap rather than by worker memory. "Ready" means the
+  // shared integrity definition is satisfied (multipart manifest OR whole SHA-256).
+  const limits = zonarSourceLimits(env);
   let sourceRows;
   try {
     sourceRows = await env.ZONAR_DB.prepare(
-      `SELECT id, status, byte_size, sha256_hex
+      `SELECT id, status, byte_size, sha256_hex, integrity_status, integrity_manifest_sha256_hex
        FROM tenant_files
        WHERE tenant_id = ?1 AND id IN (?2, ?3, ?4)`
     ).bind(allowed.tenantId, ordersId, invoicesId, deliveriesId).all();
@@ -97,16 +100,17 @@ export async function handleZonarAsyncReconciliationEnqueue(request, env, tenant
   const sources = Array.isArray(sourceRows.results) ? sourceRows.results : [];
   if (sources.length !== 3) return json({ error: 'SOURCE_FILES_NOT_AVAILABLE' }, 404);
   if (sources.some(file => !['received', 'processed'].includes(file.status) ||
-      !file.sha256_hex || Number(file.byte_size) > MAX_SOURCE_BYTES)) {
+      describeZonarSourceIntegrity(file).mode === 'none' ||
+      !(Number(file.byte_size) > 0) || Number(file.byte_size) > limits.maxBytes)) {
     return json({
-      error: 'SOURCE_FILES_NOT_READY_FOR_CURRENT_PROCESSOR',
-      max_source_bytes: MAX_SOURCE_BYTES
+      error: 'SOURCE_FILES_NOT_READY_FOR_PROCESSING',
+      max_source_bytes: limits.maxBytes
     }, 409);
   }
   const fingerprint = await sha256Hex(JSON.stringify({
     tenant_id: allowed.tenantId, orders_file_id: ordersId,
     invoices_file_id: invoicesId, deliveries_file_id: deliveriesId,
-    processor_version: ZONAR_RECONCILIATION_PIPELINE_VERSION
+    processor_version: ZONAR_STAGED_PROCESSOR_VERSION
   }));
   const runId = crypto.randomUUID().replace(/-/g, '');
   const outboxId = crypto.randomUUID().replace(/-/g, '');
@@ -134,7 +138,7 @@ export async function handleZonarAsyncReconciliationEnqueue(request, env, tenant
            )
          ON CONFLICT(tenant_id, idempotency_key) WHERE idempotency_key IS NOT NULL DO NOTHING`
       ).bind(runId, allowed.tenantId, allowed.userId,
-        ZONAR_RECONCILIATION_PIPELINE_VERSION, ordersId, invoicesId, deliveriesId,
+        ZONAR_STAGED_PROCESSOR_VERSION, ordersId, invoicesId, deliveriesId,
         idempotencyKey, fingerprint),
       env.ZONAR_DB.prepare(
         `INSERT OR IGNORE INTO reconciliation_outbox (id, tenant_id, run_id)
@@ -231,23 +235,8 @@ export async function dispatchZonarReconciliationOutbox(env, now = new Date()) {
   return { dispatched, deferred };
 }
 
-async function readVerifiedCsv(bucket, file) {
-  if (Number(file.byte_size) > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
-  const object = await bucket.get(file.object_key);
-  if (!object) throw new Error('SOURCE_OBJECT_MISSING');
-  if (Number(object.size) > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
-  const bytes = await object.arrayBuffer();
-  if (bytes.byteLength > MAX_SOURCE_BYTES) throw new Error('SOURCE_TOO_LARGE');
-  if (bytes.byteLength !== Number(file.byte_size)) throw new Error('SOURCE_SIZE_MISMATCH');
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  const actual = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
-  if (!file.sha256_hex || actual !== file.sha256_hex) throw new Error('SOURCE_INTEGRITY_FAILED');
-  try { return new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
-  catch { throw new Error('SOURCE_ENCODING_INVALID'); }
-}
-
 /** Queue consumer. A lease token fences stale consumers from committing results. */
-export async function processZonarReconciliationMessage(message, env) {
+export async function processZonarReconciliationMessage(message, env, options = {}) {
   const payload = message?.body;
   if (!payload || payload.version !== 1 || !SAFE_ID.test(payload.run_id || '')) {
     message?.ack?.();
@@ -293,67 +282,63 @@ export async function processZonarReconciliationMessage(message, env) {
     return { acknowledged: true, reason: existing?.status || 'RUN_NOT_FOUND' };
   }
 
-  let resultKey = null;
+  const heartbeat = async () => {
+    const stamp = new Date().toISOString();
+    const beat = await db.prepare(
+      `UPDATE reconciliation_runs SET lease_expires_at=?1, updated_at=?2
+       WHERE tenant_id=?3 AND id=?4 AND status='running' AND lease_token=?5`
+    ).bind(isoAfter(LEASE_SECONDS), stamp, run.tenant_id, run.id, leaseToken).run();
+    if (Number(beat?.meta?.changes || 0) !== 1) throw new Error('STALE_LEASE');
+  };
+
   try {
-    const files = await db.prepare(
-      `SELECT id, object_key, byte_size, sha256_hex
-       FROM tenant_files WHERE tenant_id=?1 AND id IN (?2,?3,?4)
-         AND status IN ('received','processed') AND deleted_at IS NULL`
-    ).bind(run.tenant_id, run.orders_file_id, run.invoices_file_id, run.deliveries_file_id).all();
-    const byId = new Map((files.results || []).map(file => [file.id, file]));
-    if (byId.size !== 3) throw new Error('SOURCE_FILES_NOT_AVAILABLE');
-    const [ordersCsv, invoicesCsv, deliveriesCsv] = await Promise.all([
-      readVerifiedCsv(bucket, byId.get(run.orders_file_id)),
-      readVerifiedCsv(bucket, byId.get(run.invoices_file_id)),
-      readVerifiedCsv(bucket, byId.get(run.deliveries_file_id))
-    ]);
-    const result = buildZonarReconciliation({ ordersCsv, invoicesCsv, deliveriesCsv });
-    const bytes = new TextEncoder().encode(JSON.stringify(result));
-    if (bytes.byteLength > MAX_RESULT_BYTES) throw new Error('RESULT_TOO_LARGE');
-    const digest = await crypto.subtle.digest('SHA-256', bytes);
-    const resultSha = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
-    resultKey = `tenants/${run.tenant_id}/reconciliation-results/${run.id}/${leaseToken}.json`;
-    await bucket.put(resultKey, bytes, {
-      httpMetadata: { contentType: 'application/json' },
-      customMetadata: { tenantId: run.tenant_id, runId: run.id, sha256Hex: resultSha }
+    const loadFiles = async () => {
+      const rows = await db.prepare(
+        `SELECT id, object_key, byte_size, sha256_hex, integrity_status, integrity_manifest_sha256_hex
+         FROM tenant_files WHERE tenant_id=?1 AND id IN (?2,?3,?4)
+           AND status IN ('received','processed') AND deleted_at IS NULL`
+      ).bind(run.tenant_id, run.orders_file_id, run.invoices_file_id, run.deliveries_file_id).all();
+      const byId = new Map((rows.results || []).map(file => [file.id, file]));
+      if (byId.size !== 3) throw new Error('SOURCE_FILES_NOT_AVAILABLE');
+      return byId;
+    };
+    const summary = await runZonarStagedProcessing({
+      env: { ...env, ZONAR_DB: db, ZONAR_FILES: bucket }, run, loadFiles, heartbeat,
+      digestFactory: options.digestFactory
     });
-    const events = await persistZonarOperationalEvents(db, {
-      tenantId: run.tenant_id, runId: run.id, exceptions: result.exceptions
-    });
-    const summary = JSON.stringify({
-      ...result.summary, operational_event_count: events.inserted,
-      operational_event_attempt_count: events.attempted
-    });
+    const summaryJson = JSON.stringify(summary);
+
+    // Mandatory audit first; the status change is also conditioned on it existing,
+    // so a run can never be 'succeeded' without its completion audit record.
+    const auditId = await ensureZonarCompletionAudit(db, run, summary);
     const completedAt = new Date().toISOString();
     const updated = await db.prepare(
       `UPDATE reconciliation_runs
-       SET status='succeeded', result_object_key=?1, result_sha256_hex=?2,
-           summary_json=?3, completed_at=?4, lease_token=NULL, lease_expires_at=NULL, updated_at=?4
-       WHERE tenant_id=?5 AND id=?6 AND status='running' AND lease_token=?7 AND lease_expires_at>?4`
-    ).bind(resultKey, resultSha, summary, completedAt, run.tenant_id, run.id, leaseToken).run();
+       SET status='succeeded', result_object_key=NULL, result_sha256_hex=NULL,
+           summary_json=?1, error_code=NULL, completed_at=?2,
+           lease_token=NULL, lease_expires_at=NULL, updated_at=?2
+       WHERE tenant_id=?3 AND id=?4 AND status='running' AND lease_token=?5 AND lease_expires_at>?2
+         AND EXISTS (SELECT 1 FROM audit_events WHERE tenant_id=?3 AND id=?6)`
+    ).bind(summaryJson, completedAt, run.tenant_id, run.id, leaseToken, auditId).run();
     if (Number(updated?.meta?.changes || 0) !== 1) {
-      await bucket.delete?.(resultKey);
       message.ack?.();
       return { acknowledged: true, reason: 'STALE_LEASE' };
     }
-    try {
-      await appendTenantAuditEvent(db, {
-        id: crypto.randomUUID().replace(/-/g, ''), tenantId: run.tenant_id,
-        actorUserId: run.requested_by_user_id, eventType: 'reconciliation.completed',
-        resourceType: 'reconciliation_run', resourceId: run.id, outcome: 'success',
-        details: { action: 'reconcile_three_datasets', job_id: run.id, count: result.summary?.exception_count ?? 0 }
-      });
-    } catch { /* Result durability is independent of secondary audit availability. */ }
     message.ack?.();
     return { acknowledged: true, status: 'succeeded' };
   } catch (error) {
-    if (resultKey) { try { await bucket.delete?.(resultKey); } catch {} }
+    if (error?.message === 'STALE_LEASE') {
+      message.ack?.();
+      return { acknowledged: true, reason: 'STALE_LEASE' };
+    }
     const permanentErrors = new Set([
       'SOURCE_FILES_NOT_AVAILABLE', 'SOURCE_OBJECT_MISSING', 'SOURCE_SIZE_MISMATCH',
-      'SOURCE_INTEGRITY_FAILED', 'SOURCE_ENCODING_INVALID', 'RESULT_TOO_LARGE', 'SOURCE_TOO_LARGE',
-      'UPLOAD_TOO_LARGE', 'EMPTY_FILE', 'NO_DATA_ROWS', 'TOO_MANY_ROWS', 'TOO_MANY_COLUMNS',
-      'INVALID_CSV', 'INVALID_NUMERIC_VALUE', 'REQUIRED_COLUMN_MISSING', 'MALFORMED_ROW',
-      'DUPLICATE_HEADER', 'BLANK_HEADER', 'AMBIGUOUS_FIELD_MAPPING', 'INVALID_DATASET'
+      'SOURCE_INTEGRITY_FAILED', 'SOURCE_INTEGRITY_UNVERIFIABLE', 'SOURCE_ENCODING_INVALID',
+      'SOURCE_TOO_LARGE', 'UPLOAD_TOO_LARGE', 'EMPTY_FILE', 'NO_DATA_ROWS', 'TOO_MANY_ROWS',
+      'TOO_MANY_COLUMNS', 'INVALID_CSV', 'INVALID_ENCODING', 'INVALID_STREAM',
+      'INVALID_NUMERIC_VALUE', 'REQUIRED_COLUMN_MISSING', 'MALFORMED_ROW', 'DUPLICATE_HEADER',
+      'BLANK_HEADER', 'AMBIGUOUS_FIELD_MAPPING', 'INVALID_DATASET', 'STREAM_DATASET_EMPTY',
+      'STREAM_PARSER_EVENT_INVALID', 'STAGING_REPLAY_CONFLICT'
     ]);
     const retryable = !permanentErrors.has(error?.message);
     const exhausted = Number(run.attempt_count) >= Number(run.max_attempts);
