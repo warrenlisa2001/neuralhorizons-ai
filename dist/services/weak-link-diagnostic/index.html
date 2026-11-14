@@ -633,7 +633,7 @@ html,body{overflow-x:clip}
   <span class="eyebrow">Next step</span>
   <h2>We don't take every engagement. We take the right ones.</h2>
   <p>Request a confidential 30-minute fit conversation. We will establish whether the business problem, decision-making team, data access and budget are aligned with the work. If there is a strong fit, we will recommend the right engagement and agree a defined scope and fee. If there isn't, we will say so. No hourly consulting, speculative strategy work or obligation to commission an AI build.</p>
-  <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="final-book">Book a confidential 30-minute call</a><a class="wl-btn s" href="https://wa.me/971585738525?text=Hi%20Lisa%2C%20I%27d%20like%20to%20book%20a%2030-minute%20call%20about%20the%20AI%20Weak-Link%20Diagnostic.">WhatsApp me</a><a class="wl-btn s" href="mailto:lisa@neuralhorizonsai.com?subject=WEAK%20LINK">Email &ldquo;WEAK LINK&rdquo;</a></div>
+  <div class="wl-btns"><a class="wl-btn p" href="https://calendly.com/warrenlisa2001/30min" data-cta="final-book">Book a confidential 30-minute call</a><a class="wl-btn s" href="https://wa.me/971585697562?text=Hi%20Lisa%2C%20I%27d%20like%20to%20book%20a%2030-minute%20call%20about%20the%20AI%20Weak-Link%20Diagnostic.">WhatsApp me</a><a class="wl-btn s" href="mailto:lisa@neuralhorizonsai.com?subject=WEAK%20LINK">Email &ldquo;WEAK LINK&rdquo;</a></div>
 </div></section>
 
 <script>
@@ -807,6 +807,22 @@ document.querySelectorAll('#mobileMenu a').forEach(link=>{link.addEventListener(
   root.addEventListener('focusout',function(e){if(!root.contains(e.relatedTarget)){paused=false;start();}});
   document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else start();});
   show(0);start();
+})();
+</script>
+<script>
+/* Weak-Link CTA click tracking: pushes one dataLayer event per booking/contact click. */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    if(!a)return;
+    var h=a.getAttribute('href')||'',ch=null;
+    if(h.indexOf('calendly.com')>-1)ch='calendly';
+    else if(h.indexOf('wa.me/')>-1)ch='whatsapp';
+    else if(h.indexOf('mailto:')===0)ch='email';
+    if(!ch)return;
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({event:'weak_link_cta_click',cta_channel:ch,cta_id:a.getAttribute('data-cta')||'unlabelled',page:'weak-link-diagnostic'});
+  },true);
 })();
 </script>
 </body>
