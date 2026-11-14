@@ -99,3 +99,11 @@ test('briefing caps evidence, flags truncation, and rejects unverified runs', ()
   assert.equal(b.evidence_truncated, true);
   assert.throws(() => buildBriefing({ run: { ...run, status: 'running' }, findings: [] }), /BRIEFING_REQUIRES_VERIFIED_RUN/);
 });
+
+test('collectFindings returns run metadata even when a verified run has zero findings', async () => {
+  const client = createFindingsClient({ baseUrl: 'https://z', tenantId: 't1', getToken: async () => 'T',
+    fetchImpl: async () => jsonRes({ schema_version: SUPPORTED_SCHEMA, run, findings: [], page: { limit: 50, next_cursor: null } }) });
+  const out = await client.collectFindings('r1');
+  assert.equal(out.run.id, 'r1');
+  assert.deepEqual(out.findings, []);
+});

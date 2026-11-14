@@ -132,3 +132,5 @@ VALUES ('sp_halu_<tenant>', '<tenant_id>', '<token iss>', '<HALU client id>', 'H
 
 6. Verify: a HALU token returns 200 on `.../reconciliation-runs/<run>/findings` for its tenant, 403 for any other tenant, and one `findings.read` row appears in `audit_events` per request.
 7. Revoke: `UPDATE service_principals SET status='revoked' WHERE id='sp_halu_<tenant>';` takes effect on the next request.
+
+HALU also polls `GET /api/zonar/tenants/<tenant>/verified-runs` (same service principal, same `findings:read` scope). Each call is audited as `verified_runs.read`.

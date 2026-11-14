@@ -151,3 +151,60 @@ test('a service token cannot be used on user-only tenant routes', async () => {
     assert.equal(result.status, 401);
   } finally { f.restore(); }
 });
+
+// ---- verified-runs feed ----
+import { handleZonarVerifiedRuns } from '../src/zonar-findings.js';
+
+function addRun(f, id, status, completedAt, { audit = false, legacyResult = false } = {}) {
+  f.sqlite.prepare(`INSERT INTO reconciliation_runs(id,tenant_id,requested_by_user_id,processor_version,status,orders_file_id,invoices_file_id,deliveries_file_id,completed_at,result_object_key)
+    VALUES(?,?,?,?,?,?,?,?,?,?)`).run(id, 't1', 'u1', 'zonar-staged-1', status, 'o', 'i', 'd', completedAt, legacyResult ? 'k/' + id : null);
+  if (audit) f.sqlite.prepare("INSERT INTO audit_events(id,tenant_id,event_type,outcome) VALUES(?,?,?,?)").run('rc_' + id, 't1', 'reconciliation.completed', 'success');
+}
+const runsCall = (f, token, query = '', tenant = 't1') => handleZonarVerifiedRuns(
+  new Request(`https://z.example/api/zonar/tenants/${tenant}/verified-runs${query}`, { headers: { Authorization: 'Bearer ' + token } }), f.env, tenant);
+
+test('verified-runs lists only verified staged runs, ordered, and resumes from the cursor', async () => {
+  const f = await fixture();
+  try {
+    f.sqlite.prepare("UPDATE reconciliation_runs SET completed_at='2026-11-14T10:00:00.000Z' WHERE id='r1'").run();
+    addRun(f, 'r2', 'succeeded', '2026-11-14T11:00:00.000Z', { audit: true });
+    addRun(f, 'r3', 'succeeded', '2026-11-14T12:00:00.000Z');                       // no completion audit
+    addRun(f, 'r4', 'failed', '2026-11-14T13:00:00.000Z', { audit: true });         // not succeeded
+    addRun(f, 'r5', 'succeeded', '2026-11-14T14:00:00.000Z', { audit: true, legacyResult: true }); // legacy R2 result
+    addRun(f, 'r6', 'succeeded', '2026-11-14T15:00:00.000Z', { audit: true });
+    const token = await f.serviceToken();
+
+    const first = await (await runsCall(f, token, '?limit=2')).json();
+    assert.deepEqual(first.runs.map(r => r.id), ['r1', 'r2']);
+    assert.equal(first.page.has_more, true);
+
+    const second = await (await runsCall(f, token, '?limit=2&cursor=' + encodeURIComponent(first.page.next_cursor))).json();
+    assert.deepEqual(second.runs.map(r => r.id), ['r6']);
+    assert.equal(second.page.has_more, false);
+
+    // Polling again from the end returns nothing and keeps the same cursor.
+    const idle = await (await runsCall(f, token, '?cursor=' + encodeURIComponent(second.page.next_cursor))).json();
+    assert.deepEqual(idle.runs, []);
+    assert.equal(idle.page.next_cursor, second.page.next_cursor);
+
+    assert.equal(f.sqlite.prepare("SELECT COUNT(*) c FROM audit_events WHERE event_type='verified_runs.read'").get().c, 3);
+  } finally { f.restore(); }
+});
+
+test('verified-runs enforces tenant binding, cursor format and fail-closed audit', async () => {
+  const f = await fixture();
+  try {
+    const token = await f.serviceToken();
+    assert.equal((await runsCall(f, token, '', 't2')).status, 403);
+    assert.equal((await runsCall(f, token, '?cursor=not-a-cursor')).status, 400);
+    assert.equal((await runsCall(f, token, "?cursor=" + encodeURIComponent("2026|x'; DROP TABLE tenants;--"))).status, 400);
+    assert.equal((await runsCall(f, token, '?limit=0')).status, 400);
+    assert.equal((await handleZonarVerifiedRuns(new Request('https://z.example/x', { method: 'POST' }), f.env, 't1')).status, 405);
+    assert.equal((await handleZonarVerifiedRuns(new Request('https://z.example/x'), f.env, 't1')).status, 401);
+  } finally { f.restore(); }
+  const g = await fixture({ failAuditInsert: true });
+  try {
+    const res = await runsCall(g, await g.serviceToken());
+    assert.equal(res.status, 503);
+  } finally { g.restore(); }
+});

@@ -15,13 +15,21 @@ Cross-department intelligence agent. HALU consumes ZONAR's **verified** findings
 | `src/entra-token.js` | Entra client-credentials token provider (cached, early refresh, no secret in errors) |
 | `src/zonar-findings-client.js` | Paged, typed, retrying client for the findings feed |
 | `src/briefing.js` | Deterministic briefing: counts by severity/code/dataset with capped evidence |
-| `tests/halu.test.mjs` | Unit tests (no network) |
+| `src/run-watcher.js` | Polls ZONAR's `verified-runs` feed, delivers each new run at-least-once (cursor advances only after delivery) |
+| `src/views/finance.js` | Finance view: over/under-invoiced totals, uninvoiced orders, invoices without orders, with evidence |
+| `tests/halu.test.mjs`, `tests/watcher.test.mjs` | Unit tests (no network) |
 
 ## Not built yet
-- A runtime (Worker or scheduled job) that calls the client on run completion.
+- A runtime (Worker cron or scheduled job) that calls `pollOnce()` and a durable cursor store (today only an in-memory one exists).
+- A delivery target for the finance view (email, Teams, dashboard); `deliver` is a plug-in function.
 - The language-model explanation layer, and delivery to departments.
-- Department-specific views (finance, operations, procurement).
+- Operations and procurement views (finance exists).
 - Other data sources beyond ZONAR.
 
 ## Connecting HALU to a ZONAR tenant
 See "HALU service principal" in `docs/zonar-staging-provisioning-runbook.md`.
+
+## How a run reaches HALU
+1. ZONAR finishes a run and writes its completion audit; the run now appears in `GET /api/zonar/tenants/:t/verified-runs`.
+2. `createRunWatcher(...).pollOnce()` lists runs after its saved cursor, reads each run's findings, builds the briefing and finance view, and calls `deliver`.
+3. Delivery is at-least-once: key on `idempotency_key` (`tenant:run`). A run that can never be read (not verified, legacy result) is skipped and reported; auth or network failures stop the poll and are retried next time.

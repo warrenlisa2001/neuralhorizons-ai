@@ -17,7 +17,9 @@ export function createFindingsClient({ baseUrl, tenantId, getToken, fetchImpl = 
   const root = baseUrl.replace(/\/+$/, '');
 
   async function fetchPage(runId, { cursor, limit, severity, dataset }) {
-    const url = new URL(`${root}/api/zonar/tenants/${encodeURIComponent(tenantId)}/reconciliation-runs/${encodeURIComponent(runId)}/findings`);
+    const url = runId === null
+      ? new URL(`${root}/api/zonar/tenants/${encodeURIComponent(tenantId)}/verified-runs`)
+      : new URL(`${root}/api/zonar/tenants/${encodeURIComponent(tenantId)}/reconciliation-runs/${encodeURIComponent(runId)}/findings`);
     if (cursor) url.searchParams.set('cursor', cursor);
     if (limit) url.searchParams.set('limit', String(limit));
     if (severity) url.searchParams.set('severity', severity);
@@ -51,11 +53,24 @@ export function createFindingsClient({ baseUrl, tenantId, getToken, fetchImpl = 
       }
       throw new ZonarFeedError('PAGE_LIMIT_EXCEEDED', 0);
     },
+    /** One page of verified, completed runs after an opaque cursor (null = from the start). */
+    async listVerifiedRuns({ cursor = null, limit = 50 } = {}) {
+      const body = await fetchPage(null, { cursor, limit });
+      return { runs: body.runs, nextCursor: body.page.next_cursor, hasMore: body.page.has_more === true };
+    },
+    /** All findings of a verified run plus its metadata (present even when there are zero findings). */
     async collectFindings(runId, filters = {}) {
       const findings = [];
       let run = null;
-      for await (const item of this.iterateFindings(runId, filters)) { run = item.run; findings.push(item.finding); }
-      return { run, findings };
+      let cursor = null;
+      for (let page = 0; page < maxPages; page++) {
+        const body = await fetchPage(runId, { ...filters, cursor });
+        run = body.run;
+        findings.push(...body.findings);
+        cursor = body.page.next_cursor;
+        if (!cursor) return { run, findings };
+      }
+      throw new ZonarFeedError('PAGE_LIMIT_EXCEEDED', 0);
     }
   };
 }
