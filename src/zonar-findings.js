@@ -1,4 +1,4 @@
-import { authenticateZonarTenant } from './zonar-auth.js';
+import { authenticateZonarService, authenticateZonarTenant, peekZonarTokenKind } from './zonar-auth.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { zonarCompletionAuditId } from './zonar-staged-run-processor.js';
 
@@ -107,14 +107,42 @@ export async function handleZonarReconciliationFindings(request, env, tenantId, 
   if (request.method !== 'GET') return json({ error: 'METHOD_NOT_ALLOWED' }, 405);
   if (!SAFE_ID.test(tenantId || '') || !SAFE_ID.test(runId || '')) return json({ error: 'INVALID_RESOURCE' }, 400);
   if (!env.ZONAR_DB?.prepare) return json({ error: 'FINDINGS_NOT_CONFIGURED' }, 503);
-  const authentication = await authenticateZonarTenant(request, env, tenantId);
-  if (!authentication.ok) return json({ error: authentication.error }, authentication.status);
-  const allowed = authorizeZonarAction(authentication, 'jobs:read');
-  if (!allowed.ok) return json({ error: allowed.error }, allowed.status);
+  // Two caller kinds, one feed: a signed-in tenant user (jobs:read) or an app-only
+  // service principal such as HALU (registry-granted findings:read). The kind is only a
+  // routing hint from unverified claims; each path verifies the token in full.
+  let scopedTenantId;
+  let serviceCaller = null;
+  if (peekZonarTokenKind(request) === 'service') {
+    const service = await authenticateZonarService(request, env, tenantId);
+    if (!service.ok) return json({ error: service.error }, service.status);
+    if (!service.scopes.includes('findings:read')) return json({ error: 'PERMISSION_DENIED' }, 403);
+    scopedTenantId = service.tenantId;
+    serviceCaller = service;
+  } else {
+    const authentication = await authenticateZonarTenant(request, env, tenantId);
+    if (!authentication.ok) return json({ error: authentication.error }, authentication.status);
+    const allowed = authorizeZonarAction(authentication, 'jobs:read');
+    if (!allowed.ok) return json({ error: allowed.error }, allowed.status);
+    scopedTenantId = allowed.tenantId;
+  }
   const options = parseOptions(new URL(request.url).searchParams);
   if (options.error) return json({ error: options.error }, 400);
+  if (serviceCaller) {
+    // Machine access to tenant data is audited before any data is returned (fail closed).
+    try {
+      await env.ZONAR_DB.prepare(
+        `INSERT INTO audit_events (id, tenant_id, actor_user_id, event_type, resource_type, resource_id, outcome, details_json)
+         VALUES (?1, ?2, NULL, 'findings.read', 'reconciliation_run', ?3, 'success', ?4)`
+      ).bind('fr_' + crypto.randomUUID(), scopedTenantId, runId, JSON.stringify({
+        actor: 'service_principal', service_principal_id: serviceCaller.servicePrincipalId,
+        app_id: serviceCaller.appId, cursor: options.cursor, limit: options.limit
+      })).run();
+    } catch {
+      return json({ error: 'AUDIT_UNAVAILABLE' }, 503);
+    }
+  }
   try {
-    const result = await queryZonarFindings(env.ZONAR_DB, { tenantId: allowed.tenantId, runId, ...options });
+    const result = await queryZonarFindings(env.ZONAR_DB, { tenantId: scopedTenantId, runId, ...options });
     return json(result.body, result.status);
   } catch {
     return json({ error: 'FINDINGS_READ_FAILED' }, 503);
