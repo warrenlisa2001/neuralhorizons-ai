@@ -51,7 +51,7 @@ Uses a cron trigger, so the account needs room for it (Free allows 5 cron trigge
 The caller sends their own ZONAR access token (`Authorization: Bearer ...`, scope `access_as_user`). HALU forwards it to ZONAR's `/api/zonar/identity`, which verifies it and returns the person's active workspaces and roles. HALU then serves only workspaces it is configured for (`HALU_TENANTS`) where the role may read (`HALU_READER_ROLES`, default all five). Consequences: no user table or signing keys in HALU; removing someone's ZONAR membership removes their HALU access on the next request; another tenant's data is unreachable (403, or 404 for a guessed run id). Responses are `no-store`; CORS allows one configured origin only (`HALU_ALLOWED_ORIGIN`), never a wildcard.
 
 ## The readiness gate
-HALU delivers nothing for a tenant until four conditions hold for the use case (`reconciliation_briefing` today):
+**Opt-in.** Off by default so staging and pilots deliver immediately. Set `HALU_REQUIRE_READINESS=true` to enforce it for a client rollout. When on, HALU delivers nothing for a tenant until four conditions hold for the use case (`reconciliation_briefing` today):
 
 | Condition | What must be true | Where it lives |
 |---|---|---|
@@ -77,3 +77,10 @@ INSERT INTO halu_boundaries (id, tenant_id, use_case_key, allowed_actions, escal
   VALUES ('bl_1', '<tenant>', 'reconciliation_briefing', 'deliver_briefing', '<escalation owner>', '<business owner>');
 ```
 Close it at any time with `UPDATE halu_boundaries SET status='revoked' WHERE id='bl_1';`.
+
+## The HALU page and Ask HALU
+`GET /` on the HALU Worker serves the page: sign in with Microsoft, pick a workspace, see the latest verified runs with the finance view and findings by type, and (when enabled) ask questions.
+- **Sign-in** is the authorisation-code flow with PKCE straight to Entra. No secret, no library, nothing stored but the access token in `sessionStorage` for the tab. Access is still decided by ZONAR: the token is forwarded to ZONAR's identity endpoint, so removing someone from ZONAR removes them from HALU.
+- **Entra setup (one-off):** register a *Single-page application* whose redirect URI is the Worker URL (e.g. `https://halu-staging.<account>.workers.dev/`), grant it the delegated permission `access_as_user` on the ZONAR API, and put its id in `HALU_SPA_CLIENT_ID`. Make sure the ZONAR API's access-token version is 2.
+- **Ask HALU:** `POST /api/halu/tenants/:t/ask` sends the stored briefing and finance view for that tenant and run to Claude with instructions to answer only from that data. Switch on with the secret `HALU_ANTHROPIC_API_KEY`. Questions are logged in `halu_ask_log` (per-tenant limit `HALU_ASK_LIMIT_PER_HOUR`, default 60). Without the key the box is hidden and the API answers 503.
+- **What the model sees:** one run's briefing and finance view for the caller's own workspace. Not other tenants, not ZONAR credentials, not raw files. The text of findings is treated as data.

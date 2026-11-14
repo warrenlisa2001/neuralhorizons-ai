@@ -11,10 +11,14 @@ import { createEntraTokenProvider } from './entra-token.js';
 import { createFindingsClient } from './zonar-findings-client.js';
 import { createRunWatcher } from './run-watcher.js';
 import { handleHaluApi } from './api.js';
+import { renderPage, pageHeaders, newNonce } from './page.js';
 import { requireGateOpen, logDecision, GateClosedError, USE_CASE_RECONCILIATION_BRIEFING } from './readiness.js';
 import { createD1CursorStore, saveBriefing, markWebhookSent, webhookAlreadySent } from './d1-store.js';
 
 const TENANT_ID = /^[A-Za-z0-9_-]{1,128}$/;
+
+/** The readiness gate is opt-in: set HALU_REQUIRE_READINESS=true to enforce it (client rollouts). */
+export const gateRequired = env => String(env.HALU_REQUIRE_READINESS || '').toLowerCase() === 'true';
 
 export function parseTenants(value) {
   return String(value || '').split(',').map(t => t.trim()).filter(Boolean);
@@ -65,9 +69,9 @@ export async function runHaluPoll(env, { fetchImpl = fetch, log = () => {} } = {
         onSkip: s => log({ level: 'warn', event: 'halu.run_skipped', tenant_id: tenantId, ...s }),
         deliver: async payload => {
           // Re-checked for every run: a boundary letter revoked mid-poll stops delivery at once.
-          const gate = await requireGateOpen(env.HALU_DB, tenantId);
+          const gate = gateRequired(env) ? await requireGateOpen(env.HALU_DB, tenantId) : null;
           await saveBriefing(env.HALU_DB, payload);
-          await logDecision(env.HALU_DB, { tenantId, useCaseKey: USE_CASE_RECONCILIATION_BRIEFING, runId: payload.run_id,
+          if (gate) await logDecision(env.HALU_DB, { tenantId, useCaseKey: USE_CASE_RECONCILIATION_BRIEFING, runId: payload.run_id,
             decision: 'delivered', verdict: gate.verdict, boundaryId: gate.boundaryId });
           if (env.HALU_WEBHOOK_URL && !(await webhookAlreadySent(env.HALU_DB, payload.idempotency_key))) {
             const response = await fetchImpl(env.HALU_WEBHOOK_URL, {
@@ -80,7 +84,7 @@ export async function runHaluPoll(env, { fetchImpl = fetch, log = () => {} } = {
         }
       });
       // Fail early, before any ZONAR call, if the gate is closed.
-      await requireGateOpen(env.HALU_DB, tenantId);
+      if (gateRequired(env)) await requireGateOpen(env.HALU_DB, tenantId);
       const out = await watcher.pollOnce();
       results.push({ tenant_id: tenantId, ok: true, delivered: out.delivered.length, skipped: out.skipped.length });
     } catch (error) {
@@ -104,7 +108,12 @@ export default {
     ctx.waitUntil(runHaluPoll(env, { log: entry => console.log(JSON.stringify(entry)) }));
   },
   async fetch(request, env) {
-    if (new URL(request.url).pathname.startsWith('/api/halu/')) return handleHaluApi(request, env);
+    const path = new URL(request.url).pathname;
+    if (path.startsWith('/api/halu/')) return handleHaluApi(request, env);
+    if ((path === '/' || path === '/halu') && request.method === 'GET') {
+      const nonce = newNonce();
+      return new Response(renderPage(nonce), { headers: pageHeaders(nonce) });
+    }
     return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
   }
 };

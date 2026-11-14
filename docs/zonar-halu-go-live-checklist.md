@@ -49,9 +49,15 @@ Expect: `iss` ends `/v2.0`, `aud` = `68673793-...`, `azp` = HALU client id, `rol
 9. **Confirm HALU can read:** a token from A6 returns `200` on `.../tenants/<tenant>/verified-runs` and `403` for any other tenant; an `audit_events` row `verified_runs.read` appears.
 
 ## Part C. HALU deploy (after Part B step 9)
-HALU will deliver nothing until the readiness gate is open for the tenant: apply `halu/migrations/0001` and `0002`, then seed the gate rows (see "The readiness gate" in `halu/README.md`) with the real definition owner, evidence and a boundary letter signed by the business owner. A closed gate is the expected first state, not a fault.
+The readiness gate is OFF by default, so HALU delivers as soon as it is deployed. For a client rollout set `HALU_REQUIRE_READINESS=true`, after which HALU delivers nothing until the gate is open for the tenant: apply `halu/migrations/0001` and `0002`, then seed the gate rows (see "The readiness gate" in `halu/README.md`) with the real definition owner, evidence and a boundary letter signed by the business owner. A closed gate is the expected first state, not a fault.
 
 Follow "Deploying HALU to staging" in `halu/README.md`. Still to fill: HALU D1 id, ZONAR staging host, HALU client id, tenant id. The Worker refuses to start while any `REPLACE_WITH_...` remains.
 
 ## Rollback
 Set both ZONAR flags back to `"false"`; revoke HALU with `UPDATE service_principals SET status='revoked' ...`; delete the HALU client secret in Entra. Data and migrations are additive and can stay.
+
+## Part D. HALU page and Ask HALU
+1. Apply `halu/migrations/0003_ask_log.sql` (with 0001 and 0002).
+2. Entra: new app registration, platform *Single-page application*, redirect URI = the HALU Worker URL, delegated permission `access_as_user` on the ZONAR API, admin consent. Put the client id in `HALU_SPA_CLIENT_ID` in `halu/wrangler.halu-staging.jsonc` and redeploy.
+3. Optional: `wrangler secret put HALU_ANTHROPIC_API_KEY --config halu/wrangler.halu-staging.jsonc` to switch on Ask HALU.
+4. Open the Worker URL, sign in as a member of the seeded tenant, confirm the latest run and finance view appear, then ask a question and check it cites the run.

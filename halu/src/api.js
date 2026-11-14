@@ -6,6 +6,10 @@
 //   GET /api/halu/workspaces
 //   GET /api/halu/tenants/:tenant/briefings?limit=&cursor=
 //   GET /api/halu/tenants/:tenant/briefings/:run
+//   POST /api/halu/tenants/:tenant/ask   {question, run_id?}  (answers grounded in the stored briefing)
+//   GET /api/halu/config                  (public sign-in settings for the page; no secrets)
+
+import { askHalu, AskError } from './ask.js';
 
 const SAFE_ID = /^[A-Za-z0-9_-]{1,128}$/;
 const CURSOR = /^[0-9TZ:.\-]{0,40}\|[A-Za-z0-9_-]{1,128}$/;
@@ -27,7 +31,7 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('Origin');
   // Only the single configured origin is ever echoed; no wildcard.
   if (origin && env.HALU_ALLOWED_ORIGIN && origin === env.HALU_ALLOWED_ORIGIN) {
-    return { 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Headers': 'Authorization', 'Access-Control-Allow-Methods': 'GET', 'Access-Control-Max-Age': '600' };
+    return { 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Headers': 'Authorization, Content-Type', 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Max-Age': '600' };
   }
   return {};
 }
@@ -71,17 +75,27 @@ function parse(text) { try { return JSON.parse(text); } catch { return null; } }
 export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   const url = new URL(request.url);
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: headers(env, corsHeaders(request, env)) });
-  if (request.method !== 'GET') return reply(request, env, { error: 'METHOD_NOT_ALLOWED' }, 405);
+  const askMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/ask$/);
+  if (request.method !== 'GET' && !(request.method === 'POST' && askMatch)) return reply(request, env, { error: 'METHOD_NOT_ALLOWED' }, 405);
+  if (url.pathname === '/api/halu/config') {
+    // Public values only. The SPA client id and scopes are not secrets.
+    return reply(request, env, {
+      sign_in: env.HALU_SPA_CLIENT_ID && env.HALU_ENTRA_TENANT_ID && env.HALU_USER_SCOPE && !String(env.HALU_SPA_CLIENT_ID).includes('REPLACE_WITH')
+        ? { authority_tenant: env.HALU_ENTRA_TENANT_ID, client_id: env.HALU_SPA_CLIENT_ID, scope: env.HALU_USER_SCOPE } : null,
+      ask_enabled: Boolean(env.HALU_ANTHROPIC_API_KEY)
+    });
+  }
   if (!env.HALU_DB?.prepare || !env.HALU_ZONAR_BASE_URL) return reply(request, env, { error: 'HALU_NOT_CONFIGURED' }, 503);
 
   const workspacesMatch = url.pathname === '/api/halu/workspaces';
   const listMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/briefings$/);
   const itemMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/briefings\/([^/]+)$/);
-  if (!workspacesMatch && !listMatch && !itemMatch) return reply(request, env, { error: 'NOT_FOUND' }, 404);
+  if (!workspacesMatch && !listMatch && !itemMatch && !askMatch) return reply(request, env, { error: 'NOT_FOUND' }, 404);
 
   let tenantId = null; let runId = null;
   try {
     if (listMatch) tenantId = decodeURIComponent(listMatch[1]);
+    if (askMatch) tenantId = decodeURIComponent(askMatch[1]);
     if (itemMatch) { tenantId = decodeURIComponent(itemMatch[1]); runId = decodeURIComponent(itemMatch[2]); }
   } catch { return reply(request, env, { error: 'INVALID_RESOURCE' }, 400); }
   if (tenantId !== null && !SAFE_ID.test(tenantId)) return reply(request, env, { error: 'INVALID_RESOURCE' }, 400);
@@ -91,6 +105,20 @@ export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   if (!who.ok) return reply(request, env, { error: who.error }, who.status);
   if (workspacesMatch) return reply(request, env, { workspaces: who.workspaces });
   if (!who.workspaces.some(w => w.id === tenantId)) return reply(request, env, { error: 'TENANT_ACCESS_DENIED' }, 403);
+
+  if (askMatch) {
+    const raw = await request.text();
+    if (raw.length > 4096) return reply(request, env, { error: 'INVALID_QUESTION' }, 400);
+    const input = parse(raw);
+    if (!input || typeof input !== 'object') return reply(request, env, { error: 'INVALID_QUESTION' }, 400);
+    if (input.run_id !== undefined && input.run_id !== null && (typeof input.run_id !== 'string' || !SAFE_ID.test(input.run_id))) return reply(request, env, { error: 'INVALID_RESOURCE' }, 400);
+    try {
+      return reply(request, env, await askHalu({ env, tenantId, runId: input.run_id ?? null, question: input.question, fetchImpl }));
+    } catch (error) {
+      if (error instanceof AskError) return reply(request, env, { error: error.code }, error.status);
+      return reply(request, env, { error: 'ASK_UNAVAILABLE' }, 502);
+    }
+  }
 
   try {
     if (itemMatch) {

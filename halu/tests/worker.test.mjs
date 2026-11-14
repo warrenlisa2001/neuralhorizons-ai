@@ -117,7 +117,7 @@ test('unfilled REPLACE_WITH placeholders fail closed', async () => {
 });
 
 test('worker exposes only the authenticated read API and parses tenant lists', async () => {
-  assert.equal((await worker.fetch(new Request('https://h.example/'), {})).status, 404);
+  assert.equal((await worker.fetch(new Request('https://h.example/other'), {})).status, 404);
   assert.equal((await worker.fetch(new Request('https://h.example/api/halu/workspaces'), { HALU_DB: { prepare() {} }, HALU_ZONAR_BASE_URL: 'https://z' })).status, 401);
   assert.deepEqual(parseTenants(' a, b ,,c '), ['a', 'b', 'c']);
   assert.equal(webhookSummary({ idempotency_key: 'k', tenant_id: 't', run_id: 'r',
@@ -125,8 +125,16 @@ test('worker exposes only the authenticated read API and parses tenant lists', a
     finance: { headline: ['h'], over_invoiced: {}, under_invoiced: {}, uninvoiced_orders: { evidence: [1] } } }).groups, undefined);
 });
 
+test('the gate is off by default: nothing is withheld when it is not required', async () => {
+  const w = world(); delete w.env.HALU_WEBHOOK_URL;
+  w.sqlite.exec('DELETE FROM halu_boundaries; DELETE FROM halu_readiness;');
+  const out = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl });
+  assert.equal(out.tenants[0].delivered, 2); assert.equal(out.tenants[0].gated, undefined);
+  assert.equal(w.sqlite.prepare('SELECT COUNT(*) c FROM halu_decision_log').get().c, 0);
+});
+
 test('a closed gate withholds delivery, does not move the cursor, and the backlog flows once it opens', async () => {
-  const w = world();
+  const w = world(); w.env.HALU_REQUIRE_READINESS = 'true';
   w.sqlite.prepare("UPDATE halu_boundaries SET status='revoked' WHERE tenant_id='t1'").run();
   const logs = [];
   const closed = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl, log: l => logs.push(l) });
@@ -146,7 +154,7 @@ test('a closed gate withholds delivery, does not move the cursor, and the backlo
 });
 
 test('a boundary revoked mid-poll stops delivery of later runs without losing them', async () => {
-  const w = world(); delete w.env.HALU_WEBHOOK_URL;
+  const w = world(); delete w.env.HALU_WEBHOOK_URL; w.env.HALU_REQUIRE_READINESS = 'true';
   let delivered = 0;
   const realFetch = w.fetchImpl;
   const fetchImpl = async (url, init) => {
@@ -163,7 +171,7 @@ test('a boundary revoked mid-poll stops delivery of later runs without losing th
 });
 
 test('one tenant gated does not stop another tenant', async () => {
-  const w = world(); w.env.HALU_TENANTS = 't1,t2'; delete w.env.HALU_WEBHOOK_URL;
+  const w = world(); w.env.HALU_TENANTS = 't1,t2'; delete w.env.HALU_WEBHOOK_URL; w.env.HALU_REQUIRE_READINESS = 'true';
   w.sqlite.prepare("UPDATE halu_readiness SET data_ok=0 WHERE tenant_id='t1'").run();
   const out = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl });
   assert.deepEqual(out.tenants.map(t => [t.tenant_id, t.gated === true, t.delivered]), [['t1', true, 0], ['t2', false, 2]]);

@@ -1,7 +1,8 @@
 {
   // HALU staging: cron poller plus the authenticated read API (/api/halu/*).
   // workers.dev is enabled so the read API is reachable; every request is checked against ZONAR.
-  // Secret (never commit): wrangler secret put HALU_CLIENT_SECRET --config halu/wrangler.halu-staging.jsonc
+  // Secrets (never commit): wrangler secret put HALU_CLIENT_SECRET --config halu/wrangler.halu-staging.jsonc
+  //                         wrangler secret put HALU_ANTHROPIC_API_KEY --config halu/wrangler.halu-staging.jsonc  (optional)
   "name": "halu-staging",
   "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
@@ -16,6 +17,14 @@
     "HALU_ENTRA_TENANT_ID": "c6993c9c-10dd-4cfe-ba91-157272624bd6",
     "HALU_CLIENT_ID": "REPLACE_WITH_HALU_APP_CLIENT_ID",
     "HALU_TENANTS": "REPLACE_WITH_ZONAR_TENANT_ID",
+    // Sign-in for the HALU page: an Entra app registration of type "Single-page application"
+    // whose redirect URI is the Worker URL, with delegated permission to the ZONAR API.
+    "HALU_SPA_CLIENT_ID": "REPLACE_WITH_HALU_SPA_CLIENT_ID",
+    "HALU_USER_SCOPE": "api://68673793-9332-440b-ab12-d181b1128a17/access_as_user",
+    // Ask HALU: set the secret HALU_ANTHROPIC_API_KEY to switch question answering on.
+    // "HALU_ASK_MODEL": "claude-sonnet-5-5",
+    // "HALU_ASK_LIMIT_PER_HOUR": "60",
+    // "HALU_REQUIRE_READINESS": "true",
     // Origin of the page that will call the read API (optional; no wildcard is ever used).
     // "HALU_ALLOWED_ORIGIN": "https://...",
     // Roles allowed to read briefings (default: all five ZONAR roles).
