@@ -1,10 +1,11 @@
 {
-  // HALU staging scheduler. No routes: it runs only on the cron trigger.
+  // HALU staging: cron poller plus the authenticated read API (/api/halu/*).
+  // workers.dev is enabled so the read API is reachable; every request is checked against ZONAR.
   // Secret (never commit): wrangler secret put HALU_CLIENT_SECRET --config halu/wrangler.halu-staging.jsonc
   "name": "halu-staging",
   "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
-  "workers_dev": false,
+  "workers_dev": true,
   "triggers": { "crons": ["*/5 * * * *"] },
   "d1_databases": [
     { "binding": "HALU_DB", "database_name": "halu-staging-db", "database_id": "REPLACE_WITH_HALU_STAGING_D1_DATABASE_ID", "migrations_dir": "migrations" }
@@ -14,7 +15,11 @@
     "HALU_ZONAR_SCOPE": "api://68673793-9332-440b-ab12-d181b1128a17/.default",
     "HALU_ENTRA_TENANT_ID": "c6993c9c-10dd-4cfe-ba91-157272624bd6",
     "HALU_CLIENT_ID": "REPLACE_WITH_HALU_APP_CLIENT_ID",
-    "HALU_TENANTS": "REPLACE_WITH_ZONAR_TENANT_ID"
+    "HALU_TENANTS": "REPLACE_WITH_ZONAR_TENANT_ID",
+    // Origin of the page that will call the read API (optional; no wildcard is ever used).
+    // "HALU_ALLOWED_ORIGIN": "https://...",
+    // Roles allowed to read briefings (default: all five ZONAR roles).
+    // "HALU_READER_ROLES": "tenant_owner,tenant_admin,analyst"
   },
   "limits": { "cpu_ms": 30000 }
 }

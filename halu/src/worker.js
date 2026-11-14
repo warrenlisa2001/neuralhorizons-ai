@@ -1,5 +1,5 @@
 // HALU scheduled Worker: on each cron tick, poll ZONAR for each configured tenant and
-// deliver new verified runs. No public HTTP surface.
+// deliver new verified runs. Its only HTTP surface is the authenticated read API (api.js).
 //
 // Env (vars): HALU_ZONAR_BASE_URL, HALU_ZONAR_SCOPE (e.g. api://<zonar-app-id>/.default),
 //             HALU_ENTRA_TENANT_ID, HALU_CLIENT_ID, HALU_TENANTS (comma-separated ZONAR tenant ids),
@@ -10,6 +10,7 @@
 import { createEntraTokenProvider } from './entra-token.js';
 import { createFindingsClient } from './zonar-findings-client.js';
 import { createRunWatcher } from './run-watcher.js';
+import { handleHaluApi } from './api.js';
 import { createD1CursorStore, saveBriefing, markWebhookSent, webhookAlreadySent } from './d1-store.js';
 
 const TENANT_ID = /^[A-Za-z0-9_-]{1,128}$/;
@@ -88,7 +89,8 @@ export default {
   async scheduled(_event, env, ctx) {
     ctx.waitUntil(runHaluPoll(env, { log: entry => console.log(JSON.stringify(entry)) }));
   },
-  async fetch() {
+  async fetch(request, env) {
+    if (new URL(request.url).pathname.startsWith('/api/halu/')) return handleHaluApi(request, env);
     return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
   }
 };

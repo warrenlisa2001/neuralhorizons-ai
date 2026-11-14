@@ -117,8 +117,9 @@ test('unfilled REPLACE_WITH placeholders fail closed', async () => {
   assert.equal(w.seen.urls.length, 0);
 });
 
-test('worker has no public surface and parses tenant lists', async () => {
-  assert.equal((await worker.fetch()).status, 404);
+test('worker exposes only the authenticated read API and parses tenant lists', async () => {
+  assert.equal((await worker.fetch(new Request('https://h.example/'), {})).status, 404);
+  assert.equal((await worker.fetch(new Request('https://h.example/api/halu/workspaces'), { HALU_DB: { prepare() {} }, HALU_ZONAR_BASE_URL: 'https://z' })).status, 401);
   assert.deepEqual(parseTenants(' a, b ,,c '), ['a', 'b', 'c']);
   assert.equal(webhookSummary({ idempotency_key: 'k', tenant_id: 't', run_id: 'r',
     briefing: { completed_at: 'x', total_findings: 1, by_severity: {}, groups: [{ evidence: [1] }] },

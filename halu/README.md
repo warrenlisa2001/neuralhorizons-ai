@@ -18,12 +18,13 @@ Cross-department intelligence agent. HALU consumes ZONAR's **verified** findings
 | `src/run-watcher.js` | Polls ZONAR's `verified-runs` feed, delivers each new run at-least-once (cursor advances only after delivery) |
 | `src/worker.js`, `src/d1-store.js` | Cloudflare cron Worker: polls each configured tenant, stores briefings once in HALU's own D1, optional summary-only webhook |
 | `migrations/0001_halu.sql`, `wrangler.halu-staging.jsonc` | HALU database schema and staging config (placeholders must be filled; the Worker refuses to run with any left) |
+| `src/api.js` | Read API for people: `/api/halu/workspaces`, `/api/halu/tenants/:t/briefings[/:run]`. Delegates sign-in to ZONAR's identity endpoint |
 | `src/views/finance.js` | Finance view: over/under-invoiced totals, uninvoiced orders, invoices without orders, with evidence |
 | `tests/halu.test.mjs`, `tests/watcher.test.mjs` | Unit tests (no network) |
 
 ## Not built yet
 - Deployment: nothing is deployed. The Worker, config and schema exist and are tested, but no HALU database, secret or Entra app exists yet.
-- A way for people to read stored briefings (there is deliberately no public HTTP surface yet; output goes to the HALU database and the optional webhook).
+- A web page for the read API (the API exists and is tested; a front end with Entra sign-in does not). Reads by people are not yet access-logged.
 - The language-model explanation layer, and delivery to departments.
 - Operations and procurement views (finance exists).
 - Other data sources beyond ZONAR.
@@ -44,3 +45,6 @@ See "HALU service principal" in `docs/zonar-staging-provisioning-runbook.md`.
 5. Optional: `HALU_WEBHOOK_URL` (https only). The webhook receives headline and totals, never row-level evidence.
 6. `wrangler deploy --config halu/wrangler.halu-staging.jsonc`. It runs every 5 minutes; check `halu_briefings` and `halu_cursors`.
 Uses a cron trigger, so the account needs room for it (Free allows 5 cron triggers per account; ZONAR staging already uses one).
+
+## Read API (for people)
+The caller sends their own ZONAR access token (`Authorization: Bearer ...`, scope `access_as_user`). HALU forwards it to ZONAR's `/api/zonar/identity`, which verifies it and returns the person's active workspaces and roles. HALU then serves only workspaces it is configured for (`HALU_TENANTS`) where the role may read (`HALU_READER_ROLES`, default all five). Consequences: no user table or signing keys in HALU; removing someone's ZONAR membership removes their HALU access on the next request; another tenant's data is unreachable (403, or 404 for a guessed run id). Responses are `no-store`; CORS allows one configured origin only (`HALU_ALLOWED_ORIGIN`), never a wildcard.
