@@ -128,7 +128,7 @@ async function verifyZonarAccessToken(token, env) {
   if (!env.ZONAR_REQUIRED_SCOPE || typeof env.ZONAR_REQUIRED_SCOPE !== 'string') {
     throw new Error('AUTH_CONFIGURATION_MISSING');
   }
-  const delegatedScopes = typeof claims.scp === 'string' ? claims.scp.split(/\\s+/) : [];
+  const delegatedScopes = typeof claims.scp === 'string' ? claims.scp.split(/\s+/) : [];
   if (!delegatedScopes.includes(env.ZONAR_REQUIRED_SCOPE) ||
       claims.iss !== env.ZONAR_ISSUER || !audienceValid ||
       typeof claims.sub !== 'string' || !claims.sub || claims.sub.length > 512 ||
@@ -175,7 +175,7 @@ async function verifyZonarAccessToken(token, env) {
  */
 export async function authenticateZonarIdentity(request, env) {
   const authorization = request.headers.get('Authorization') || '';
-  const bearer = authorization.match(/^Bearer ([^\\s]+)$/i);
+  const bearer = authorization.match(/^Bearer ([^\s]+)$/i);
   if (!bearer || authorization.length > MAX_BEARER_TOKEN_LENGTH + 7) {
     return { ok: false, status: 401, error: 'UNAUTHORISED' };
   }
