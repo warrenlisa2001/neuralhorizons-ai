@@ -16,12 +16,14 @@ Cross-department intelligence agent. HALU consumes ZONAR's **verified** findings
 | `src/zonar-findings-client.js` | Paged, typed, retrying client for the findings feed |
 | `src/briefing.js` | Deterministic briefing: counts by severity/code/dataset with capped evidence |
 | `src/run-watcher.js` | Polls ZONAR's `verified-runs` feed, delivers each new run at-least-once (cursor advances only after delivery) |
+| `src/worker.js`, `src/d1-store.js` | Cloudflare cron Worker: polls each configured tenant, stores briefings once in HALU's own D1, optional summary-only webhook |
+| `migrations/0001_halu.sql`, `wrangler.halu-staging.jsonc` | HALU database schema and staging config (placeholders must be filled; the Worker refuses to run with any left) |
 | `src/views/finance.js` | Finance view: over/under-invoiced totals, uninvoiced orders, invoices without orders, with evidence |
 | `tests/halu.test.mjs`, `tests/watcher.test.mjs` | Unit tests (no network) |
 
 ## Not built yet
-- A runtime (Worker cron or scheduled job) that calls `pollOnce()` and a durable cursor store (today only an in-memory one exists).
-- A delivery target for the finance view (email, Teams, dashboard); `deliver` is a plug-in function.
+- Deployment: nothing is deployed. The Worker, config and schema exist and are tested, but no HALU database, secret or Entra app exists yet.
+- A way for people to read stored briefings (there is deliberately no public HTTP surface yet; output goes to the HALU database and the optional webhook).
 - The language-model explanation layer, and delivery to departments.
 - Operations and procurement views (finance exists).
 - Other data sources beyond ZONAR.
@@ -33,3 +35,12 @@ See "HALU service principal" in `docs/zonar-staging-provisioning-runbook.md`.
 1. ZONAR finishes a run and writes its completion audit; the run now appears in `GET /api/zonar/tenants/:t/verified-runs`.
 2. `createRunWatcher(...).pollOnce()` lists runs after its saved cursor, reads each run's findings, builds the briefing and finance view, and calls `deliver`.
 3. Delivery is at-least-once: key on `idempotency_key` (`tenant:run`). A run that can never be read (not verified, legacy result) is skipped and reported; auth or network failures stop the poll and are retried next time.
+
+## Deploying HALU to staging (after ZONAR staging works)
+1. `wrangler d1 create halu-staging-db`, then put its id in `halu/wrangler.halu-staging.jsonc`.
+2. `wrangler d1 migrations apply halu-staging-db --remote --config halu/wrangler.halu-staging.jsonc`
+3. Fill the `REPLACE_WITH_*` vars (ZONAR host, ZONAR app id, Entra directory id, HALU client id, tenant ids).
+4. `wrangler secret put HALU_CLIENT_SECRET --config halu/wrangler.halu-staging.jsonc`
+5. Optional: `HALU_WEBHOOK_URL` (https only). The webhook receives headline and totals, never row-level evidence.
+6. `wrangler deploy --config halu/wrangler.halu-staging.jsonc`. It runs every 5 minutes; check `halu_briefings` and `halu_cursors`.
+Uses a cron trigger, so the account needs room for it (Free allows 5 cron triggers per account; ZONAR staging already uses one).

@@ -1,0 +1,20 @@
+{
+  // HALU staging scheduler. No routes: it runs only on the cron trigger.
+  // Secret (never commit): wrangler secret put HALU_CLIENT_SECRET --config halu/wrangler.halu-staging.jsonc
+  "name": "halu-staging",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "d1_databases": [
+    { "binding": "HALU_DB", "database_name": "halu-staging-db", "database_id": "REPLACE_WITH_HALU_STAGING_D1_DATABASE_ID", "migrations_dir": "migrations" }
+  ],
+  "vars": {
+    "HALU_ZONAR_BASE_URL": "https://REPLACE_WITH_ZONAR_STAGING_HOST",
+    "HALU_ZONAR_SCOPE": "api://REPLACE_WITH_ZONAR_APP_ID/.default",
+    "HALU_ENTRA_TENANT_ID": "REPLACE_WITH_ENTRA_DIRECTORY_ID",
+    "HALU_CLIENT_ID": "REPLACE_WITH_HALU_APP_CLIENT_ID",
+    "HALU_TENANTS": "REPLACE_WITH_ZONAR_TENANT_ID"
+  },
+  "limits": { "cpu_ms": 30000 }
+}
