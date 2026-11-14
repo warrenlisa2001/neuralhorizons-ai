@@ -1,11 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import worker, { runHaluPoll, parseTenants, webhookSummary } from '../src/worker.js';
 import { SUPPORTED_SCHEMA } from '../src/zonar-findings-client.js';
 
-const migration = readFileSync(new URL('../migrations/0001_halu.sql', import.meta.url), 'utf8');
+import { migrations as migration, openGate } from './helpers.mjs';
 const jsonRes = (b, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { 'Content-Type': 'application/json' } });
 const SECRET = 'SUPER-SECRET-VALUE';
 
@@ -19,7 +18,7 @@ const finding = (id, code, ds, row, order, expected, actual) => ({ id: String(id
   source: { file_id: 'f-' + ds, dataset: ds, row_number: row, record_id: 'R' + id, order_id: order }, expected, actual, details: null });
 
 function world({ tenantFailures = {}, webhookStatus = 200 } = {}) {
-  const sqlite = new DatabaseSync(':memory:'); sqlite.exec(migration);
+  const sqlite = new DatabaseSync(':memory:'); sqlite.exec(migration); openGate(sqlite, 't1'); openGate(sqlite, 't2');
   const runs = [
     { id: 'r1', completed_at: '2026-11-14T10:00:00.000Z', findings: [finding(1, 'ORDER_INVOICE_VALUE_MISMATCH', 'invoices', 3, 'O2', 50, 45)] },
     { id: 'r2', completed_at: '2026-11-14T11:00:00.000Z', findings: [] }
@@ -124,4 +123,48 @@ test('worker exposes only the authenticated read API and parses tenant lists', a
   assert.equal(webhookSummary({ idempotency_key: 'k', tenant_id: 't', run_id: 'r',
     briefing: { completed_at: 'x', total_findings: 1, by_severity: {}, groups: [{ evidence: [1] }] },
     finance: { headline: ['h'], over_invoiced: {}, under_invoiced: {}, uninvoiced_orders: { evidence: [1] } } }).groups, undefined);
+});
+
+test('a closed gate withholds delivery, does not move the cursor, and the backlog flows once it opens', async () => {
+  const w = world();
+  w.sqlite.prepare("UPDATE halu_boundaries SET status='revoked' WHERE tenant_id='t1'").run();
+  const logs = [];
+  const closed = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl, log: l => logs.push(l) });
+  assert.deepEqual(closed.tenants, [{ tenant_id: 't1', ok: true, gated: true, verdict: 'on_governance', delivered: 0, skipped: 0 }]);
+  assert.equal(w.sqlite.prepare('SELECT COUNT(*) c FROM halu_briefings').get().c, 0);
+  assert.equal(w.sqlite.prepare('SELECT COUNT(*) c FROM halu_cursors').get().c, 0);
+  assert.equal(w.seen.webhooks.length, 0);
+  assert.equal(w.seen.urls.some(u => u.startsWith('zonar.example')), false, 'no ZONAR call while the gate is closed');
+  assert.equal(logs.some(l => l.event === 'halu.gate_closed'), true);
+  assert.equal(w.sqlite.prepare("SELECT COUNT(*) c FROM halu_decision_log WHERE decision='withheld'").get().c, 1);
+
+  w.sqlite.prepare("UPDATE halu_boundaries SET status='active' WHERE tenant_id='t1'").run();
+  const open = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl });
+  assert.equal(open.tenants[0].delivered, 2);
+  assert.equal(w.sqlite.prepare("SELECT COUNT(*) c FROM halu_decision_log WHERE decision='delivered'").get().c, 2);
+  assert.equal(w.sqlite.prepare("SELECT boundary_id FROM halu_decision_log WHERE decision='delivered' LIMIT 1").get().boundary_id, 'bl-t1');
+});
+
+test('a boundary revoked mid-poll stops delivery of later runs without losing them', async () => {
+  const w = world(); delete w.env.HALU_WEBHOOK_URL;
+  let delivered = 0;
+  const realFetch = w.fetchImpl;
+  const fetchImpl = async (url, init) => {
+    const res = await realFetch(url, init);
+    if (new URL(url).pathname.endsWith('/reconciliation-runs/r1/findings')) { delivered++; w.sqlite.prepare("UPDATE halu_boundaries SET status='revoked' WHERE tenant_id='t1'").run(); }
+    return res;
+  };
+  const out = await runHaluPoll(w.env, { fetchImpl });
+  assert.equal(out.tenants[0].gated, true);
+  assert.equal(w.sqlite.prepare('SELECT COUNT(*) c FROM halu_briefings').get().c, 0, 'revocation during the poll blocks even the run being processed');
+  w.sqlite.prepare("UPDATE halu_boundaries SET status='active'").run();
+  const again = await runHaluPoll(w.env, { fetchImpl: realFetch });
+  assert.equal(again.tenants[0].delivered, 2);
+});
+
+test('one tenant gated does not stop another tenant', async () => {
+  const w = world(); w.env.HALU_TENANTS = 't1,t2'; delete w.env.HALU_WEBHOOK_URL;
+  w.sqlite.prepare("UPDATE halu_readiness SET data_ok=0 WHERE tenant_id='t1'").run();
+  const out = await runHaluPoll(w.env, { fetchImpl: w.fetchImpl });
+  assert.deepEqual(out.tenants.map(t => [t.tenant_id, t.gated === true, t.delivered]), [['t1', true, 0], ['t2', false, 2]]);
 });

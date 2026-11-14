@@ -19,6 +19,7 @@ Cross-department intelligence agent. HALU consumes ZONAR's **verified** findings
 | `src/worker.js`, `src/d1-store.js` | Cloudflare cron Worker: polls each configured tenant, stores briefings once in HALU's own D1, optional summary-only webhook |
 | `migrations/0001_halu.sql`, `wrangler.halu-staging.jsonc` | HALU database schema and staging config (placeholders must be filled; the Worker refuses to run with any left) |
 | `src/api.js` | Read API for people: `/api/halu/workspaces`, `/api/halu/tenants/:t/briefings[/:run]`. Delegates sign-in to ZONAR's identity endpoint |
+| `src/readiness.js`, `migrations/0002_governance.sql` | The four-condition gate (data, defined, governance, free), boundary letters, definitions register and decision log |
 | `src/views/finance.js` | Finance view: over/under-invoiced totals, uninvoiced orders, invoices without orders, with evidence |
 | `tests/halu.test.mjs`, `tests/watcher.test.mjs` | Unit tests (no network) |
 
@@ -48,3 +49,31 @@ Uses a cron trigger, so the account needs room for it (Free allows 5 cron trigge
 
 ## Read API (for people)
 The caller sends their own ZONAR access token (`Authorization: Bearer ...`, scope `access_as_user`). HALU forwards it to ZONAR's `/api/zonar/identity`, which verifies it and returns the person's active workspaces and roles. HALU then serves only workspaces it is configured for (`HALU_TENANTS`) where the role may read (`HALU_READER_ROLES`, default all five). Consequences: no user table or signing keys in HALU; removing someone's ZONAR membership removes their HALU access on the next request; another tenant's data is unreachable (403, or 404 for a guessed run id). Responses are `no-store`; CORS allows one configured origin only (`HALU_ALLOWED_ORIGIN`), never a wildcard.
+
+## The readiness gate
+HALU delivers nothing for a tenant until four conditions hold for the use case (`reconciliation_briefing` today):
+
+| Condition | What must be true | Where it lives |
+|---|---|---|
+| Data | Recorded evidence that the data exists and is trustworthy | `halu_readiness.data_ok` + `data_evidence` |
+| Defined | Every linked term has one agreed definition, a named owner and a signer | `halu_definitions`, `halu_use_case_definitions` |
+| Governance | An active boundary letter: signed by the business owner, names an escalation owner, permits `deliver_briefing`, not expired | `halu_boundaries` |
+| Free | No blocking dependency recorded (another system or migration in progress) | `halu_readiness.blocked_by` empty |
+
+Behaviour: the gate is checked before any ZONAR call and again before every run is delivered. If it is closed, nothing is delivered, the cursor does not move, a `withheld` decision is logged once per distinct reason, and the backlog flows when it opens. Every delivery is logged with the boundary letter that permitted it. Anything missing counts as closed: an unregistered tenant is never open by default. HALU never writes these rows itself; an operator does, so the people accountable are the ones who sign.
+
+Verdicts, first failing condition wins: `on_data`, `blocked_by_dependency`, `once_defined`, `on_governance`, `build_now`.
+
+### Opening the gate for a tenant (staging seed)
+Use real names and real evidence. Values below are placeholders.
+```sql
+INSERT INTO halu_use_cases (tenant_id, use_case_key, title) VALUES ('<tenant>', 'reconciliation_briefing', 'Reconciliation briefing');
+INSERT INTO halu_definitions (id, tenant_id, term, definition, owner, agreed_by, agreed_at, status)
+  VALUES ('def_1', '<tenant>', '<term>', '<one agreed meaning>', '<named owner>', '<who signed>', datetime('now'), 'agreed');
+INSERT INTO halu_use_case_definitions (tenant_id, use_case_key, definition_id) VALUES ('<tenant>', 'reconciliation_briefing', 'def_1');
+INSERT INTO halu_readiness (tenant_id, use_case_key, data_ok, data_evidence, blocked_by, assessed_by)
+  VALUES ('<tenant>', 'reconciliation_briefing', 1, '<what was checked, against what, by whom>', NULL, '<assessor>');
+INSERT INTO halu_boundaries (id, tenant_id, use_case_key, allowed_actions, escalation_owner, signed_by)
+  VALUES ('bl_1', '<tenant>', 'reconciliation_briefing', 'deliver_briefing', '<escalation owner>', '<business owner>');
+```
+Close it at any time with `UPDATE halu_boundaries SET status='revoked' WHERE id='bl_1';`.

@@ -11,6 +11,7 @@ import { createEntraTokenProvider } from './entra-token.js';
 import { createFindingsClient } from './zonar-findings-client.js';
 import { createRunWatcher } from './run-watcher.js';
 import { handleHaluApi } from './api.js';
+import { requireGateOpen, logDecision, GateClosedError, USE_CASE_RECONCILIATION_BRIEFING } from './readiness.js';
 import { createD1CursorStore, saveBriefing, markWebhookSent, webhookAlreadySent } from './d1-store.js';
 
 const TENANT_ID = /^[A-Za-z0-9_-]{1,128}$/;
@@ -63,7 +64,11 @@ export async function runHaluPoll(env, { fetchImpl = fetch, log = () => {} } = {
         client, tenantId, store: createD1CursorStore(env.HALU_DB, tenantId),
         onSkip: s => log({ level: 'warn', event: 'halu.run_skipped', tenant_id: tenantId, ...s }),
         deliver: async payload => {
+          // Re-checked for every run: a boundary letter revoked mid-poll stops delivery at once.
+          const gate = await requireGateOpen(env.HALU_DB, tenantId);
           await saveBriefing(env.HALU_DB, payload);
+          await logDecision(env.HALU_DB, { tenantId, useCaseKey: USE_CASE_RECONCILIATION_BRIEFING, runId: payload.run_id,
+            decision: 'delivered', verdict: gate.verdict, boundaryId: gate.boundaryId });
           if (env.HALU_WEBHOOK_URL && !(await webhookAlreadySent(env.HALU_DB, payload.idempotency_key))) {
             const response = await fetchImpl(env.HALU_WEBHOOK_URL, {
               method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -74,9 +79,18 @@ export async function runHaluPoll(env, { fetchImpl = fetch, log = () => {} } = {
           }
         }
       });
+      // Fail early, before any ZONAR call, if the gate is closed.
+      await requireGateOpen(env.HALU_DB, tenantId);
       const out = await watcher.pollOnce();
       results.push({ tenant_id: tenantId, ok: true, delivered: out.delivered.length, skipped: out.skipped.length });
     } catch (error) {
+      if (error instanceof GateClosedError) {
+        // Expected state, not a fault: nothing is delivered, the cursor does not move, and the
+        // backlog flows as soon as the gate opens.
+        log({ level: 'warn', event: 'halu.gate_closed', tenant_id: tenantId, verdict: error.verdict });
+        results.push({ tenant_id: tenantId, ok: true, gated: true, verdict: error.verdict, delivered: 0, skipped: 0 });
+        continue;
+      }
       // Log the code only: never the message, which could echo upstream bodies.
       log({ level: 'error', event: 'halu.tenant_poll_failed', tenant_id: tenantId, code: error.code || String(error.message).split(':')[0] });
       results.push({ tenant_id: tenantId, ok: false, error: error.code || String(error.message).split(':')[0] });

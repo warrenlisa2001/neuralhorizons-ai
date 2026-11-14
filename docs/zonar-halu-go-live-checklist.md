@@ -49,6 +49,8 @@ Expect: `iss` ends `/v2.0`, `aud` = `68673793-...`, `azp` = HALU client id, `rol
 9. **Confirm HALU can read:** a token from A6 returns `200` on `.../tenants/<tenant>/verified-runs` and `403` for any other tenant; an `audit_events` row `verified_runs.read` appears.
 
 ## Part C. HALU deploy (after Part B step 9)
+HALU will deliver nothing until the readiness gate is open for the tenant: apply `halu/migrations/0001` and `0002`, then seed the gate rows (see "The readiness gate" in `halu/README.md`) with the real definition owner, evidence and a boundary letter signed by the business owner. A closed gate is the expected first state, not a fault.
+
 Follow "Deploying HALU to staging" in `halu/README.md`. Still to fill: HALU D1 id, ZONAR staging host, HALU client id, tenant id. The Worker refuses to start while any `REPLACE_WITH_...` remains.
 
 ## Rollback
