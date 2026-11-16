@@ -64,7 +64,7 @@ export async function askHalu({ env, tenantId, runId = null, question, fetchImpl
   let response;
   try {
     response = await fetchImpl('https://api.anthropic.com/v1/messages', {
-      method: 'POST', redirect: 'error',
+      method: 'POST', redirect: 'manual',
       headers: { 'content-type': 'application/json', 'x-api-key': env.HALU_ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
       body: JSON.stringify({
         model: env.HALU_ASK_MODEL || DEFAULT_MODEL, max_tokens: 800, system: SYSTEM,

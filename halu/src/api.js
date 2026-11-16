@@ -53,7 +53,7 @@ async function resolveWorkspaces(request, env, fetchImpl) {
   let response;
   try {
     response = await fetchImpl(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/identity', {
-      headers: { Authorization: 'Bearer ' + bearer[1], Accept: 'application/json' }, redirect: 'error'
+      headers: { Authorization: 'Bearer ' + bearer[1], Accept: 'application/json' }, redirect: 'manual'
     });
   } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' }; }
   if (response.status === 401 || response.status === 403) return { ok: false, status: 401, error: 'UNAUTHORISED' };

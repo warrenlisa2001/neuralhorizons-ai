@@ -76,7 +76,7 @@ export async function runHaluPoll(env, { fetchImpl = fetch, log = () => {} } = {
           if (env.HALU_WEBHOOK_URL && !(await webhookAlreadySent(env.HALU_DB, payload.idempotency_key))) {
             const response = await fetchImpl(env.HALU_WEBHOOK_URL, {
               method: 'POST', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(webhookSummary(payload)), redirect: 'error'
+              body: JSON.stringify(webhookSummary(payload)), redirect: 'manual'
             });
             if (!response.ok) throw new Error('WEBHOOK_FAILED:' + response.status);
             await markWebhookSent(env.HALU_DB, payload.idempotency_key);
