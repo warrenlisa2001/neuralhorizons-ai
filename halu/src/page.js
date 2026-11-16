@@ -82,7 +82,7 @@ async function api(path, init) {
   const res = await fetch(path, { ...init, headers: { ...(init && init.headers), Authorization: 'Bearer ' + S.token } });
   const body = await res.json().catch(() => ({}));
   if (res.status === 401) { try { sessionStorage.removeItem(KEY); } catch {} S.token = null; throw Object.assign(new Error('Your session has ended. Please sign in again.'), { auth: true }); }
-  if (!res.ok) throw Object.assign(new Error(body.error || 'REQUEST_FAILED'), { code: body.error });
+  if (!res.ok) throw Object.assign(new Error(body.error || 'REQUEST_FAILED'), { code: body.error, detail: body.detail });
   return body;
 }
 
@@ -155,7 +155,7 @@ async function openWorkspace() {
   await loadRuns();
 }
 
-function fail(e) { if (e && e.auth) return start(); setMsg(e && e.message === 'TENANT_ACCESS_DENIED' ? 'You do not have access to that workspace.' : 'Something went wrong loading HALU. Please refresh.' + whoami(), true); }
+function fail(e) { if (e && e.auth) return start(); setMsg(e && e.message === 'TENANT_ACCESS_DENIED' ? 'You do not have access to that workspace.' : 'Something went wrong loading HALU. Please refresh.' + (e && e.detail ? ' (' + e.detail + ')' : '') + whoami(), true); }
 
 async function start() {
   S.token = loadSession();

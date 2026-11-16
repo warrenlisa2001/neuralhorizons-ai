@@ -55,12 +55,12 @@ async function resolveWorkspaces(request, env, fetchImpl) {
     response = await fetchImpl(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/me', {
       headers: { Authorization: 'Bearer ' + bearer[1], Accept: 'application/json' }, redirect: 'manual'
     });
-  } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' }; }
+  } catch (e) { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_unreachable' }; }
   if (response.status === 401 || response.status === 403) return { ok: false, status: 401, error: 'UNAUTHORISED' };
-  if (!response.ok) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' };
+  if (!response.ok) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_status_' + response.status };
   let body;
-  try { body = await response.json(); } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' }; }
-  if (!body || body.authenticated !== true || !Array.isArray(body.workspaces)) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' };
+  try { body = await response.json(); } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_body_not_json' }; }
+  if (!body || body.authenticated !== true || !Array.isArray(body.workspaces)) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_body_unexpected' };
   const known = new Set(String(env.HALU_TENANTS || '').split(',').map(t => t.trim()).filter(Boolean));
   const roles = readerRoles(env);
   // Only workspaces HALU serves AND where the person's role may read.
@@ -102,7 +102,7 @@ export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   if (runId !== null && !SAFE_ID.test(runId)) return reply(request, env, { error: 'INVALID_RESOURCE' }, 400);
 
   const who = await resolveWorkspaces(request, env, fetchImpl);
-  if (!who.ok) return reply(request, env, { error: who.error }, who.status);
+  if (!who.ok) return reply(request, env, who.detail ? { error: who.error, detail: who.detail } : { error: who.error }, who.status);
   if (workspacesMatch) return reply(request, env, { workspaces: who.workspaces });
   if (!who.workspaces.some(w => w.id === tenantId)) return reply(request, env, { error: 'TENANT_ACCESS_DENIED' }, 403);
 
