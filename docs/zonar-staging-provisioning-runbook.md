@@ -114,3 +114,23 @@ Git SHA and Worker version ID; `migrations list` output; token claims used (neve
 ## 9. Rollback
 
 Set both flags back to `"false"` and redeploy (stops dispatch, recovery and uploads), detach the queue consumer if needed, and delete the staging D1 database, R2 bucket and queues. Staging holds synthetic data only.
+
+## HALU service principal (machine access to the findings feed)
+
+HALU authenticates with an Entra **app-only** token, not a user token. Setup is an operator task per tenant.
+
+1. In Entra, on the ZONAR API app registration, add an **application** app role named `Zonar.Findings.Read` (allowed member types: Applications).
+2. Register a separate app for HALU, create a client secret (store it in a secret manager, not in the repo), and grant it the `Zonar.Findings.Read` application permission with admin consent.
+3. Set `ZONAR_SERVICE_ROLE` in the Worker vars only if you used a different role name (default `Zonar.Findings.Read`).
+4. Apply migration `0011_service_principals.sql`.
+5. Register HALU for one tenant (replace values; `identity_issuer` must equal the token `iss`, `app_id` the HALU application (client) id):
+
+```sql
+INSERT INTO service_principals (id, tenant_id, identity_issuer, app_id, display_name, scopes)
+VALUES ('sp_halu_<tenant>', '<tenant_id>', '<token iss>', '<HALU client id>', 'HALU', 'findings:read');
+```
+
+6. Verify: a HALU token returns 200 on `.../reconciliation-runs/<run>/findings` for its tenant, 403 for any other tenant, and one `findings.read` row appears in `audit_events` per request.
+7. Revoke: `UPDATE service_principals SET status='revoked' WHERE id='sp_halu_<tenant>';` takes effect on the next request.
+
+HALU also polls `GET /api/zonar/tenants/<tenant>/verified-runs` (same service principal, same `findings:read` scope). Each call is audited as `verified_runs.read`.
