@@ -141,17 +141,21 @@ async function ask() {
   } finally { btn.disabled = false; }
 }
 
+function whoami() {
+  try { const c = JSON.parse(atob(S.token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))); return ' Your sign-in details for your administrator: iss=' + c.iss + ' sub=' + c.sub; } catch { return ''; }
+}
+
 async function openWorkspace() {
   $('auth').hidden = true; $('app').hidden = false; $('out').hidden = false;
   const w = await api('/api/halu/workspaces');
   const sel = $('ws'); clear(sel);
-  if (!w.workspaces.length) { setMsg('You are signed in, but you do not have access to a HALU workspace. Ask your administrator.', true); $('app').hidden = true; return; }
+  if (!w.workspaces.length) { setMsg('You are signed in, but you do not have access to a HALU workspace. Ask your administrator.' + whoami(), true); $('app').hidden = true; return; }
   for (const x of w.workspaces) sel.append(h('option', { value: x.id }, x.name || x.id));
   S.tenant = sel.value; sel.onchange = () => { S.tenant = sel.value; S.run = null; loadRuns().catch(fail); };
   await loadRuns();
 }
 
-function fail(e) { if (e && e.auth) return start(); setMsg(e && e.message === 'TENANT_ACCESS_DENIED' ? 'You do not have access to that workspace.' : 'Something went wrong loading HALU. Please refresh.', true); }
+function fail(e) { if (e && e.auth) return start(); setMsg(e && e.message === 'TENANT_ACCESS_DENIED' ? 'You do not have access to that workspace.' : 'Something went wrong loading HALU. Please refresh.' + whoami(), true); }
 
 async function start() {
   S.token = loadSession();
