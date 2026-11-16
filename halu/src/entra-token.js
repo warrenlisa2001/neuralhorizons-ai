@@ -16,7 +16,7 @@ export function createEntraTokenProvider({ authorityTenantId, clientId, clientSe
         body: new URLSearchParams({
           grant_type: 'client_credentials', client_id: clientId, client_secret: clientSecret, scope
         }).toString(),
-        redirect: 'error'
+        redirect: 'manual'
       }
     );
     if (!response.ok) throw new Error('ENTRA_TOKEN_REQUEST_FAILED:' + response.status);

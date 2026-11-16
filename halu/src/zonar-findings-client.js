@@ -26,7 +26,7 @@ export function createFindingsClient({ baseUrl, tenantId, getToken, fetchImpl = 
     if (dataset) url.searchParams.set('dataset', dataset);
 
     for (let attempt = 0; ; attempt++) {
-      const response = await fetchImpl(url, { headers: { Authorization: 'Bearer ' + await getToken(), Accept: 'application/json' }, redirect: 'error' });
+      const response = await fetchImpl(url, { headers: { Authorization: 'Bearer ' + await getToken(), Accept: 'application/json' }, redirect: 'manual' });
       if (response.ok) {
         const body = await response.json();
         if (body.schema_version !== SUPPORTED_SCHEMA) throw new ZonarFeedError('UNSUPPORTED_SCHEMA_VERSION', 200, body.schema_version);

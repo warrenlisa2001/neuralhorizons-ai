@@ -84,7 +84,7 @@ async function loadJwks(url, forceRefresh = false) {
   }
   const response = await fetch(url, {
     headers: { Accept: 'application/json' },
-    redirect: 'error'
+    redirect: 'manual'
   });
   if (!response.ok) throw new Error('JWKS_UNAVAILABLE');
   const document = await readBoundedJwks(response);
