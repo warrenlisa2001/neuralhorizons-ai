@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { webcrypto } from 'node:crypto';
-import { authenticateZonarTenant } from '../src/zonar-auth.js';
+import { authenticateZonarIdentity, authenticateZonarTenant } from '../src/zonar-auth.js';
 
 globalThis.crypto ||= webcrypto;
 
@@ -228,5 +228,39 @@ test('unknown-kid refresh cooldown prevents repeated JWKS fetches', async () => 
       assert.equal(result.status, 401);
     }
     assert.equal(f.getFetchCount(), 2);
+  } finally { f.restore(); }
+});
+
+test('identity endpoint accepts real-world tokens that contain the letter "s" (regression)', async () => {
+  const f = await fixture();
+  try {
+    // Base64url tokens contain lowercase "s" almost always; force it into the compact form.
+    assert.match(f.token, /s/);
+    const request = new Request('https://zonar.example/api/zonar/identity', {
+      headers: { Authorization: 'Bearer ' + f.token }
+    });
+    const result = await authenticateZonarIdentity(request, f.env);
+    assert.equal(result.ok, true);
+    assert.equal(result.identity.subject, 'user-123');
+  } finally { f.restore(); }
+});
+
+test('tokens carrying several space-separated scopes are accepted when the required scope is present (regression)', async () => {
+  const f = await fixture();
+  try {
+    const token = await createToken(f.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300,
+      scp: 'profile zonar.api other.scope'
+    });
+    const request = new Request('https://zonar.example/x', { headers: { Authorization: 'Bearer ' + token } });
+    assert.equal((await authenticateZonarIdentity(request, f.env)).ok, true);
+    const without = await createToken(f.privateKey, {
+      iss: f.env.ZONAR_ISSUER, aud: f.env.ZONAR_AUDIENCE, sub: 'user-123', exp: f.now + 300,
+      scp: 'profile other.scope'
+    });
+    const denied = await authenticateZonarIdentity(
+      new Request('https://zonar.example/x', { headers: { Authorization: 'Bearer ' + without } }), f.env);
+    assert.equal(denied.ok, false);
+    assert.equal(denied.status, 401);
   } finally { f.restore(); }
 });

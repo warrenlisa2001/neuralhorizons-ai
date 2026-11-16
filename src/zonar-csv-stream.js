@@ -45,7 +45,13 @@ async function* csvRecords(stream, limits, onBytes) {
   };
   try {
     while (true) {
-      const part = await reader.read();
+      let part;
+      try { part = await reader.read(); }
+      catch (error) {
+        // Source-stream failures (R2 I/O, upstream integrity checks) are not CSV
+        // syntax errors: preserve them so callers can tell transient from permanent.
+        throw Object.assign(error instanceof Error ? error : new Error('SOURCE_STREAM_ERROR'), { sourceStream: true });
+      }
       if (part.done) break;
       onBytes(part.value.byteLength);
       let text;
@@ -94,7 +100,7 @@ async function* csvRecords(stream, limits, onBytes) {
     if (!sawAny) fail('EMPTY_FILE');
   } catch (error) {
     try { await reader.cancel(); } catch {}
-    if (error.code) throw error;
+    if (error.code || error.sourceStream) throw error;
     fail('INVALID_CSV');
   } finally {
     reader.releaseLock();

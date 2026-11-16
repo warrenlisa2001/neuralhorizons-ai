@@ -2,6 +2,8 @@
 // Configure ZONAR_ISSUER, ZONAR_AUDIENCE, ZONAR_JWKS_URL and ZONAR_DB
 // before enabling customer routes. User and membership provisioning is explicit.
 const MAX_BEARER_TOKEN_LENGTH = 8192;
+export const ZONAR_DEFAULT_SERVICE_ROLE = 'Zonar.Findings.Read';
+export const ZONAR_SERVICE_SCOPES = Object.freeze(['findings:read']);
 const MAX_JWKS_BYTES = 64 * 1024;
 const JWKS_CACHE_TTL_MS = 5 * 60 * 1000;
 const JWKS_UNKNOWN_KID_REFRESH_COOLDOWN_MS = 30 * 1000;
@@ -91,7 +93,7 @@ async function loadJwks(url, forceRefresh = false) {
   return keys;
 }
 
-async function verifyZonarAccessToken(token, env) {
+async function verifyZonarAccessToken(token, env, mode = 'delegated') {
   if (typeof token !== 'string' || token.length === 0 || token.length > MAX_BEARER_TOKEN_LENGTH) {
     throw new Error('INVALID_TOKEN');
   }
@@ -128,8 +130,23 @@ async function verifyZonarAccessToken(token, env) {
   if (!env.ZONAR_REQUIRED_SCOPE || typeof env.ZONAR_REQUIRED_SCOPE !== 'string') {
     throw new Error('AUTH_CONFIGURATION_MISSING');
   }
-  const delegatedScopes = typeof claims.scp === 'string' ? claims.scp.split(/\\s+/) : [];
-  if (!delegatedScopes.includes(env.ZONAR_REQUIRED_SCOPE) ||
+  const serviceRole = typeof env.ZONAR_SERVICE_ROLE === 'string' && env.ZONAR_SERVICE_ROLE
+    ? env.ZONAR_SERVICE_ROLE : ZONAR_DEFAULT_SERVICE_ROLE;
+  let callerAuthorised;
+  let appId = null;
+  if (mode === 'service') {
+    // Client-credentials (app-only) token: carries app roles, never a delegated
+    // scp, and identifies the calling application by azp (v2) or appid (v1).
+    appId = typeof claims.azp === 'string' && claims.azp ? claims.azp
+      : (typeof claims.appid === 'string' && claims.appid ? claims.appid : null);
+    callerAuthorised = claims.scp === undefined && Array.isArray(claims.roles) &&
+      claims.roles.includes(serviceRole) && appId !== null && appId.length <= 256 &&
+      (claims.idtyp === undefined || claims.idtyp === 'app');
+  } else {
+    const delegatedScopes = typeof claims.scp === 'string' ? claims.scp.split(/\s+/) : [];
+    callerAuthorised = delegatedScopes.includes(env.ZONAR_REQUIRED_SCOPE);
+  }
+  if (!callerAuthorised ||
       claims.iss !== env.ZONAR_ISSUER || !audienceValid ||
       typeof claims.sub !== 'string' || !claims.sub || claims.sub.length > 512 ||
       typeof claims.exp !== 'number' || !Number.isFinite(claims.exp) || claims.exp <= now ||
@@ -166,7 +183,7 @@ async function verifyZonarAccessToken(token, env) {
   const signingInput = new TextEncoder().encode(parts[0] + '.' + parts[1]);
   const valid = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', publicKey, signature, signingInput);
   if (!valid) throw new Error('INVALID_TOKEN');
-  return { issuer: claims.iss, subject: claims.sub };
+  return { issuer: claims.iss, subject: claims.sub, appId };
 }
 
 /**
@@ -175,7 +192,7 @@ async function verifyZonarAccessToken(token, env) {
  */
 export async function authenticateZonarIdentity(request, env) {
   const authorization = request.headers.get('Authorization') || '';
-  const bearer = authorization.match(/^Bearer ([^\\s]+)$/i);
+  const bearer = authorization.match(/^Bearer ([^\s]+)$/i);
   if (!bearer || authorization.length > MAX_BEARER_TOKEN_LENGTH + 7) {
     return { ok: false, status: 401, error: 'UNAUTHORISED' };
   }
@@ -234,6 +251,66 @@ export async function authenticateZonarTenant(request, env, requestedTenantId) {
     ).bind(identity.issuer, identity.subject, requestedTenantId).first();
     if (!membership) return { ok: false, status: 403, error: 'TENANT_ACCESS_DENIED' };
     return { ok: true, userId: membership.user_id, tenantId: membership.tenant_id, role: membership.role };
+  } catch {
+    return { ok: false, status: 503, error: 'TENANT_AUTH_UNAVAILABLE' };
+  }
+}
+
+/**
+ * Routing hint only: classify a bearer token as a delegated user token or an
+ * app-only service token from its UNVERIFIED claims. Never use the result to
+ * grant access; each path fully verifies the signature and claims itself.
+ */
+export function peekZonarTokenKind(request) {
+  const bearer = (request.headers.get('Authorization') || '').match(/^Bearer ([^\s]+)$/i);
+  if (!bearer) return null;
+  try {
+    const claims = decodeJsonPart(bearer[1].split('.')[1] || '');
+    if (typeof claims.scp === 'string') return 'delegated';
+    if (Array.isArray(claims.roles)) return 'service';
+  } catch { /* fall through */ }
+  return null;
+}
+
+/**
+ * Authenticate an app-only service principal (for example HALU) for ONE tenant.
+ * Requires a verified client-credentials token carrying the findings app role AND an
+ * active registry row binding (issuer, app id) to the requested tenant. Scopes come
+ * from the registry, never from the token.
+ */
+export async function authenticateZonarService(request, env, requestedTenantId) {
+  if (!env.ZONAR_DB || typeof env.ZONAR_DB.prepare !== 'function') {
+    return { ok: false, status: 503, error: 'TENANT_AUTH_NOT_CONFIGURED' };
+  }
+  if (typeof requestedTenantId !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/.test(requestedTenantId)) {
+    return { ok: false, status: 400, error: 'INVALID_TENANT' };
+  }
+  const authorization = request.headers.get('Authorization') || '';
+  const bearer = authorization.match(/^Bearer ([^\s]+)$/i);
+  if (!bearer || authorization.length > MAX_BEARER_TOKEN_LENGTH + 7) {
+    return { ok: false, status: 401, error: 'UNAUTHORISED' };
+  }
+  let identity;
+  try {
+    identity = await verifyZonarAccessToken(bearer[1], env, 'service');
+  } catch (error) {
+    if (error.message === 'AUTH_CONFIGURATION_MISSING') {
+      return { ok: false, status: 503, error: 'TENANT_AUTH_NOT_CONFIGURED' };
+    }
+    return { ok: false, status: 401, error: 'UNAUTHORISED' };
+  }
+  try {
+    const row = await env.ZONAR_DB.prepare(
+      `SELECT sp.id AS service_principal_id, sp.tenant_id AS tenant_id, sp.scopes AS scopes
+       FROM service_principals sp
+       INNER JOIN tenants t ON t.id = sp.tenant_id
+       WHERE sp.identity_issuer = ?1 AND sp.app_id = ?2 AND sp.tenant_id = ?3
+         AND sp.status = 'active' AND t.status = 'active'
+       LIMIT 1`
+    ).bind(identity.issuer, identity.appId, requestedTenantId).first();
+    if (!row) return { ok: false, status: 403, error: 'TENANT_ACCESS_DENIED' };
+    const scopes = String(row.scopes || '').split(/\s+/).filter(scope => ZONAR_SERVICE_SCOPES.includes(scope));
+    return { ok: true, servicePrincipalId: row.service_principal_id, tenantId: row.tenant_id, scopes, appId: identity.appId };
   } catch {
     return { ok: false, status: 503, error: 'TENANT_AUTH_UNAVAILABLE' };
   }
