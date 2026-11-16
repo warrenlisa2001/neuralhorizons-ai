@@ -45,7 +45,7 @@ Expect: `iss` ends `/v2.0`, `aud` = `68673793-...`, `azp` = HALU client id, `rol
 
    Apply the migrations from the repo (answer yes when asked):
    ```bash
-   npx wrangler d1 migrations apply DB --remote --config wrangler.zonar-staging.jsonc
+   npx wrangler d1 migrations apply ZONAR_DB --remote --config wrangler.zonar-staging.jsonc
    npx wrangler d1 migrations apply HALU_DB --remote --config halu/wrangler.halu-staging.jsonc
    ```
    Then confirm 11 ZONAR migrations and 3 HALU migrations: `SELECT name FROM d1_migrations ORDER BY id;`
