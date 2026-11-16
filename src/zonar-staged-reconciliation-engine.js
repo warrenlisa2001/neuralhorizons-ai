@@ -31,7 +31,7 @@ async function seedSourceExceptions(db, tenantId, runId) {
              json_object('field', CASE s.dataset WHEN 'orders' THEN 'order_id' WHEN 'invoices' THEN 'invoice_id' ELSE 'delivery_id' END)
       FROM reconciliation_staging_rows s
       WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset=?3 AND s.record_id IS NOT NULL
-        AND s.row_number > (SELECT MIN(first.row_number) FROM reconciliation_staging_rows first
+        AND s.row_number > (SELECT MIN(first.row_number) FROM reconciliation_staging_rows first INDEXED BY idx_reconciliation_staging_record
           WHERE first.tenant_id=s.tenant_id AND first.run_id=s.run_id
             AND first.dataset=s.dataset AND first.record_id=s.record_id)
     `, tenantId, runId, dataset));
@@ -47,7 +47,7 @@ async function seedSourceExceptions(db, tenantId, runId) {
       FROM reconciliation_staging_rows s
       WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='${dataset}'
         AND s.record_id IS NOT NULL
-        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id AND x.dataset=s.dataset AND x.record_id=s.record_id)
         AND s.order_id IS NULL
     `, tenantId, runId));
@@ -58,12 +58,12 @@ async function seedSourceExceptions(db, tenantId, runId) {
       FROM reconciliation_staging_rows s
       WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='${dataset}'
         AND s.record_id IS NOT NULL AND s.order_id IS NOT NULL
-        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id AND x.dataset=s.dataset AND x.record_id=s.record_id)
         AND NOT EXISTS (SELECT 1 FROM reconciliation_staging_rows o
           WHERE o.tenant_id=s.tenant_id AND o.run_id=s.run_id AND o.dataset='orders'
             AND o.record_id=s.order_id
-            AND o.row_number=(SELECT MIN(oo.row_number) FROM reconciliation_staging_rows oo
+            AND o.row_number=(SELECT MIN(oo.row_number) FROM reconciliation_staging_rows oo INDEXED BY idx_reconciliation_staging_record
               WHERE oo.tenant_id=o.tenant_id AND oo.run_id=o.run_id AND oo.dataset='orders' AND oo.record_id=o.record_id))
     `, tenantId, runId));
   }
@@ -104,14 +104,17 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
     return { status:'complete', processed_orders:Number(progress.processed_order_count), more_work:false };
   }
 
-  await seedSourceExceptions(db, tenantId, runId);
+  // Source-level exceptions scan whole datasets, so seed them once (while the run is
+  // still 'pending'), not on every page. Seeding is idempotent (INSERT OR IGNORE), so
+  // a crash before the first page commits simply re-seeds on retry.
+  if (progress.status === 'pending') await seedSourceExceptions(db, tenantId, runId);
   const cursor = Number(progress.last_order_row_number || 1);
   const page = await db.prepare(
     `SELECT s.row_number,s.record_id
      FROM reconciliation_staging_rows s
      WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='orders'
        AND s.row_number>?3 AND s.record_id IS NOT NULL
-       AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+       AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
          WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id
            AND x.dataset='orders' AND x.record_id=s.record_id)
      ORDER BY s.row_number LIMIT ?4`
@@ -135,7 +138,7 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
       FROM reconciliation_staging_rows s
       WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='orders'
         AND s.row_number>?3 AND s.row_number<=?4 AND s.record_id IS NOT NULL
-        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id
             AND x.dataset='orders' AND x.record_id=s.record_id)
     ),
@@ -154,7 +157,7 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
       FROM reconciliation_staging_rows i JOIN page p ON p.order_id=i.order_id
       WHERE i.tenant_id=?1 AND i.run_id=?2 AND i.dataset='invoices'
         AND i.record_id IS NOT NULL
-        AND i.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND i.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=i.tenant_id AND x.run_id=i.run_id
             AND x.dataset='invoices' AND x.record_id=i.record_id)
       GROUP BY i.order_id
@@ -169,7 +172,7 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
       FROM reconciliation_staging_rows d JOIN page p ON p.order_id=d.order_id
       WHERE d.tenant_id=?1 AND d.run_id=?2 AND d.dataset='deliveries'
         AND d.record_id IS NOT NULL
-        AND d.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND d.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=d.tenant_id AND x.run_id=d.run_id
             AND x.dataset='deliveries' AND x.record_id=d.record_id)
       GROUP BY d.order_id
@@ -198,17 +201,17 @@ export async function processZonarStagedReconciliationBatch(db, input = {}) {
       FROM reconciliation_staging_rows s
       WHERE s.tenant_id=?1 AND s.run_id=?2 AND s.dataset='orders'
         AND s.row_number>?3 AND s.row_number<=?4 AND s.record_id IS NOT NULL
-        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+        AND s.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
           WHERE x.tenant_id=s.tenant_id AND x.run_id=s.run_id
             AND x.dataset='orders' AND x.record_id=s.record_id)
     )
     INSERT OR IGNORE INTO reconciliation_result_links
       (tenant_id,run_id,order_id,dataset,linked_record_id,source_row_number)
     SELECT p.tenant_id,p.run_id,p.order_id,i.dataset,i.record_id,i.row_number
-    FROM page p JOIN reconciliation_staging_rows i ON i.tenant_id=p.tenant_id
+    FROM page p JOIN reconciliation_staging_rows i INDEXED BY idx_reconciliation_staging_order ON i.tenant_id=p.tenant_id
       AND i.run_id=p.run_id AND i.order_id=p.order_id
       AND i.dataset IN ('invoices','deliveries') AND i.record_id IS NOT NULL
-      AND i.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x
+      AND i.row_number=(SELECT MIN(x.row_number) FROM reconciliation_staging_rows x INDEXED BY idx_reconciliation_staging_record
         WHERE x.tenant_id=i.tenant_id AND x.run_id=i.run_id
           AND x.dataset=i.dataset AND x.record_id=i.record_id)
   `;
