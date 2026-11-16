@@ -17,7 +17,7 @@ function world({ key = 'sk-test', workspaces = [{ id: 't1', name: 'One', role: '
   const sent = [];
   const fetchImpl = async (url, init) => {
     const u = new URL(url);
-    if (u.pathname === '/api/zonar/identity') return json({ authenticated: true, workspaces });
+    if (u.pathname === '/api/zonar/me') return json({ authenticated: true, workspaces });
     assert.equal(url, 'https://api.anthropic.com/v1/messages'); sent.push({ init, body: JSON.parse(init.body) });
     return anthropic ? anthropic() : json({ content: [{ type: 'text', text: 'Two orders were not invoiced (run r2).' }] });
   };

@@ -25,7 +25,7 @@ function world({ workspaces = [{ id: 't1', name: 'Tenant One', role: 'analyst' }
   add('t2', 'r9', '2026-11-14T12:30:00.000Z', 'OTHER TENANT');
   const seen = { auth: [] };
   const fetchImpl = async (url, init) => {
-    assert.equal(new URL(url).pathname, '/api/zonar/identity');
+    assert.equal(new URL(url).pathname, '/api/zonar/me');
     seen.auth.push(init.headers.Authorization);
     return identityStatus === 200 ? jsonRes({ authenticated: true, workspaces }) : jsonRes({ error: 'X' }, identityStatus);
   };

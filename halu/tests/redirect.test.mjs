@@ -38,3 +38,12 @@ test('a redirect from ZONAR is a failure, not data', async () => {
   await assert.rejects(client.listVerifiedRuns({}), error => error.status === 302);
   assert.equal(seen, 'manual');
 });
+
+// HALU asks ZONAR who a person is. The route must be one ZONAR actually serves.
+test('HALU identity route exists in ZONAR', () => {
+  const zonar = readFileSync(join(here, '..', '..', 'src', 'index.js'), 'utf8');
+  const halu = readFileSync(join(here, '..', 'src', 'api.js'), 'utf8');
+  const route = halu.match(/'(\/api\/zonar\/[a-z-]+)'\s*,\s*\{/)?.[1];
+  assert.ok(route, 'HALU identity route not found');
+  assert.ok(zonar.includes(`'${route}'`), `ZONAR does not serve ${route}`);
+});
