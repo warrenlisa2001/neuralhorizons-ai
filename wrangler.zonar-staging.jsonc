@@ -12,8 +12,8 @@
   "d1_databases": [
     {
       "binding": "ZONAR_DB",
-      "database_name": "zonar-staging-db",
-      "database_id": "REPLACE_WITH_STAGING_D1_DATABASE_ID",
+      "database_name": "zonar-staging-db-20261116",
+      "database_id": "92316a0a-489d-47d5-adf4-c323a192c3b9",
       "migrations_dir": "migrations"
     }
   ],

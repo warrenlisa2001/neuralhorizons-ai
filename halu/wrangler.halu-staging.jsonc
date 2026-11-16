@@ -9,7 +9,7 @@
   "workers_dev": true,
   "triggers": { "crons": ["*/5 * * * *"] },
   "d1_databases": [
-    { "binding": "HALU_DB", "database_name": "halu-staging-db", "database_id": "REPLACE_WITH_HALU_STAGING_D1_DATABASE_ID", "migrations_dir": "migrations" }
+    { "binding": "HALU_DB", "database_name": "halu-staging-db", "database_id": "7710cfc2-1398-4c60-a15e-06b819d24e77", "migrations_dir": "migrations" }
   ],
   "vars": {
     "HALU_ZONAR_BASE_URL": "https://REPLACE_WITH_ZONAR_STAGING_HOST",

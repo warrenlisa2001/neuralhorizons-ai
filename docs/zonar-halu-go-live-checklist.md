@@ -39,7 +39,16 @@ Expect: `iss` ends `/v2.0`, `aud` = `68673793-...`, `azp` = HALU client id, `rol
 ## Part B. Monday: Cloudflare (needs Workers Paid)
 
 1. **Upgrade the account to Workers Paid.** (Free allows 50 D1 queries and 10 ms CPU per invocation; the staged pipeline cannot run inside that.)
-2. **Check what is already in `zonar-staging-db`** before applying anything. Run in D1 Console: `SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;` and, if present, `SELECT name FROM d1_migrations ORDER BY id;`. 9 tables suggests only `0001`-`0002` ran. Migration `0004` uses `ALTER TABLE ... ADD COLUMN`, which is not re-runnable, so apply only the migrations that are missing, in order, up to `0011`. Do not blindly re-run `0001`-`0003`.
+2. **Use the fresh staging databases (created 16 Nov 2026).** The old `zonar-staging-db` was built from an earlier schema: its applied `0002_zonar_runtime_schema.sql` is not the repo's `0002_reconciliation_runs.sql`, so `wrangler d1 migrations apply` against it would re-run 0002 and the later migrations would be built on a different base. It holds only test data (1 tenant, 1 user, 2 files), so leave it untouched and use the new, empty databases already named in the configs:
+   - ZONAR: `zonar-staging-db-20261116` (`92316a0a-489d-47d5-adf4-c323a192c3b9`)
+   - HALU: `halu-staging-db` (`7710cfc2-1398-4c60-a15e-06b819d24e77`)
+
+   Apply the migrations from the repo (answer yes when asked):
+   ```bash
+   npx wrangler d1 migrations apply DB --remote --config wrangler.zonar-staging.jsonc
+   npx wrangler d1 migrations apply HALU_DB --remote --config halu/wrangler.halu-staging.jsonc
+   ```
+   Then confirm 11 ZONAR migrations and 3 HALU migrations: `SELECT name FROM d1_migrations ORDER BY id;`
 3. **Create the queues:** `zonar-staging-reconciliation` and `zonar-staging-reconciliation-dlq`.
 4. **Put the real D1 id** (`67a07ade-3b53-4960-b169-a9e1440994f1`) into `wrangler.zonar-staging.jsonc` and deploy with both flags still `"false"`.
 5. **Smoke test:** an unauthenticated call to `/api/zonar/tenants/x/verified-runs` returns `401`, not `5xx`.
@@ -51,7 +60,7 @@ Expect: `iss` ends `/v2.0`, `aud` = `68673793-...`, `azp` = HALU client id, `rol
 ## Part C. HALU deploy (after Part B step 9)
 The readiness gate is OFF by default, so HALU delivers as soon as it is deployed. For a client rollout set `HALU_REQUIRE_READINESS=true`, after which HALU delivers nothing until the gate is open for the tenant: apply `halu/migrations/0001` and `0002`, then seed the gate rows (see "The readiness gate" in `halu/README.md`) with the real definition owner, evidence and a boundary letter signed by the business owner. A closed gate is the expected first state, not a fault.
 
-Follow "Deploying HALU to staging" in `halu/README.md`. Still to fill: HALU D1 id, ZONAR staging host, HALU client id, tenant id. The Worker refuses to start while any `REPLACE_WITH_...` remains.
+Follow "Deploying HALU to staging" in `halu/README.md`. Still to fill: ZONAR staging host, HALU client id, tenant id. The Worker refuses to start while any `REPLACE_WITH_...` remains.
 
 ## Rollback
 Set both ZONAR flags back to `"false"`; revoke HALU with `UPDATE service_principals SET status='revoked' ...`; delete the HALU client secret in Entra. Data and migrations are additive and can stay.
