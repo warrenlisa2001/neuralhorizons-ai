@@ -7,6 +7,9 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
+    // Every API path must reach the Worker; otherwise the asset layer can answer
+    // an unknown /api/ path with its own 404 page before ZONAR's code runs.
+    "run_worker_first": ["/api/*"],
     "binding": "ASSETS"
   },
   "d1_databases": [
