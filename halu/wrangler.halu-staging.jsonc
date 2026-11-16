@@ -19,7 +19,7 @@
     "HALU_TENANTS": "stg_tenant_a",
     // Sign-in for the HALU page: an Entra app registration of type "Single-page application"
     // whose redirect URI is the Worker URL, with delegated permission to the ZONAR API.
-    "HALU_SPA_CLIENT_ID": "REPLACE_WITH_HALU_SPA_CLIENT_ID",
+    "HALU_SPA_CLIENT_ID": "e2370aec-ba62-4f7c-9a00-00841efc8267",
     "HALU_USER_SCOPE": "api://68673793-9332-440b-ab12-d181b1128a17/access_as_user",
     // Ask HALU: set the secret HALU_ANTHROPIC_API_KEY to switch question answering on.
     // "HALU_ASK_MODEL": "claude-sonnet-5-5",
