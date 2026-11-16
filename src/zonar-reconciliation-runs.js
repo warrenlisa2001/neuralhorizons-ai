@@ -2,6 +2,7 @@ import { authenticateZonarTenant } from './zonar-auth.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { appendTenantAuditEvent } from './zonar-audit.js';
 import { buildZonarReconciliation, ZONAR_RECONCILIATION_PIPELINE_VERSION } from './zonar-reconciliation-pipeline.js';
+import { persistZonarOperationalEvents } from './zonar-operational-events.js';
 
 const SAFE_ID = /^[A-Za-z0-9_-]{1,128}$/;
 const MAX_REQUEST_BYTES = 4096;
@@ -157,7 +158,17 @@ export async function handleZonarReconciliationRun(request, env, tenantId) {
       customMetadata: { tenantId: allowed.tenantId, runId, sha256Hex: resultSha }
     });
 
-    const summaryJson = JSON.stringify(result.summary);
+    const operationalEvents = await persistZonarOperationalEvents(env.ZONAR_DB, {
+      tenantId: allowed.tenantId,
+      runId,
+      exceptions: result.exceptions
+    });
+
+    const summaryJson = JSON.stringify({
+      ...result.summary,
+      operational_event_count: operationalEvents.inserted,
+      operational_event_attempt_count: operationalEvents.attempted
+    });
     const updated = await env.ZONAR_DB.prepare(
       `UPDATE reconciliation_runs
        SET status = 'succeeded', result_sha256_hex = ?1, summary_json = ?2,
@@ -195,11 +206,17 @@ export async function handleZonarReconciliationRun(request, env, tenantId) {
         processor_version: ZONAR_RECONCILIATION_PIPELINE_VERSION,
         result_sha256_hex: resultSha,
         audit_recorded: auditRecorded,
-        summary: result.summary
+        operational_events: operationalEvents,
+        summary: { ...result.summary, operational_event_count: operationalEvents.inserted }
       }
     }, 201);
   } catch (error) {
     try { await env.ZONAR_FILES.delete(resultKey); } catch {}
+    try {
+      await env.ZONAR_DB.prepare(
+        'DELETE FROM operational_events WHERE tenant_id = ?1 AND source_run_id = ?2'
+      ).bind(allowed.tenantId, runId).run();
+    } catch {}
     try {
       await env.ZONAR_DB.prepare(
         `UPDATE reconciliation_runs

@@ -25,7 +25,10 @@ CREATE TABLE IF NOT EXISTS operational_events (
   summary TEXT NOT NULL CHECK (length(summary) BETWEEN 1 AND 240),
   -- Store monetary exposure in minor units (e.g. fils/cents), never floats.
   exposure_minor_units INTEGER
-    CHECK (exposure_minor_units IS NULL OR exposure_minor_units >= 0),
+    CHECK (
+    exposure_minor_units IS NULL
+    OR (typeof(exposure_minor_units) = 'integer' AND exposure_minor_units >= 0)
+  ),
   currency_code TEXT
     CHECK (currency_code IS NULL OR currency_code GLOB '[A-Z][A-Z][A-Z]'),
   occurred_at TEXT,

@@ -2,8 +2,11 @@ import { authenticateZonarTenant } from './zonar-auth.js';
 import { handleZonarIdentity } from './zonar-identity.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
 import { handleZonarTenantFiles } from './zonar-file-storage.js';
+import { handleZonarResumableUpload, expireZonarUploadSessions } from './zonar-resumable-uploads.js';
 import { handleZonarReconciliationRun } from './zonar-reconciliation-runs.js';
 import { handleZonarReconciliationResult } from './zonar-reconciliation-results.js';
+import { handleZonarOperationalEvents } from './zonar-operational-events.js';
+import { handleZonarAsyncReconciliationEnqueue, handleZonarReconciliationQueueBatch, recoverZonarReconciliationLeases, dispatchZonarReconciliationOutbox } from './zonar-async-reconciliation.js';
 
 // Neural Horizons AI — Cloudflare Worker
 // Serves the static site (dist/) and a small live AI-news API used by the
@@ -140,12 +143,33 @@ export default {
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
     }
+    const resumableUploadMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/files\/uploads(?:\/([^/]+)(?:\/parts\/(\d+)|\/(complete|abort))?)?$/);
+    if (resumableUploadMatch) {
+      let tenantId, uploadId = null;
+      try {
+        tenantId = decodeURIComponent(resumableUploadMatch[1]);
+        uploadId = resumableUploadMatch[2] ? decodeURIComponent(resumableUploadMatch[2]) : null;
+      } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
+      return handleZonarResumableUpload(
+        request, env, tenantId, uploadId,
+        resumableUploadMatch[3] || null, resumableUploadMatch[4] || null
+      );
+    }
     const tenantFilesMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/files$/);
     if (tenantFilesMatch) {
       let tenantId;
       try { tenantId = decodeURIComponent(tenantFilesMatch[1]); }
       catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
       return handleZonarTenantFiles(request, env, tenantId);
+    }
+    const operationalEventMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/operational-events(?:\/([^/]+))?$/);
+    if (operationalEventMatch) {
+      let tenantId, eventId = null;
+      try {
+        tenantId = decodeURIComponent(operationalEventMatch[1]);
+        eventId = operationalEventMatch[2] ? decodeURIComponent(operationalEventMatch[2]) : null;
+      } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
+      return handleZonarOperationalEvents(request, env, tenantId, eventId);
     }
     const reconciliationResultMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs\/([^/]+)$/);
     if (reconciliationResultMatch) {
@@ -155,6 +179,13 @@ export default {
         runId = decodeURIComponent(reconciliationResultMatch[2]);
       } catch { return zonarJson({ error: 'INVALID_RESOURCE' }, 400); }
       return handleZonarReconciliationResult(request, env, tenantId, runId);
+    }
+    const asyncReconciliationMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-jobs$/);
+    if (asyncReconciliationMatch) {
+      let tenantId;
+      try { tenantId = decodeURIComponent(asyncReconciliationMatch[1]); }
+      catch { return zonarJson({ error: 'INVALID_TENANT' }, 400); }
+      return handleZonarAsyncReconciliationEnqueue(request, env, tenantId);
     }
     const reconciliationRunMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/reconciliation-runs$/);
     if (reconciliationRunMatch) {
@@ -177,9 +208,25 @@ export default {
       return handleZonarProfile(request, env);
     }
     return env.ASSETS.fetch(request);
+  },
+  async queue(batch, env) {
+    return handleZonarReconciliationQueueBatch(batch, env);
+  },
+  async scheduled(controller, env, ctx) {
+    if (env.ZONAR_ASYNC_ENABLED !== 'true' &&
+        env.ZONAR_RESUMABLE_UPLOADS_ENABLED !== 'true') return;
+    ctx.waitUntil((async () => {
+      if (env.ZONAR_ASYNC_ENABLED === 'true') {
+        await recoverZonarReconciliationLeases(env);
+        await dispatchZonarReconciliationOutbox(env);
+      }
+      if (env.ZONAR_RESUMABLE_UPLOADS_ENABLED === 'true') {
+        await expireZonarUploadSessions(env);
+      }
+    })());
   }
 };
-
+ 
 const ZONAR_MAX_BYTES = 2 * 1024 * 1024;
 const ZONAR_MAX_ROWS = 10000;
 const ZONAR_ALIASES = {

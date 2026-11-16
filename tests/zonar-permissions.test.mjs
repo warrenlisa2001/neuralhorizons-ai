@@ -17,6 +17,17 @@ test('owner and admin can manage members, but only owner can manage tenant owner
   assert.equal(hasZonarPermission('tenant_admin', 'tenant:manage'), false);
 });
 
+test('event permissions separate feed access from acknowledgement control', () => {
+  for (const role of ['tenant_owner', 'tenant_admin', 'operator']) {
+    assert.equal(hasZonarPermission(role, 'events:read'), true);
+    assert.equal(hasZonarPermission(role, 'events:manage'), true);
+  }
+  for (const role of ['analyst', 'viewer']) {
+    assert.equal(hasZonarPermission(role, 'events:read'), true);
+    assert.equal(hasZonarPermission(role, 'events:manage'), false);
+  }
+});
+
 test('analyst can read and export but cannot upload, run jobs or administer users', () => {
   assert.equal(hasZonarPermission('analyst', 'files:read'), true);
   assert.equal(hasZonarPermission('analyst', 'exports:create'), true);

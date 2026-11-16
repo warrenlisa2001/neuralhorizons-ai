@@ -6,7 +6,9 @@ import { DatabaseSync } from 'node:sqlite';
 const migration = [
   '0001_tenant_foundation.sql',
   '0002_reconciliation_runs.sql',
-  '0003_operational_intelligence.sql'
+  '0003_operational_intelligence.sql',
+  '0004_operational_event_delivery.sql',
+  '0005_async_reconciliation_outbox.sql'
 ].map(name => readFileSync(new URL('../migrations/' + name, import.meta.url), 'utf8')).join('\n');
 
 function seededDb() {
@@ -96,5 +98,92 @@ test('metric snapshots are tenant-scoped and immutable', () => {
       .run('snapshot-cross', 'tenant-b', 'run-a', 'reconciliation', '{}'), /FOREIGN KEY/);
     assert.throws(() => db.prepare("UPDATE metric_snapshots SET metrics_json = '{}' WHERE id = 'snapshot-a'").run(), /immutable/);
     assert.throws(() => db.prepare("DELETE FROM metric_snapshots WHERE id = 'snapshot-a'").run(), /immutable/);
+  } finally { db.close(); }
+});
+
+test('operational event source references are deduplicated per tenant and run', () => {
+  const db = seededDb();
+  try {
+    const insert = db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, source_ref, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
+    insert.run('event-one', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    assert.throws(() => insert.run('event-two', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Duplicate event'));
+  } finally { db.close(); }
+});
+
+test('event acknowledgement records the active tenant actor and preserves source facts', () => {
+  const db = seededDb();
+  try {
+    db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, source_ref, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run('event-a', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED:orders:A1', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    db.prepare(`UPDATE operational_events
+      SET status = 'acknowledged', acknowledged_at = '2026-11-08T10:00:00Z',
+          acknowledged_by_user_id = 'user-a', updated_at = '2026-11-08T10:00:00Z'
+      WHERE id = 'event-a'`).run();
+    assert.throws(() => db.prepare(`UPDATE operational_events
+      SET summary = 'Altered source facts' WHERE id = 'event-a'`).run(), /provenance is immutable/);
+    const event = db.prepare('SELECT status, acknowledged_by_user_id FROM operational_events WHERE id = ?').get('event-a');
+    assert.equal(event.status, 'acknowledged');
+    assert.equal(event.acknowledged_by_user_id, 'user-a');
+  } finally { db.close(); }
+});
+
+test('event acknowledgement rejects an actor without tenant membership', () => {
+  const db = seededDb();
+  try {
+    db.prepare(`INSERT INTO operational_events
+      (id, tenant_id, source_kind, source_run_id, event_code, severity, summary)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`)
+      .run('event-a', 'tenant-a', 'reconciliation', 'run-a', 'ORDER_NOT_DELIVERED', 'medium', 'Order has no delivery');
+    assert.throws(() => db.prepare(`UPDATE operational_events
+      SET status = 'acknowledged', acknowledged_at = '2026-11-08T10:00:00Z',
+          acknowledged_by_user_id = 'user-b'
+      WHERE id = 'event-a'`).run(), /active tenant membership/);
+  } finally { db.close(); }
+});
+
+
+test('async migration adds idempotent reconciliation requests and durable outbox', () => {
+  const db = seededDb();
+  try {
+    const columns = db.prepare("PRAGMA table_info(reconciliation_runs)").all().map(row => row.name);
+    for (const column of ['idempotency_key', 'request_fingerprint', 'attempt_count', 'max_attempts', 'lease_token', 'lease_expires_at', 'last_attempt_at', 'updated_at']) {
+      assert.ok(columns.includes(column), 'missing reconciliation_runs column: ' + column);
+    }
+    const outbox = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='reconciliation_outbox'").get();
+    assert.ok(outbox);
+    db.prepare("UPDATE reconciliation_runs SET idempotency_key = ?, request_fingerprint = ? WHERE id = ?")
+      .run('request-1', 'fingerprint-1', 'run-a');
+    assert.throws(() => db.prepare(`INSERT INTO reconciliation_runs
+      (id, tenant_id, requested_by_user_id, processor_version, orders_file_id, invoices_file_id, deliveries_file_id, idempotency_key, request_fingerprint)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run('run-duplicate', 'tenant-a', 'user-a', '0.2.0', 'orders', 'invoices', 'deliveries', 'request-1', 'fingerprint-1'));
+    db.prepare(`INSERT INTO reconciliation_outbox (id, tenant_id, run_id)
+      VALUES (?, ?, ?)`).run('outbox-a', 'tenant-a', 'run-a');
+    assert.throws(() => db.prepare(`INSERT INTO reconciliation_outbox (id, tenant_id, run_id)
+      VALUES (?, ?, ?)`).run('outbox-duplicate', 'tenant-a', 'run-a'));
+    assert.throws(() => db.prepare(`INSERT INTO reconciliation_outbox (id, tenant_id, run_id)
+      VALUES (?, ?, ?)`).run('outbox-cross', 'tenant-b', 'run-a'), /FOREIGN KEY/);
+    assert.throws(() => db.prepare("UPDATE reconciliation_outbox SET run_id = ? WHERE id = ?").run('other-run', 'outbox-a'), /identity is immutable/);
+  } finally { db.close(); }
+});
+
+test('async outbox lease and dispatch state constraints are enforced', () => {
+  const db = seededDb();
+  try {
+    db.prepare("INSERT INTO reconciliation_outbox (id, tenant_id, run_id) VALUES (?, ?, ?)")
+      .run('outbox-a', 'tenant-a', 'run-a');
+    assert.throws(() => db.prepare("UPDATE reconciliation_outbox SET status = 'leased' WHERE id = 'outbox-a'").run(), /CHECK constraint failed/);
+    db.prepare(`UPDATE reconciliation_outbox
+      SET status = 'leased', lease_token = 'lease-a', lease_expires_at = '2026-11-08T18:00:00Z'
+      WHERE id = 'outbox-a'`).run();
+    assert.throws(() => db.prepare("UPDATE reconciliation_outbox SET status = 'dispatched' WHERE id = 'outbox-a'").run(), /CHECK constraint failed/);
+    db.prepare("UPDATE reconciliation_outbox SET status = 'dispatched', lease_token = NULL, lease_expires_at = NULL, dispatched_at = '2026-11-08T18:00:00Z' WHERE id = 'outbox-a'").run();
+    const row = db.prepare("SELECT status, dispatched_at FROM reconciliation_outbox WHERE id = 'outbox-a'").get();
+    assert.equal(row.status, 'dispatched');
+    assert.equal(row.dispatched_at, '2026-11-08T18:00:00Z');
   } finally { db.close(); }
 });
