@@ -1,5 +1,5 @@
 // HALU read API for people (finance leads etc.). Authentication is delegated to ZONAR:
-// the caller's own ZONAR access token is forwarded to ZONAR's /api/zonar/identity, which
+// the caller's own ZONAR access token is forwarded to ZONAR's /api/zonar/me, which
 // verifies it and returns only the workspaces the person actively belongs to. HALU keeps
 // no user table and no signing keys, so access can never outlive ZONAR membership.
 //
@@ -52,7 +52,7 @@ async function resolveWorkspaces(request, env, fetchImpl) {
   if (!bearer || authorization.length > MAX_BEARER + 7) return { ok: false, status: 401, error: 'UNAUTHORISED' };
   let response;
   try {
-    response = await fetchImpl(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/identity', {
+    response = await fetchImpl(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/me', {
       headers: { Authorization: 'Bearer ' + bearer[1], Accept: 'application/json' }, redirect: 'manual'
     });
   } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE' }; }
