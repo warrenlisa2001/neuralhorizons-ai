@@ -12,11 +12,11 @@
     { "binding": "HALU_DB", "database_name": "halu-staging-db", "database_id": "7710cfc2-1398-4c60-a15e-06b819d24e77", "migrations_dir": "migrations" }
   ],
   "vars": {
-    "HALU_ZONAR_BASE_URL": "https://REPLACE_WITH_ZONAR_STAGING_HOST",
+    "HALU_ZONAR_BASE_URL": "https://zonar-staging.warrenlisa2001.workers.dev",
     "HALU_ZONAR_SCOPE": "api://68673793-9332-440b-ab12-d181b1128a17/.default",
     "HALU_ENTRA_TENANT_ID": "c6993c9c-10dd-4cfe-ba91-157272624bd6",
-    "HALU_CLIENT_ID": "REPLACE_WITH_HALU_APP_CLIENT_ID",
-    "HALU_TENANTS": "REPLACE_WITH_ZONAR_TENANT_ID",
+    "HALU_CLIENT_ID": "4b9bd07d-8a2f-4c4e-b890-103e7b7b2ef3",
+    "HALU_TENANTS": "stg_tenant_a",
     // Sign-in for the HALU page: an Entra app registration of type "Single-page application"
     // whose redirect URI is the Worker URL, with delegated permission to the ZONAR API.
     "HALU_SPA_CLIENT_ID": "REPLACE_WITH_HALU_SPA_CLIENT_ID",
