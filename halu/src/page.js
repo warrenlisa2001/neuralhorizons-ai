@@ -174,6 +174,7 @@ async function openWorkspace() {
   const sel = $('ws'); clear(sel);
   if (!w.workspaces.length) { setMsg('You are signed in, but you do not have access to a HALU workspace. Ask your administrator.' + whoami(), true); $('app').hidden = true; return; }
   for (const x of w.workspaces) sel.append(h('option', { value: x.id }, x.name || x.id));
+  $('stage').hidden = !S.cfg.staging_tools;
   S.tenant = sel.value; sel.onchange = () => { S.tenant = sel.value; S.run = null; loadRuns().catch(fail); };
   await loadRuns();
 }
