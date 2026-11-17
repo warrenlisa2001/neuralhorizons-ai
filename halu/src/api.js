@@ -9,6 +9,7 @@
 //   POST /api/halu/tenants/:tenant/ask   {question, run_id?}  (answers grounded in the stored briefing)
 //   GET /api/halu/config                  (public sign-in settings for the page; no secrets)
 
+import { startStagingJourney, stagingJourneyStatus, stagingToolsEnabled } from './staging-journey.js';
 import { askHalu, AskError } from './ask.js';
 
 const SAFE_ID = /^[A-Za-z0-9_-]{1,128}$/;
@@ -85,13 +86,15 @@ export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   const url = new URL(request.url);
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: headers(env, corsHeaders(request, env)) });
   const askMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/ask$/);
-  if (request.method !== 'GET' && !(request.method === 'POST' && askMatch)) return reply(request, env, { error: 'METHOD_NOT_ALLOWED' }, 405);
+  const stagingMatch = url.pathname.match(/^\/api\/halu\/staging\/journey(?:\/([^/]+))?$/);
+  if (request.method !== 'GET' && !(request.method === 'POST' && (askMatch || (stagingMatch && !stagingMatch[1])))) return reply(request, env, { error: 'METHOD_NOT_ALLOWED' }, 405);
   if (url.pathname === '/api/halu/config') {
     // Public values only. The SPA client id and scopes are not secrets.
     return reply(request, env, {
       sign_in: env.HALU_SPA_CLIENT_ID && env.HALU_ENTRA_TENANT_ID && env.HALU_USER_SCOPE && !String(env.HALU_SPA_CLIENT_ID).includes('REPLACE_WITH')
         ? { authority_tenant: env.HALU_ENTRA_TENANT_ID, client_id: env.HALU_SPA_CLIENT_ID, scope: env.HALU_USER_SCOPE } : null,
-      ask_enabled: Boolean(env.HALU_ANTHROPIC_API_KEY)
+      ask_enabled: Boolean(env.HALU_ANTHROPIC_API_KEY),
+      staging_tools: stagingToolsEnabled(env)
     });
   }
   if (!env.HALU_DB?.prepare || !env.HALU_ZONAR_BASE_URL) return reply(request, env, { error: 'HALU_NOT_CONFIGURED' }, 503);
@@ -99,7 +102,7 @@ export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   const workspacesMatch = url.pathname === '/api/halu/workspaces';
   const listMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/briefings$/);
   const itemMatch = url.pathname.match(/^\/api\/halu\/tenants\/([^/]+)\/briefings\/([^/]+)$/);
-  if (!workspacesMatch && !listMatch && !itemMatch && !askMatch) return reply(request, env, { error: 'NOT_FOUND' }, 404);
+  if (!workspacesMatch && !listMatch && !itemMatch && !askMatch && !stagingMatch) return reply(request, env, { error: 'NOT_FOUND' }, 404);
 
   let tenantId = null; let runId = null;
   try {
@@ -113,6 +116,20 @@ export async function handleHaluApi(request, env, { fetchImpl = fetch } = {}) {
   const who = await resolveWorkspaces(request, env, fetchImpl);
   if (!who.ok) return reply(request, env, who.detail ? { error: who.error, detail: who.detail } : { error: who.error }, who.status);
   if (workspacesMatch) return reply(request, env, { workspaces: who.workspaces });
+  if (stagingMatch) {
+    if (!stagingToolsEnabled(env)) return reply(request, env, { error: 'NOT_FOUND' }, 404);
+    const bearer = (request.headers.get('Authorization') || '').match(/^Bearer ([^\s]+)$/i)[1];
+    if (request.method === 'POST') {
+      const input = parse(await request.text()) || {};
+      const tenant = typeof input.tenant_id === 'string' && SAFE_ID.test(input.tenant_id) ? input.tenant_id : null;
+      if (!tenant) return reply(request, env, { error: 'INVALID_RESOURCE' }, 400);
+      const r = await startStagingJourney({ env, bearer, tenantId: tenant, workspaces: who.workspaces });
+      return reply(request, env, r.body, r.status);
+    }
+    const tenant = url.searchParams.get('tenant_id') || '';
+    const r = await stagingJourneyStatus({ env, bearer, tenantId: tenant, runId: decodeURIComponent(stagingMatch[1]), workspaces: who.workspaces });
+    return reply(request, env, r.body, r.status);
+  }
   if (!who.workspaces.some(w => w.id === tenantId)) return reply(request, env, { error: 'TENANT_ACCESS_DENIED' }, 403);
 
   if (askMatch) {

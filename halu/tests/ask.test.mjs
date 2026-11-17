@@ -95,7 +95,7 @@ test('config endpoint exposes only public sign-in values', async () => {
   const env = { HALU_ENTRA_TENANT_ID: 'dir', HALU_SPA_CLIENT_ID: 'spa', HALU_USER_SCOPE: 'api://z/access_as_user', HALU_CLIENT_SECRET: 'TOP-SECRET', HALU_ANTHROPIC_API_KEY: 'sk' };
   const res = await handleHaluApi(new Request('https://h.example/api/halu/config'), env);
   const text = await res.text();
-  assert.deepEqual(JSON.parse(text), { sign_in: { authority_tenant: 'dir', client_id: 'spa', scope: 'api://z/access_as_user' }, ask_enabled: true });
+  assert.deepEqual(JSON.parse(text), { sign_in: { authority_tenant: 'dir', client_id: 'spa', scope: 'api://z/access_as_user' }, ask_enabled: true, staging_tools: false });
   assert.ok(!text.includes('TOP-SECRET') && !text.includes('sk"'));
   const placeholder = await (await handleHaluApi(new Request('https://h.example/api/halu/config'), { ...env, HALU_SPA_CLIENT_ID: 'REPLACE_WITH_X' })).json();
   assert.equal(placeholder.sign_in, null);
