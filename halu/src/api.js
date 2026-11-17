@@ -52,7 +52,11 @@ async function resolveWorkspaces(request, env, fetchImpl) {
   if (!bearer || authorization.length > MAX_BEARER + 7) return { ok: false, status: 401, error: 'UNAUTHORISED' };
   let response;
   try {
-    response = await fetchImpl(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/me', {
+    // A Worker cannot call another Worker on the same account through its public
+    // workers.dev address while serving a request (Cloudflare error 1042), so use the
+    // service binding to ZONAR when it is configured.
+    const call = env.ZONAR && typeof env.ZONAR.fetch === 'function' ? (u, i) => env.ZONAR.fetch(u, i) : fetchImpl;
+    response = await call(env.HALU_ZONAR_BASE_URL.replace(/\/+$/, '') + '/api/zonar/me', {
       headers: { Authorization: 'Bearer ' + bearer[1], Accept: 'application/json' }, redirect: 'manual'
     });
   } catch (e) { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_unreachable' }; }
