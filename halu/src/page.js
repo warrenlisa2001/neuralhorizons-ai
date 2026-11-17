@@ -124,7 +124,7 @@ async function showRun(runId) {
     el.append(h('h2', {}, 'All findings by type'), t);
   }
   if (f.units_note) el.append(h('p', { class: 'mute' }, f.units_note));
-  $('ask').hidden = !S.cfg.ask_enabled; clear($('answer'));
+  $('ask').hidden = !S.cfg.ask_enabled; $('stage').hidden = !S.cfg.staging_tools; clear($('answer'));
 }
 
 async function ask() {
@@ -138,6 +138,29 @@ async function ask() {
     if (e.auth) return start();
     const text = { ASK_RATE_LIMITED: 'Too many questions this hour. Please try again later.', ASK_NOT_CONFIGURED: 'Asking is not switched on yet.', INVALID_QUESTION: 'Please ask a shorter question.' }[e.code] || 'HALU could not answer just now. Please try again.';
     out.append(h('p', { class: 'err' }, text));
+  } finally { btn.disabled = false; }
+}
+
+async function stageTest() {
+  const btn = $('stagebtn'), out = $('stagemsg'); btn.disabled = true; clear(out);
+  const say = (t, err) => { clear(out); out.append(h('span', { class: err ? 'err' : 'mute' }, t)); };
+  try {
+    say('Uploading three synthetic files and queuing a run…');
+    const r = await api('/api/halu/staging/journey', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tenant_id: S.tenant }) });
+    const started = Date.now();
+    for (;;) {
+      await new Promise(res => setTimeout(res, 15000));
+      const st = await api('/api/halu/staging/journey/' + encodeURIComponent(r.run_id) + '?tenant_id=' + encodeURIComponent(S.tenant));
+      const mins = Math.round((Date.now() - started) / 60000);
+      if (st.status === 'succeeded') { say('Run complete (' + (st.exception_count ?? '?') + ' findings). HALU picks it up within about 5 minutes; this list refreshes by itself.'); break; }
+      if (st.status === 'failed') { say('The run failed (' + (st.error_code || 'unknown') + ').', true); break; }
+      if (Date.now() - started > 15 * 60000) { say('Still running after 15 minutes. Check again later.', true); break; }
+      say('Run ' + st.status + ' (' + mins + ' min). ZONAR starts queued runs within about 5 minutes.');
+    }
+    for (let i = 0; i < 16; i++) { await loadRuns(); if (document.querySelector('#runs .run')) break; await new Promise(res => setTimeout(res, 20000)); }
+  } catch (e) {
+    if (e.auth) return start();
+    say('Staging test could not run: ' + (e.detail || e.code || e.message), true);
   } finally { btn.disabled = false; }
 }
 
@@ -169,7 +192,7 @@ async function start() {
 
 (async () => {
   $('login').addEventListener('click', () => signIn().catch(() => setMsg('Could not start sign-in.', true)));
-  $('out').addEventListener('click', signOut); $('go').addEventListener('click', ask);
+  $('out').addEventListener('click', signOut); $('go').addEventListener('click', ask); $('stagebtn').addEventListener('click', stageTest);
   try {
     S.cfg = await (await fetch('/api/halu/config')).json();
     await finishSignIn();
@@ -186,6 +209,7 @@ export function renderPage(nonce) {
 <p id="msg" class="mute" role="status" style="grid-column:1/-1;margin:0"></p>
 <aside id="app" class="card" hidden><h2>Workspace</h2><select id="ws" aria-label="Workspace"></select><h2>Verified runs</h2><div id="runs"></div></aside>
 <section style="display:grid;gap:16px;align-content:start"><div id="detail" class="card"></div>
+<div id="stage" class="card" hidden><h2>Staging test</h2><p class="mute">Runs three small synthetic files (with planted errors) through ZONAR so HALU has a verified run to brief. Staging only.</p><p><button id="stagebtn">Run staging test (synthetic data)</button></p><div id="stagemsg" aria-live="polite"></div></div>
 <div id="ask" class="card" hidden><h2>Ask HALU</h2><textarea id="q" maxlength="1000" placeholder="e.g. Which invoices are over-billed, and by how much?" aria-label="Your question"></textarea><p><button id="go">Ask</button></p><div id="answer" aria-live="polite"></div></div></section>
 </main><script nonce="${nonce}">${SCRIPT}</script></body></html>`;
 }

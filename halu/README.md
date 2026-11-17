@@ -84,3 +84,7 @@ Close it at any time with `UPDATE halu_boundaries SET status='revoked' WHERE id=
 - **Entra setup (one-off):** register a *Single-page application* whose redirect URI is the Worker URL (e.g. `https://halu-staging.<account>.workers.dev/`), grant it the delegated permission `access_as_user` on the ZONAR API, and put its id in `HALU_SPA_CLIENT_ID`. Make sure the ZONAR API's access-token version is 2.
 - **Ask HALU:** `POST /api/halu/tenants/:t/ask` sends the stored briefing and finance view for that tenant and run to Claude with instructions to answer only from that data. Switch on with the secret `HALU_ANTHROPIC_API_KEY`. Questions are logged in `halu_ask_log` (per-tenant limit `HALU_ASK_LIMIT_PER_HOUR`, default 60). Without the key the box is hidden and the API answers 503.
 - **What the model sees:** one run's briefing and finance view for the caller's own workspace. Not other tenants, not ZONAR credentials, not raw files. The text of findings is treated as data.
+
+## Staging test button (staging only)
+
+With `HALU_STAGING_TOOLS="true"` and the `ZONAR` service binding, the page shows a "Run staging test" button. It uploads three small synthetic CSVs (with planted errors) to ZONAR as the signed-in user, queues one reconciliation job and shows its progress. ZONAR's normal tenant and role checks apply (owner, admin or operator only). Leave the variable out of any production config. ZONAR starts queued jobs on its 5-minute schedule and HALU polls every 5 minutes, so expect up to about 10 minutes before the briefing appears.
