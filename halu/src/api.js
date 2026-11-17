@@ -57,7 +57,12 @@ async function resolveWorkspaces(request, env, fetchImpl) {
     });
   } catch (e) { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_unreachable' }; }
   if (response.status === 401 || response.status === 403) return { ok: false, status: 401, error: 'UNAUTHORISED' };
-  if (!response.ok) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_status_' + response.status };
+  if (!response.ok) {
+    let snippet = '';
+    try { snippet = (await response.text()).replace(/[^\x20-\x7e]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80); } catch {}
+    const kind = (response.headers.get('Content-Type') || '').split(';')[0].slice(0, 40);
+    return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_status_' + response.status + (kind ? ' ' + kind : '') + (snippet ? ' ' + snippet : '') };
+  }
   let body;
   try { body = await response.json(); } catch { return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_body_not_json' }; }
   if (!body || body.authenticated !== true || !Array.isArray(body.workspaces)) return { ok: false, status: 503, error: 'IDENTITY_UNAVAILABLE', detail: 'zonar_body_unexpected' };
