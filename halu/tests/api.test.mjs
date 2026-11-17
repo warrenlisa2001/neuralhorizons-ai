@@ -115,3 +115,12 @@ test('unconfigured HALU fails closed', async () => {
   const w = world(); delete w.env.HALU_ZONAR_BASE_URL;
   assert.equal((await w.call('/api/halu/workspaces')).status, 503);
 });
+
+test('workspace lookup uses the ZONAR service binding when configured', async () => {
+  const w = world();
+  let viaBinding = 0;
+  const env = { ...w.env, ZONAR: { fetch: async (url, init) => { viaBinding++; return jsonRes({ authenticated: true, workspaces: [{ id: 't1', name: 'Tenant One', role: 'analyst' }] }); } } };
+  const res = await handleHaluApi(new Request('https://halu.test/api/halu/workspaces', { headers: { Authorization: 'Bearer abc' } }), env, { fetchImpl: async () => { throw new Error('public fetch must not be used'); } });
+  assert.equal(res.status, 200);
+  assert.equal(viaBinding, 1);
+});
