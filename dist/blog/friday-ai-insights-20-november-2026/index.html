@@ -494,6 +494,52 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
 .evidence li em a{color:#00FF88}
 .ev-note{margin:12px 0 0;color:#A8A8B5;font-size:13px}
 @media(max-width:560px){.evidence li{grid-template-columns:1fr;gap:2px}}
+
+/* journey */
+.jny{margin:34px 0 8px}
+.jroute{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:0 0 20px}
+.jroute:before{content:"";position:absolute;left:8.33%;right:8.33%;top:19px;height:3px;background:rgba(255,255,255,.12);border-radius:3px}
+.jroute .jfill{position:absolute;left:8.33%;top:19px;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);border-radius:3px;transition:width .5s ease}
+.jstop{position:relative;background:none;border:0;color:#A8A8B5;font:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 2px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.jstop i{width:40px;height:40px;border-radius:50%;background:#14141D;border:2px solid rgba(255,255,255,.2);display:grid;place-items:center;font-style:normal;font-size:15px;color:#fff;transition:all .25s}
+.jstop.seen i{border-color:#8A2BE2;background:#241238}
+.jstop.on i{border-color:#00FF88;background:#00FF88;color:#0A0A0F;box-shadow:0 0 0 6px rgba(0,255,136,.15)}
+.jstop.on{color:#fff}
+.jstop:focus-visible{outline:2px solid #00FF88;outline-offset:4px;border-radius:8px}
+.jpanel{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch}
+.jwhy{grid-column:1/-1;margin:0;color:#C6C6D0;font-size:16px;min-height:3em}
+.jcard{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;color:#fff;text-decoration:none;transition:transform .2s,border-color .2s}
+.jcard:hover{transform:translateY(-3px);border-color:#00FF88;text-decoration:none}
+.jcard .jimg{aspect-ratio:16/9;background:#0A0A0F;overflow:hidden}
+.jcard .jimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.jcard:hover .jimg img{transform:scale(1.05)}
+.jcard .jb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.jtag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#00FF88}
+.jcard h4{margin:0;font-size:17px;line-height:1.35}
+.jgo{margin-top:auto;color:#00FF88;font-weight:700;font-size:14px}
+.jcs{background:linear-gradient(145deg,#1a1030 0%,#0f1a24 100%)}
+.jcs .jbig{padding:26px 18px 6px}
+.jcs .jbig b{display:block;font-size:clamp(38px,6vw,54px);line-height:1;color:#00FF88;font-weight:800}
+.jcs .jbig span{display:block;color:#C6C6D0;font-size:14px;margin-top:6px}
+.jdesc{margin:0;color:#C6C6D0;font-size:14px;line-height:1.5}
+.jmore{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-top:2px}
+.jmore a.j2{color:#00FF88;font-size:14px}
+.jnav{display:flex;gap:10px}
+.jnav button{background:transparent;color:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jnav button.pri{background:#00FF88;border-color:#00FF88;color:#0A0A0F}
+.jnav button:disabled{opacity:.35;cursor:default}
+.jhubs{grid-column:1/-1;display:none;gap:10px;flex-wrap:wrap}
+.jhubs.show{display:flex}
+.jhubs a{border:1px solid #00FF88;border-radius:99px;padding:9px 18px;font-weight:700;font-size:14px}
+.jchip{display:inline-block;margin:6px 0 0;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.4);color:#00FF88;border-radius:99px;padding:8px 16px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jchip:hover{background:rgba(0,255,136,.16)}
+@media(max-width:700px){
+ .jpanel{grid-template-columns:1fr}
+ .jstop{font-size:10px}
+ .jstop i{width:32px;height:32px;font-size:13px}
+ .jroute:before,.jroute .jfill{top:15px}
+}
+@media(prefers-reduced-motion:reduce){.jcard,.jcard .jimg img,.jroute .jfill,.jstop i{transition:none}}
 </style>
 </head>
 
@@ -566,6 +612,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   </div>
   <a class="read-link" href="https://openai.com/index/introducing-gpt-6-2-astra-sol" target="_blank" rel="noopener">Read OpenAI's announcement &rarr;</a>
 
+
+  <p><button type="button" class="jchip" data-go="0">Journey stop 1: the models, in practice &rarr;</button></p>
 </div>
 </section>
 
@@ -598,6 +646,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   </div>
   <a class="read-link" href="https://microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work" target="_blank" rel="noopener">Read Microsoft's Ignite post &rarr;</a>
 
+
+  <p><button type="button" class="jchip" data-go="1">Journey stop 2: agents and accountability &rarr;</button></p>
 </div>
 </section>
 
@@ -646,6 +696,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   <a class="read-link" href="https://www.ibtimes.com/nvidia-record-revenue-130-billion-outlook-china-3809889" target="_blank" rel="noopener">Read the Nvidia results coverage &rarr;</a>
   <p class="small-note">The IPO price and timing come from reports and filings coverage checked on 19 November. First-day trading was not known when this edition was written.</p>
 
+
+  <p><button type="button" class="jchip" data-go="2">Journey stop 3: what returns look like &rarr;</button></p>
 </div>
 </section>
 
@@ -688,6 +740,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   </div>
   <a class="read-link" href="https://thenextweb.com/news/california-sues-openai-hugging-face-attack-rogue-agents" target="_blank" rel="noopener">Read the California story &rarr;</a>
 
+
+  <p><button type="button" class="jchip" data-go="3">Journey stop 4: the rules and the UAE &rarr;</button></p>
 </div>
 </section>
 
@@ -727,6 +781,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   </div>
   <a class="read-link" href="https://bleepingcomputer.com/news/security/google-warns-that-fully-automated-ai-attacks-are-coming-soon" target="_blank" rel="noopener">Read the Google report coverage &rarr;</a>
 
+
+  <p><button type="button" class="jchip" data-go="4">Journey stop 5: attacks and weak links &rarr;</button></p>
 </div>
 </section>
 
@@ -764,6 +820,35 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
     </p>
   </div>
   <a class="read-link" href="https://unite.ai/dubai-approves-city-ai-agent-to-coordinate-government-services" target="_blank" rel="noopener">Read about the City AI Agent &rarr;</a>
+
+</div>
+</section>
+
+<section class="section" id="journey">
+<div class="container">
+
+  <div class="section-label">Take the journey</div>
+
+  <h2>
+    Follow the story through our work.
+    <span>Six stops. Real results.</span>
+  </h2>
+
+  <p class="lead">
+    Each stop pairs this week's story with a post that goes deeper and a client case study that shows
+    what it looked like in practice. Tap a stop, or press Next.
+  </p>
+
+  <div class="jny" id="jny">
+    <div class="jroute" id="jroute"><span class="jfill" id="jfill"></span><button type="button" class="jstop" data-i="0" aria-label="Stop 1: Models"><i>1</i>Models</button><button type="button" class="jstop" data-i="1" aria-label="Stop 2: Agents"><i>2</i>Agents</button><button type="button" class="jstop" data-i="2" aria-label="Stop 3: Money"><i>3</i>Money</button><button type="button" class="jstop" data-i="3" aria-label="Stop 4: Rules"><i>4</i>Rules</button><button type="button" class="jstop" data-i="4" aria-label="Stop 5: Attacks"><i>5</i>Attacks</button><button type="button" class="jstop" data-i="5" aria-label="Stop 6: Monday"><i>6</i>Monday</button></div>
+    <div class="jpanel" aria-live="polite">
+      <p class="jwhy" id="jwhy"></p>
+      <a class="jcard" id="jblog" href="#"><div class="jimg"><img id="jimg" src="" alt="" width="800" height="450" loading="lazy"></div><div class="jb"><span class="jtag" id="jbtag">Blog &amp; Insights</span><h4 id="jbt"></h4><span class="jgo">Read the post &rarr;</span></div></a>
+      <a class="jcard jcs" id="jcs" href="#"><div class="jbig"><b id="jstat"></b><span id="jsl"></span></div><div class="jb"><span class="jtag">Case study &middot; <span id="jcd"></span></span><h4 id="jct"></h4><p class="jdesc" id="jcx"></p><span class="jgo">Read the case study &rarr;</span></div></a>
+      <div class="jmore"><a class="j2" id="jb2" href="#"></a><div class="jnav"><button type="button" id="jprev">&larr; Back</button><button type="button" class="pri" id="jnext">Next stop &rarr;</button></div></div>
+      <div class="jhubs" id="jhubs"><a href="/blog/">Blog &amp; Insights</a><a href="/case-studies/">All case studies</a><a href="https://neuralhorizonsai.com/services/weak-link-diagnostic/?utm_source=blog&amp;utm_medium=article&amp;utm_campaign=wld-nov26">Weak-Link Diagnostic</a></div>
+    </div>
+  </div>
 
 </div>
 </section>
@@ -976,6 +1061,32 @@ $$('.stat').forEach(function(st){
     l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
   });
   upd();
+})();
+var JS=[{"k": "models", "n": "Models", "why": "Models got cheaper and stronger. The question is where the value lands in a real business.", "img": "models", "bt": "From Agentic to Autonomous: Where Microsoft, OpenAI, Google and Salesforce Actually Stand in 2026", "bu": "/blog/agentic-to-autonomous-2026/", "bg": "Blog", "b2t": "Gartner says 40% of agentic AI projects will be cancelled", "b2u": "/blog/dont-cancel-your-agentic-ai-project-gartner-40-percent/", "stat": "60 hrs", "sl": "saved every week", "ct": "Zero AI to 3 automated workflows in 60 days", "cu": "/case-studies/retail-ai-automation/", "cx": "Inventory, customer communication and reporting, automated.", "cd": "A regional retail group"}, {"k": "agents", "n": "Agents", "why": "Agents now get identities and managers. Someone still has to own what they do.", "img": "agents", "bt": "AI Agents Can Be Responsible. They Can Never Be Accountable.", "bu": "/blog/ai-agent-accountability-who-owns-the-decision/", "bg": "Blog", "b2t": "We evaluated 8 AI agents. Only 2 passed.", "b2u": "/blog/we-evaluated-8-ai-agents-only-2-passed/", "stat": "2 of 8", "sl": "agents cleared to build", "ct": "How a manufacturer avoided building the wrong AI agents", "cu": "/case-studies/fmcg-agentic-ai-readiness/", "cx": "Eight candidate agents tested against the data. Two cleared to build.", "cd": "A regional FMCG manufacturer"}, {"k": "money", "n": "Money", "why": "The market is paying for AI. Boards will ask what it returns inside your business.", "img": "money", "bt": "Intelligence Is Becoming More Valuable Than Information", "bu": "/blog/intelligence-more-valuable-than-information/", "bg": "Blog", "b2t": "How I started finding revenue leaks", "b2u": "/blog/how-i-started-finding-revenue-leaks/", "stat": "50%", "sl": "digital performance uplift", "ct": "Digital transformation for a global asset manager", "cu": "/case-studies/asset-management-digital-transformation/", "cx": "400+ sales teams enabled and 70+ products marketed.", "cd": "A global asset management firm"}, {"k": "rules", "n": "Rules", "why": "Courts, regulators and Dubai are writing the rules for agents. Know which ones apply to you.", "img": "rules", "bt": "Dubai Just Published Its AI Rulebook. Which Tier Are You In?", "bu": "/blog/dubai-ai-rulebook-gcc-business-readiness/", "bg": "Blog", "b2t": "The UAE started a two-year clock on 23 April 2026", "b2u": "/blog/uae-agentic-ai-clock-2028/", "stat": "1,000+", "sl": "qualified leads a month", "ct": "One strategy across four regions, including MENA", "cu": "/case-studies/franchise-demand-generation/", "cx": "US, Europe, LATAM and MENA unified on one go-to-market.", "cd": "An international franchise group"}, {"k": "attack", "n": "Attacks", "why": "AI now finds the flaw and writes the exploit. The weak link is usually access, not code.", "img": "attack", "bt": "No Hack Required: Two Outages, One Week, and the AI Agent Problem Nobody Is Governing", "bu": "/blog/no-hack-required-outages-ai-agents-weak-link/", "bg": "Blog", "b2t": "AI is now both the weapon and the defence", "b2u": "/blog/ai-is-now-both-the-weapon-and-the-defence/", "stat": "$1.2M", "sl": "attributable pipeline", "ct": "Fragmented AI initiatives to one unified strategy", "cu": "/case-studies/cybersecurity-lead-generation/", "cx": "+35% pipeline growth and +25% revenue ROI across MEA and APAC.", "cd": "A global cybersecurity SaaS firm"}, {"k": "monday", "n": "Monday", "why": "Pick one move and start. Then find out where your own weak link is.", "img": "monday", "bt": "AI Governance Isn't Optional Anymore", "bu": "/blog/ai-governance-compliance-what-to-do-now/", "bg": "Blog", "b2t": "Browse every post on Blog & Insights", "b2u": "/blog/", "stat": "5", "sl": "client case studies", "ct": "See the results behind the advice", "cu": "/case-studies/", "cx": "Retail, FMCG, finance, franchise and cybersecurity.", "cd": "Neural Horizons AI"}];
+
+(function(){
+  var root=$('#jny');if(!root)return;
+  var cur=-1,seen={};
+  var stopsEl=$$('.jstop',root),fill=$('#jfill'),prev=$('#jprev'),next=$('#jnext');
+  function show(i,scroll){
+    if(i<0||i>=JS.length)return;cur=i;seen[i]=1;var d=JS[i];
+    $('#jwhy').textContent=d.why;
+    var b=$('#jblog');b.href=d.bu;$('#jbt').textContent=d.bt;
+    var im=$('#jimg');im.src='/images/journey/'+d.img+'.jpg';im.alt=d.n+': '+d.bt;
+    var c=$('#jcs');c.href=d.cu;$('#jstat').textContent=d.stat;$('#jsl').textContent=d.sl;$('#jct').textContent=d.ct;$('#jcx').textContent=d.cx;$('#jcd').textContent=d.cd;
+    var l=$('#jb2');l.href=d.b2u;l.textContent='Also read: '+d.b2t+' →';
+    stopsEl.forEach(function(el,k){el.classList.toggle('on',k===i);el.classList.toggle('seen',!!seen[k]&&k!==i);el.setAttribute('aria-current',k===i?'step':'false')});
+    fill.style.width=(i/(JS.length-1)*83.34)+'%';
+    prev.disabled=i===0;next.disabled=i===JS.length-1;
+    next.textContent=i===JS.length-1?'Journey complete':(i===JS.length-2?'Final stop →':'Next stop →');
+    $('#jhubs').classList.toggle('show',i===JS.length-1);
+    if(scroll){var r=root.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.5)root.scrollIntoView({behavior:RM?'auto':'smooth',block:'center'})}
+  }
+  stopsEl.forEach(function(el){el.addEventListener('click',function(){show(+el.getAttribute('data-i'))})});
+  prev.addEventListener('click',function(){show(cur-1)});
+  next.addEventListener('click',function(){show(cur+1)});
+  $$('.jchip').forEach(function(b){b.addEventListener('click',function(){show(+b.getAttribute('data-go'),true)})});
+  show(0);
 })();
 })();
 </script>
