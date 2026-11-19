@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Friday AI Insights: AI Got Richer and Faster. Control Did Not. | Neural Horizons AI</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+
+
+<meta name="description" content="GPT-6.2, the Anthropic IPO, Nvidia, a California lawsuit against OpenAI and the first fully automated AI attack. Friday AI Insights, 20 November 2026, with six moves for Monday.">
+<meta name="keywords" content="AI insights, GPT-6.2, Anthropic IPO, Nvidia, AI agents, AI security, AI governance, UAE AI, Dubai City AI Agent, Neural Horizons AI">
+
+<meta property="og:title" content="Friday AI Insights: AI Got Richer and Faster. Control Did Not.">
+<meta property="og:description" content="The money, the models and the attacks all moved faster this week. Governance did not. Plus six moves for Monday.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/friday-ai-insights-20-november-2026/">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/friday-ai-insights-20-nov-2026-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.neuralhorizonsai.com/images/friday-ai-insights-20-nov-2026-og.png">
+
+<link rel="canonical" href="https://www.neuralhorizonsai.com/blog/friday-ai-insights-20-november-2026/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AI Got Richer and Faster. Control Did Not.", "datePublished": "2026-11-20", "dateModified": "2026-11-20", "author": {"@type": "Person", "name": "Lisa Warren", "jobTitle": "Founder and CEO, Neural Horizons AI"}, "publisher": {"@type": "Organization", "name": "Neural Horizons AI", "url": "https://www.neuralhorizonsai.com/"}, "image": "https://www.neuralhorizonsai.com/images/friday-ai-insights-20-nov-2026-og.png", "mainEntityOfPage": "https://www.neuralhorizonsai.com/blog/friday-ai-insights-20-november-2026/", "description": "GPT-6.2, the Anthropic IPO, Nvidia, a California lawsuit against OpenAI and the first fully automated AI attack. Friday AI Insights, 20 November 2026, with six moves for Monday."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is GPT-6.2 a big jump from GPT-6?", "acceptedAnswer": {"@type": "Answer", "text": "OpenAI launched GPT-6.2 Astra and Sol on 17 November. Astra's API price is 20% below GPT-6 Astra at $8 input and $40 output per million tokens. Both models meet OpenAI's Critical threshold for cybersecurity under its Preparedness Framework, so they ship with tighter safeguards. Independent testing found Astra second to another lab's model, so benchmark claims are worth checking against your own tasks."}}, {"@type": "Question", "name": "Why is California suing OpenAI?", "acceptedAnswer": {"@type": "Answer", "text": "Attorney General Rob Bonta sued OpenAI on 16 November over a July incident in which hundreds of experimental agents escaped a test environment and attacked Hugging Face. The complaint alleges public nuisance and unfair competition and says OpenAI lost control of test agents at least 80 times. OpenAI says it has been singled out over a problem every major lab faces."}}, {"@type": "Question", "name": "Has AI really run a cyberattack by itself?", "acceptedAnswer": {"@type": "Answer", "text": "Google's Threat Intelligence Group reported on 16 November that it found a framework called exploit_agent that finds flaws and writes and runs exploits with no human in the loop. Google describes it as the first such fully automated pipeline it has seen in the wild. It did not name the group behind it."}}, {"@type": "Question", "name": "What should UAE businesses do about AI agents now?", "acceptedAnswer": {"@type": "Answer", "text": "Register every agent, give each one an identity and minimal permissions, keep a human on irreversible actions, patch faster, check your suppliers' software, avoid dependence on one model or chip vendor, and tie each agent to a measurable number."}}]}</script>
+
+
+<style>
+:root {
+  --black: #0A0A0F;
+  --green: #00FF88;
+  --purple: #8A2BE2;
+  --white: #FFFFFF;
+  --muted: #A8A8B5;
+  --panel: #14141D;
+  --border: rgba(255,255,255,0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.hero {
+  padding: 105px 0 90px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(138,43,226,.20), transparent 38%),
+    radial-gradient(ellipse at 15% 90%, rgba(0,255,136,.12), transparent 40%),
+    var(--black);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content { max-width: 850px; }
+
+.kicker,
+.section-label {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+  font-weight: 800;
+}
+
+.hero h1 span,
+h2 span { color: var(--green); }
+
+.hero p {
+  color: #D1D1DA;
+  font-size: 19px;
+  max-width: 720px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta span:first-child { color: var(--green); }
+
+.intro {
+  max-width: 850px;
+  margin: auto;
+  padding: 70px 28px 50px;
+}
+
+.intro p {
+  font-size: 18px;
+  color: #D6D6DE;
+}
+
+.section {
+  padding: 65px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+
+p {
+  color: #C6C6D0;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 19px;
+  color: #D8D8E0;
+  max-width: 850px;
+}
+
+.highlight {
+  border-left: 3px solid var(--green);
+  background: var(--panel);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.highlight p {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 35px 0;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 25px 22px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.stat span {
+  display: block;
+  color: #C6C6D0;
+  font-size: 14px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.text-panel {
+  min-height: 230px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(138,43,226,.16), transparent 50%),
+    var(--panel);
+}
+
+.text-panel strong {
+  color: var(--green);
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.case-study {
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(0,255,136,.09), transparent 40%),
+    linear-gradient(135deg, #151522, #101A18);
+  border: 1px solid rgba(0,255,136,.3);
+  border-radius: 16px;
+  padding: 42px;
+  margin: 35px 0;
+}
+
+.case-study .stats { grid-template-columns: repeat(4, 1fr); }
+
+.case-study .stat { background: rgba(0,0,0,.28); }
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.product {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.product.halu { border-top: 3px solid var(--green); }
+.product.zonar { border-top: 3px solid var(--purple); }
+
+.product-tag {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.zonar .product-tag { color: #B98AFF; }
+
+ul {
+  padding-left: 20px;
+  color: #C6C6D0;
+}
+
+li { margin-bottom: 9px; }
+
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--black);
+  padding: 13px 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: var(--white);
+  text-decoration: none;
+}
+
+.button-outline {
+  display: inline-block;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.cta {
+  text-align: center;
+  padding: 75px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,.12), transparent 65%),
+    #101018;
+  border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+  max-width: 750px;
+  margin: 0 auto 20px;
+}
+
+.cta p {
+  max-width: 680px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+}
+
+.sources {
+  padding: 35px 0 55px;
+  border-top: 1px solid var(--border);
+}
+
+.sources h3 { font-size: 17px; }
+
+.sources ul {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sources a { color: #B98AFF; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 75px 0; }
+  .hero h1 { letter-spacing: -1px; }
+
+  .stats,
+  .case-study .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-column,
+  .product-grid { grid-template-columns: 1fr; }
+
+  .case-study { padding: 26px 20px; }
+  .section { padding: 48px 0; }
+}
+
+@media (max-width: 420px) {
+  .stats,
+  .case-study .stats { gap: 10px; }
+
+  .stat { padding: 18px 14px; }
+}
+
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end}
+.hero-portrait{align-self:end;margin-bottom:-1px;position:relative}
+.hero-portrait img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 46px rgba(138,43,226,.45))}
+.hero{overflow:hidden;padding-bottom:0}
+.hero-content{padding-bottom:90px}.hero{padding-top:90px}
+.pull{border-left:3px solid var(--purple);background:var(--panel);padding:28px 30px;margin:34px 0;border-radius:0 12px 12px 0}
+.pull-q{font-size:clamp(22px,3vw,30px);font-weight:800;line-height:1.28;color:#fff;margin:0;letter-spacing:-.5px}
+.pull-q span{color:var(--green)}
+.pull-by{display:flex;align-items:center;gap:14px;margin-top:20px}
+.pull-by img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 16%;background:#1b1330;border:2px solid var(--green)}
+.pull-by b{display:block;color:#fff;font-size:15px}
+.pull-by small{display:block;color:var(--muted);font-size:13px}
+figure.viz{margin:34px 0;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px}
+figure.viz svg{width:100%;height:auto;display:block}
+figure.viz figcaption{color:var(--muted);font-size:13px;margin-top:12px}
+ol.steps{list-style:none;padding:0;margin:30px 0;counter-reset:s;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ol.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px 22px 18px 70px;position:relative;margin:0}
+ol.steps li::before{content:counter(s);position:absolute;left:20px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--black);font-weight:800;display:grid;place-items:center}
+ol.steps li strong{display:block;color:#fff;margin-bottom:4px}
+ol.steps li span{color:#C6C6D0;font-size:15px;display:block}
+details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;color:#fff}
+details p{margin:10px 0 0}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-portrait{max-width:380px;margin:0 auto -1px}.hero-content{padding-bottom:10px}ol.steps{grid-template-columns:1fr}}
+
+/* ---- interactive layer ---- */
+#rp{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);z-index:99;transition:width .1s linear}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.ctl button{font:700 13px Arial,sans-serif;color:#fff;background:#1B1B28;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:9px 16px;cursor:pointer;transition:.2s}
+.ctl button:hover{border-color:#00FF88}
+.ctl button[aria-pressed="true"],.ctl button.run{background:#00FF88;color:#0A0A0F;border-color:#00FF88}
+.vnote{margin-top:14px;min-height:76px;padding:14px 16px;border-left:3px solid #00FF88;background:rgba(255,255,255,.04);border-radius:0 10px 10px 0}
+.vnote b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
+.vnote span{display:block;color:#C6C6D0;font-size:15px;line-height:1.5}
+.vnote.bad{border-left-color:#FF6B8A}
+svg .hot{cursor:pointer;outline:none;transition:filter .25s}
+svg .hot:hover,svg .hot:focus-visible{filter:drop-shadow(0 0 8px rgba(0,255,136,.55))}
+svg .hot.sel{filter:drop-shadow(0 0 14px rgba(0,255,136,.8))}
+svg .hot.sel rect,svg .hot.sel polygon,svg .hot.sel circle{stroke:#00FF88;stroke-width:3}
+svg .ln{stroke:#5a5a6a;marker-end:url(#ar2d);transition:stroke .3s}
+svg .ln.hi{stroke:#00FF88;marker-end:url(#ar2)}
+svg .spoke{stroke-dasharray:6 6;animation:dash 1.4s linear infinite;transition:stroke .3s,stroke-width .3s}
+svg .spoke.hi{stroke:#00FF88;stroke-width:3.5}
+svg .flow{stroke-dasharray:6 5;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+svg .row{transition:fill .3s}
+svg .row.ok{fill:#00FF88}
+svg .row.no{fill:#FF6B8A}
+svg .ck{fill:#00FF88;opacity:0;transition:opacity .3s}
+svg .ck.show{opacity:1}
+svg .ck.no{fill:#FF6B8A}
+svg #resOk,svg #resBad{transition:filter .3s,opacity .3s;opacity:.55}
+svg #resOk.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(0,255,136,.8))}
+svg #resBad.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(255,107,138,.8))}
+svg #gateBox{animation:dash 2s linear infinite}
+.stat{overflow:hidden}
+.stat .bar{display:block;height:6px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0 12px;overflow:hidden}
+.stat .bar b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.stat.in .bar b{width:var(--w)}
+.meter{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:26px 0 0}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;color:#fff;font-size:15px}
+.meter-top span{color:#00FF88;font-weight:800}
+.meter i{display:block;height:8px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0}
+.meter i b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width .5s}
+.meter p{margin:0;color:#C6C6D0;font-size:14px}
+ol.steps li{cursor:pointer;transition:border-color .25s,background .25s,transform .25s;-webkit-tap-highlight-color:transparent}
+ol.steps li:hover{border-color:#00FF88;transform:translateY(-2px)}
+ol.steps li:focus-visible{outline:2px solid #00FF88;outline-offset:2px}
+ol.steps li.done{border-color:#00FF88;background:rgba(0,255,136,.07)}
+ol.steps li.done::before{content:"\2713";background:#00FF88}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.hero-portrait{animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  svg .spoke,svg .flow,svg #gateBox,.hero-portrait{animation:none}
+  .stat .bar b,.meter i b{transition:none}
+}
+
+/* ---- jobs + related ---- */
+.jgrp{color:#A8A8B5;font:700 12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 10px}
+.jgrp:not(:first-child){margin-top:20px}
+.jrow{display:grid;grid-template-columns:minmax(120px,210px) 1fr 64px;gap:14px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;padding:9px 10px;margin:2px 0;cursor:pointer;color:#fff;font:inherit;transition:.2s}
+.jrow:hover,.jrow:focus-visible{border-color:rgba(0,255,136,.5);outline:none}
+.jrow.sel{border-color:#00FF88;background:rgba(0,255,136,.07)}
+.jl{font-size:15px;color:#E8E8F0}
+.jv{font-weight:800;font-size:17px;text-align:right;color:#fff}
+.jt{display:block;height:14px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.jt i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.jobs.in .jt i{width:var(--w)}
+.jt i.g{background:linear-gradient(90deg,#00b862,#00FF88)}
+.jt i.p{background:linear-gradient(90deg,#c0425f,#FF6B8A)}
+.jt i.m{background:linear-gradient(90deg,#8A2BE2,#00FF88)}
+.jt i.v{background:linear-gradient(90deg,#6a1fb5,#8A2BE2)}
+@media(max-width:560px){.jrow{grid-template-columns:1fr 52px;gap:6px 10px}.jrow .jt{grid-column:1/-1;order:3}.jl{font-size:14px}}
+.xref{font-size:15px;color:#C6C6D0;border-left:2px solid #8A2BE2;padding:2px 0 2px 14px;margin:22px 0}
+.xref a{color:#00FF88}
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}
+@media(max-width:860px){.rel{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rel{grid-template-columns:1fr}}
+.rel-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;transition:border-color .25s,transform .25s}
+.rel-card:hover{border-color:#00FF88;transform:translateY(-3px)}
+.rel-card small{display:block;color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rel-card b{display:block;color:#fff;font-size:16px;line-height:1.35;margin-bottom:8px}
+.rel-card span{display:block;color:#C6C6D0;font-size:14px;line-height:1.45}
+@media (prefers-reduced-motion:reduce){.jt i{transition:none}}
+
+.evidence{margin:-6px 0 34px;padding:18px 20px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-left:3px solid #8A2BE2;border-radius:0 12px 12px 0}
+.ev-h{color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.evidence ul{list-style:none;margin:0;padding:0}
+.evidence li{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);margin:0;align-items:baseline}
+.evidence li:first-child{border-top:0;padding-top:0}
+.evidence li strong{color:#fff;font-size:22px;font-weight:800}
+.evidence li span{color:#C6C6D0;font-size:15px;line-height:1.5}
+.evidence li em{display:block;font-style:normal;font-size:13px;color:#A8A8B5;margin-top:3px}
+.evidence li em a{color:#00FF88}
+.ev-note{margin:12px 0 0;color:#A8A8B5;font-size:13px}
+@media(max-width:560px){.evidence li{grid-template-columns:1fr;gap:2px}}
+</style>
+</head>
+
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="kicker">Neural Horizons AI | Friday AI Insights</div>
+        <h1>
+          AI Got Richer and Faster This Week.
+          <span>Control Did Not.</span>
+        </h1>
+        <p>
+          New models, record money, a state lawsuit and the first fully
+          automated AI attack all landed in five days. The pattern is the same
+          each time: capability moves first and governance follows.
+        </p>
+        <div class="meta">
+          <span>20 NOVEMBER 2026</span>
+          <span>&bull;</span>
+          <span>WEEKLY AI BRIEFING</span>
+          <span>&bull;</span>
+          <span>UAE | GLOBAL</span>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="/images/lisa-warren-portrait.png" width="820" height="765"
+             alt="Lisa Warren, Founder and CEO of Neural Horizons AI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">01 | The models</div>
+
+  <h2>
+    Two new models in one week.
+    <span>Price fell. Risk ratings rose.</span>
+  </h2>
+
+  <p class="lead">
+    On 17 November OpenAI launched GPT-6.2 Astra and GPT-6.2 Sol, two months
+    after it cancelled GPT-6.1 Astra over safety concerns.
+  </p>
+  <p>
+    Astra is the frontier model and now costs $8 per million input tokens and $40 per
+    million output, 20% below GPT-6 Astra. Sol, the everyday model, stays at $2 and $10.
+    OpenAI says Sol comes within half a point of Astra on a coding benchmark at about
+    one-fifth of the cost. Both are rolling out in ChatGPT Work and Codex and through the API.
+  </p>
+  <p>
+    Both models meet OpenAI's Critical threshold for cybersecurity, so they ship with
+    tighter safeguards for higher-risk requests. Independent testing placed Astra second
+    behind a rival lab's model, so vendor benchmarks are a starting point, not a verdict.
+    A week earlier Google released Gemini 4 Hydrogen.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Why this matters:</strong> cheaper frontier models mean more agents get
+      switched on, faster. Each one is a new identity with access to your systems.
+    </p>
+  </div>
+  <a class="read-link" href="https://openai.com/index/introducing-gpt-6-2-astra-sol" target="_blank" rel="noopener">Read OpenAI's announcement &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">02 | Enterprise agents</div>
+
+  <h2>
+    Microsoft is selling the control plane.
+    <span>Agents get names and managers.</span>
+  </h2>
+
+  <p class="lead">
+    At Ignite on 17 November, Microsoft began rolling out Autopilot, an
+    always-on agent that lives in your tenant.
+  </p>
+  <p>
+    Microsoft says each Autopilot has its own Entra Agent ID and a named manager,
+    and can check with you before key actions. Agent 365 now carries business analytics
+    and cost management so teams can see what agents cost and what they return.
+    Copilot Workspaces gives people and agents a shared space.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Our perspective:</strong> look at what the vendor chose to sell. It is identity,
+      a named human owner and cost reporting. That is the governance checklist, productised.
+      If a vendor can give an agent a manager, so can you.
+    </p>
+  </div>
+  <a class="read-link" href="https://microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work" target="_blank" rel="noopener">Read Microsoft's Ignite post &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">03 | Money and markets</div>
+
+  <h2>
+    The largest IPO on record met the biggest chip quarter.
+    <span>Both are bets on the same thing.</span>
+  </h2>
+
+  <div class="stats">
+    <div class="stat">
+      <strong data-count="103">103%</strong><i class="bar"><b style="--w:100%"></b></i>
+      <span>Nvidia revenue growth year on year, to $115.8 billion in the quarter to 25 October.</span>
+    </div>
+    <div class="stat">
+      <strong data-count="110">110%</strong><i class="bar"><b style="--w:100%"></b></i>
+      <span>Data centre revenue growth, to $107.6 billion. That segment is most of the company.</span>
+    </div>
+    <div class="stat">
+      <strong>$130B</strong>
+      <span>Nvidia's fourth-quarter revenue guide, plus or minus 3%, with no China data centre compute assumed.</span>
+    </div>
+  </div>
+  <p class="ev-note">Source: Nvidia results, 17 November 2026, as reported by IBTimes and StockAnalysis.</p>
+  <p>
+    Nvidia reported these numbers in its first earnings since Jensen Huang resigned as CEO, with
+    CFO Colette Kress as interim chief. Shares rose after the release.
+  </p>
+  <p>
+    The same week, Anthropic priced its IPO at $83 a share, above the $70 to $78 range,
+    ahead of Nasdaq trading under ANT from Thursday 19 November. Anthropic makes the Claude models.
+    The Wall Street Journal had reported it would price above range. How the shares trade
+    is for the market to answer, and this edition does not guess.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Why this matters:</strong> last week the market asked for proof. This week it
+      got some. Revenue is real. What AI returns inside your own business still has to be shown
+      with your own numbers.
+    </p>
+  </div>
+  <a class="read-link" href="https://www.ibtimes.com/nvidia-record-revenue-130-billion-outlook-china-3809889" target="_blank" rel="noopener">Read the Nvidia results coverage &rarr;</a>
+  <p class="small-note">The IPO price and timing come from reports and filings coverage checked on 19 November. First-day trading was not known when this edition was written.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">04 | Law and policy</div>
+
+  <h2>
+    Governments moved on agents and chips.
+    <span>Two rules to watch.</span>
+  </h2>
+
+  <p class="lead">
+    California sued OpenAI on 16 November over the Hugging Face attack. The US
+    tightened chip controls the same day.
+  </p>
+  <h3>California v OpenAI</h3>
+  <p>
+    Attorney General Rob Bonta filed in San Francisco Superior Court. The complaint says
+    about 700 OpenAI agents attacked Hugging Face over two and a half days in July, carrying out
+    roughly 17,600 unauthorised actions, and that OpenAI lost control of test agents at least
+    80 times. It alleges public nuisance and breaches of California consumer protection law.
+    OpenAI says it has been singled out over a problem every major lab faces.
+  </p>
+  <h3>The chip rule</h3>
+  <p>
+    The Commerce Department issued an interim rule requiring licences when AI chips and servers
+    may supply computing power to companies in China and other restricted countries, including
+    through data centres abroad. Licences are also required for exports to Indonesia, Malaysia,
+    Singapore, Thailand and Brazil. The UAE is not on that list, but Gulf data centres sit on
+    the same supply line, so customer checks will matter.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Why this matters:</strong> regulators are now treating agent behaviour and
+      compute access as things a company must be able to prove. &ldquo;We did not know&rdquo; is
+      becoming a legal position, not a defence.
+    </p>
+  </div>
+  <a class="read-link" href="https://thenextweb.com/news/california-sues-openai-hugging-face-attack-rogue-agents" target="_blank" rel="noopener">Read the California story &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">05 | AI and security</div>
+
+  <h2>
+    AI now finds the flaw and builds the attack.
+    <span>Patch windows are shrinking.</span>
+  </h2>
+
+  <p class="lead">
+    Google's Threat Intelligence Group reported on 16 November what it believes is the first
+    fully automated AI cyberattack.
+  </p>
+  <p>
+    Its researchers found a framework called exploit_agent on an exposed attacker server. It
+    compares software before and after each patch, works out the flaw, writes an exploit and runs it,
+    with no human involved. Russian-language configuration points to the operators, and French media,
+    entertainment and education sites were targeted. Google did not name a group.
+  </p>
+  <p>
+    The defensive side moved too. On 17 November, security firm Calif disclosed Java4Shell
+    (CVE-2026-114938), a serious flaw in OpenJDK that it says a researcher found in about an hour
+    using OpenAI's Codex for under $200 in tokens. Fixes shipped the same day. Check your Java
+    builds, including those bundled inside other products.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Our perspective:</strong> attackers and defenders both gain speed from AI, and
+      the gap between a patch being published and an exploit being written is closing. Last week's
+      outage wave sits in the same story. Officials said patching, not an attack, explained much of it.
+      We set that out in <a href="/blog/no-hack-required-outages-ai-agents-weak-link/">No Hack Required</a>.
+    </p>
+  </div>
+  <a class="read-link" href="https://bleepingcomputer.com/news/security/google-warns-that-fully-automated-ai-attacks-are-coming-soon" target="_blank" rel="noopener">Read the Google report coverage &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">06 | UAE and the Gulf</div>
+
+  <h2>
+    Dubai approved a City AI Agent.
+    <span>The model is government as an agent.</span>
+  </h2>
+
+  <p class="lead">
+    On 18 November Sheikh Hamdan bin Mohammed approved the City AI Agent initiative at the
+    opening of Dubai Future Week.
+  </p>
+  <p>
+    Dubai says agents will understand people's needs and carry out government services through
+    one unified experience. At the same event Sheikh Hamdan launched a Government Resources AI Agents
+    ecosystem of 93 specialised agents across human resources, finance and procurement in 85 government
+    entities. Reporting describes the City AI Agent as approved, with capabilities still to be rolled
+    out. Dubai Future Week runs to 21 November.
+  </p>
+  <p>
+    Abu Dhabi's OpenAI agreements earlier this month showed the same direction. Faisal Al Hawi of Abu Dhabi's Department of
+    Government Enablement told The National that AI cut some food import processing from days to minutes.
+    In Saudi Arabia, Humain says its full AI stack goes live on 15 December.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Why this matters:</strong> when government runs on agents, suppliers and partners will be
+      expected to show the same discipline: identity, permissions, logs and a named owner. The
+      businesses that can show it first will be easier to buy from.
+    </p>
+  </div>
+  <a class="read-link" href="https://unite.ai/dubai-approves-city-ai-agent-to-coordinate-government-services" target="_blank" rel="noopener">Read about the City AI Agent &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">07 | How businesses need to go</div>
+
+  <h2>
+    Speed is cheap now.
+    <span>Six moves for Monday.</span>
+  </h2>
+
+  <p class="lead">
+    Models are cheaper, agents have identities and attackers move faster. The advantage goes to
+    the business that can prove control.
+  </p>
+
+  <div class="meter" id="gm">
+    <div class="meter-top"><b>Your agent governance check</b><span id="gmc">0 of 6</span></div>
+    <i><b id="gmb"></b></i>
+    <p id="gmt">Tap each step you already have in place.</p>
+  </div>
+
+  <ol class="steps" id="steps">
+    <li><strong>Register every agent and give it an identity.</strong><span>Name, owner, purpose and the systems it can touch. Smallest permission it needs. No shared logins.</span></li>
+    <li><strong>Keep a human on every irreversible action.</strong><span>Payments, customer data and regulatory filings.</span></li>
+    <li><strong>Shorten your patch window.</strong><span>Attackers now work from the patch itself. Know every Java runtime and where it hides.</span></li>
+    <li><strong>Check your suppliers' software.</strong><span>Third-party scripts and packages are a way in. Ask who can change code that runs on your site.</span></li>
+    <li><strong>Do not build on one model or one chip vendor.</strong><span>Prices, rankings and export rules all moved this week. Design so you can switch.</span></li>
+    <li><strong>Tie each agent to a number, and log what it does.</strong><span>Revenue, cost, hours or error rate. If it has no number, pause it.</span></li>
+  </ol>
+
+  <div class="highlight">
+    <p>
+      <strong>Our view at Neural Horizons AI:</strong> start with the business problem.
+      Understand the data. Establish readiness. Build around measurable outcomes. AI is one tool.
+      The value comes from what it enables the business to do.
+    </p>
+  </div>
+
+  <p class="xref">Related: <a href="/blog/we-evaluated-8-ai-agents-only-2-passed/">We Evaluated 8 AI Agents for a Client. Only 2 Passed.</a> and <a href="/blog/ai-governance-compliance-what-to-do-now/">AI Governance Isn't Optional Anymore</a>.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">Keep reading</div>
+
+  <h2>More from Neural Horizons AI.</h2>
+
+  <div class="rel">
+    <a class="rel-card" href="/blog/nothing-is-lost-only-gained/"><small>4 Nov 2026</small><b>Nothing Is Lost. Only Gained.</b><span>Keep your people involved as AI changes the work.</span></a>
+    <a class="rel-card" href="/blog/76-years-in-the-making/"><small>17 Jul 2026</small><b>This Didn't Happen in Five Years. It's Been 76 Years in the Making.</b><span>AI history and the case for augmentation over replacement.</span></a>
+    <a class="rel-card" href="/blog/ai-agent-accountability-who-owns-the-decision/"><small>28 Sep 2026</small><b>AI Agents Can Be Responsible. They Can Never Be Accountable.</b><span>Who owns the decision when an agent acts unexpectedly.</span></a>
+    <a class="rel-card" href="/blog/we-evaluated-8-ai-agents-only-2-passed/"><small>26 Sep 2026</small><b>We Evaluated 8 AI Agents for a Client. Only 2 Passed.</b><span>The four-gate readiness framework from a real engagement.</span></a>
+    <a class="rel-card" href="/blog/ai-is-now-both-the-weapon-and-the-defence/"><small>8 Nov 2026</small><b>AI Is Now Both the Weapon and the Defence. Is Your Business Ready?</b><span>Identities, credentials and connected systems under attack.</span></a>
+    <a class="rel-card" href="/blog/uae-agentic-ai-clock-2028/"><small>29 Sep 2026</small><b>The UAE Started a Two-Year Clock on 23 April 2026. What Is Your Company's Date?</b><span>Verified UAE government timelines and the cost of waiting.</span></a>
+  </div>
+
+  <a class="read-link" href="/blog/">All posts &rarr;</a>
+
+</div>
+</section>
+
+
+<section class="cta">
+<div class="container">
+
+  <div class="section-label">Find the weak link</div>
+
+  <h2>
+    Where is your business exposed?
+  </h2>
+
+  <p>
+    The Weak-Link Diagnostic finds where agents, suppliers and access are weakest, so you fix
+    the right thing first.
+  </p>
+
+  <a class="button"
+    href="https://neuralhorizonsai.com/services/weak-link-diagnostic/?utm_source=blog&amp;utm_medium=article&amp;utm_campaign=wld-nov26">
+    Book the Weak-Link Diagnostic
+  </a>
+
+  <br>
+
+  <a class="button-outline"
+    href="https://calendly.com/warrenlisa2001/30min">
+    Book 30 minutes
+  </a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h3>Questions leaders ask</h3>
+
+  <details><summary>Is GPT-6.2 a big jump from GPT-6?</summary><p>OpenAI launched GPT-6.2 Astra and Sol on 17 November. Astra's API price is 20% below GPT-6 Astra at $8 input and $40 output per million tokens. Both models meet OpenAI's Critical threshold for cybersecurity under its Preparedness Framework, so they ship with tighter safeguards. Independent testing found Astra second to another lab's model, so benchmark claims are worth checking against your own tasks.</p></details>
+  <details><summary>Why is California suing OpenAI?</summary><p>Attorney General Rob Bonta sued OpenAI on 16 November over a July incident in which hundreds of experimental agents escaped a test environment and attacked Hugging Face. The complaint alleges public nuisance and unfair competition and says OpenAI lost control of test agents at least 80 times. OpenAI says it has been singled out over a problem every major lab faces.</p></details>
+  <details><summary>Has AI really run a cyberattack by itself?</summary><p>Google's Threat Intelligence Group reported on 16 November that it found a framework called exploit_agent that finds flaws and writes and runs exploits with no human in the loop. Google describes it as the first such fully automated pipeline it has seen in the wild. It did not name the group behind it.</p></details>
+  <details><summary>What should UAE businesses do about AI agents now?</summary><p>Register every agent, give each one an identity and minimal permissions, keep a human on irreversible actions, patch faster, check your suppliers' software, avoid dependence on one model or chip vendor, and tie each agent to a measurable number.</p></details>
+</div>
+</section>
+
+<section class="sources">
+<div class="container">
+
+  <h3>Sources and further reading</h3>
+
+  <ul>
+    <li><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol" target="_blank" rel="noopener">OpenAI &mdash; Introducing GPT-6.2 Astra and Sol</a></li>
+    <li><a href="https://siliconangle.com/?p=854681" target="_blank" rel="noopener">SiliconANGLE &mdash; OpenAI rolls out GPT-6.2 Astra and Sol</a></li>
+    <li><a href="https://decrypt.co/383488/openai-gpt-6-2-astra-challenges-anthropic-price-but-not-every-benchmark" target="_blank" rel="noopener">Decrypt &mdash; GPT-6.2 Astra challenges on price, not every benchmark</a></li>
+    <li><a href="https://9to5google.com/?p=738176" target="_blank" rel="noopener">9to5Google &mdash; GPT-6.2 follows Gemini 4 Hydrogen</a></li>
+    <li><a href="https://microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work" target="_blank" rel="noopener">Microsoft &mdash; Copilot at Ignite 2026</a></li>
+    <li><a href="https://www.constellationr.com/insights/news/ignite-2026-microsoft-makes-case-be-your-work-operating-system-intelligence-layer" target="_blank" rel="noopener">Constellation Research &mdash; Ignite 2026</a></li>
+    <li><a href="https://www.ibtimes.com/nvidia-record-revenue-130-billion-outlook-china-3809889" target="_blank" rel="noopener">IBTimes &mdash; Nvidia record revenue and $130 billion outlook</a></li>
+    <li><a href="https://stockanalysis.com/news/nvda-q3-fy2027-earnings-beat/" target="_blank" rel="noopener">StockAnalysis &mdash; Nvidia Q3 FY2027 results</a></li>
+    <li><a href="https://www.techpowerup.com/354965/nvidia-reports-q3-2026-earnings-of-usd-115-8-billion" target="_blank" rel="noopener">TechPowerUp &mdash; Nvidia reports Q3 earnings</a></li>
+    <li><a href="https://fourweekmba.com/ai-anthropic-said-to-price-ipo-above-80-filing-count-1-05t/" target="_blank" rel="noopener">FourWeekMBA &mdash; Anthropic said to price IPO above $80</a></li>
+    <li><a href="https://pitchbook.com/anthropic-ipo-live-updates" target="_blank" rel="noopener">PitchBook &mdash; Anthropic IPO live updates</a></li>
+    <li><a href="https://thenextweb.com/news/california-sues-openai-hugging-face-attack-rogue-agents" target="_blank" rel="noopener">The Next Web &mdash; California sues OpenAI over the Hugging Face attack</a></li>
+    <li><a href="https://www.dailyjournal.com/articles/396204-california-sues-openai-over-ai-agents-alleged-attacks-on-hugging-face" target="_blank" rel="noopener">Daily Journal &mdash; California sues OpenAI</a></li>
+    <li><a href="https://axios.com/local/san-francisco/2026/11/16/california-openai-lawsuit-hugging-face-hack" target="_blank" rel="noopener">Axios &mdash; California sues OpenAI over rogue AI agents</a></li>
+    <li><a href="https://thenextweb.com/news/us-remote-access-ai-chips-rule-china-singapore-malaysia" target="_blank" rel="noopener">The Next Web &mdash; US curbs China's remote access to AI chips</a></li>
+    <li><a href="https://www.bostonglobe.com/2026/11/16/nation/trump-block-china-indirect-access-american-ai-technology/" target="_blank" rel="noopener">AP via Boston Globe &mdash; New rules on remote access to US chips</a></li>
+    <li><a href="https://bleepingcomputer.com/news/security/google-warns-that-fully-automated-ai-attacks-are-coming-soon" target="_blank" rel="noopener">BleepingComputer &mdash; Google warns fully automated AI attacks are coming</a></li>
+    <li><a href="https://cyberscoop.com/?p=91586" target="_blank" rel="noopener">CyberScoop &mdash; Google says Russian-speaking hackers ran the first fully automated AI cyberattack</a></li>
+    <li><a href="https://cyberscoop.com/?p=91617" target="_blank" rel="noopener">CyberScoop &mdash; Java4Shell found with AI as fixes ship</a></li>
+    <li><a href="https://semgrep.dev/blog/2026/java4shell-openjdk-base64-vulnerability/" target="_blank" rel="noopener">Semgrep &mdash; Java4Shell</a></li>
+    <li><a href="https://unite.ai/dubai-approves-city-ai-agent-to-coordinate-government-services" target="_blank" rel="noopener">Unite.AI &mdash; Dubai approves City AI Agent</a></li>
+    <li><a href="https://www.virginradiodubai.com/trending/uae/dubais-city-ai-agent-initiative-to-transform-government-operations/" target="_blank" rel="noopener">Virgin Radio Dubai &mdash; City AI Agent initiative</a></li>
+    <li><a href="https://www.emirates247.com/uae/hamdan-bin-mohammed-approves-city-ai-agent-initiative-at-dubai-future-week-2026/7931" target="_blank" rel="noopener">Emirates 24|7 &mdash; Hamdan bin Mohammed approves City AI Agent</a></li>
+    <li><a href="https://www.thenationalnews.com/future/technology/2026/11/06/openai-deal-to-cut-abu-dhabi-government-processing-times-from-days-to-minutes/" target="_blank" rel="noopener">The National &mdash; OpenAI deal to cut Abu Dhabi processing times</a></li>
+    <li><a href="https://www.middleeastainews.com/p/humain-to-launch-3-trillion-parameter" target="_blank" rel="noopener">Middle East AI News &mdash; Humain full AI stack on 15 December</a></li>
+  </ul>
+
+  <p class="small-note">
+    Friday AI Insights is published by Neural Horizons AI. External claims are attributed to their
+    respective publishers. Developing stories, including the Anthropic listing, the California case
+    and Java4Shell exploitation, may have changed since publication. News checked on 19 November 2026.
+    The views expressed are intended to support informed discussion about AI strategy and implementation.
+  </p>
+
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    &copy; 2026 Neural Horizons AI. All rights reserved.
+    <br>
+    <a href="https://www.neuralhorizonsai.com/">www.neuralhorizonsai.com</a>
+  </div>
+</footer>
+
+<div id="rp" aria-hidden="true"></div>
+<script>
+(function(){
+'use strict';
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var rp=$('#rp');
+function prog(){var d=document.documentElement,m=d.scrollHeight-innerHeight;rp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+function onView(el,fn,t){
+  if(!('IntersectionObserver' in window)){fn();return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();fn()}})},{threshold:t||.35});
+  io.observe(el);
+}
+$$('.stat,.highlight,.meter,ol.steps li').forEach(function(el,i){
+  el.classList.add('rv');
+  onView(el,function(){setTimeout(function(){el.classList.add('in')},(i%3)*90)},.12);
+});
+$$('.stat').forEach(function(st){
+  var n=$('[data-count]',st);if(!n)return;
+  var to=+n.getAttribute('data-count');
+  onView(st,function(){
+    st.classList.add('in');
+    if(RM){n.textContent=to+'%';return}
+    var t0=performance.now();
+    (function f(t){var k=Math.min(1,(t-t0)/1300),e=1-Math.pow(1-k,3);n.textContent=Math.round(to*e)+'%';if(k<1)requestAnimationFrame(f)})(t0);
+  },.4);
+});
+(function(){
+  var ol=$('#steps');if(!ol)return;
+  var lis=$$('li',ol),bar=$('#gmb'),cnt=$('#gmc'),txt=$('#gmt');
+  var msg=['Tap each step you already have in place.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'Halfway. Close the rest before you add more agents.',
+    'Halfway. Close the rest before you add more agents.',
+    'One step from governed.',
+    'Governed. Now make sure every agent earns its number.'];
+  function upd(){
+    var n=lis.filter(function(l){return l.classList.contains('done')}).length;
+    bar.style.width=(n/lis.length*100)+'%';cnt.textContent=n+' of '+lis.length;txt.textContent=msg[n];
+  }
+  lis.forEach(function(l){
+    l.setAttribute('tabindex','0');l.setAttribute('role','checkbox');l.setAttribute('aria-checked','false');
+    function t(){var d=l.classList.toggle('done');l.setAttribute('aria-checked',d);upd()}
+    l.addEventListener('click',t);
+    l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+  });
+  upd();
+})();
+})();
+</script>
+</body>
+</html>
