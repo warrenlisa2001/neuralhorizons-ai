@@ -1,3 +1,4 @@
+import { handleFormRequest } from './forms.js';
 import { authenticateZonarTenant } from './zonar-auth.js';
 import { handleZonarIdentity } from './zonar-identity.js';
 import { authorizeZonarAction } from './zonar-permissions.js';
@@ -143,6 +144,12 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/news') {
       return handleNewsRequest(request, ctx);
+    }
+    if (url.pathname === '/api/contact') {
+      return handleFormRequest(request, env, 'contact');
+    }
+    if (url.pathname === '/api/newsletter') {
+      return handleFormRequest(request, env, 'newsletter');
     }
     const resumableUploadMatch = url.pathname.match(/^\/api\/zonar\/tenants\/([^/]+)\/files\/uploads(?:\/([^/]+)(?:\/parts\/(\d+)|\/(complete|abort))?)?$/);
     if (resumableUploadMatch) {
