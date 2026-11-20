@@ -13,6 +13,7 @@ const reconciliationResultsModuleUrl = new URL('../src/zonar-reconciliation-resu
 const operationalEventsModuleUrl = new URL('../src/zonar-operational-events.js', import.meta.url).href;
 const asyncReconciliationModuleUrl = new URL('../src/zonar-async-reconciliation.js', import.meta.url).href;
 const findingsModuleUrl = new URL('../src/zonar-findings.js', import.meta.url).href;
+const formsModuleUrl = new URL('../src/forms.js', import.meta.url).href;
 const executableSource = source
   .replaceAll("'./zonar-auth.js'", JSON.stringify(authModuleUrl))
   .replaceAll("'./zonar-identity.js'", JSON.stringify(identityModuleUrl))
@@ -23,7 +24,8 @@ const executableSource = source
   .replaceAll("'./zonar-reconciliation-results.js'", JSON.stringify(reconciliationResultsModuleUrl))
   .replaceAll("'./zonar-operational-events.js'", JSON.stringify(operationalEventsModuleUrl))
   .replaceAll("'./zonar-async-reconciliation.js'", JSON.stringify(asyncReconciliationModuleUrl))
-  .replaceAll("'./zonar-findings.js'", JSON.stringify(findingsModuleUrl));
+  .replaceAll("'./zonar-findings.js'", JSON.stringify(findingsModuleUrl))
+  .replaceAll("'./forms.js'", JSON.stringify(formsModuleUrl));
 const workerModule = await import('data:text/javascript;base64,' + Buffer.from(executableSource).toString('base64'));
 const worker = workerModule.default;
 const TOKEN = 'local-test-token';
