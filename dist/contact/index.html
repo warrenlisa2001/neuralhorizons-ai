@@ -1316,7 +1316,7 @@ function fallbackToEmail(){
   var bodyLines=['Name: '+(data.name||''),'Email: '+(data.email||''),'Phone: '+(data.phone||''),'','Message:',data.message||''];
   var body=encodeURIComponent(bodyLines.join('\n'));
   if(typeof dataLayer!=='undefined'){dataLayer.push({'event':'form_submit_fallback_email','form_name':'contact_form'});}
-  window.location.href='/contact/'+subject+'&body='+body;
+  window.location.href='mailto:lisa@neuralhorizonsai.com?subject='+subject+'&body='+body;
   submitBtn.innerHTML='Opening your email client…';
   submitBtn.style.background='linear-gradient(135deg,#05C793,#00A87A)';submitBtn.style.color='#fff';
   setTimeout(function(){submitBtn.disabled=false;submitBtn.innerHTML=originalText;},4000);
