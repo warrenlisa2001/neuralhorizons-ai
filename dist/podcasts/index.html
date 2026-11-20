@@ -9,13 +9,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Podcasts | Neural Horizons AI</title>
-<meta name="description" content="The Agentic Shift — Lisa Warren's own AI podcast — plus five essential AI podcasts worth your time: Lex Fridman, Dwarkesh, No Priors, Hard Fork and AI at a16z.">
+<meta name="description" content="The Agentic Shift — Lisa Warren's own AI podcast — plus six AI podcasts worth your time, each with a recent episode: Dwarkesh, No Priors, Latent Space, Lex Fridman, The Cognitive Revolution and The AI Daily Brief.">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 <link rel="canonical" href="https://www.neuralhorizonsai.com/podcasts/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.neuralhorizonsai.com/podcasts/">
 <meta property="og:title" content="Podcasts | Neural Horizons AI">
-<meta property="og:description" content="The Agentic Shift — Lisa Warren's own AI podcast — plus five essential AI podcasts worth your time.">
+<meta property="og:description" content="The Agentic Shift — Lisa Warren's own AI podcast — plus six AI podcasts worth your time, refreshed 20 November 2026.">
 <meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
 <meta property="og:site_name" content="Neural Horizons AI">
 <meta name="twitter:card" content="summary_large_image">
@@ -68,7 +68,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .btn-ghost:hover{background:var(--off-white)}
 
 /* Live event card */
-.event-card{background:#0B0E1A;color:#fff;border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
+.event-card{align-self:start;background:#0B0E1A;color:#fff;border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
 .event-card::before{content:'';position:absolute;top:-40%;right:-20%;width:280px;height:280px;background:radial-gradient(circle,rgba(124,58,237,.35) 0%,transparent 70%)}
 .event-card>*{position:relative;z-index:1}
 .event-card .badge{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18);color:#fff}
@@ -87,6 +87,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .pod-card h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--slate);margin:14px 0 6px;letter-spacing:-0.01em}
 .pod-card p{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:14px}
 .pod-card .thumb-wrap{margin-bottom:0}
+.pod-card{display:flex;flex-direction:column}
+.pod-card h3{margin:10px 0 8px;font-size:17px}
+.pod-card p{flex:1}
+.pod-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px}
+.pod-show{color:var(--accent)}
+.pod-date{color:var(--slate-light);font-weight:600;letter-spacing:.6px;white-space:nowrap}
+.pod-card{border-top:3px solid var(--accent)}
+@media(min-width:900px){.pod-grid{grid-template-columns:repeat(3,1fr)}}
 .pod-card-foot{display:flex;align-items:center;justify-content:space-between}
 .pod-more{font-size:12.5px;color:var(--accent);font-weight:600;text-decoration:none}
 .pod-more:hover{text-decoration:underline}
@@ -146,17 +154,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       </div>
 
       <div class="event-card">
-        <div class="badge"><span class="dot"></span> Live &amp; Virtual Event</div>
-        <h2>Next episode — recorded live</h2>
-        <p>Wed 23 September 2026 · 12:30 PM UAE time. A guest speaker we can't name yet — but you'll want to be in the room. Spots are limited.</p>
-        <div class="countdown mono" id="agentic-countdown">
-          <div class="seg"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
-          <div class="seg"><div class="num" id="cd-h">--</div><div class="lbl">Hrs</div></div>
-          <div class="seg"><div class="num" id="cd-m">--</div><div class="lbl">Min</div></div>
-          <div class="seg"><div class="num" id="cd-s">--</div><div class="lbl">Sec</div></div>
-        </div>
-        <div class="event-meta">Hosted by Lisa Warren · Founder, Neural Horizons AI</div>
-        <a class="btn btn-primary" href="https://luma.com/u8ilqbzc" target="_blank" rel="noopener" style="width:100%;justify-content:center;">Register on Luma →</a>
+        <div class="badge"><span class="dot"></span> Follow The Agentic Shift</div>
+        <h2>New episodes and live recordings</h2>
+        <p>Subscribe on YouTube to be first to see each new episode of The Agentic Shift, and visit the podcast site for the full story behind the show.</p>
+        <div class="event-meta">Hosted by Lisa Warren &middot; Founder, Neural Horizons AI</div>
+        <a class="btn btn-primary" href="https://www.youtube.com/@lisawarren6167" target="_blank" rel="noopener" style="width:100%;justify-content:center;">Subscribe on YouTube &rarr;</a>
       </div>
     </div>
 
@@ -165,74 +167,68 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="section-label">Also Worth Your Time</div>
-    <p class="section-intro">Five AI podcasts we follow closely — for context on where the industry is actually headed, not just what's trending this week.</p>
+    <div class="section-label">Fresh This Month &middot; Also Worth Your Time</div>
+    <p class="section-intro">Six AI podcasts we follow, each with a recent episode worth your time. Refreshed 20 November 2026.</p>
 
     <div class="pod-grid">
 
       <div class="pod-card">
-        <div class="thumb-wrap" onclick="playPod(this,'EV7WhVT270Q')">
-          <img src="https://i.ytimg.com/vi/EV7WhVT270Q/hqdefault.jpg" alt="Lex Fridman Podcast thumbnail" loading="lazy">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <h3>Lex Fridman Podcast</h3>
-        <p>Long-form, unhurried conversations with the researchers and founders building frontier AI.</p>
+        <div class="pod-meta"><span class="pod-show">Dwarkesh Podcast</span><span class="pod-date">5 Nov 2026</span></div>
+        <h3>Can AI models bluff?</h3>
+        <p>Dwarkesh uses the social-deduction game Blood on the Clocktower as a benchmark for long-term strategy, bluffing and multi-agent coordination in today&rsquo;s models.</p>
         <div class="pod-card-foot">
-          <a class="pod-more" href="https://www.youtube.com/@lexfridman" target="_blank" rel="noopener">More episodes →</a>
+          <a class="pod-more" href="https://www.dwarkesh.com/podcast" target="_blank" rel="noopener">Listen on Dwarkesh &rarr;</a>
         </div>
       </div>
 
       <div class="pod-card">
-        <div class="thumb-wrap" onclick="playPod(this,'y8ZEJe2Ss9k')">
-          <img src="https://i.ytimg.com/vi/y8ZEJe2Ss9k/hqdefault.jpg" alt="Dwarkesh Podcast thumbnail" loading="lazy">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <h3>Dwarkesh Podcast</h3>
-        <p>Dwarkesh Patel's deep-dive interviews with the people setting AI's technical direction.</p>
+        <div class="pod-meta"><span class="pod-show">No Priors</span><span class="pod-date">5 Nov 2026</span></div>
+        <h3>Robinhood and agentic trading</h3>
+        <p>Robinhood CEO Vlad Tenev on tokenization and agentic trading, including how fast customers are adopting AI agents inside brokerage accounts.</p>
         <div class="pod-card-foot">
-          <a class="pod-more" href="https://www.dwarkesh.com/podcast" target="_blank" rel="noopener">More episodes →</a>
+          <a class="pod-more" href="https://www.youtube.com/@NoPriorsPodcast" target="_blank" rel="noopener">Watch No Priors &rarr;</a>
         </div>
       </div>
 
       <div class="pod-card">
-        <div class="thumb-wrap" onclick="playPod(this,'TOsNrV3bXtQ')">
-          <img src="https://i.ytimg.com/vi/TOsNrV3bXtQ/hqdefault.jpg" alt="No Priors podcast thumbnail" loading="lazy">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <h3>No Priors</h3>
-        <p>Sarah Guo and Elad Gil talk to the founders and researchers actually shaping AI.</p>
+        <div class="pod-meta"><span class="pod-show">Latent Space</span><span class="pod-date">2 Nov 2026</span></div>
+        <h3>Building legal agents without seeing the data</h3>
+        <p>Legora CTO Jacob Lauritzen on how you evaluate agents when you cannot see customer data, and why the billable hour is under pressure.</p>
         <div class="pod-card-foot">
-          <a class="pod-more" href="https://www.youtube.com/@NoPriorsPodcast" target="_blank" rel="noopener">More episodes →</a>
+          <a class="pod-more" href="https://latent.space/p/building-ai-for-lawyers-jacob-lauritzen-cto-of-legora/" target="_blank" rel="noopener">Listen to the episode &rarr;</a>
         </div>
       </div>
 
       <div class="pod-card">
-        <div class="thumb-wrap" onclick="playPod(this,'m4e2933lbYI')">
-          <img src="https://i.ytimg.com/vi/m4e2933lbYI/hqdefault.jpg" alt="Hard Fork podcast thumbnail" loading="lazy">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <h3>Hard Fork</h3>
-        <p>The New York Times' Kevin Roose and Casey Newton on the week's biggest tech and AI stories.</p>
+        <div class="pod-meta"><span class="pod-show">Lex Fridman Podcast</span><span class="pod-date">26 Oct 2026 &middot; #503</span></div>
+        <h3>AI and the crisis in mathematics</h3>
+        <p>A long-form conversation on what AI is doing to hard maths problems, from Navier-Stokes to the Riemann Hypothesis and complexity theory.</p>
         <div class="pod-card-foot">
-          <a class="pod-more" href="https://www.youtube.com/hardfork" target="_blank" rel="noopener">More episodes →</a>
+          <a class="pod-more" href="https://lexfridman.com/podcast" target="_blank" rel="noopener">Listen on lexfridman.com &rarr;</a>
         </div>
       </div>
 
       <div class="pod-card">
-        <div class="thumb-wrap" onclick="playPod(this,'ULszsXDyjMY')">
-          <img src="https://i.ytimg.com/vi/ULszsXDyjMY/hqdefault.jpg" alt="AI at a16z podcast thumbnail" loading="lazy">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <h3>AI at a16z</h3>
-        <p>Andreessen Horowitz on where AI investment, infrastructure and product are heading next.</p>
+        <div class="pod-meta"><span class="pod-show">The Cognitive Revolution</span><span class="pod-date">14 Nov 2026</span></div>
+        <h3>AI, the Modern Enigma</h3>
+        <p>A keynote from host Nathan Labenz at the Enterprise AI Summit at Bletchley Park, shared as a special episode on how to think about AI&rsquo;s trajectory.</p>
         <div class="pod-card-foot">
-          <a class="pod-more" href="https://www.youtube.com/@a16z" target="_blank" rel="noopener">More episodes →</a>
+          <a class="pod-more" href="https://www.cognitiverevolution.ai/" target="_blank" rel="noopener">Listen on Cognitive Revolution &rarr;</a>
+        </div>
+      </div>
+
+      <div class="pod-card">
+        <div class="pod-meta"><span class="pod-show">The AI Daily Brief</span><span class="pod-date">Daily</span></div>
+        <h3>The fastest way to stay current</h3>
+        <p>A daily briefing of about half an hour from Nathaniel Whittemore on the AI stories and policy shifts that matter, a good companion to our Friday AI Insights.</p>
+        <div class="pod-card-foot">
+          <a class="pod-more" href="https://aidailybrief.ai/" target="_blank" rel="noopener">Listen on AI Daily Brief &rarr;</a>
         </div>
       </div>
 
     </div>
 
-    <p style="font-size:12.5px;color:var(--slate-light);margin-top:28px;max-width:640px;">Curated by the Neural Horizons AI team — not a live leaderboard. Episode picks are refreshed periodically.</p>
+    <p style="font-size:12.5px;color:var(--slate-light);margin-top:28px;max-width:640px;">Curated by the Neural Horizons AI team, not a live leaderboard. Episode details checked on 20 November 2026 and refreshed periodically.</p>
   </div>
 </section>
 
@@ -255,24 +251,6 @@ function playPod(wrap, videoId){
   wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/'+videoId+'?autoplay=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 }
 
-(function(){
-  var target = new Date('2026-09-23T12:30:00+04:00').getTime();
-  var dEl=document.getElementById('cd-d'), hEl=document.getElementById('cd-h'), mEl=document.getElementById('cd-m'), sEl=document.getElementById('cd-s');
-  function tick(){
-    var diff = target - Date.now();
-    if (diff <= 0){ dEl.textContent='0'; hEl.textContent='00'; mEl.textContent='00'; sEl.textContent='00'; return; }
-    var d = Math.floor(diff/86400000);
-    var h = Math.floor((diff%86400000)/3600000);
-    var m = Math.floor((diff%3600000)/60000);
-    var s = Math.floor((diff%60000)/1000);
-    dEl.textContent = d;
-    hEl.textContent = String(h).padStart(2,'0');
-    mEl.textContent = String(m).padStart(2,'0');
-    sEl.textContent = String(s).padStart(2,'0');
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
 </script>
 
 </body>
