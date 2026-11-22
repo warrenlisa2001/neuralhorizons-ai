@@ -104,7 +104,7 @@
   </url>
   <url>
     <loc>https://www.neuralhorizonsai.com/blog/</loc>
-    <lastmod>2026-11-12</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -537,6 +537,12 @@
   <url>
     <loc>https://www.neuralhorizonsai.com/blog/friday-ai-insights-13-november-2026/</loc>
     <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.neuralhorizonsai.com/blog/monday-ai-insights-23-november-2026/</loc>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

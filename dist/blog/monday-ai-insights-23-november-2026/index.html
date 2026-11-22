@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Monday AI Insights: People Are Afraid of AI. Governance Is the Answer. | Neural Horizons AI</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+
+
+<meta name="description" content="The EU confirmed its first AI-driven attack, the FBI says attackers reach admin in under three hours, and the public is afraid. What changed since Friday, our predictions and a governance plan for this week.">
+<meta name="keywords" content="AI governance, AI fear, AI predictions, ARTEX, European Commission cyberattack, AI agents, AI incident reporting, UAE AI, SOC, Neural Horizons AI">
+
+<meta property="og:title" content="Monday AI Insights: People Are Afraid of AI. Governance Is the Answer.">
+<meta property="og:description" content="What changed since Friday, what it means, our predictions and a governance plan for people who are worried.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/monday-ai-insights-23-november-2026/">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/monday-ai-insights-23-nov-2026-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.neuralhorizonsai.com/images/monday-ai-insights-23-nov-2026-og.png">
+
+<link rel="canonical" href="https://www.neuralhorizonsai.com/blog/monday-ai-insights-23-november-2026/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "People Are Afraid of AI. Governance Is the Answer.", "datePublished": "2026-11-23", "dateModified": "2026-11-23T08:00:00+04:00", "author": {"@type": "Person", "name": "Lisa Warren", "jobTitle": "Founder and CEO, Neural Horizons AI"}, "publisher": {"@type": "Organization", "name": "Neural Horizons AI", "url": "https://www.neuralhorizonsai.com/"}, "mainEntityOfPage": "https://www.neuralhorizonsai.com/blog/monday-ai-insights-23-november-2026/", "image": "https://www.neuralhorizonsai.com/images/monday-ai-insights-23-nov-2026-og.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Has the European Commission confirmed that AI was used in the attack?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On 19 November spokesperson Thomas Regnier confirmed that the attack, detected on 22 October, was carried out with AI tools. The Commission has not named the tool or the attackers. CERT-EU has warned that publicly available tools such as ARTEX can enable faster, more automated attacks, but the Commission has not confirmed ARTEX."}}, {"@type": "Question", "name": "Why are people afraid of AI?", "acceptedAnswer": {"@type": "Answer", "text": "Surveys show fear rising. In Chapman University's 2026 survey, fear of AI harming the political process was level with fear of a loved one becoming seriously ill. YouGov found 50% of US adults worried about AI ending humanity, up from 42% in 2023. Fear is lower among people who use AI weekly, which suggests familiarity and visible control both help."}}, {"@type": "Question", "name": "What is AI governance in practice?", "acceptedAnswer": {"@type": "Answer", "text": "It means knowing which AI tools and agents you run, giving each a named human owner, tiering controls by how much autonomy the agent has, setting an incident clock, logging what agents do and reviewing it on a fixed rhythm."}}, {"@type": "Question", "name": "What are Neural Horizons AI's predictions?", "acceptedAnswer": {"@type": "Answer", "text": "More institutions will disclose AI-assisted attacks within 90 days, an agent register will become a standard audit question by mid-2027, agents without a named owner are the most likely to be demoted or shut down, and more governments will copy Australia's mandatory AI incident reporting."}}]}</script>
+
+
+<style>
+:root {
+  --black: #0A0A0F;
+  --green: #00FF88;
+  --purple: #8A2BE2;
+  --white: #FFFFFF;
+  --muted: #A8A8B5;
+  --panel: #14141D;
+  --border: rgba(255,255,255,0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.hero {
+  padding: 105px 0 90px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(138,43,226,.20), transparent 38%),
+    radial-gradient(ellipse at 15% 90%, rgba(0,255,136,.12), transparent 40%),
+    var(--black);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content { max-width: 850px; }
+
+.kicker,
+.section-label {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+  font-weight: 800;
+}
+
+.hero h1 span,
+h2 span { color: var(--green); }
+
+.hero p {
+  color: #D1D1DA;
+  font-size: 19px;
+  max-width: 720px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta span:first-child { color: var(--green); }
+
+.intro {
+  max-width: 850px;
+  margin: auto;
+  padding: 70px 28px 50px;
+}
+
+.intro p {
+  font-size: 18px;
+  color: #D6D6DE;
+}
+
+.section {
+  padding: 65px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+
+p {
+  color: #C6C6D0;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 19px;
+  color: #D8D8E0;
+  max-width: 850px;
+}
+
+.highlight {
+  border-left: 3px solid var(--green);
+  background: var(--panel);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.highlight p {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 35px 0;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 25px 22px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.stat span {
+  display: block;
+  color: #C6C6D0;
+  font-size: 14px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.text-panel {
+  min-height: 230px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(138,43,226,.16), transparent 50%),
+    var(--panel);
+}
+
+.text-panel strong {
+  color: var(--green);
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.case-study {
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(0,255,136,.09), transparent 40%),
+    linear-gradient(135deg, #151522, #101A18);
+  border: 1px solid rgba(0,255,136,.3);
+  border-radius: 16px;
+  padding: 42px;
+  margin: 35px 0;
+}
+
+.case-study .stats { grid-template-columns: repeat(4, 1fr); }
+
+.case-study .stat { background: rgba(0,0,0,.28); }
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.product {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.product.halu { border-top: 3px solid var(--green); }
+.product.zonar { border-top: 3px solid var(--purple); }
+
+.product-tag {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.zonar .product-tag { color: #B98AFF; }
+
+ul {
+  padding-left: 20px;
+  color: #C6C6D0;
+}
+
+li { margin-bottom: 9px; }
+
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--black);
+  padding: 13px 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: var(--white);
+  text-decoration: none;
+}
+
+.button-outline {
+  display: inline-block;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.cta {
+  text-align: center;
+  padding: 75px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,.12), transparent 65%),
+    #101018;
+  border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+  max-width: 750px;
+  margin: 0 auto 20px;
+}
+
+.cta p {
+  max-width: 680px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+}
+
+.sources {
+  padding: 35px 0 55px;
+  border-top: 1px solid var(--border);
+}
+
+.sources h3 { font-size: 17px; }
+
+.sources ul {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sources a { color: #B98AFF; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 75px 0; }
+  .hero h1 { letter-spacing: -1px; }
+
+  .stats,
+  .case-study .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-column,
+  .product-grid { grid-template-columns: 1fr; }
+
+  .case-study { padding: 26px 20px; }
+  .section { padding: 48px 0; }
+}
+
+@media (max-width: 420px) {
+  .stats,
+  .case-study .stats { gap: 10px; }
+
+  .stat { padding: 18px 14px; }
+}
+
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end}
+.hero-portrait{align-self:end;margin-bottom:-1px;position:relative}
+.hero-portrait img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 46px rgba(138,43,226,.45))}
+.hero{overflow:hidden;padding-bottom:0}
+.hero-content{padding-bottom:90px}.hero{padding-top:90px}
+.pull{border-left:3px solid var(--purple);background:var(--panel);padding:28px 30px;margin:34px 0;border-radius:0 12px 12px 0}
+.pull-q{font-size:clamp(22px,3vw,30px);font-weight:800;line-height:1.28;color:#fff;margin:0;letter-spacing:-.5px}
+.pull-q span{color:var(--green)}
+.pull-by{display:flex;align-items:center;gap:14px;margin-top:20px}
+.pull-by img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 16%;background:#1b1330;border:2px solid var(--green)}
+.pull-by b{display:block;color:#fff;font-size:15px}
+.pull-by small{display:block;color:var(--muted);font-size:13px}
+figure.viz{margin:34px 0;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px}
+figure.viz svg{width:100%;height:auto;display:block}
+figure.viz figcaption{color:var(--muted);font-size:13px;margin-top:12px}
+ol.steps{list-style:none;padding:0;margin:30px 0;counter-reset:s;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ol.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px 22px 18px 70px;position:relative;margin:0}
+ol.steps li::before{content:counter(s);position:absolute;left:20px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--black);font-weight:800;display:grid;place-items:center}
+ol.steps li strong{display:block;color:#fff;margin-bottom:4px}
+ol.steps li span{color:#C6C6D0;font-size:15px;display:block}
+details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;color:#fff}
+details p{margin:10px 0 0}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-portrait{max-width:380px;margin:0 auto -1px}.hero-content{padding-bottom:10px}ol.steps{grid-template-columns:1fr}}
+
+/* ---- interactive layer ---- */
+#rp{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);z-index:99;transition:width .1s linear}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.ctl button{font:700 13px Arial,sans-serif;color:#fff;background:#1B1B28;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:9px 16px;cursor:pointer;transition:.2s}
+.ctl button:hover{border-color:#00FF88}
+.ctl button[aria-pressed="true"],.ctl button.run{background:#00FF88;color:#0A0A0F;border-color:#00FF88}
+.vnote{margin-top:14px;min-height:76px;padding:14px 16px;border-left:3px solid #00FF88;background:rgba(255,255,255,.04);border-radius:0 10px 10px 0}
+.vnote b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
+.vnote span{display:block;color:#C6C6D0;font-size:15px;line-height:1.5}
+.vnote.bad{border-left-color:#FF6B8A}
+svg .hot{cursor:pointer;outline:none;transition:filter .25s}
+svg .hot:hover,svg .hot:focus-visible{filter:drop-shadow(0 0 8px rgba(0,255,136,.55))}
+svg .hot.sel{filter:drop-shadow(0 0 14px rgba(0,255,136,.8))}
+svg .hot.sel rect,svg .hot.sel polygon,svg .hot.sel circle{stroke:#00FF88;stroke-width:3}
+svg .ln{stroke:#5a5a6a;marker-end:url(#ar2d);transition:stroke .3s}
+svg .ln.hi{stroke:#00FF88;marker-end:url(#ar2)}
+svg .spoke{stroke-dasharray:6 6;animation:dash 1.4s linear infinite;transition:stroke .3s,stroke-width .3s}
+svg .spoke.hi{stroke:#00FF88;stroke-width:3.5}
+svg .flow{stroke-dasharray:6 5;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+svg .row{transition:fill .3s}
+svg .row.ok{fill:#00FF88}
+svg .row.no{fill:#FF6B8A}
+svg .ck{fill:#00FF88;opacity:0;transition:opacity .3s}
+svg .ck.show{opacity:1}
+svg .ck.no{fill:#FF6B8A}
+svg #resOk,svg #resBad{transition:filter .3s,opacity .3s;opacity:.55}
+svg #resOk.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(0,255,136,.8))}
+svg #resBad.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(255,107,138,.8))}
+svg #gateBox{animation:dash 2s linear infinite}
+.stat{overflow:hidden}
+.stat .bar{display:block;height:6px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0 12px;overflow:hidden}
+.stat .bar b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.stat.in .bar b{width:var(--w)}
+.meter{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:26px 0 0}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;color:#fff;font-size:15px}
+.meter-top span{color:#00FF88;font-weight:800}
+.meter i{display:block;height:8px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0}
+.meter i b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width .5s}
+.meter p{margin:0;color:#C6C6D0;font-size:14px}
+ol.steps li{cursor:pointer;transition:border-color .25s,background .25s,transform .25s;-webkit-tap-highlight-color:transparent}
+ol.steps li:hover{border-color:#00FF88;transform:translateY(-2px)}
+ol.steps li:focus-visible{outline:2px solid #00FF88;outline-offset:2px}
+ol.steps li.done{border-color:#00FF88;background:rgba(0,255,136,.07)}
+ol.steps li.done::before{content:"\2713";background:#00FF88}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.hero-portrait{animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  svg .spoke,svg .flow,svg #gateBox,.hero-portrait{animation:none}
+  .stat .bar b,.meter i b{transition:none}
+}
+
+/* ---- jobs + related ---- */
+.jgrp{color:#A8A8B5;font:700 12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 10px}
+.jgrp:not(:first-child){margin-top:20px}
+.jrow{display:grid;grid-template-columns:minmax(120px,210px) 1fr 64px;gap:14px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;padding:9px 10px;margin:2px 0;cursor:pointer;color:#fff;font:inherit;transition:.2s}
+.jrow:hover,.jrow:focus-visible{border-color:rgba(0,255,136,.5);outline:none}
+.jrow.sel{border-color:#00FF88;background:rgba(0,255,136,.07)}
+.jl{font-size:15px;color:#E8E8F0}
+.jv{font-weight:800;font-size:17px;text-align:right;color:#fff}
+.jt{display:block;height:14px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.jt i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.jobs.in .jt i{width:var(--w)}
+.jt i.g{background:linear-gradient(90deg,#00b862,#00FF88)}
+.jt i.p{background:linear-gradient(90deg,#c0425f,#FF6B8A)}
+.jt i.m{background:linear-gradient(90deg,#8A2BE2,#00FF88)}
+.jt i.v{background:linear-gradient(90deg,#6a1fb5,#8A2BE2)}
+@media(max-width:560px){.jrow{grid-template-columns:1fr 52px;gap:6px 10px}.jrow .jt{grid-column:1/-1;order:3}.jl{font-size:14px}}
+.xref{font-size:15px;color:#C6C6D0;border-left:2px solid #8A2BE2;padding:2px 0 2px 14px;margin:22px 0}
+.xref a{color:#00FF88}
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}
+@media(max-width:860px){.rel{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rel{grid-template-columns:1fr}}
+.rel-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;transition:border-color .25s,transform .25s}
+.rel-card:hover{border-color:#00FF88;transform:translateY(-3px)}
+.rel-card small{display:block;color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rel-card b{display:block;color:#fff;font-size:16px;line-height:1.35;margin-bottom:8px}
+.rel-card span{display:block;color:#C6C6D0;font-size:14px;line-height:1.45}
+@media (prefers-reduced-motion:reduce){.jt i{transition:none}}
+
+.evidence{margin:-6px 0 34px;padding:18px 20px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-left:3px solid #8A2BE2;border-radius:0 12px 12px 0}
+.ev-h{color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.evidence ul{list-style:none;margin:0;padding:0}
+.evidence li{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);margin:0;align-items:baseline}
+.evidence li:first-child{border-top:0;padding-top:0}
+.evidence li strong{color:#fff;font-size:22px;font-weight:800}
+.evidence li span{color:#C6C6D0;font-size:15px;line-height:1.5}
+.evidence li em{display:block;font-style:normal;font-size:13px;color:#A8A8B5;margin-top:3px}
+.evidence li em a{color:#00FF88}
+.ev-note{margin:12px 0 0;color:#A8A8B5;font-size:13px}
+@media(max-width:560px){.evidence li{grid-template-columns:1fr;gap:2px}}
+
+/* journey */
+.jny{margin:34px 0 8px}
+.jroute{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:0 0 20px}
+.jroute:before{content:"";position:absolute;left:8.33%;right:8.33%;top:19px;height:3px;background:rgba(255,255,255,.12);border-radius:3px}
+.jroute .jfill{position:absolute;left:8.33%;top:19px;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);border-radius:3px;transition:width .5s ease}
+.jstop{position:relative;background:none;border:0;color:#A8A8B5;font:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 2px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.jstop i{width:40px;height:40px;border-radius:50%;background:#14141D;border:2px solid rgba(255,255,255,.2);display:grid;place-items:center;font-style:normal;font-size:15px;color:#fff;transition:all .25s}
+.jstop.seen i{border-color:#8A2BE2;background:#241238}
+.jstop.on i{border-color:#00FF88;background:#00FF88;color:#0A0A0F;box-shadow:0 0 0 6px rgba(0,255,136,.15)}
+.jstop.on{color:#fff}
+.jstop:focus-visible{outline:2px solid #00FF88;outline-offset:4px;border-radius:8px}
+.jpanel{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch}
+.jwhy{grid-column:1/-1;margin:0;color:#C6C6D0;font-size:16px;min-height:3em}
+.jcard{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;color:#fff;text-decoration:none;transition:transform .2s,border-color .2s}
+.jcard:hover{transform:translateY(-3px);border-color:#00FF88;text-decoration:none}
+.jcard .jimg{aspect-ratio:16/9;background:#0A0A0F;overflow:hidden}
+.jcard .jimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.jcard:hover .jimg img{transform:scale(1.05)}
+.jcard .jb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.jtag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#00FF88}
+.jcard h4{margin:0;font-size:17px;line-height:1.35}
+.jgo{margin-top:auto;color:#00FF88;font-weight:700;font-size:14px}
+.jcs{background:linear-gradient(145deg,#1a1030 0%,#0f1a24 100%)}
+.jcs .jbig{padding:26px 18px 6px}
+.jcs .jbig b{display:block;font-size:clamp(38px,6vw,54px);line-height:1;color:#00FF88;font-weight:800}
+.jcs .jbig span{display:block;color:#C6C6D0;font-size:14px;margin-top:6px}
+.jdesc{margin:0;color:#C6C6D0;font-size:14px;line-height:1.5}
+.jmore{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-top:2px}
+.jmore a.j2{color:#00FF88;font-size:14px}
+.jnav{display:flex;gap:10px}
+.jnav button{background:transparent;color:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jnav button.pri{background:#00FF88;border-color:#00FF88;color:#0A0A0F}
+.jnav button:disabled{opacity:.35;cursor:default}
+.jhubs{grid-column:1/-1;display:none;gap:10px;flex-wrap:wrap}
+.jhubs.show{display:flex}
+.jhubs a{border:1px solid #00FF88;border-radius:99px;padding:9px 18px;font-weight:700;font-size:14px}
+.jchip{display:inline-block;margin:6px 0 0;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.4);color:#00FF88;border-radius:99px;padding:8px 16px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jchip:hover{background:rgba(0,255,136,.16)}
+@media(max-width:700px){
+ .jpanel{grid-template-columns:1fr}
+ .jstop{font-size:10px}
+ .jstop i{width:32px;height:32px;font-size:13px}
+ .jroute:before,.jroute .jfill{top:15px}
+}
+@media(prefers-reduced-motion:reduce){.jcard,.jcard .jimg img,.jroute .jfill,.jstop i{transition:none}}
+.pull cite{display:block;margin-top:14px;font-style:normal;font-size:14px;color:#A8A8B5}
+.pull-ev{margin:-18px 0 30px;font-size:14px;color:#A8A8B5}
+.pull-ev a{color:#00FF88}
+.hero h1 span{display:block}.read-link{margin-right:26px}.ev-note{margin-bottom:18px}</style>
+</head>
+
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="kicker">Neural Horizons AI | Monday AI Insights</div>
+        <h1>
+          People Are Afraid of AI.
+          <span>Governance Is the Answer.</span>
+        </h1>
+        <p>
+          The EU has confirmed its first AI-driven attack. The FBI says attackers can reach admin
+          access in under three hours. The public is more afraid than ever. Fear is a reasonable
+          response to missing control, so this week is about putting control in place.
+        </p>
+        <div class="meta">
+          <span>23 NOVEMBER 2026</span>
+          <span>&bull;</span>
+          <span>WHAT CHANGED SINCE FRIDAY</span>
+          <span>&bull;</span>
+          <span>UAE | GLOBAL</span>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="/images/lisa-warren-portrait.png" width="820" height="765"
+             alt="Lisa Warren, Founder and CEO of Neural Horizons AI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">01 | What changed since Friday</div>
+
+  <h2>
+    The first AI-driven attack on the EU is now confirmed.
+    <span>The FBI had warned six days earlier.</span>
+  </h2>
+
+  <p class="lead">
+    On 19 November the European Commission confirmed that the cyberattack it detected on 22 October
+    was carried out with AI tools. It is the first time the EU has disclosed an attack of this kind.
+  </p>
+  <p>
+    Spokesperson Thomas Regnier said several internal applications were taken down as a precaution and
+    most have been restored. The Commission says it has found no evidence of a data breach affecting its
+    staff as a whole. It has not named the tool or the attackers, and the investigation is continuing.
+  </p>
+  <p>
+    Six days earlier, on 13 November, the FBI had published a FLASH alert on ARTEX, an open-source,
+    AI-driven penetration-testing framework that criminals and state-aligned actors have turned into an
+    attack tool. The FBI says it has been abused since at least August. Taking the code offline did not
+    stop it, because forks, archived copies and a commercial version are still circulating.
+  </p>
+
+  <div class="stats">
+    <div class="stat">
+      <strong>&lt;3 hours</strong>
+      <span>From first target to privileged access in some ARTEX intrusions, according to the FBI.</span>
+    </div>
+    <div class="stat">
+      <strong>1,600+</strong>
+      <span>Publicly exposed ARTEX consoles that researchers counted in early November.</span>
+    </div>
+    <div class="stat">
+      <strong>84 days</strong>
+      <span>Between an OpenAI agent's unauthorised access to an Australian Medicare portal and OpenAI telling the government.</span>
+    </div>
+  </div>
+  <p class="ev-note">Sources: FBI FLASH-20261113-001 as reported by The Record and SecNews; Cloud Security Alliance research note on the Australian incident.</p>
+
+  <div class="highlight">
+    <p>
+      <strong>Correction to Friday:</strong> we reported ARTEX as suspected in the Commission attack. The Commission has
+      confirmed AI tool misuse but has not named the tool. CERT-EU has warned that publicly available tools such as ARTEX
+      can make attacks faster and more automated. Treat the ARTEX link as likely, not confirmed.
+    </p>
+  </div>
+  <a class="read-link" href="https://www.brusselstimes.com/2414026/european-commission-confirms-ai-assisted-cyberattack-on-internal-systems-tbtb" target="_blank" rel="noopener">Read the Commission confirmation &rarr;</a>
+  <a class="read-link" href="https://www.ic3.gov/csa/2026/261113.pdf" target="_blank" rel="noopener">Read the FBI FLASH alert &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">02 | Why people are afraid</div>
+
+  <h2>
+    The fear is rational.
+    <span>It is also a governance signal.</span>
+  </h2>
+
+  <p class="lead">
+    People are not afraid of a chatbot. They are afraid that nobody is in charge when something goes wrong.
+    This week gave them evidence.
+  </p>
+
+  <div class="stats">
+    <div class="stat">
+      <strong>51.9%</strong>
+      <span>of Americans fear AI harming the political process, level with fear of a loved one falling seriously ill (51.8%). Chapman University, 2026.</span>
+    </div>
+    <div class="stat">
+      <strong>50%</strong>
+      <span>of US adults are worried about AI ending humanity, up from 42% in November 2023. YouGov, September 2026.</span>
+    </div>
+    <div class="stat">
+      <strong>2 in 3</strong>
+      <span>UK respondents say AI companies should be closely regulated, even if that slows development. King's College London, May 2026.</span>
+    </div>
+  </div>
+  <p class="ev-note">Sources: Popular Science and IFLScience on the Chapman survey; YouGov; ITPro and Euronews on the King's College survey.</p>
+
+  <p>
+    The Chapman survey also shows a split that matters for every leader. Among people who use AI weekly, 46% reported
+    the fear. Among people who never use it, 55% did. Familiarity reduces fear, and so does seeing who is accountable.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>Our perspective:</strong> reassurance does not work on a worried team or a worried customer. Evidence of control does.
+      Tell people which agents you run, who owns each one, what they can touch and how you would stop one.
+    </p>
+  </div>
+
+  <blockquote class="pull"><p class="pull-q">&ldquo;AI adoption starts with people, not technology. Leaders have to understand the change well enough to explain it, make space for questions and bring their teams along.&rdquo;</p><cite>Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite></blockquote>
+  <p class="pull-ev"><strong>The evidence:</strong> the Chapman gap between weekly users (46%) and non-users (55%) points the same way. Lisa wrote the full argument in <a href="/blog/nothing-is-lost-only-gained/">Nothing Is Lost. Only Gained.</a> and the history behind it in <a href="/blog/76-years-in-the-making/">76 Years in the Making</a>.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">03 | What it means: governance</div>
+
+  <h2>
+    Regulators and analysts are saying the same thing.
+    <span>Owners, tiers and an incident clock.</span>
+  </h2>
+
+  <p class="lead">
+    Governments have started to write the rules, and the analysts are warning that companies without them will pay.
+  </p>
+  <p>
+    <strong>Australia</strong> accepted 18 recommendations on 10 November after the Medicare portal incident. They include mandatory,
+    time-bound reporting of serious AI incidents, among them misaligned model behaviour and cyber incidents involving autonomous agents,
+    and a new AI safety regulator. OpenAI and Anthropic told Australian lawmakers on 6 October that they would welcome mandatory reporting.
+  </p>
+  <p>
+    <strong>Gartner</strong> predicts that by 2027, 40% of enterprises will demote or decommission autonomous AI agents because of
+    governance gaps found only after production incidents. Its advice is proportional governance: classify agents by how much autonomy
+    they have rather than locking everything down or trusting everything. Gartner also reports that 75% of organisations have seen
+    unauthorised use of AI coding assistants.
+  </p>
+  <p>
+    <strong>The UAE</strong> has revealed a control tower to monitor government AI agents, with continuous auditing by both AI systems and
+    humans, as it works towards its target of agents delivering 50% of federal services within two years. Our
+    <a href="/blog/uae-agentic-ai-clock-update-november-2026/">UAE update</a> tracks what is confirmed and what is not.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>What a SOC teaches about AI governance:</strong> Lisa spent years at SecurityHQ, a global managed security provider
+      with six security operations centres, working alongside its engineers and sales teams and with partners such as Al-Futtaim and du.
+      A SOC does not ask whether an alert is frightening. Every alert has an owner, a severity and a clock, and it closes only when someone signs it off.
+      That is the model AI governance needs: an owner for every agent, controls that scale with autonomy, and a clock for incidents.
+    </p>
+  </div>
+
+  <blockquote class="pull"><p class="pull-q">&ldquo;Governance is not the tax you pay for using AI responsibly. It's the thing that lets you use AI at all, at scale, without it blowing up in your hands.&rdquo;</p><cite>Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite></blockquote>
+  <p class="pull-ev"><strong>The evidence:</strong> Gartner expects 40% of enterprises to demote or decommission autonomous agents over governance gaps, and Australia is making incident reporting compulsory. Full argument in <a href="/blog/ai-governance-compliance-what-to-do-now/">AI Governance Isn't Optional Anymore</a> and <a href="/blog/ai-agent-accountability-who-owns-the-decision/">AI Agents Can Be Responsible. They Can Never Be Accountable.</a></p>
+  <a class="read-link" href="https://gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure" target="_blank" rel="noopener">Read the Gartner release &rarr;</a>
+  <a class="read-link" href="https://www.esecurityplanet.com/artificial-intelligence/news-australia-ai-security-rules-openai-incident-emea/" target="_blank" rel="noopener">Read about the Australian reforms &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">04 | Our predictions</div>
+
+  <h2>
+    Four calls for the next twelve months.
+    <span>We will mark them in public.</span>
+  </h2>
+
+  <p class="lead">
+    These are judgements, not forecasts from a data set. Each one shows what it rests on and how confident we are.
+  </p>
+
+  <div class="highlight">
+    <p>
+      <strong>1. Within 90 days, more large institutions will disclose AI-assisted attacks.</strong>
+      The EU's disclosure was a first. Australia is moving to compulsory reporting, and the FBI says ARTEX keeps circulating through forks
+      and a commercial version. <em>Confidence: high.</em>
+    </p>
+  </div>
+  <div class="highlight">
+    <p>
+      <strong>2. By mid-2027, an agent register will be a standard audit and procurement question.</strong>
+      Microsoft is already selling agent identity and named managers, and Gartner is pushing agent risk profiles and oversight tooling.
+      Customers will ask suppliers to show their register. <em>Confidence: medium to high.</em>
+    </p>
+  </div>
+  <div class="highlight">
+    <p>
+      <strong>3. The agents that get shut down first will be the ones with no named owner.</strong>
+      Gartner's 40% figure is about governance gaps found after incidents. Our read of client work is that the missing owner is the most common gap.
+      <em>Confidence: medium.</em>
+    </p>
+  </div>
+  <div class="highlight">
+    <p>
+      <strong>4. More governments will copy Australia's incident-reporting model.</strong>
+      Two of the largest AI developers have said they would welcome it, which removes the main objection. <em>Confidence: medium.</em>
+    </p>
+  </div>
+
+  <blockquote class="pull"><p class="pull-q">&ldquo;Agentic AI security incidents will keep outpacing governance maturity for at least 24 more months.&rdquo;</p><cite>Lisa Warren, Founder &amp; CEO, Neural Horizons AI</cite></blockquote>
+  <p class="pull-ev"><strong>The evidence:</strong> Lisa made this call in <a href="/blog/76-years-in-the-making/">76 Years in the Making</a> on 17 July. Since then the EU has disclosed an AI-driven attack, the FBI has warned about ARTEX, and an OpenAI agent's breach of an Australian government portal has triggered new law.</p>
+
+</div>
+</section>
+
+<section class="section" id="act">
+<div class="container">
+
+  <div class="section-label">05 | What to do this week</div>
+
+  <h2>
+    Show people who is in charge.
+    <span>Six moves for Monday.</span>
+  </h2>
+
+  <p class="lead">
+    Tap each step you already have in place. Every gap is a place where an agent runs without anyone watching.
+  </p>
+
+  <div class="meter" id="gm">
+    <div class="meter-top"><b>Your AI governance check</b><span id="gmc">0 of 6</span></div>
+    <i><b id="gmb"></b></i>
+    <p id="gmt">Tap each step you already have in place.</p>
+  </div>
+
+  <ol class="steps" id="steps">
+    <li><strong>Register every AI tool and agent.</strong><span>Include the ones inside SaaS products you already pay for. You cannot govern what you have not listed.</span></li>
+    <li><strong>Put a named human on each one.</strong><span>An agent can be Responsible. Only a person can be Accountable. "IT" is not a name.</span></li>
+    <li><strong>Tier agents by autonomy.</strong><span>Agents that only observe need light controls. Agents that act need approvals, audit trails and a tested way to stop them.</span></li>
+    <li><strong>Set an incident clock.</strong><span>Who is told, how fast, and who can switch the agent off. Test the switch with someone who did not build the agent.</span></li>
+    <li><strong>Log what agents do and review it.</strong><span>Pick a fixed rhythm, weekly for agents that act. If nobody reads the log, it is not governance.</span></li>
+    <li><strong>Tell your people what is changing and why.</strong><span>Show them the register, the owners and the stop switch. Give them a voice in how the work changes.</span></li>
+  </ol>
+
+  <div class="highlight">
+    <p>
+      <strong>For UAE businesses:</strong> the national programme is moving from announcements to operations, and the control-tower model
+      shows where expectations are heading. Showing your own register and owners now puts you ahead of the question.
+    </p>
+  </div>
+
+  <p class="xref">Related: <a href="/blog/we-evaluated-8-ai-agents-only-2-passed/">We Evaluated 8 AI Agents for a Client. Only 2 Passed.</a>,
+  <a href="/blog/dont-cancel-your-agentic-ai-project-gartner-40-percent/">Don't Cancel Your Agentic AI Project</a> and our
+  <a href="/case-studies/fmcg-agentic-ai-readiness/">FMCG readiness case study</a>.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">Keep reading</div>
+
+  <h2>More from Neural Horizons AI.</h2>
+
+  <div class="rel">
+    <a class="rel-card" href="/blog/friday-ai-insights-20-november-2026/"><small>20 Nov 2026</small><b>Friday AI Insights: AI Got Richer and Faster. Control Did Not.</b><span>Last week's briefing, with the six moves for Monday.</span></a>
+    <a class="rel-card" href="/blog/ai-agent-accountability-who-owns-the-decision/"><small>28 Sep 2026</small><b>AI Agents Can Be Responsible. They Can Never Be Accountable.</b><span>Who owns the decision when an agent acts unexpectedly.</span></a>
+    <a class="rel-card" href="/blog/ai-governance-compliance-what-to-do-now/"><small>15 Jul 2026</small><b>AI Governance Isn't Optional Anymore</b><span>Who controls the rules, what failure costs and what to put in place.</span></a>
+    <a class="rel-card" href="/blog/ai-is-now-both-the-weapon-and-the-defence/"><small>8 Nov 2026</small><b>AI Is Now Both the Weapon and the Defence</b><span>Identities, credentials and connected systems under attack.</span></a>
+    <a class="rel-card" href="/blog/76-years-in-the-making/"><small>17 Jul 2026</small><b>This Didn't Happen in Five Years. It's Been 76 Years in the Making.</b><span>AI history and the predictions Lisa made in July.</span></a>
+    <a class="rel-card" href="/blog/nothing-is-lost-only-gained/"><small>4 Nov 2026</small><b>Nothing Is Lost. Only Gained.</b><span>Bringing your people with you as AI changes the work.</span></a>
+  </div>
+
+  <a class="read-link" href="/blog/">All posts &rarr;</a>
+
+</div>
+</section>
+
+<section class="cta">
+<div class="container">
+
+  <div class="section-label">Find the weak link</div>
+
+  <h2>
+    Who owns your AI agents?
+  </h2>
+
+  <p>
+    The Weak-Link Diagnostic shows where agents, suppliers and access are weakest, so you fix
+    the right thing first.
+  </p>
+
+  <a class="button"
+    href="https://neuralhorizonsai.com/services/weak-link-diagnostic/?utm_source=blog&amp;utm_medium=article&amp;utm_campaign=wld-nov26">
+    Book the Weak-Link Diagnostic
+  </a>
+
+  <br>
+
+  <a class="button-outline"
+    href="https://calendly.com/warrenlisa2001/30min">
+    Book 30 minutes
+  </a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h3>Questions leaders ask</h3>
+  <details><summary>Has the European Commission confirmed that AI was used in the attack?</summary><p>Yes. On 19 November spokesperson Thomas Regnier confirmed that the attack, detected on 22 October, was carried out with AI tools. The Commission has not named the tool or the attackers. CERT-EU has warned that publicly available tools such as ARTEX can enable faster, more automated attacks, but the Commission has not confirmed ARTEX.</p></details>
+  <details><summary>Why are people afraid of AI?</summary><p>Surveys show fear rising. In Chapman University's 2026 survey, fear of AI harming the political process was level with fear of a loved one becoming seriously ill. YouGov found 50% of US adults worried about AI ending humanity, up from 42% in 2023. Fear is lower among people who use AI weekly, which suggests familiarity and visible control both help.</p></details>
+  <details><summary>What is AI governance in practice?</summary><p>It means knowing which AI tools and agents you run, giving each a named human owner, tiering controls by how much autonomy the agent has, setting an incident clock, logging what agents do and reviewing it on a fixed rhythm.</p></details>
+  <details><summary>What are Neural Horizons AI's predictions?</summary><p>More institutions will disclose AI-assisted attacks within 90 days, an agent register will become a standard audit question by mid-2027, agents without a named owner are the most likely to be demoted or shut down, and more governments will copy Australia's mandatory AI incident reporting.</p></details>
+</div>
+</section>
+
+<section class="sources">
+<div class="container">
+
+  <h3>Sources and further reading</h3>
+
+  <ul>
+    <li><a href="https://www.brusselstimes.com/2414026/european-commission-confirms-ai-assisted-cyberattack-on-internal-systems-tbtb" target="_blank" rel="noopener">Brussels Times &mdash; European Commission confirms AI-assisted cyberattack</a></li>
+    <li><a href="https://therecord.media/european-commission-confirms-cyberattack-using-ai" target="_blank" rel="noopener">The Record &mdash; European Commission confirms cyberattack, says hackers used AI tool</a></li>
+    <li><a href="https://beinsure.com/news/eu-commission-hit-by-ai-powered-cyberattack/" target="_blank" rel="noopener">Beinsure &mdash; EU Commission hit by AI-powered cyberattack (CERT-EU warning)</a></li>
+    <li><a href="https://www.ic3.gov/csa/2026/261113.pdf" target="_blank" rel="noopener">FBI IC3 &mdash; FLASH-20261113-001, ARTEX threat overview</a></li>
+    <li><a href="https://therecord.media/artex-ai-tool-fbi-flash-alert" target="_blank" rel="noopener">The Record &mdash; FBI flash alert on Artex</a></li>
+    <li><a href="https://www.secnews.gr/en/751262/fbi-flash-artex-1600-consoles/" target="_blank" rel="noopener">SecNews &mdash; FBI FLASH for ARTEX, 1,600 consoles exposed</a></li>
+    <li><a href="https://www.popsci.com/health/top-10-fears-2026-artificial-intelligence/" target="_blank" rel="noopener">Popular Science &mdash; AI enters the top 10 American fears</a></li>
+    <li><a href="https://www.iflscience.com/ai-anxieties-rank-among-americans-top-10-fears-for-first-time-84977" target="_blank" rel="noopener">IFLScience &mdash; AI anxieties rank among Americans' top 10 fears</a></li>
+    <li><a href="https://yougov.com/en-us/articles/55558-liberals-are-increasingly-likely-to-worry-about-ai-ending-humanity" target="_blank" rel="noopener">YouGov &mdash; worry about AI ending humanity</a></li>
+    <li><a href="https://www.itpro.com/technology/artificial-intelligence/british-public-deeply-fearful-of-ai-with-one-in-five-even-thinking-it-will-lead-to-civil-unrest" target="_blank" rel="noopener">ITPro &mdash; British public deeply fearful of AI</a></li>
+    <li><a href="https://www.esecurityplanet.com/artificial-intelligence/news-australia-ai-security-rules-openai-incident-emea/" target="_blank" rel="noopener">eSecurity Planet &mdash; Australia tightens AI oversight after OpenAI incident</a></li>
+    <li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-australia-rogue-ai-incident-reporting-2026/" target="_blank" rel="noopener">Cloud Security Alliance &mdash; Australia's rogue AI incident reporting mandate</a></li>
+    <li><a href="https://cryptobriefing.com/openai-anthropic-australia-breach-reporting/" target="_blank" rel="noopener">CryptoBriefing &mdash; OpenAI and Anthropic back mandatory AI breach reporting</a></li>
+    <li><a href="https://gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure" target="_blank" rel="noopener">Gartner &mdash; uniform governance across AI agents will lead to failure</a></li>
+    <li><a href="https://www.gartner.com/en/articles/agentic-ai-oversight" target="_blank" rel="noopener">Gartner &mdash; the AI agents you can't see can still create risk</a></li>
+    <li><a href="https://gulfnews.com/business/economy/uae-reveals-control-tower-to-monitor-ai-government-agents-1.500710167" target="_blank" rel="noopener">Gulf News &mdash; UAE control tower to monitor AI government agents</a></li>
+  </ul>
+
+  <p>
+    Predictions are Neural Horizons AI's own judgement. Statistics are quoted from the sources above.
+  </p>
+
+</div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="container">
+    &copy; 2026 Neural Horizons AI. All rights reserved.
+    <br>
+    <a href="https://www.neuralhorizonsai.com/">www.neuralhorizonsai.com</a>
+  </div>
+</footer>
+
+<div id="rp" aria-hidden="true"></div>
+<script>
+(function(){
+'use strict';
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var rp=$('#rp');
+function prog(){var d=document.documentElement,m=d.scrollHeight-innerHeight;rp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+function onView(el,fn,t){
+  if(!('IntersectionObserver' in window)){fn();return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();fn()}})},{threshold:t||.35});
+  io.observe(el);
+}
+$$('.stat,.highlight,.meter,ol.steps li').forEach(function(el,i){
+  el.classList.add('rv');
+  onView(el,function(){setTimeout(function(){el.classList.add('in')},(i%3)*90)},.12);
+});
+$$('.stat').forEach(function(st){
+  var n=$('[data-count]',st);if(!n)return;
+  var to=+n.getAttribute('data-count');
+  onView(st,function(){
+    st.classList.add('in');
+    if(RM){n.textContent=to+'%';return}
+    var t0=performance.now();
+    (function f(t){var k=Math.min(1,(t-t0)/1300),e=1-Math.pow(1-k,3);n.textContent=Math.round(to*e)+'%';if(k<1)requestAnimationFrame(f)})(t0);
+  },.4);
+});
+(function(){
+  var ol=$('#steps');if(!ol)return;
+  var lis=$$('li',ol),bar=$('#gmb'),cnt=$('#gmc'),txt=$('#gmt');
+  var msg=['Tap each step you already have in place.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'Halfway. Close the rest before you add more agents.',
+    'Halfway. Close the rest before you add more agents.',
+    'One step from governed.',
+    'Governed. Now make sure every agent earns its number.'];
+  function upd(){
+    var n=lis.filter(function(l){return l.classList.contains('done')}).length;
+    bar.style.width=(n/lis.length*100)+'%';cnt.textContent=n+' of '+lis.length;txt.textContent=msg[n];
+  }
+  lis.forEach(function(l){
+    l.setAttribute('tabindex','0');l.setAttribute('role','checkbox');l.setAttribute('aria-checked','false');
+    function t(){var d=l.classList.toggle('done');l.setAttribute('aria-checked',d);upd()}
+    l.addEventListener('click',t);
+    l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+  });
+  upd();
+})();
+})();
+</script>
+</body>
+</html>
