@@ -388,7 +388,7 @@ nav.fixed{top:38px;}
 </div>
 
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center overflow-hidden" id="hero" style="background:#0A0A0F;z-index:1;">
+<section class="relative flex items-center overflow-hidden" id="hero" style="background:#0A0A0F;z-index:1;">
     <canvas id="neuralCanvas" class="absolute inset-0 w-full h-full" style="opacity:0.8;"></canvas>
     <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
       <div style="position:absolute;top:-20%;left:10%;width:900px;height:900px;background:radial-gradient(ellipse at center,rgba(138,43,226,0.14) 0%,transparent 65%);animation:heroBgPulse 7s ease-in-out infinite;"></div>
@@ -420,35 +420,78 @@ nav.fixed{top:38px;}
     .hero-stat-label{color:#9DA2B3;font-size:0.78rem;white-space:nowrap;}
     .hero-stat-divider{width:1px;height:20px;background:rgba(255,255,255,.18);flex-shrink:0;}
     @media (max-width:640px){.hero-stat-num{font-size:1.05rem;}.hero-stat-label{font-size:0.68rem;}.hero-stats-row{gap:16px;justify-content:flex-start;}}
+    .hero-for{color:#B8BCCB;font-size:0.9rem;margin:0 0 1.5rem;}
+    #hero .container{padding-top:7rem;padding-bottom:4rem;}
+    @media (max-width:640px){#hero .container{padding-top:6rem;padding-bottom:2.5rem;}.hero-for{text-align:center;}#hero .hero-stats-row{flex-wrap:wrap;justify-content:center;gap:10px 16px;}#hero .hero-stat-divider{display:none;}}
+    .hero-headline{font-size:clamp(1.7rem,4.2vw,3.1rem)!important;line-height:1.15;}
+    .hero-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(10px);border-radius:20px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.4);text-align:left;max-width:480px;margin:0 auto;}
+    .hc-top{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#D3D6E0;margin-bottom:12px;}
+    .hc-dot{width:8px;height:8px;border-radius:50%;background:#00FF88;}
+    .hc-tag{margin-left:auto;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:2px 10px;font-size:.62rem;letter-spacing:.06em;color:#9DA2B3;}
+    .hc-lead{color:#fff;font-weight:800;font-size:1.05rem;line-height:1.35;margin:0 0 14px;}
+    .hc-row{display:flex;gap:14px;align-items:center;padding:11px 0;border-top:1px solid rgba(255,255,255,.1);}
+    .hc-n{flex:0 0 52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#8A2BE2,#2563EB);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.25rem;}
+    .hc-row strong{display:block;color:#fff;font-size:.92rem;}
+    .hc-row em{display:block;color:#B8BCCB;font-size:.8rem;font-style:normal;line-height:1.4;}
+    .hc-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;margin-top:2px;font-size:.74rem;color:#9DA2B3;}
+    .hc-ok{color:#00FF88;font-weight:800;}
+    .hc-note{text-align:center;color:#9DA2B3;font-size:.82rem;margin-top:12px;}
+    @media (max-width:1024px){.hero-card{max-width:560px;}}
     </style>
     <div class="container mx-auto px-6 relative z-20 py-32">
         <div class="hero-grid">
             <div class="fade-in relative z-20">
-                <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(6px);border-radius:9999px;padding:6px 18px;margin-bottom:2rem;">
+                <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(6px);border-radius:9999px;padding:6px 18px;margin-bottom:1.5rem;">
                     <span style="width:7px;height:7px;border-radius:50%;background:#00FF88;display:inline-block;animation:heroPulse 2s infinite;flex-shrink:0;"></span>
-                    <span style="font-size:0.75rem;font-weight:800;color:#ffffff;letter-spacing:0.12em;text-transform:uppercase;">Strategy &middot; Agentic AI &middot; Governance &middot; Data &nbsp;&middot;&nbsp; UAE &amp; GCC</span>
+                    <span style="font-size:0.72rem;font-weight:800;color:#ffffff;letter-spacing:0.12em;text-transform:uppercase;">Agentic AI consulting &middot; UAE &amp; GCC</span>
                 </div>
                 <h1 class="hero-headline">
-                    Most consultancies add AI to one department.<br>
-                    <span style="background:linear-gradient(90deg,#8A2BE2 0%,#2563EB 45%,#00FF88 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">We build the AI layer your whole business runs on.</span>
+                    We find the money your departments lose <span style="background:linear-gradient(90deg,#8A2BE2 0%,#2563EB 45%,#00FF88 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">between them, and close the gap with AI your team controls.</span>
                 </h1>
                 <p class="hero-subhead">
-                    Your departments work in silos and their records stop agreeing. One team closes the gaps between them, proves each one with the source record, and keeps your people in the loop.
+                    Orders, deliveries and invoices sit in different systems, and nobody owns the gaps. Our <strong style="color:#fff;">Zonar OS&trade;</strong> checks one department&rsquo;s records against another&rsquo;s and proves each mismatch with the source record. <strong style="color:#fff;">HALU&trade;</strong> briefs the person who owns it. Your team approves every action.
                 </p>
-                <div class="hero-stats-row" style="margin-bottom:1.75rem;">
-                    <div class="hero-stat"><span class="hero-stat-num" style="color:#00FF88;">20+</span><span class="hero-stat-label">Global Clients</span></div>
-                    <div class="hero-stat-divider"></div>
-                    <div class="hero-stat"><span class="hero-stat-num" style="color:#2563EB;">98%</span><span class="hero-stat-label">Client Satisfaction</span></div>
-                    <div class="hero-stat-divider"></div>
-                    <div class="hero-stat"><span class="hero-stat-num" style="color:#F59E0B;">20+</span><span class="hero-stat-label">Years Experience</span></div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 relative z-20" style="margin-bottom:1.5rem;">
+                    <a href="/services/weak-link-diagnostic/" class="btn-gradient px-8 py-4 rounded-full font-bold text-base inline-flex items-center shadow-lg w-full sm:w-auto justify-center">Find where your departments disagree<i class="fas fa-arrow-right ml-3"></i></a>
+                    <a href="/platform/" class="btn-secondary px-8 py-4 rounded-full font-bold text-base inline-flex items-center shadow-lg w-full sm:w-auto justify-center">See how it works</a>
                 </div>
-                <div class="flex flex-col sm:flex-row items-center gap-4 relative z-20" style="margin-bottom:2.75rem;">
-                    <a href="mailto:lisa@neuralhorizonsai.com" class="btn-gradient px-10 py-4 rounded-full font-bold text-base inline-flex items-center shadow-lg w-full sm:w-auto justify-center">Contact Us<i class="fas fa-arrow-right ml-3"></i></a>
-                    <a href="/services" class="btn-secondary px-10 py-4 rounded-full font-bold text-base inline-flex items-center shadow-lg w-full sm:w-auto justify-center">See How We Work</a>
+                <p class="hero-for">Built for CEOs, COOs and CFOs of retail, FMCG, distribution and digital businesses.</p>
+                <div class="hero-stats-row">
+                    <div class="hero-stat"><span class="hero-stat-num" style="color:#00FF88;">AED 9M+</span><span class="hero-stat-label">generated for clients</span></div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat"><span class="hero-stat-num" style="color:#2563EB;">20+</span><span class="hero-stat-label">businesses mapped</span></div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat"><span class="hero-stat-num" style="color:#F59E0B;">4&ndash;6 wks</span><span class="hero-stat-label">to go-live</span></div>
                 </div>
             </div>
 
-            <div class="relative z-20 hero-orbit-col">
+            <div class="relative z-20 hero-card-col">
+                <div class="hero-card" role="img" aria-label="Illustrative example of a HALU briefing for an Operations owner">
+                    <div class="hc-top"><span class="hc-dot"></span>HALU&trade; briefing &middot; Operations<span class="hc-tag">Illustrative</span></div>
+                    <p class="hc-lead">3 gaps found between Sales, Warehouse and Finance this week</p>
+                    <div class="hc-row"><span class="hc-n">6</span><div><strong>Delivered, no invoice</strong><em>Goods left the warehouse and were never billed</em></div></div>
+                    <div class="hc-row"><span class="hc-n">14</span><div><strong>Ordered, no delivery record</strong><em>Customers were charged for goods with no proof of delivery</em></div></div>
+                    <div class="hc-row"><span class="hc-n">9</span><div><strong>Price differs from order</strong><em>Invoiced price does not match the agreed price</em></div></div>
+                    <div class="hc-foot"><span>Each finding links to its source rows</span><span class="hc-ok">Awaiting your approval</span></div>
+                </div>
+                <p class="hc-note">Check &rarr; Brief &rarr; Approve. People stay in the loop.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+<!-- WHERE WE WORK: SECTOR ORBIT -->
+<section id="sectors" style="background:#0A0A0F;border-top:1px solid rgba(255,255,255,.08);padding:72px 0 56px;position:relative;z-index:1;">
+    <div class="container mx-auto px-6">
+        <div style="text-align:center;max-width:720px;margin:0 auto 12px;">
+            <span style="font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#00FF88;">Where we work</span>
+            <h2 style="font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;color:#fff;margin:.5rem 0 1rem;line-height:1.2;">Every sector has the same problem:<br>departments that do not agree.</h2>
+            <p style="color:#D3D6E0;font-size:1.05rem;line-height:1.7;">We start with retail, FMCG and digital and IT businesses, and apply the same check across the sectors below.</p>
+        </div>
+            <div class="relative z-20 sectors-orbit-col">
                 <div id="heroOrbitWrap" class="hero-sphere-wrap" role="group" aria-label="Ecosystem Intelligence sectors, orbiting diagram. Hover to pause, click a sector to explore.">
                     <div class="hero-orbit-ring hero-orbit-ring-1" aria-hidden="true"></div>
                     <div class="hero-orbit-ring hero-orbit-ring-2" aria-hidden="true"></div>
@@ -486,10 +529,7 @@ nav.fixed{top:38px;}
                 </div>
                 <p class="text-center" style="color:#6E7180;font-size:0.82rem;margin-top:10px;">Hover to pause the orbit &middot; click a sector to explore how we approach it</p>
             </div>
-        </div>
     </div>
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20"><i class="fas fa-chevron-down text-2xl" style="color:#00FF88;"></i></div>
-
     <style>
     .hero-sphere-wrap{position:relative;height:580px;max-width:620px;margin:0 auto;}
     @media (max-width:640px){.hero-sphere-wrap{height:380px;}}
@@ -509,9 +549,7 @@ nav.fixed{top:38px;}
     .hero-orbit-node:hover .hero-node-circle,.hero-orbit-node:focus .hero-node-circle{transform:scale(1.08);box-shadow:0 0 0 3px var(--nc), 0 0 22px 2px var(--nc);}
     @media (max-width:640px){.hero-hub-sphere{width:150px;height:150px;}.hero-hub-sphere span{font-size:0.78rem;}.hero-node-circle{width:56px;height:56px;}.hero-node-text{font-size:0.52rem;}}
     @media (prefers-reduced-motion: reduce){.hero-hub-pulse{animation:none;}}
-    #hero .container{padding-top:8rem;padding-bottom:8rem;}
-    @media (max-width:640px){#hero .container{padding-top:4.5rem;padding-bottom:3rem;}}
-    </style>
+        </style>
 
     <script>
     (function(){
@@ -558,8 +596,8 @@ nav.fixed{top:38px;}
       requestAnimationFrame(tick);
     })();
     </script>
-
 </section>
+
 
 <!-- PAIN POINTS -->
 <section class="py-20 pp-section" id="pain-points" style="position:relative;overflow:hidden;">
