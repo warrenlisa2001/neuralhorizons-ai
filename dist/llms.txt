@@ -1,0 +1,20 @@
+# Neural Horizons AI
+
+> Neural Horizons AI is a specialist agentic AI consultancy in the UAE, founded by Lisa Warren. It builds Zonar OS, a verification layer that reconciles orders, invoices and deliveries and proves every mismatch with the source row, and HALU, an intelligence agent that briefs department heads from verified findings. People approve every action that matters.
+
+## Products
+- [Platform overview](https://www.neuralhorizonsai.com/platform/): Zonar OS and HALU together, how they work, how they are built (deterministic engine, LLM and RAG explanation layer, human in the loop).
+- [Zonar OS](https://www.neuralhorizonsai.com/zonar-os/): verification layer and Reconciliation Audit, the first live module.
+- [HALU](https://www.neuralhorizonsai.com/halu/): cross-department intelligence agent, Lite, Pro and Enterprise tiers.
+- [AI revenue leakage detection](https://www.neuralhorizonsai.com/revenue-leakage-detection/): what revenue leakage is, the three-way match, and how to detect it.
+- [Revenue Leak Calculator](https://www.neuralhorizonsai.com/revenue-leak-calculator/): free estimate.
+
+## Learn
+- [Agentic AI explained](https://www.neuralhorizonsai.com/agentic-ai/)
+- [AI glossary](https://www.neuralhorizonsai.com/ai-glossary/)
+- [Blog](https://www.neuralhorizonsai.com/blog/)
+
+## Company
+- [Home](https://www.neuralhorizonsai.com/)
+- [About](https://www.neuralhorizonsai.com/about/)
+- [Contact](https://www.neuralhorizonsai.com/contact/)
