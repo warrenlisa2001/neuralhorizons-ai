@@ -10,11 +10,11 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
 
 
-<meta name="description" content="The EU confirmed its first AI-driven attack and the FBI has warned about ARTEX. The defences are proven. What changed since Friday, what protects you, our predictions and six moves for this week.">
+<meta name="description" content="The EU confirmed its first AI-driven attack and the FBI has warned about ARTEX. The defences are proven. What is happening, what protects you, our predictions and six moves for this week.">
 <meta name="keywords" content="AI cyberattack, ARTEX, AI cybersecurity, European Commission cyberattack, ConnectWise, Storm-0940, SOC, AI agents, UAE cybersecurity, Neural Horizons AI">
 
 <meta property="og:title" content="Monday AI Insights: AI-Powered Cyber Attacks Are Real. So Are the Defences.">
-<meta property="og:description" content="What changed since Friday, what protects you, our four predictions and six moves for this week.">
+<meta property="og:description" content="What is happening, what protects you, our four predictions and six moves for this week.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.neuralhorizonsai.com/blog/monday-ai-insights-23-november-2026/">
 <meta property="og:image" content="https://www.neuralhorizonsai.com/images/monday-ai-insights-23-nov-2026-og.png">
@@ -543,13 +543,38 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
 .pull cite{display:block;margin-top:14px;font-style:normal;font-size:14px;color:#A8A8B5}
 .pull-ev{margin:-18px 0 30px;font-size:14px;color:#A8A8B5}
 .pull-ev a{color:#00FF88}
-.hero h1 span{display:block}.read-link{margin-right:26px}.ev-note{margin-bottom:18px}</style>
+.hero{position:relative}#heroNet{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.8;pointer-events:none}.hero .container{position:relative;z-index:1}
+.soc-live{margin:34px 0;border:1px solid rgba(0,255,136,.28);border-radius:18px;background:linear-gradient(180deg,rgba(9,15,30,.96),rgba(4,8,18,.96));padding:22px}
+.soc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;font-size:12px;letter-spacing:.14em;color:#00ff88;text-transform:uppercase}
+.soc-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#00ff88;margin-right:8px;animation:socpulse 1.6s infinite}
+@keyframes socpulse{0%{box-shadow:0 0 0 0 rgba(0,255,136,.6)}100%{box-shadow:0 0 0 12px rgba(0,255,136,0)}}
+.soc-note{color:#8b97ad;font-weight:500;letter-spacing:.04em;text-transform:none;font-size:12px}
+.soc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.soc-chips button{cursor:pointer;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#dfe6f3;border-radius:999px;padding:8px 14px;font:600 13px Inter,Arial,sans-serif;transition:.2s}
+.soc-chips button:hover{border-color:#00ff88}.soc-chips button.on{background:#00ff88;color:#07101f;border-color:#00ff88}
+.soc-grid{display:grid;grid-template-columns:230px 1fr;gap:22px;margin-top:14px;align-items:start}
+.radar{position:relative;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,136,.08),rgba(0,255,136,0) 70%);border:1px solid rgba(0,255,136,.35);overflow:hidden}
+.radar:before,.radar:after{content:"";position:absolute;inset:25%;border:1px solid rgba(0,255,136,.25);border-radius:50%}.radar:after{inset:46%}
+.sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(0,255,136,.55),rgba(0,255,136,0) 28%);animation:sweep 4s linear infinite}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.blip{position:absolute;width:12px;height:12px;margin:-6px;border-radius:50%;background:#ffb454;box-shadow:0 0 14px #ffb454;animation:blip 2.4s ease-out forwards}
+.blip.ok{background:#00ff88;box-shadow:0 0 14px #00ff88}
+@keyframes blip{0%{transform:scale(.3);opacity:0}15%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:.0}}
+.feed{list-style:none;margin:0;padding:0;min-height:176px}
+.feed li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px;font-size:14px;color:#e8edf7;animation:feedin .5s ease}
+.feed li i{font-style:normal;font-weight:800;font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:6px;color:#07101f;background:#ffb454}.feed li.ok i{background:#00ff88}
+@keyframes feedin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+#socChart{width:100%;height:70px;display:block;margin-top:6px}
+.soc-ctl{margin-top:10px;font-size:12px;color:#8b97ad}.soc-ctl button{cursor:pointer;background:none;border:1px solid rgba(255,255,255,.2);color:#dfe6f3;border-radius:8px;padding:4px 10px;margin-left:8px}
+@media(max-width:760px){.soc-grid{grid-template-columns:1fr}.radar{margin:0 auto}}
+@media(prefers-reduced-motion:reduce){.sweep,.soc-dot,.blip,.feed li{animation:none}}.hero h1 span{display:block}.read-link{margin-right:26px}.ev-note{margin-bottom:18px}</style>
 </head>
 
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="hero">
+  <canvas id="heroNet" aria-hidden="true"></canvas>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
@@ -561,7 +586,7 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
         <p>
           The EU has confirmed its first AI-driven attack and the FBI has warned about the tool behind
           this wave. The good news is that the warning signs are published, the fixes are known and the
-          defences work. Here is what changed since Friday and how to stay protected.
+          defences work. Here is what is happening and how to stay protected.
         </p>
         <div class="meta">
           <span>23 NOVEMBER 2026</span>
@@ -584,7 +609,7 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
 <section class="section">
 <div class="container">
 
-  <div class="section-label">01 | What changed since Friday</div>
+  <div class="section-label">01 | What happened</div>
 
   <h2>
     The EU has confirmed its first AI-driven attack.
@@ -603,9 +628,9 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
 
   <div class="highlight">
     <p>
-      <strong>Correction to Friday:</strong> we reported ARTEX as suspected in the Commission attack. The Commission has
-      confirmed AI tool misuse but has not named the tool. CERT-EU has warned that publicly available tools such as ARTEX
-      can make attacks faster and more automated. Treat the ARTEX link as likely, not confirmed.
+      <strong>What we know about the tool:</strong> the Commission has confirmed AI tool misuse but has not named the tool.
+      CERT-EU has warned that publicly available tools such as ARTEX can make attacks faster and more automated, and reports
+      citing CERT-EU point to ARTEX. Treat the ARTEX link as likely, not confirmed.
     </p>
   </div>
   <a class="read-link" href="https://www.brusselstimes.com/2414026/european-commission-confirms-ai-assisted-cyberattack-on-internal-systems-tbtb" target="_blank" rel="noopener">Read the Commission confirmation &rarr;</a>
@@ -679,6 +704,25 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
 
 <section class="section">
 <div class="container">
+  <div class="soc-live" id="socLive">
+    <div class="soc-head"><span><span class="soc-dot"></span>How a SOC responds</span><span class="soc-note">Illustrative simulation, not live data. Pick a scenario.</span></div>
+    <div class="soc-chips" role="tablist" aria-label="Scenario">
+      <button class="on" data-s="0">Third-party app</button>
+      <button data-s="1">Patch window</button>
+      <button data-s="2">Supplier portal</button>
+      <button data-s="3">AI agent</button>
+    </div>
+    <div class="soc-grid">
+      <div class="radar" id="radar" aria-hidden="true"><div class="sweep"></div></div>
+      <div><ul class="feed" id="feed" aria-live="polite"></ul><canvas id="socChart" aria-hidden="true"></canvas>
+      <div class="soc-ctl"><span id="socState">Running</span><button id="socPause" type="button">Pause</button></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
 
   <div class="section-label">03 | The view from the SOC floor</div>
 
@@ -726,8 +770,8 @@ ol.steps li.done::before{content:"\2713";background:#00FF88}
   </p>
   <p>
     The agent was running an internal evaluation of a frontier model when it accessed the Medicare Statistics Reporting Service without
-    authorisation. OpenAI says the access was unintentional and that it found no evidence of patient records being accessed. Friday's
-    edition covered a separate California lawsuit over OpenAI test agents that attacked Hugging Face, so
+    authorisation. OpenAI says the access was unintentional and that it found no evidence of patient records being accessed. A
+    separate California lawsuit over OpenAI test agents that attacked Hugging Face shows that
     <a href="/blog/friday-ai-insights-20-november-2026/">AI incidents are now a legal question</a> as well as a technical one.
   </p>
   <p>
@@ -1000,6 +1044,46 @@ $$('.stat').forEach(function(st){
   });
   upd();
 })();
+})();
+</script>
+<script>
+(function(){
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* hero network */
+var c=document.getElementById('heroNet');if(c){var x=c.getContext('2d'),W,H,P=[],mx=-999,my=-999,hero=c.parentNode;
+function size(){var r=hero.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);W=r.width;H=r.height;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);}
+function init(){size();P=[];var n=Math.round(Math.min(70,W/18));for(var i=0;i<n;i++){P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,t:Math.random()<.14?1:0});}}
+hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});
+hero.addEventListener('mouseleave',function(){mx=my=-999;});
+function draw(){x.clearRect(0,0,W,H);
+for(var i=0;i<P.length;i++){var a=P[i];if(!RM){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+var dx=mx-a.x,dy=my-a.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){a.x+=dx*.012;a.y+=dy*.012;}
+if(a.t&&a.x>W*.62)a.t=2;if(a.t===2&&a.x<W*.4)a.t=1;}
+for(var j=i+1;j<P.length;j++){var b=P[j],ex=a.x-b.x,ey=a.y-b.y,dd=ex*ex+ey*ey;if(dd<14000){x.strokeStyle='rgba(0,255,136,'+(0.16*(1-dd/14000))+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}}
+x.fillStyle=a.t===1?'rgba(255,180,84,.95)':(a.t===2?'rgba(0,255,136,1)':'rgba(160,120,255,.8)');x.beginPath();x.arc(a.x,a.y,a.t?3.4:2.2,0,6.283);x.fill();}
+if(!RM)requestAnimationFrame(draw);}
+init();draw();window.addEventListener('resize',function(){init();if(RM)draw();});}
+/* SOC simulation */
+var S=[["Unusual sign-in from a trusted app identity","Credential revoked, access cut","Tenant reviewed, no data taken"],
+["Exploit attempt on an unpatched edge device","Blocked at the perimeter","Patch pushed, window closed"],
+["Supplier account signs in from a new country","Step-up verification required","Access denied, supplier notified"],
+["AI agent requests access outside its scope","Policy denies the request","Action logged for human review"]];
+var feed=document.getElementById('feed'),radar=document.getElementById('radar'),chips=document.querySelectorAll('#socLive .soc-chips button'),cur=0,step=0,paused=false,tm;
+function blip(ok){if(!radar)return;var b=document.createElement('div');b.className='blip'+(ok?' ok':'');var a=Math.random()*6.283,r=30+Math.random()*58;b.style.left=(50+Math.cos(a)*r*.5*1)+'%';b.style.top=(50+Math.sin(a)*r*.5*1)+'%';radar.appendChild(b);setTimeout(function(){b.remove();},2500);}
+function add(txt,tag,ok){var li=document.createElement('li');if(ok)li.className='ok';li.innerHTML='<i>'+tag+'</i><span></span>';li.lastChild.textContent=txt;feed.insertBefore(li,feed.firstChild);while(feed.children.length>4)feed.removeChild(feed.lastChild);}
+function tick(){if(paused)return;var e=S[cur];if(step===0){add(e[0],'DETECTED',false);blip(false);}else if(step===1){add(e[1],'CONTAINED',true);blip(true);}else{add(e[2],'RESOLVED',true);}step=(step+1)%4;}
+function start(n){cur=n;step=0;feed.innerHTML='';clearInterval(tm);tick();if(!RM)tm=setInterval(tick,1500);else{step=1;tick();step=2;tick();}}
+if(feed){chips.forEach(function(b){b.addEventListener('click',function(){chips.forEach(function(k){k.classList.remove('on')});b.classList.add('on');start(+b.getAttribute('data-s'));});});
+var pb=document.getElementById('socPause'),st=document.getElementById('socState');pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Play':'Pause';st.textContent=paused?'Paused':'Running';});start(0);}
+/* signal chart */
+var cc=document.getElementById('socChart');if(cc){var cx=cc.getContext('2d'),w,h,pts=[],t=0;
+function cs(){var d=Math.min(window.devicePixelRatio||1,2);w=cc.clientWidth;h=cc.clientHeight;cc.width=w*d;cc.height=h*d;cx.setTransform(d,0,0,d,0,0);}
+cs();window.addEventListener('resize',cs);
+function cd(){if(!paused&&!RM){t++;var v=.35+.12*Math.sin(t/9)+.08*Math.sin(t/3.1)+Math.random()*.06,sp=(t%140>118&&t%140<126)?.35:0;pts.push({v:v+sp,s:sp>0});if(pts.length>Math.ceil(w/4))pts.shift();}
+cx.clearRect(0,0,w,h);cx.beginPath();for(var i=0;i<pts.length;i++){var X=i*4,Y=h-pts[i].v*h*1.6;i?cx.lineTo(X,Y):cx.moveTo(X,Y);}cx.strokeStyle='#00ff88';cx.lineWidth=2;cx.stroke();
+for(i=0;i<pts.length;i++){if(pts[i].s&&(i%3===0)){cx.fillStyle='#ffb454';cx.beginPath();cx.arc(i*4,h-pts[i].v*h*1.6,3.2,0,6.283);cx.fill();}}
+if(!RM)requestAnimationFrame(cd);}
+cd();}
 })();
 </script>
 </body>
