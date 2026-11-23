@@ -286,6 +286,15 @@
 .pf-table td{color:var(--ink2)}
 .pf-cmp-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 
+
+/* INDUSTRIES */
+.pf-inds{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.pf-ind{position:relative;display:block;background:#F7F9FC;border:1px solid var(--line);border-radius:16px;padding:20px 44px 20px 20px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.pf-ind:hover{transform:translateY(-3px);border-color:var(--g2);box-shadow:0 14px 34px rgba(18,23,43,.08)}
+.pf-ind b{display:block;color:var(--ink);font-weight:800;font-size:1rem;margin-bottom:4px}
+.pf-ind span{display:block;color:var(--mute);font-size:.85rem;line-height:1.5}
+.pf-ind i{position:absolute;right:18px;top:20px;font-style:normal;color:var(--g2);font-weight:900}
+
 /* JOURNEY */
 .pf-jour{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .pf-j{background:#F7F9FC;border:1px solid var(--line);border-radius:18px;padding:24px 20px}
@@ -441,7 +450,7 @@ body{padding-top:84px;}
     <div>
       <span class="pf-chip pf-chip-dk"><i></i>The Neural Horizons AI Platform</span>
       <h1>Two products.<br><span class="pf-grad">One verified view</span> of your business.</h1>
-      <p class="lead"><strong style="color:#00FF88">Zonar OS™</strong> reconciles your order, invoice and delivery files and proves every discrepancy. <strong style="color:#C4B5FD">HALU™</strong> turns those verified findings into briefings your department heads can act on.</p>
+      <p class="lead"><strong style="color:#00FF88">Zonar OS™</strong> is the verification layer for your whole business. It checks one set of records against another and proves every mismatch. <strong style="color:#C4B5FD">HALU™</strong> turns the verified findings into briefings your department heads can act on.</p>
       <div class="pf-btns">
         <a href="/contact/" class="pf-btn pf-btn-grad">Talk to Lisa Warren →</a>
         <a href="#compare" class="pf-btn pf-btn-ghost">Compare the Products</a>
@@ -471,15 +480,15 @@ body{padding-top:84px;}
 <section class="pf-sec pf-sec-lt">
   <div class="pf-wrap">
     <div class="reveal pf-head">
-      <span class="pf-chip pf-chip-lt"><i></i>Why this exists</span>
-      <h2>Your systems record everything.<br><span class="pf-grad">Nobody checks them against each other.</span></h2>
-      <p>SAP, Oracle, Microsoft, Salesforce. They run the business. They do not tell you that an order was delivered and never invoiced, or that an invoice does not match its order. Zonar OS and HALU sit on top of what you already run. Nothing gets replaced.</p>
-      <p style="margin-top:12px"><strong style="color:#12172B">Finance is where we start.</strong> The same method, verify first and then brief, extends to operations, procurement, sales and marketing.</p>
+      <span class="pf-chip pf-chip-lt"><i></i>First live module: Reconciliation Audit</span>
+      <h2>Every department keeps records.<br><span class="pf-grad">Nobody checks them against each other.</span></h2>
+      <p>SAP, Oracle, Microsoft, Salesforce. They run the business. They do not tell you that an order was delivered and never invoiced, or that an invoice does not match its order. Zonar OS sits on top of what you already run and audits it. Nothing gets replaced.</p>
+      <p style="margin-top:12px"><strong style="color:#12172B">The Reconciliation Audit is our first live module.</strong> It checks orders, invoices and deliveries. The same method, verify first and then brief, applies to every industry we serve. See below.</p>
     </div>
     <div class="reveal pf-guard" style="grid-template-columns:repeat(3,1fr)">
-      <div class="pf-g"><div class="ic">📄</div><h3>Over- and under-invoiced</h3><p>Orders where the invoice does not match what was ordered or delivered.</p></div>
-      <div class="pf-g"><div class="ic">🚚</div><h3>Delivered, never invoiced</h3><p>Revenue that left the building and never reached a bill.</p></div>
-      <div class="pf-g"><div class="ic">🔗</div><h3>Invoices with no order</h3><p>Charges with nothing behind them. Each one is traced to its row.</p></div>
+      <div class="pf-g"><div class="ic">📄</div><h3>Orders vs invoices</h3><p>Orders where the invoice does not match what was ordered or delivered.</p></div>
+      <div class="pf-g"><div class="ic">🚚</div><h3>Deliveries vs invoices</h3><p>Revenue that left the building and never reached a bill.</p></div>
+      <div class="pf-g"><div class="ic">🔗</div><h3>Invoices vs orders</h3><p>Charges with nothing behind them. Each one is traced to its row.</p></div>
     </div>
   </div>
 </section>
@@ -540,6 +549,18 @@ body{padding-top:84px;}
         <a href="/halu/" class="pf-btn pf-btn-blue">Explore HALU™ →</a>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="pf-sec pf-sec-wh" id="industries">
+  <div class="pf-wrap">
+    <div class="reveal pf-head">
+      <span class="pf-chip pf-chip-lt"><i></i>Across the ecosystem</span>
+      <h2>One layer.<br><span class="pf-grad">Every industry we serve.</span></h2>
+      <p>Each industry has records that should agree and often do not. Zonar OS checks them. HALU briefs the people accountable. The Reconciliation Audit is live first. Each sector's checks are scoped with you in a pilot.</p>
+    </div>
+    <div class="reveal pf-inds"><a href="/intelligence/finance/" class="pf-ind"><b>Finance</b><span>Orders, invoices and payments</span><i>&rarr;</i></a><a href="/intelligence/fmcg/" class="pf-ind"><b>FMCG</b><span>Orders, shipments and distributor pricing</span><i>&rarr;</i></a><a href="/intelligence/supply-chain-process/" class="pf-ind"><b>Supply Chain &amp; Process</b><span>Purchase orders, goods received, supplier invoices</span><i>&rarr;</i></a><a href="/intelligence/healthcare/" class="pf-ind"><b>Healthcare</b><span>Treatments, claims and payer remittances</span><i>&rarr;</i></a><a href="/intelligence/education/" class="pf-ind"><b>Education</b><span>Enrolments, fee invoices and payments</span><i>&rarr;</i></a><a href="/intelligence/sustainability/" class="pf-ind"><b>Sustainability</b><span>Reported emissions against activity data</span><i>&rarr;</i></a><a href="/intelligence/government-relations-esg/" class="pf-ind"><b>Government Relations &amp; ESG</b><span>Disclosures against underlying evidence</span><i>&rarr;</i></a><a href="/intelligence/strategic-planning/" class="pf-ind"><b>Strategic Planning</b><span>Plan targets against actuals</span><i>&rarr;</i></a><a href="/intelligence/digital/" class="pf-ind"><b>Digital</b><span>Licences, usage and vendor invoices</span><i>&rarr;</i></a><a href="/intelligence/agentic-ai/" class="pf-ind"><b>Agentic AI</b><span>Agent actions against source systems</span><i>&rarr;</i></a></div>
   </div>
 </section>
 
