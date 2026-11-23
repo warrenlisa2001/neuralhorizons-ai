@@ -443,14 +443,14 @@ body{padding-top:84px;}
       </div>
     </div>
     <div class="pf-win" style="box-shadow:0 30px 80px rgba(0,0,0,.5)">
-      <div class="pf-win-bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>HALU™ · Finance briefing · Run verified</span></div>
+      <div class="pf-win-bar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>HALU™ · Operations briefing · Run verified</span></div>
       <div class="pf-win-body">
-        <h5>Finance briefing</h5>
+        <h5>Operations briefing</h5>
         <div class="sub">Order, invoice and delivery files reconciled · 3 findings</div>
-        <div class="pf-find f-red"><b>Delivered, never invoiced</b><em>AED 52,100</em><small>6 orders · traced to delivery file rows and order IDs</small></div>
-        <div class="pf-find f-amb"><b>Over-invoiced</b><em>AED 38,400</em><small>14 orders · invoice value above order value</small></div>
-        <div class="pf-find f-pur"><b>Under-invoiced</b><em>AED 21,750</em><small>9 orders · invoice value below order value</small></div>
-        <div class="pf-ask"><b>Ask HALU:</b> Which customer has the largest gap?<br>→ Answers from the verified run, with the rows that support it.</div>
+        <div class="pf-find f-red"><b>Delivered, no invoice</b><em>6 orders</em><small>Oldest waiting 41 days · traced to delivery file rows and order IDs</small></div>
+        <div class="pf-find f-amb"><b>Ordered, no delivery record</b><em>14 orders</em><small>Concentrated in two warehouses · open since last month</small></div>
+        <div class="pf-find f-pur"><b>Price differs from order</b><em>9 orders</em><small>Invoice value does not match the agreed order value</small></div>
+        <div class="pf-ask"><b>Ask HALU:</b> Which customers have waited longest for an invoice?<br>→ Answers from the verified run, with the rows that support it.</div>
         <p style="margin-top:12px;font-size:.72rem;color:#6B7390;text-align:center">Illustrative example. Figures are not client data.</p>
       </div>
     </div>
@@ -474,7 +474,7 @@ body{padding-top:84px;}
     </div>
     <div class="pf-guard" style="grid-template-columns:repeat(3,1fr)">
       <div class="pf-g"><div class="ic">📝</div><h3>A briefing for every verified run</h3><p>Counts by severity, the findings that matter most, and the evidence behind each one, in plain language.</p></div>
-      <div class="pf-g"><div class="ic">💰</div><h3>A finance view</h3><p>Over- and under-invoiced totals, uninvoiced orders, and invoices with no order, each with its source rows.</p></div>
+      <div class="pf-g"><div class="ic">💰</div><h3>A view for each department</h3><p>Delivered-not-invoiced, undelivered orders, price differences and invoices with no order, each with its source rows.</p></div>
       <div class="pf-g"><div class="ic">💬</div><h3>Ask HALU</h3><p>Ask a question and get an answer from the verified data only. If the answer is not there, HALU says so.</p></div>
       <div class="pf-g"><div class="ic">🚦</div><h3>An optional readiness gate</h3><p>Nothing is delivered until the data, the definitions and a boundary signed by your business owner are in place.</p></div>
       <div class="pf-g"><div class="ic">🔔</div><h3>Automatic delivery</h3><p>New verified runs are picked up and briefed without anyone chasing. Your team approves every action.</p></div>
@@ -548,9 +548,31 @@ body{padding-top:84px;}
     <div class="pf-head">
       <span class="pf-chip pf-chip-lt"><i></i>Across the ecosystem</span>
       <h2>One agent.<br><span class="pf-grad">Every industry we serve.</span></h2>
-      <p>The finance view is live first. Each sector's briefings are scoped with you in a pilot.</p>
+      <p>The first views are live first. Each sector's briefings are scoped with you in a pilot.</p>
     </div>
     <div class="pf-inds"><a href="/intelligence/finance/" class="pf-ind"><b>Finance</b><span>Orders, invoices and payments</span><i>&rarr;</i></a><a href="/intelligence/fmcg/" class="pf-ind"><b>FMCG</b><span>Orders, shipments and distributor pricing</span><i>&rarr;</i></a><a href="/intelligence/supply-chain-process/" class="pf-ind"><b>Supply Chain &amp; Process</b><span>Purchase orders, goods received, supplier invoices</span><i>&rarr;</i></a><a href="/intelligence/healthcare/" class="pf-ind"><b>Healthcare</b><span>Treatments, claims and payer remittances</span><i>&rarr;</i></a><a href="/intelligence/education/" class="pf-ind"><b>Education</b><span>Enrolments, fee invoices and payments</span><i>&rarr;</i></a><a href="/intelligence/sustainability/" class="pf-ind"><b>Sustainability</b><span>Reported emissions against activity data</span><i>&rarr;</i></a><a href="/intelligence/government-relations-esg/" class="pf-ind"><b>Government Relations &amp; ESG</b><span>Disclosures against underlying evidence</span><i>&rarr;</i></a><a href="/intelligence/strategic-planning/" class="pf-ind"><b>Strategic Planning</b><span>Plan targets against actuals</span><i>&rarr;</i></a><a href="/intelligence/digital/" class="pf-ind"><b>Digital</b><span>Licences, usage and vendor invoices</span><i>&rarr;</i></a><a href="/intelligence/agentic-ai/" class="pf-ind"><b>Agentic AI</b><span>Agent actions against source systems</span><i>&rarr;</i></a></div>
+  </div>
+</section>
+
+<!-- BEYOND FINANCE -->
+<section class="pf-sec pf-sec-lt" id="departments">
+  <div class="pf-wrap">
+    <div class="reveal pf-head">
+      <span class="pf-chip pf-chip-lt"><i></i>Every department</span>
+      <h2>Not a finance tool.<br><span class="pf-grad">One verified view, briefed to every team.</span></h2>
+      <p>Orders, deliveries and invoices belong to more than finance. The same verified findings go to the person who owns each gap, in the language of their department.</p>
+    </div>
+    <div class="pf-guard">
+      <div class="pf-g"><div class="ic">⚙️</div><h3>Operations</h3><p>Orders with no delivery record, deliveries with no order, and where fulfilment is slipping.</p></div>
+      <div class="pf-g"><div class="ic">📈</div><h3>Sales and revenue</h3><p>Customers billed below the agreed price, discounts outside terms, and delivered work not yet invoiced.</p></div>
+      <div class="pf-g"><div class="ic">🚚</div><h3>Supply chain</h3><p>Ordered against received against invoiced, with supplier mismatches traced to the source row.</p></div>
+      <div class="pf-g"><div class="ic">🛡️</div><h3>Risk and compliance</h3><p>Records that do not agree, with an evidence trail and an audit log for every run and decision.</p></div>
+      <div class="pf-g"><div class="ic">👥</div><h3>Leadership</h3><p>A short briefing on what is wrong, how much it is worth and who owns it, with every claim traceable.</p></div>
+      <div class="pf-g"><div class="ic">💰</div><h3>Finance</h3><p>Under-invoiced, over-invoiced and uninvoiced amounts, ready to act on. One team of many.</p></div>
+      <div class="pf-g"><div class="ic">🧾</div><h3>Procurement</h3><p>Purchase orders against goods received and supplier invoices, so you pay for what arrived.</p></div>
+      <div class="pf-g"><div class="ic">🎧</div><h3>Customer service</h3><p>Disputed invoices and missing deliveries traced to the record, before the customer calls.</p></div>
+    </div>
+    <p style="text-align:center;margin-top:22px;color:var(--mute);font-size:.92rem">The Reconciliation Audit is live first. Each department's checks beyond it are scoped with you in a pilot.</p>
   </div>
 </section>
 
