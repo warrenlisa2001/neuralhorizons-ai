@@ -8,6 +8,7 @@
 
 <meta name="description" content="HALU is the intelligence agent built on Zonar OS. It reads what Zonar OS has verified and briefs your department heads, with every statement traced to a source record and your team approving every action.">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="HALU, AI agent, agentic AI, human-in-the-loop AI, RAG, retrieval-augmented generation, LLM, large language model, grounded AI, AI guardrails, AI governance, explainable AI, audit trail, multi-agent AI, AI briefing, cross-department intelligence, Zonar OS, Neural Horizons AI, UAE, GCC">
 <link rel="canonical" href="https://www.neuralhorizonsai.com/halu/">
 <meta property="og:title" content="HALU — The Intelligence Agent Built on Zonar OS | Neural Horizons AI">
 <meta property="og:description" content="HALU turns Zonar OS's verified findings into briefings for every department head, traced to the source record, with your team in control.">
@@ -22,7 +23,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
 
 <!-- JSON-LD Schema -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "@id": "https://www.neuralhorizonsai.com/halu/#software", "name": "HALU", "alternateName": "HALU Agent", "description": "Neural Horizons AI's intelligence agent. Reads the verified findings from Zonar OS, builds a plain-language briefing and finance view for each completed run, and answers questions using only that verified data.", "applicationCategory": "BusinessApplication", "operatingSystem": "Cloud", "url": "https://www.neuralhorizonsai.com/halu/", "isPartOf": {"@type": "SoftwareApplication", "@id": "https://www.neuralhorizonsai.com/zonar-os/#software"}, "provider": {"@type": "Organization", "@id": "https://www.neuralhorizonsai.com/#org", "name": "Neural Horizons AI"}, "offers": {"@type": "Offer", "url": "https://www.neuralhorizonsai.com/halu/", "priceSpecification": {"@type": "PriceSpecification", "price": "0", "priceCurrency": "AED", "description": "Contact us for pricing — scoped to your business"}, "seller": {"@type": "Organization", "name": "Neural Horizons AI"}}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.neuralhorizonsai.com/"}, {"@type": "ListItem", "position": 2, "name": "Platform", "item": "https://www.neuralhorizonsai.com/platform/"}, {"@type": "ListItem", "position": 3, "name": "HALU", "item": "https://www.neuralhorizonsai.com/halu/"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "@id": "https://www.neuralhorizonsai.com/halu/#software", "name": "HALU", "alternateName": "HALU Agent", "description": "Neural Horizons AI's intelligence agent. Reads the verified findings from Zonar OS, builds a plain-language briefing and finance view for each completed run, and answers questions using only that verified data.", "applicationCategory": "BusinessApplication", "operatingSystem": "Cloud", "url": "https://www.neuralhorizonsai.com/halu/", "isPartOf": {"@type": "SoftwareApplication", "@id": "https://www.neuralhorizonsai.com/zonar-os/#software"}, "provider": {"@type": "Organization", "@id": "https://www.neuralhorizonsai.com/#org", "name": "Neural Horizons AI"}, "offers": {"@type": "Offer", "url": "https://www.neuralhorizonsai.com/halu/", "priceSpecification": {"@type": "PriceSpecification", "price": "0", "priceCurrency": "AED", "description": "Contact us for pricing — scoped to your business"}, "seller": {"@type": "Organization", "name": "Neural Horizons AI"}}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.neuralhorizonsai.com/"}, {"@type": "ListItem", "position": 2, "name": "Platform", "item": "https://www.neuralhorizonsai.com/platform/"}, {"@type": "ListItem", "position": 3, "name": "HALU", "item": "https://www.neuralhorizonsai.com/halu/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a human in the loop with HALU?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. HALU drafts, flags and escalates. Your team approves every action that matters. Pre-approved playbook actions run only inside limits a human set, and every action is logged."}}, {"@type": "Question", "name": "Does HALU use an LLM or RAG?", "acceptedAnswer": {"@type": "Answer", "text": "HALU pairs a deterministic reconciliation engine with a large language model layer that explains verified findings. Answers use retrieval-augmented generation: HALU retrieves the verified evidence first, then answers from it, citing source rows."}}, {"@type": "Question", "name": "Can HALU hallucinate?", "acceptedAnswer": {"@type": "Answer", "text": "We design against it: verified-only inputs, source-row citations, refusal when evidence is missing, an optional readiness gate and a decision log."}}, {"@type": "Question", "name": "Can HALU run without Zonar OS?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. HALU deploys as a standalone agent on top of your existing CRM, analytics and communication tools. Zonar OS gives it deeper access and verified findings to brief from."}}]}]}</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -214,6 +215,55 @@
  .pf-hero{padding:56px 0 64px}
 }
 
+.oh{--cyan:#2563EB;--dark2:#F7F9FC;--card:rgba(18,23,43,0.036);--border:rgba(18,23,43,0.064);--green:#05C793}
+.section{max-width:1060px;margin:80px auto;padding:0 24px}
+.section-eyebrow{font-size:10px;font-weight:700;color:#4b5563;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.section-title{font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:12px}
+.section-body{font-size:16px;color:#5B6478;line-height:1.8;max-width:600px;margin-bottom:44px}
+
+/* DEPT GRID */
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.dept-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color 0.25s,transform 0.2s}
+.dept-card:hover{border-color:rgba(0,229,255,0.25);transform:translateY(-2px)}
+.dept-icon{font-size:26px;margin-bottom:12px}
+.dept-name{font-size:15px;font-weight:800;color:#12172B;margin-bottom:6px}
+.dept-desc{font-size:13px;color:#6b7280;line-height:1.65}
+
+/* HOW IT WORKS */
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:24px;align-items:flex-start;position:relative;padding-bottom:36px}
+.flow-step:last-child{padding-bottom:0}
+.flow-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px}
+.flow-num{width:40px;height:40px;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--cyan);flex-shrink:0}
+.flow-line{width:1px;flex:1;background:rgba(0,229,255,0.1);margin:6px 0}
+.flow-step:last-child .flow-line{display:none}
+.flow-content{padding-top:6px}
+.flow-title{font-size:16px;font-weight:800;color:#12172B;margin-bottom:6px}
+.flow-desc{font-size:14px;color:#5B6478;line-height:1.7;max-width:500px}
+
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.result-card{background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.12);border-radius:16px;padding:28px;text-align:center}
+.result-num{font-size:42px;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:8px}
+.result-label{font-size:14px;color:#5B6478;line-height:1.6}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.p-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative}
+.p-card.featured{border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.03)}
+.p-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#12172B;font-size:10px;font-weight:900;padding:4px 16px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.p-tier{font-size:10px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.p-name{font-size:20px;font-weight:900;color:#12172B;margin-bottom:8px}
+.p-price{font-size:34px;font-weight:900;color:var(--cyan);line-height:1;margin-bottom:4px}
+.p-price span{font-size:14px;color:#6b7280;font-weight:500}
+.p-desc{font-size:13px;color:#5B6478;line-height:1.65;margin:12px 0 20px}
+.p-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.p-features li{font-size:13px;color:#374050;display:flex;gap:8px;align-items:flex-start}
+.p-features li::before{content:"✓";color:var(--cyan);font-weight:900;flex-shrink:0}
+.btn-cyan{display:block;background:var(--cyan);color:#12172B;font-weight:800;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:opacity 0.2s}
+.btn-cyan:hover{opacity:0.85}
+.btn-border{display:block;border:1px solid rgba(0,229,255,0.25);color:#374050;font-weight:700;font-size:14px;padding:14px;border-radius:100px;text-align:center;transition:all 0.2s}
+.btn-border:hover{border-color:rgba(0,229,255,0.5);color:#12172B}
 #talk{--cyan:#2563EB;--dark2:#F7F9FC;--border:rgba(18,23,43,0.064)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .chat-wrap{max-width:720px;margin:0 auto;padding:0 24px}
@@ -373,7 +423,7 @@ body{padding-top:84px;}
 <section class="pf-hero">
   <div class="pf-wrap">
     <div>
-      <span class="pf-chip pf-chip-dk"><i></i>Built on Zonar OS™ · Pilot programme</span>
+      <span class="pf-chip pf-chip-dk"><i></i>Built on Zonar OS™ · Neural Horizons AI</span>
       <h1>HALU™.<br><span class="pf-grad">The intelligence agent</span><br>your leaders can trust.</h1>
       <p class="lead">HALU™ reads what Zonar OS™ has verified and briefs the people who need to act on it, department by department. Every statement traces to a source record, and your team approves every action.</p>
       <div class="pf-btns">
@@ -383,7 +433,7 @@ body{padding-top:84px;}
       <div class="pf-stats">
         <div class="pf-stat"><b style="color:#00FF88">Verified</b><span>Data only</span></div>
         <div class="pf-stat"><b style="color:#2563EB">Traced</b><span>To the source row</span></div>
-        <div class="pf-stat"><b style="color:#F59E0B">Read-only</b><span>By design</span></div>
+        <div class="pf-stat"><b style="color:#F59E0B">Human</b><span>In the loop</span></div>
       </div>
     </div>
     <div class="pf-win" style="box-shadow:0 30px 80px rgba(0,0,0,.5)">
@@ -435,6 +485,50 @@ body{padding-top:84px;}
   </div>
 </section>
 
+<section class="pf-sec pf-sec-lt" id="how-built">
+  <div class="pf-wrap">
+    <div class="pf-head">
+      <span class="pf-chip pf-chip-lt"><i></i>How it's built</span>
+      <h2>Human-in-the-loop agentic AI<br><span class="pf-grad">you can audit.</span></h2>
+      <p>Zonar OS and HALU combine a deterministic reconciliation engine with a grounded large language model (LLM) layer. The engine decides what is true. The language layer explains it. People approve what matters.</p>
+    </div>
+    <div class="pf-guard" style="grid-template-columns:repeat(3,1fr)">
+      <div class="pf-g"><div class="ic">🧑‍💼</div><h3>Human in the loop</h3><p>HALU drafts, flags and escalates. Your people approve every action that matters. Pre-approved playbook actions run only inside limits a human set, and every one is logged.</p></div>
+      <div class="pf-g"><div class="ic">⚙️</div><h3>A deterministic core</h3><p>Reconciliation is rule-based and repeatable. The same files give the same findings. No language model decides what is true.</p></div>
+      <div class="pf-g"><div class="ic">🔗</div><h3>Grounded answers (RAG)</h3><p>Ask HALU uses retrieval-augmented generation over verified findings. It retrieves the evidence first, then answers from it, with the source rows. No evidence, no answer.</p></div>
+      <div class="pf-g"><div class="ic">🧠</div><h3>An LLM that explains, not invents</h3><p>The LLM writes the plain-language briefing. It cannot introduce a fact the evidence does not carry, and every statement keeps its source reference.</p></div>
+      <div class="pf-g"><div class="ic">🛡️</div><h3>Guardrails against hallucination</h3><p>Verified-only inputs, source-row citations, refusal when evidence is missing, an optional readiness gate and a decision log of every delivery and every hold.</p></div>
+      <div class="pf-g"><div class="ic">🔐</div><h3>Governance and security</h3><p>Microsoft Entra ID sign-in, role-based access control, one client per credential, tenant isolation, a full audit trail, and backup and recovery.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pf-sec pf-sec-wh oh">
+  <div class="pf-wrap" style="max-width:820px">
+    <div style="background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.12);border-radius:20px;padding:32px;">
+      <p style="font-size:10px;font-weight:700;color:#4b5563;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;">TYPICAL RESULTS</p>
+      <div class="results-grid" style="grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="result-card" style="padding:20px">
+          <div class="result-num" style="font-size:32px">AED<br>200–500K</div>
+          <div class="result-label" style="font-size:12px">Average revenue leak found in first 30 days</div>
+        </div>
+        <div class="result-card" style="padding:20px">
+          <div class="result-num" style="font-size:32px">60%</div>
+          <div class="result-label" style="font-size:12px">Reduction in cross-department escalation time</div>
+        </div>
+        <div class="result-card" style="padding:20px">
+          <div class="result-num" style="font-size:32px">Scheduled</div>
+          <div class="result-label" style="font-size:12px">Checks of your connected data on a regular schedule — no manual check-ins</div>
+        </div>
+        <div class="result-card" style="padding:20px">
+          <div class="result-num" style="font-size:32px">2–4<br>weeks</div>
+          <div class="result-label" style="font-size:12px">From audit to full live deployment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="pf-sec pf-sec-wh">
   <div class="pf-wrap">
     <div class="pf-head">
@@ -479,6 +573,69 @@ body{padding-top:84px;}
   </div>
 </section>
 
+<div class="oh">
+<section class="section" id="pricing">
+  <p class="section-eyebrow">PRICING</p>
+  <h2 class="section-title">Deploy HALU™ in your business.</h2>
+  <p class="section-body">From a single department pilot to full enterprise deployment with white-label licensing. All plans include Neural Horizons AI onboarding and setup.</p>
+
+  <div class="pricing-grid">
+    <div class="p-card">
+      <div class="p-tier">Starter</div>
+      <div class="p-name">HALU™ Lite</div>
+      <div class="p-price">Contact us <span>for pricing</span></div>
+      <div class="p-desc">Single department. Ideal for testing HALU™ on one revenue-critical workflow before rolling out company-wide.</div>
+      <ul class="p-features">
+        <li>1 department connected</li>
+        <li>Revenue leak monitoring</li>
+        <li>Action item generation</li>
+        <li>Weekly intelligence summaries</li>
+        <li>Email + chat support</li>
+        <li>Neural Horizons AI onboarding</li>
+      </ul>
+      <a href="https://calendly.com/warrenlisa2001/30min" target="_blank" rel="noopener" class="btn-border">📅 Book a Call</a>
+    </div>
+
+    <div class="p-card featured">
+      <div class="p-badge">MOST POPULAR</div>
+      <div class="p-tier">Growth</div>
+      <div class="p-name">HALU™ Pro</div>
+      <div class="p-price">Contact us <span>for pricing</span></div>
+      <div class="p-desc">Full cross-department Command Centre. HALU™ runs across all departments simultaneously — monitoring and routing on a regular schedule, with your team approving every action.</div>
+      <ul class="p-features">
+        <li>Up to 5 departments connected</li>
+        <li>Real-time Command Centre dashboard</li>
+        <li>Intelligent escalation engine</li>
+        <li>CRM + analytics integration</li>
+        <li>Zonar™ Metrics live reporting</li>
+        <li>Automated email drafting</li>
+        <li>Dedicated success manager</li>
+      </ul>
+      <a href="https://calendly.com/warrenlisa2001/30min" target="_blank" rel="noopener" class="btn-cyan">📅 Book a Call with Our Team</a>
+    </div>
+
+    <div class="p-card">
+      <div class="p-tier">Enterprise</div>
+      <div class="p-name">HALU™ Enterprise</div>
+      <div class="p-price">Custom <span>pricing</span></div>
+      <div class="p-desc">Full Zonar OS™ + HALU™ deployment. Built to your organisation's architecture — including white-label licensing to resell as your own product.</div>
+      <ul class="p-features">
+        <li>Unlimited departments</li>
+        <li>Custom AI model training</li>
+        <li>Full API + webhook integration</li>
+        <li>White-label option available</li>
+        <li>On-site deployment support</li>
+        <li>SLA guarantee</li>
+        <li>Quarterly strategy reviews</li>
+      </ul>
+      <a href="mailto:support@neuralhorizonsai.com" class="btn-border">Contact for Pricing</a>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:12px;color:#374151;margin-top:20px;">Pricing is scoped to your business. Global clients welcome.</p>
+</section>
+</div>
+
 <section class="pf-sec pf-sec-wh">
   <div class="pf-wrap">
     <div class="pf-head">
@@ -487,10 +644,13 @@ body{padding-top:84px;}
     </div>
     <div class="pf-faq">
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the difference between HALU™ and Zonar OS™?<span>+</span></div><div class="faq-a">Zonar OS™ is the verification layer. It matches your operational files against each other and flags every discrepancy with evidence. HALU™ is the agent that reads what Zonar OS™ has verified and briefs your people. Zonar OS™ checks. HALU™ explains.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can HALU™ run without Zonar OS™?<span>+</span></div><div class="faq-a">Not today. HALU™ works only from findings Zonar OS™ has verified, which is what keeps every answer traceable to a source record.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What does HALU™ connect to?<span>+</span></div><div class="faq-a">HALU™ does not connect to your systems directly. It reads the verified results from Zonar OS™, which works from the exports your systems already produce. Nothing is replaced.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can HALU™ take actions on its own?<span>+</span></div><div class="faq-a">No. HALU™ is read-only and supervised. It briefs and answers. Your team approves every action.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is it available now?<span>+</span></div><div class="faq-a">Both products are in a pilot programme. We take on a small number of clients, scope each rollout with you, and handle setup, training and onboarding.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can HALU™ run without Zonar OS™?<span>+</span></div><div class="faq-a">Yes. HALU™ deploys as a standalone agent on top of your existing CRM, analytics and communication tools. No rip-and-replace. Zonar OS™ is the enterprise upgrade that gives HALU™ deeper access, and verified findings to brief from.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does HALU™ actually monitor my departments?<span>+</span></div><div class="faq-a">HALU™ connects to your existing data sources, such as CRM, email, project management and analytics, and runs a continuous monitoring loop across departments. It does not wait to be asked. It surfaces issues, generates action items and routes them to the right person.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is a human in the loop?<span>+</span></div><div class="faq-a">Yes. HALU™ drafts, flags and escalates. Your team approves every action that matters. Pre-approved playbook actions run only inside limits a human set, escalation logic keeps people in control, and every action is logged and explainable.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does HALU™ use an LLM or RAG?<span>+</span></div><div class="faq-a">HALU™ pairs a deterministic reconciliation engine with a large language model (LLM) layer that explains verified findings in plain language. Answers use retrieval-augmented generation (RAG): HALU™ retrieves the verified evidence first, then answers from it, citing the source rows. The language model cannot introduce a fact the evidence does not carry.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can HALU™ hallucinate?<span>+</span></div><div class="faq-a">We design against it. Inputs are verified findings only, every statement keeps a source reference, HALU™ declines to answer when evidence is missing, and an optional readiness gate holds delivery until the data, definitions and a signed boundary are in place. Every delivery and every hold is logged.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is HALU™ available as a white-label product?<span>+</span></div><div class="faq-a">Yes, on the Enterprise tier. You can license HALU™ under your own brand and sell it to your clients. Contact support@neuralhorizonsai.com for white-label pricing.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is it available now?<span>+</span></div><div class="faq-a">Yes. We scope each rollout with you and handle setup, training and onboarding. The Reconciliation Audit module in Zonar OS™ is currently a pilot programme.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What does it cost?<span>+</span></div><div class="faq-a">Pricing is scoped to your business and includes onboarding. Contact us and we will talk it through. Questions? support@neuralhorizonsai.com</div></div>
     </div>
   </div>
