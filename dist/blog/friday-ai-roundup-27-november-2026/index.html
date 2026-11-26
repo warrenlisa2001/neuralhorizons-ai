@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Friday AI Roundup: The Agents Went Shopping. The Bottleneck Is Still Inside Your Company. | Neural Horizons AI</title>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+
+
+<meta name="description" content="Walmart and Meta put an AI agent in the Black Friday cart, a new study shows adoption stalls inside companies, the UAE Cabinet set a date for agentic government and AI attacks sped up. Friday AI Roundup, 27 November 2026.">
+<meta name="keywords" content="AI roundup, agentic commerce, Black Friday AI agents, UAE agentic AI strategy, Mira, FedAI, AI cyber attacks, ARTEX, AI governance, Neural Horizons AI">
+
+<meta property="og:title" content="The Agents Went Shopping. The Bottleneck Is Still Inside Your Company.">
+<meta property="og:description" content="Agents are in the Black Friday cart, the UAE has set a date for agentic government, and attacks now take hours. Plus six moves for Monday.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/blog/friday-ai-roundup-27-november-2026/">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+
+<link rel="canonical" href="https://www.neuralhorizonsai.com/blog/friday-ai-roundup-27-november-2026/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Agents Went Shopping. The Bottleneck Is Still Inside Your Company.", "datePublished": "2026-11-27", "dateModified": "2026-11-27T09:00:00+04:00", "author": {"@type": "Person", "name": "Lisa Warren", "jobTitle": "Founder and CEO, Neural Horizons AI"}, "publisher": {"@type": "Organization", "name": "Neural Horizons AI", "url": "https://www.neuralhorizonsai.com/"}, "image": "https://www.neuralhorizonsai.com/images/og-default.png", "mainEntityOfPage": "https://www.neuralhorizonsai.com/blog/friday-ai-roundup-27-november-2026/", "description": "Walmart and Meta put an AI agent in the Black Friday cart, a new study shows adoption stalls inside companies, the UAE Cabinet set a date for agentic government and AI attacks sped up. Friday AI Roundup, 27 November 2026."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why are retailers blocking AI shopping agents?", "acceptedAnswer": {"@type": "Answer", "text": "Control of the customer relationship and of advertising revenue. Amazon blocked Meta's Muse agent in September and is reported to be in talks about lifting the block. The sticking points are ad revenue and who controls which products the agent recommends. Walmart took the opposite route on 24 November and opened its Black Friday deals to Muse with spending limits and approval before purchase."}}, {"@type": "Question", "name": "What did the UAE Cabinet approve on 25 November 2026?", "acceptedAnswer": {"@type": "Answer", "text": "A government strategy for agentic AI that targets agentic AI across 50% of government operations, services and procedures, and the FedAI platform for building and running agentic AI across federal entities. Mira, a government concierge agent, reaches federal-service users from March 2027."}}, {"@type": "Question", "name": "What is ARTEX and why did the FBI warn about it?", "acceptedAnswer": {"@type": "Answer", "text": "ARTEX is an open-source, AI-driven platform built for authorised security testing that attackers have repurposed to automate intrusions. The FBI's 13 November flash advisory says it has helped attackers reach privileged network access in under three hours."}}, {"@type": "Question", "name": "What should a business do about AI agents this week?", "acceptedAnswer": {"@type": "Answer", "text": "Write an agent policy, make product and pricing data accurate and machine-readable, cap every agent that spends, name one owner per agent, measure review capacity before adding output, and treat agent access as privileged access."}}]}</script>
+
+
+<style>
+:root {
+  --black: #0A0A0F;
+  --green: #00FF88;
+  --purple: #8A2BE2;
+  --white: #FFFFFF;
+  --muted: #A8A8B5;
+  --panel: #14141D;
+  --border: rgba(255,255,255,0.12);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.hero {
+  padding: 105px 0 90px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgba(138,43,226,.20), transparent 38%),
+    radial-gradient(ellipse at 15% 90%, rgba(0,255,136,.12), transparent 40%),
+    var(--black);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content { max-width: 850px; }
+
+.kicker,
+.section-label {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+  font-weight: 800;
+}
+
+.hero h1 span,
+h2 span { color: var(--green); }
+
+.hero p {
+  color: #D1D1DA;
+  font-size: 19px;
+  max-width: 720px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta span:first-child { color: var(--green); }
+
+.intro {
+  max-width: 850px;
+  margin: auto;
+  padding: 70px 28px 50px;
+}
+
+.intro p {
+  font-size: 18px;
+  color: #D6D6DE;
+}
+
+.section {
+  padding: 65px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+}
+
+p {
+  color: #C6C6D0;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 19px;
+  color: #D8D8E0;
+  max-width: 850px;
+}
+
+.highlight {
+  border-left: 3px solid var(--green);
+  background: var(--panel);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.highlight p {
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 35px 0;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 25px 22px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.stat span {
+  display: block;
+  color: #C6C6D0;
+  font-size: 14px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.text-panel {
+  min-height: 230px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(138,43,226,.16), transparent 50%),
+    var(--panel);
+}
+
+.text-panel strong {
+  color: var(--green);
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.case-study {
+  background:
+    radial-gradient(ellipse at 90% 5%, rgba(0,255,136,.09), transparent 40%),
+    linear-gradient(135deg, #151522, #101A18);
+  border: 1px solid rgba(0,255,136,.3);
+  border-radius: 16px;
+  padding: 42px;
+  margin: 35px 0;
+}
+
+.case-study .stats { grid-template-columns: repeat(4, 1fr); }
+
+.case-study .stat { background: rgba(0,0,0,.28); }
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 35px;
+}
+
+.product {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.product.halu { border-top: 3px solid var(--green); }
+.product.zonar { border-top: 3px solid var(--purple); }
+
+.product-tag {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.zonar .product-tag { color: #B98AFF; }
+
+ul {
+  padding-left: 20px;
+  color: #C6C6D0;
+}
+
+li { margin-bottom: 9px; }
+
+.button {
+  display: inline-block;
+  background: var(--green);
+  color: var(--black);
+  padding: 13px 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background: var(--white);
+  text-decoration: none;
+}
+
+.button-outline {
+  display: inline-block;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.cta {
+  text-align: center;
+  padding: 75px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,255,136,.12), transparent 65%),
+    #101018;
+  border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+  max-width: 750px;
+  margin: 0 auto 20px;
+}
+
+.cta p {
+  max-width: 680px;
+  margin: 0 auto 25px;
+  font-size: 18px;
+}
+
+.sources {
+  padding: 35px 0 55px;
+  border-top: 1px solid var(--border);
+}
+
+.sources h3 { font-size: 17px; }
+
+.sources ul {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sources a { color: #B98AFF; }
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 75px 0; }
+  .hero h1 { letter-spacing: -1px; }
+
+  .stats,
+  .case-study .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-column,
+  .product-grid { grid-template-columns: 1fr; }
+
+  .case-study { padding: 26px 20px; }
+  .section { padding: 48px 0; }
+}
+
+@media (max-width: 420px) {
+  .stats,
+  .case-study .stats { gap: 10px; }
+
+  .stat { padding: 18px 14px; }
+}
+
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end}
+.hero-portrait{align-self:end;margin-bottom:-1px;position:relative}
+.hero-portrait img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 46px rgba(138,43,226,.45))}
+.hero{overflow:hidden;padding-bottom:0}
+.hero-content{padding-bottom:90px}.hero{padding-top:90px}
+.pull{border-left:3px solid var(--purple);background:var(--panel);padding:28px 30px;margin:34px 0;border-radius:0 12px 12px 0}
+.pull-q{font-size:clamp(22px,3vw,30px);font-weight:800;line-height:1.28;color:#fff;margin:0;letter-spacing:-.5px}
+.pull-q span{color:var(--green)}
+.pull-by{display:flex;align-items:center;gap:14px;margin-top:20px}
+.pull-by img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 16%;background:#1b1330;border:2px solid var(--green)}
+.pull-by b{display:block;color:#fff;font-size:15px}
+.pull-by small{display:block;color:var(--muted);font-size:13px}
+figure.viz{margin:34px 0;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px}
+figure.viz svg{width:100%;height:auto;display:block}
+figure.viz figcaption{color:var(--muted);font-size:13px;margin-top:12px}
+ol.steps{list-style:none;padding:0;margin:30px 0;counter-reset:s;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ol.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px 22px 18px 70px;position:relative;margin:0}
+ol.steps li::before{content:counter(s);position:absolute;left:20px;top:18px;width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--black);font-weight:800;display:grid;place-items:center}
+ol.steps li strong{display:block;color:#fff;margin-bottom:4px}
+ol.steps li span{color:#C6C6D0;font-size:15px;display:block}
+details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;color:#fff}
+details p{margin:10px 0 0}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}.hero-portrait{max-width:380px;margin:0 auto -1px}.hero-content{padding-bottom:10px}ol.steps{grid-template-columns:1fr}}
+
+/* ---- interactive layer ---- */
+#rp{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);z-index:99;transition:width .1s linear}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.ctl button{font:700 13px Arial,sans-serif;color:#fff;background:#1B1B28;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:9px 16px;cursor:pointer;transition:.2s}
+.ctl button:hover{border-color:#00FF88}
+.ctl button[aria-pressed="true"],.ctl button.run{background:#00FF88;color:#0A0A0F;border-color:#00FF88}
+.vnote{margin-top:14px;min-height:76px;padding:14px 16px;border-left:3px solid #00FF88;background:rgba(255,255,255,.04);border-radius:0 10px 10px 0}
+.vnote b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
+.vnote span{display:block;color:#C6C6D0;font-size:15px;line-height:1.5}
+.vnote.bad{border-left-color:#FF6B8A}
+svg .hot{cursor:pointer;outline:none;transition:filter .25s}
+svg .hot:hover,svg .hot:focus-visible{filter:drop-shadow(0 0 8px rgba(0,255,136,.55))}
+svg .hot.sel{filter:drop-shadow(0 0 14px rgba(0,255,136,.8))}
+svg .hot.sel rect,svg .hot.sel polygon,svg .hot.sel circle{stroke:#00FF88;stroke-width:3}
+svg .ln{stroke:#5a5a6a;marker-end:url(#ar2d);transition:stroke .3s}
+svg .ln.hi{stroke:#00FF88;marker-end:url(#ar2)}
+svg .spoke{stroke-dasharray:6 6;animation:dash 1.4s linear infinite;transition:stroke .3s,stroke-width .3s}
+svg .spoke.hi{stroke:#00FF88;stroke-width:3.5}
+svg .flow{stroke-dasharray:6 5;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+svg .row{transition:fill .3s}
+svg .row.ok{fill:#00FF88}
+svg .row.no{fill:#FF6B8A}
+svg .ck{fill:#00FF88;opacity:0;transition:opacity .3s}
+svg .ck.show{opacity:1}
+svg .ck.no{fill:#FF6B8A}
+svg #resOk,svg #resBad{transition:filter .3s,opacity .3s;opacity:.55}
+svg #resOk.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(0,255,136,.8))}
+svg #resBad.lit{opacity:1;filter:drop-shadow(0 0 16px rgba(255,107,138,.8))}
+svg #gateBox{animation:dash 2s linear infinite}
+.stat{overflow:hidden}
+.stat .bar{display:block;height:6px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0 12px;overflow:hidden}
+.stat .bar b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.stat.in .bar b{width:var(--w)}
+.meter{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:26px 0 0}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;color:#fff;font-size:15px}
+.meter-top span{color:#00FF88;font-weight:800}
+.meter i{display:block;height:8px;border-radius:99px;background:rgba(255,255,255,.1);margin:10px 0}
+.meter i b{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8A2BE2,#00FF88);transition:width .5s}
+.meter p{margin:0;color:#C6C6D0;font-size:14px}
+ol.steps li{cursor:pointer;transition:border-color .25s,background .25s,transform .25s;-webkit-tap-highlight-color:transparent}
+ol.steps li:hover{border-color:#00FF88;transform:translateY(-2px)}
+ol.steps li:focus-visible{outline:2px solid #00FF88;outline-offset:2px}
+ol.steps li.done{border-color:#00FF88;background:rgba(0,255,136,.07)}
+ol.steps li.done::before{content:"\2713";background:#00FF88}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.hero-portrait{animation:fl 7s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  svg .spoke,svg .flow,svg #gateBox,.hero-portrait{animation:none}
+  .stat .bar b,.meter i b{transition:none}
+}
+
+/* ---- jobs + related ---- */
+.jgrp{color:#A8A8B5;font:700 12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 10px}
+.jgrp:not(:first-child){margin-top:20px}
+.jrow{display:grid;grid-template-columns:minmax(120px,210px) 1fr 64px;gap:14px;align-items:center;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-radius:10px;padding:9px 10px;margin:2px 0;cursor:pointer;color:#fff;font:inherit;transition:.2s}
+.jrow:hover,.jrow:focus-visible{border-color:rgba(0,255,136,.5);outline:none}
+.jrow.sel{border-color:#00FF88;background:rgba(0,255,136,.07)}
+.jl{font-size:15px;color:#E8E8F0}
+.jv{font-weight:800;font-size:17px;text-align:right;color:#fff}
+.jt{display:block;height:14px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.jt i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.jobs.in .jt i{width:var(--w)}
+.jt i.g{background:linear-gradient(90deg,#00b862,#00FF88)}
+.jt i.p{background:linear-gradient(90deg,#c0425f,#FF6B8A)}
+.jt i.m{background:linear-gradient(90deg,#8A2BE2,#00FF88)}
+.jt i.v{background:linear-gradient(90deg,#6a1fb5,#8A2BE2)}
+@media(max-width:560px){.jrow{grid-template-columns:1fr 52px;gap:6px 10px}.jrow .jt{grid-column:1/-1;order:3}.jl{font-size:14px}}
+.xref{font-size:15px;color:#C6C6D0;border-left:2px solid #8A2BE2;padding:2px 0 2px 14px;margin:22px 0}
+.xref a{color:#00FF88}
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}
+@media(max-width:860px){.rel{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rel{grid-template-columns:1fr}}
+.rel-card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;transition:border-color .25s,transform .25s}
+.rel-card:hover{border-color:#00FF88;transform:translateY(-3px)}
+.rel-card small{display:block;color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rel-card b{display:block;color:#fff;font-size:16px;line-height:1.35;margin-bottom:8px}
+.rel-card span{display:block;color:#C6C6D0;font-size:14px;line-height:1.45}
+@media (prefers-reduced-motion:reduce){.jt i{transition:none}}
+
+.evidence{margin:-6px 0 34px;padding:18px 20px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-left:3px solid #8A2BE2;border-radius:0 12px 12px 0}
+.ev-h{color:#00FF88;font:700 12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.evidence ul{list-style:none;margin:0;padding:0}
+.evidence li{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);margin:0;align-items:baseline}
+.evidence li:first-child{border-top:0;padding-top:0}
+.evidence li strong{color:#fff;font-size:22px;font-weight:800}
+.evidence li span{color:#C6C6D0;font-size:15px;line-height:1.5}
+.evidence li em{display:block;font-style:normal;font-size:13px;color:#A8A8B5;margin-top:3px}
+.evidence li em a{color:#00FF88}
+.ev-note{margin:12px 0 0;color:#A8A8B5;font-size:13px}
+@media(max-width:560px){.evidence li{grid-template-columns:1fr;gap:2px}}
+
+/* journey */
+.jny{margin:34px 0 8px}
+.jroute{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:0 0 20px}
+.jroute:before{content:"";position:absolute;left:8.33%;right:8.33%;top:19px;height:3px;background:rgba(255,255,255,.12);border-radius:3px}
+.jroute .jfill{position:absolute;left:8.33%;top:19px;height:3px;width:0;background:linear-gradient(90deg,#8A2BE2,#00FF88);border-radius:3px;transition:width .5s ease}
+.jstop{position:relative;background:none;border:0;color:#A8A8B5;font:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;padding:0 2px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.jstop i{width:40px;height:40px;border-radius:50%;background:#14141D;border:2px solid rgba(255,255,255,.2);display:grid;place-items:center;font-style:normal;font-size:15px;color:#fff;transition:all .25s}
+.jstop.seen i{border-color:#8A2BE2;background:#241238}
+.jstop.on i{border-color:#00FF88;background:#00FF88;color:#0A0A0F;box-shadow:0 0 0 6px rgba(0,255,136,.15)}
+.jstop.on{color:#fff}
+.jstop:focus-visible{outline:2px solid #00FF88;outline-offset:4px;border-radius:8px}
+.jpanel{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch}
+.jwhy{grid-column:1/-1;margin:0;color:#C6C6D0;font-size:16px;min-height:3em}
+.jcard{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;color:#fff;text-decoration:none;transition:transform .2s,border-color .2s}
+.jcard:hover{transform:translateY(-3px);border-color:#00FF88;text-decoration:none}
+.jcard .jimg{aspect-ratio:16/9;background:#0A0A0F;overflow:hidden}
+.jcard .jimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.jcard:hover .jimg img{transform:scale(1.05)}
+.jcard .jb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.jtag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#00FF88}
+.jcard h4{margin:0;font-size:17px;line-height:1.35}
+.jgo{margin-top:auto;color:#00FF88;font-weight:700;font-size:14px}
+.jcs{background:linear-gradient(145deg,#1a1030 0%,#0f1a24 100%)}
+.jcs .jbig{padding:26px 18px 6px}
+.jcs .jbig b{display:block;font-size:clamp(38px,6vw,54px);line-height:1;color:#00FF88;font-weight:800}
+.jcs .jbig span{display:block;color:#C6C6D0;font-size:14px;margin-top:6px}
+.jdesc{margin:0;color:#C6C6D0;font-size:14px;line-height:1.5}
+.jmore{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin-top:2px}
+.jmore a.j2{color:#00FF88;font-size:14px}
+.jnav{display:flex;gap:10px}
+.jnav button{background:transparent;color:#fff;border:1px solid var(--border);border-radius:99px;padding:9px 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jnav button.pri{background:#00FF88;border-color:#00FF88;color:#0A0A0F}
+.jnav button:disabled{opacity:.35;cursor:default}
+.jhubs{grid-column:1/-1;display:none;gap:10px;flex-wrap:wrap}
+.jhubs.show{display:flex}
+.jhubs a{border:1px solid #00FF88;border-radius:99px;padding:9px 18px;font-weight:700;font-size:14px}
+.jchip{display:inline-block;margin:6px 0 0;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.4);color:#00FF88;border-radius:99px;padding:8px 16px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.jchip:hover{background:rgba(0,255,136,.16)}
+@media(max-width:700px){
+ .jpanel{grid-template-columns:1fr}
+ .jstop{font-size:10px}
+ .jstop i{width:32px;height:32px;font-size:13px}
+ .jroute:before,.jroute .jfill{top:15px}
+}
+@media(prefers-reduced-motion:reduce){.jcard,.jcard .jimg img,.jroute .jfill,.jstop i{transition:none}}
+.pull cite{display:block;margin-top:14px;font-style:normal;font-size:14px;color:#A8A8B5}
+.pull-ev{margin:-18px 0 30px;font-size:14px;color:#A8A8B5}
+.pull-ev a{color:#00FF88}
+</style>
+</head>
+
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-583T68TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="kicker">Neural Horizons AI | Friday AI Roundup</div>
+        <h1>
+          The Agents Went Shopping.
+          <span>The Bottleneck Is Still Inside Your Company.</span>
+        </h1>
+        <p>
+          Black Friday is here, and some of the shoppers are agents. They are in the cart.
+          They are not in charge of it. Here is what moved this week and what to do about it.
+        </p>
+        <div class="meta">
+          <span>27 NOVEMBER 2026</span>
+          <span>&bull;</span>
+          <span>WEEKLY AI ROUNDUP</span>
+          <span>&bull;</span>
+          <span>UAE | GLOBAL</span>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img src="/images/lisa-warren-portrait.png" width="820" height="765"
+             alt="Lisa Warren, Founder and CEO of Neural Horizons AI">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">01 | Agents go shopping</div>
+
+  <h2>
+    Agents are shopping.
+    <span>Platforms decide who gets in.</span>
+  </h2>
+
+  <p class="lead">
+    On 24 November Walmart opened its Black Friday deals to Meta&rsquo;s Muse agent. Amazon is still blocking the same agent.
+  </p>
+  <p>
+    Shoppers using Muse on Walmart can set spending limits, require approval before a purchase and review every
+    agent-placed order. Muse cannot see their Walmart shopping history. The experience runs on Walmart&rsquo;s
+    Agent Gateway, which launched in October, and Walmart plans to open it to more AI platforms.
+  </p>
+  <p>
+    Amazon blocked Muse in September. Reported talks to lift the block are stuck on advertising revenue and on who
+    controls which products the agent recommends. Amazon&rsquo;s advertising business is worth $68.6 billion a year.
+    That is what it is protecting.
+  </p>
+  <p>
+    One analytics firm says Muse accounts for 51% of agentic orders. It has not published its method, so treat
+    the number as a direction, not a fact.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Signal:</strong> Every retailer now has an agent policy. Most have not written it down. Allow, block or negotiate. Pick one on purpose.
+    </p>
+  </div>
+  <p>&rarr; Decide which agents may browse, quote and buy from you.</p>
+  <p>&rarr; Keep product, price and stock data accurate and machine-readable.</p>
+  <p>&rarr; Expect platform access to become a commercial negotiation.</p>
+  <a class="read-link" href="https://techcrunch.com/2026/11/24/walmart-teams-up-with-meta-to-bring-black-friday-deals-to-ai-agent-muse/" target="_blank" rel="noopener">Read the Walmart and Meta report &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">02 | Adoption</div>
+
+  <h2>
+    Adoption stalls inside the company.
+    <span>Not in the tool.</span>
+  </h2>
+
+  <p class="lead">
+    A study published on 23 November found the blockers to AI value are mostly organisational.
+  </p>
+  <div class="stats">
+    <div class="stat">
+      <strong>58</strong>
+      <span>US companies interviewed, across 66 interviews.</span>
+    </div>
+    <div class="stat">
+      <strong>~300</strong>
+      <span>AI applications classified by the researchers.</span>
+    </div>
+    <div class="stat">
+      <strong>2 in 3</strong>
+      <span>companies reported reduced hiring because of AI, mostly through roles not backfilled.</span>
+    </div>
+  </div>
+  <p class="ev-note">Source: &ldquo;Working with AI&rdquo;, Anthropic, 23 November 2026.</p>
+  <p>
+    Most gains were more output, not lower cost. Layoffs were rare. The blockers were not technical. Experts
+    resisted deployment. Work that AI does not speed up, such as code review, sales and strategic decisions,
+    became the bottleneck. Adoption was uneven across teams. And people struggled to review the volume of AI output.
+  </p>
+  <p>
+    Caveat: the findings are qualitative and self-reported, and every company was a customer of the lab that ran
+    the study. Anthropic makes the Claude models. Read it as a pattern, not a measurement.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Signal:</strong> Faster output without faster review is a queue, not a gain.
+    </p>
+  </div>
+  <p>&rarr; Measure your review capacity before you add more AI output.</p>
+  <p>&rarr; Find the tasks AI does not speed up. Those set your real pace.</p>
+  <p>&rarr; Bring the experts in early. Resistance is information.</p>
+  <a class="read-link" href="https://www.anthropic.com/research/working-with-ai" target="_blank" rel="noopener">Read the study &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">03 | Accountability</div>
+
+  <h2>
+    Someone must own the agent.
+    <span>Regulators now say it plainly.</span>
+  </h2>
+
+  <p class="lead">
+    On 24 November the UK&rsquo;s financial regulator published its expectations for agentic AI.
+  </p>
+  <p>
+    Responsibility stays with the firm and its senior managers, even when a third party supplies the system.
+    Firms should plan how to verify they are dealing with an agent, manage consent, define what an agent may do,
+    and assess liability before accepting payments an agent instructs.
+  </p>
+  <p>
+    The research points the same way. A new study found that changing the software that runs a model, the harness,
+    moved agent performance by nearly 10 percentage points. The model was not the only variable. Amazon also
+    reported that an open-source agent mostly autonomously exploited a previously unknown vulnerability. And Axios
+    reported that more than two dozen sources say staff at OpenAI and Anthropic worry about releasing some
+    advanced models safely.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Signal:</strong> The control layer is now the product. Permissions, limits, logs and an owner.
+    </p>
+  </div>
+  <p>&rarr; Name one accountable owner per agent.</p>
+  <p>&rarr; Give every agent a defined scope, a spend limit and an audit trail.</p>
+  <p>&rarr; Test the harness, not just the model.</p>
+  <a class="read-link" href="https://www.fca.org.uk/firms/innovation/ai-approach/agentic-ai" target="_blank" rel="noopener">Read the FCA page &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">04 | AI cyber attacks</div>
+
+  <h2>
+    Attacks now take hours, not weeks.
+    <span>Patch cycles have not caught up.</span>
+  </h2>
+
+  <div class="stats">
+    <div class="stat">
+      <strong>&lt;3 hrs</strong>
+      <span>Reported time for attackers using ARTEX to reach privileged network access, per the FBI advisory of 13 November.</span>
+    </div>
+    <div class="stat">
+      <strong>40+</strong>
+      <span>groups that have targeted UAE infrastructure, according to the head of UAE Government Cyber Security on 18 November.</span>
+    </div>
+  </div>
+  <p class="ev-note">Sources: FBI flash advisory as reported by Let&rsquo;s Data Science and CDO Magazine; Khaleej Times, 18 November 2026.</p>
+  <p class="lead">
+    The FBI warned on 13 November about ARTEX, an open-source, AI-driven platform that attackers use to automate
+    intrusions from reconnaissance to data theft.
+  </p>
+  <p>
+    It was built for authorised security testing. Forks and a commercial version keep it in circulation.
+    This week brought the fallout. The US Treasury&rsquo;s financial crimes unit took systems offline after
+    unauthorised access, hours after a reported intrusion at the CIA, NGA and ODNI, where investigators suspect
+    ARTEX was repurposed. That link is reported, not confirmed. Todoist also confirmed a breach that began with
+    stolen credentials.
+  </p>
+  <p>
+    In the UAE, the head of the government&rsquo;s Cyber Security Council said AI is being used to build attacks and
+    can also find unknown vulnerabilities.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Signal:</strong> Attack speed has collapsed from weeks to hours. Patch cycles have not.
+    </p>
+  </div>
+  <p>&rarr; Treat agent access like privileged access.</p>
+  <p>&rarr; Rotate and review credentials. Stolen logins still start the chain.</p>
+  <p>&rarr; Rehearse a three-hour incident, not a three-week one.</p>
+  <a class="read-link" href="https://www.khaleejtimes.com/uae/over-40-cyber-groups-tried-to-attack-uae-infrastructure-amid-regional-crisis-official-says" target="_blank" rel="noopener">Read the Khaleej Times report &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">05 | Money and machines</div>
+
+  <h2>
+    Quick hits.
+    <span>The week in five lines.</span>
+  </h2>
+
+  <p>&rarr; The US FCC approved SpaceX&rsquo;s plan for up to one million satellites to run AI computing in orbit. The approval covers a potential network. Scientists question the economics and heat dissipation.</p>
+  <p>&rarr; New US export rules reportedly led lenders to pause billions of dollars in financing tied to major Chinese cloud providers.</p>
+  <p>&rarr; OpenAI is merging ChatGPT usage limits across Chat and Work. Heavy users of both may hit limits sooner. Wider rollout comes in December.</p>
+  <p>&rarr; Anthropic says it moved its Messages API from Python to Rust using agents under human review, with about 70% less CPU per request. The figures are company-reported.</p>
+  <p>&rarr; New York banned AI-chatbot toys for five years.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">06 | The UAE</div>
+
+  <h2>
+    Government goes agentic.
+    <span>And sets a date.</span>
+  </h2>
+
+  <p class="lead">
+    On 25 November the UAE Cabinet approved what it calls the world&rsquo;s first comprehensive government strategy for agentic AI.
+  </p>
+  <p>
+    It targets agentic AI across 50% of government operations, services and procedures. The Cabinet also endorsed
+    FedAI, a unified, secure and sovereign ecosystem for building and running agentic AI across federal entities,
+    and told federal bodies to integrate their services with Mira on approved timelines.
+  </p>
+  <p>
+    Mira, the government concierge agent announced on 23 November, reaches federal-service users from March 2027.
+    It starts with work permits, passports, healthcare and education. It will not only answer questions but process
+    tasks on a user&rsquo;s behalf. The strategy also covers training 80,000 federal employees in agentic AI.
+  </p>
+  <p>
+    On the demand side, about half of MENA consumers say they are comfortable with an agent shopping for them
+    (UAE: 54%), and privacy is the top barrier, per Checkout.com&rsquo;s 2026 report. In Saudi Arabia, HUMAIN says its
+    full stack, including a 3-trillion-parameter open-weight model, goes live on 15 December. Its 88% cost-cut
+    claim is the company&rsquo;s own. No independent benchmark exists yet.
+  </p>
+  <div class="highlight">
+    <p>
+      <strong>Signal:</strong> Government has set the pace and a date. Private-sector readiness is the gap.
+    </p>
+  </div>
+  <a class="read-link" href="https://gulfnews.com/uae/government/uae-cabinet-chaired-by-mohammed-bin-rashid-approves-the-uae-government-concierge-agent-mira-1.500760957" target="_blank" rel="noopener">Read the Gulf News report &rarr;</a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">07 | How businesses need to go</div>
+
+  <h2>
+    Agents are in the cart.
+    <span>Six moves for Monday.</span>
+  </h2>
+
+  <p class="lead">
+    Access, review, ownership and speed. The technology is moving faster than the operating model around it.
+  </p>
+
+  <div class="meter" id="gm">
+    <div class="meter-top"><b>Your agent readiness check</b><span id="gmc">0 of 6</span></div>
+    <i><b id="gmb"></b></i>
+    <p id="gmt">Tap each step you already have in place.</p>
+  </div>
+
+  <ol class="steps" id="steps">
+    <li><strong>Write your agent policy.</strong><span>Which agents may browse, quote and buy from you. Allow, block or negotiate, on purpose.</span></li>
+    <li><strong>Make your product and pricing data accurate and machine-readable.</strong><span>Agents read what you publish. Wrong data becomes a wrong order.</span></li>
+    <li><strong>Cap every agent that spends.</strong><span>Limits, approval gates and order review.</span></li>
+    <li><strong>Name one owner per agent.</strong><span>One person, one name on the register.</span></li>
+    <li><strong>Measure review capacity before you add output.</strong><span>If people cannot review it, more output is a queue.</span></li>
+    <li><strong>Treat agent access as privileged access, and patch the same day.</strong><span>Stolen logins and unpatched flaws are how attacks start.</span></li>
+  </ol>
+
+  <div class="highlight">
+    <p>
+      <strong>Our view at Neural Horizons AI:</strong> start with the business problem.
+      Understand the data. Establish readiness. Build around measurable outcomes. AI is one tool.
+      The value comes from what it enables the business to do.
+    </p>
+  </div>
+
+  <p class="xref">Related: <a href="/blog/we-evaluated-8-ai-agents-only-2-passed/">We Evaluated 8 AI Agents for a Client. Only 2 Passed.</a> and <a href="/blog/ai-governance-compliance-what-to-do-now/">AI Governance Isn't Optional Anymore</a>.</p>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+  <div class="section-label">Keep reading</div>
+
+  <h2>More from Neural Horizons AI.</h2>
+
+  <div class="rel">
+    <a class="rel-card" href="/blog/friday-ai-insights-20-november-2026/"><small>20 Nov 2026</small><b>AI Got Richer and Faster This Week. Control Did Not.</b><span>Last Friday: models, money, lawsuits and the first fully automated attack.</span></a>
+    <a class="rel-card" href="/blog/monday-ai-insights-23-november-2026/"><small>23 Nov 2026</small><b>AI-Powered Cyber Attacks Are Real. So Are the Defences.</b><span>The Monday read on attacks and what holds up against them.</span></a>
+    <a class="rel-card" href="/blog/nothing-is-lost-only-gained/"><small>4 Nov 2026</small><b>Nothing Is Lost. Only Gained.</b><span>Keep your people involved as AI changes the work.</span></a>
+    <a class="rel-card" href="/blog/76-years-in-the-making/"><small>17 Jul 2026</small><b>This Didn't Happen in Five Years. It's Been 76 Years in the Making.</b><span>AI history and the case for augmentation over replacement.</span></a>
+    <a class="rel-card" href="/blog/ai-agent-accountability-who-owns-the-decision/"><small>28 Sep 2026</small><b>AI Agents Can Be Responsible. They Can Never Be Accountable.</b><span>Who owns the decision when an agent acts unexpectedly.</span></a>
+    <a class="rel-card" href="/blog/we-evaluated-8-ai-agents-only-2-passed/"><small>26 Sep 2026</small><b>We Evaluated 8 AI Agents for a Client. Only 2 Passed.</b><span>The four-gate readiness framework from a real engagement.</span></a>
+  </div>
+
+  <a class="read-link" href="/blog/">All posts &rarr;</a>
+
+</div>
+</section>
+
+
+
+<section class="cta">
+<div class="container">
+
+  <div class="section-label">Find the weak link</div>
+
+  <h2>
+    Where is your business exposed?
+  </h2>
+
+  <p>
+    The tool is rarely the problem. The weak link sits between departments. The Weak-Link Diagnostic finds it
+    in two weeks, so you fix the right thing first.
+  </p>
+
+  <a class="button"
+    href="https://neuralhorizonsai.com/services/weak-link-diagnostic/?utm_source=blog&amp;utm_medium=article&amp;utm_campaign=wld-nov27">
+    Book the Weak-Link Diagnostic
+  </a>
+
+  <br>
+
+  <a class="button-outline"
+    href="https://calendly.com/warrenlisa2001/30min">
+    Book 30 minutes
+  </a>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+  <h3>Questions leaders ask</h3>
+
+  <details><summary>Why are retailers blocking AI shopping agents?</summary><p>Control of the customer relationship and of advertising revenue. Amazon blocked Meta's Muse agent in September and is reported to be in talks about lifting the block. The sticking points are ad revenue and who controls which products the agent recommends. Walmart took the opposite route on 24 November and opened its Black Friday deals to Muse with spending limits and approval before purchase.</p></details>
+  <details><summary>What did the UAE Cabinet approve on 25 November 2026?</summary><p>A government strategy for agentic AI that targets agentic AI across 50% of government operations, services and procedures, and the FedAI platform for building and running agentic AI across federal entities. Mira, a government concierge agent, reaches federal-service users from March 2027.</p></details>
+  <details><summary>What is ARTEX and why did the FBI warn about it?</summary><p>ARTEX is an open-source, AI-driven platform built for authorised security testing that attackers have repurposed to automate intrusions. The FBI's 13 November flash advisory says it has helped attackers reach privileged network access in under three hours.</p></details>
+  <details><summary>What should a business do about AI agents this week?</summary><p>Write an agent policy, make product and pricing data accurate and machine-readable, cap every agent that spends, name one owner per agent, measure review capacity before adding output, and treat agent access as privileged access.</p></details>
+</div>
+</section>
+
+<section class="sources">
+<div class="container">
+
+  <h3>Sources and further reading</h3>
+
+  <ul>
+    <li><a href="https://techcrunch.com/2026/11/24/walmart-teams-up-with-meta-to-bring-black-friday-deals-to-ai-agent-muse/" target="_blank" rel="noopener">TechCrunch &mdash; Walmart teams up with Meta to bring Black Friday deals to Muse</a></li>
+    <li><a href="https://the-decoder.com/amazon-and-meta-are-in-talks-to-end-the-block-on-metas-ai-shopping-agent-muse-in-amazons-online-store/" target="_blank" rel="noopener">The Decoder &mdash; Amazon and Meta in talks to end the block on Muse</a></li>
+    <li><a href="https://www.cxnetwork.com/cx-experience/articles/agentic-commerce-retail-golden-quarter-black-friday" target="_blank" rel="noopener">CX Network &mdash; How will agentic commerce shape Black Friday 2026?</a></li>
+    <li><a href="https://www.anthropic.com/research/working-with-ai" target="_blank" rel="noopener">Anthropic &mdash; Working with AI</a></li>
+    <li><a href="https://www.fca.org.uk/firms/innovation/ai-approach/agentic-ai" target="_blank" rel="noopener">FCA &mdash; Agentic AI</a></li>
+    <li><a href="https://www.thedeepview.com/articles/exclusive-openclaw-offers-an-agent-reality-check/" target="_blank" rel="noopener">The Deep View &mdash; OpenClaw agent reality check</a></li>
+    <li><a href="https://gizmodo.com/amazon-says-open-source-ai-agent-mostly-autonomously-exploited-a-zero-day-2000844891" target="_blank" rel="noopener">Gizmodo &mdash; Amazon says an open-source AI agent exploited a zero-day</a></li>
+    <li><a href="https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks" target="_blank" rel="noopener">Axios &mdash; AI lab staff worry about releasing advanced models</a></li>
+    <li><a href="https://letsdatascience.com/news/fbi-warns-artex-tool-automates-cyberattacks-at-machine-speed-cd8b3296" target="_blank" rel="noopener">Let's Data Science &mdash; FBI warns ARTEX automates cyberattacks</a></li>
+    <li><a href="https://www.cdomagazine.tech/us-federal-news-bureau/fbi-warns-ai-powered-hacking-tool-can-breach-networks-in-under-three-hours" target="_blank" rel="noopener">CDO Magazine &mdash; FBI warns AI hacking tool can breach networks in under three hours</a></li>
+    <li><a href="https://dev.to/magnus_ferm/dev-news-digest-25-nov-2026-1800-4ddi" target="_blank" rel="noopener">Dev News Digest, 25 Nov &mdash; Treasury, CIA/NGA/ODNI and Todoist incidents (summarising The Verge and TechCrunch)</a></li>
+    <li><a href="https://www.khaleejtimes.com/uae/over-40-cyber-groups-tried-to-attack-uae-infrastructure-amid-regional-crisis-official-says" target="_blank" rel="noopener">Khaleej Times &mdash; Over 40 cyber groups tried to attack UAE infrastructure</a></li>
+    <li><a href="https://apnews.com/article/b9897fe06f851ffaf92fd304ae69075c" target="_blank" rel="noopener">AP &mdash; FCC approves SpaceX orbital AI data centres</a></li>
+    <li><a href="https://www.semafor.com/article/11/25/2026/new-us-export-rules-threaten-asian-ai-buildout" target="_blank" rel="noopener">Semafor &mdash; New US export rules threaten Asian AI buildouts</a></li>
+    <li><a href="https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/" target="_blank" rel="noopener">TechCrunch &mdash; OpenAI merges ChatGPT usage limits</a></li>
+    <li><a href="https://www.anthropic.com/research/migrating-api-to-rust" target="_blank" rel="noopener">Anthropic &mdash; Migrating the Messages API to Rust</a></li>
+    <li><a href="https://www.nbcnews.com/tech/tech-news/new-york-governor-kathy-hochul-sign-ai-toy-ban-law-rcna610962" target="_blank" rel="noopener">NBC News &mdash; New York signs AI toy ban</a></li>
+    <li><a href="https://gulfnews.com/uae/government/uae-cabinet-chaired-by-mohammed-bin-rashid-approves-the-uae-government-concierge-agent-mira-1.500760957" target="_blank" rel="noopener">Gulf News &mdash; UAE Cabinet approves Mira and the agentic AI strategy</a></li>
+    <li><a href="https://www.thenationalnews.com/news/uae/2026/11/25/uae-approves-fedai-platform-to-build-fastest-and-most-efficient-government/" target="_blank" rel="noopener">The National &mdash; UAE approves FedAI platform</a></li>
+    <li><a href="https://english.uaevartha.com/uae-cabinet-approves-concierge-agent-mira-and-world-first-agentic-ai-strategy/" target="_blank" rel="noopener">UAE Vartha &mdash; Cabinet approves Mira and the agentic AI strategy</a></li>
+    <li><a href="https://www.arabnews.com/middle-east/uae-unveils-mira-ai-assistant-to-handle-government-services-3013726" target="_blank" rel="noopener">Arab News &mdash; UAE unveils Mira</a></li>
+    <li><a href="https://www.middleeastainews.com/p/mena-shoppers-ready-for-ai-agents" target="_blank" rel="noopener">Middle East AI News &mdash; MENA shoppers ready for AI agents (Checkout.com)</a></li>
+    <li><a href="https://www.middleeastainews.com/p/humain-to-launch-3-trillion-parameter" target="_blank" rel="noopener">Middle East AI News &mdash; HUMAIN full AI stack on 15 December</a></li>
+  </ul>
+
+  <p class="small-note">
+    Friday AI Roundup is published by Neural Horizons AI. External claims are attributed to their
+    respective publishers. Developing stories, including the Amazon and Meta talks and the reported
+    government-agency intrusions, may have changed since publication. News checked on 26 November 2026.
+    The views expressed are intended to support informed discussion about AI strategy and implementation.
+  </p>
+
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    &copy; 2026 Neural Horizons AI. All rights reserved.
+    <br>
+    <a href="https://www.neuralhorizonsai.com/">www.neuralhorizonsai.com</a>
+  </div>
+</footer>
+
+<div id="rp" aria-hidden="true"></div>
+<script>
+(function(){
+'use strict';
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var rp=$('#rp');
+function prog(){var d=document.documentElement,m=d.scrollHeight-innerHeight;rp.style.width=(m>0?Math.min(100,scrollY/m*100):0)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+function onView(el,fn,t){
+  if(!('IntersectionObserver' in window)){fn();return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();fn()}})},{threshold:t||.35});
+  io.observe(el);
+}
+$$('.stat,.highlight,.meter,ol.steps li').forEach(function(el,i){
+  el.classList.add('rv');
+  onView(el,function(){setTimeout(function(){el.classList.add('in')},(i%3)*90)},.12);
+});
+$$('.stat').forEach(function(st){
+  var n=$('[data-count]',st);if(!n)return;
+  var to=+n.getAttribute('data-count');
+  onView(st,function(){
+    st.classList.add('in');
+    if(RM){n.textContent=to+'%';return}
+    var t0=performance.now();
+    (function f(t){var k=Math.min(1,(t-t0)/1300),e=1-Math.pow(1-k,3);n.textContent=Math.round(to*e)+'%';if(k<1)requestAnimationFrame(f)})(t0);
+  },.4);
+});
+(function(){
+  var ol=$('#steps');if(!ol)return;
+  var lis=$$('li',ol),bar=$('#gmb'),cnt=$('#gmc'),txt=$('#gmt');
+  var msg=['Tap each step you already have in place.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'A start. Every gap is a place where an agent runs unsupervised.',
+    'Halfway. Close the rest before you add more agents.',
+    'Halfway. Close the rest before you add more agents.',
+    'One step from governed.',
+    'Governed. Now make sure every agent earns its number.'];
+  function upd(){
+    var n=lis.filter(function(l){return l.classList.contains('done')}).length;
+    bar.style.width=(n/lis.length*100)+'%';cnt.textContent=n+' of '+lis.length;txt.textContent=msg[n];
+  }
+  lis.forEach(function(l){
+    l.setAttribute('tabindex','0');l.setAttribute('role','checkbox');l.setAttribute('aria-checked','false');
+    function t(){var d=l.classList.toggle('done');l.setAttribute('aria-checked',d);upd()}
+    l.addEventListener('click',t);
+    l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}});
+  });
+  upd();
+})();
+
+})();
+</script>
+</body>
+</html>
