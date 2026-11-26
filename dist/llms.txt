@@ -10,7 +10,7 @@
 - [When orders, invoices and deliveries disagree](https://www.neuralhorizonsai.com/orders-invoices-deliveries-disagree/): why departments' records disagree in UAE retail, FMCG and IT, and how Zonar OS verifies first and a human decides.
 - [AI for Retail and FMCG](https://www.neuralhorizonsai.com/retail-fmcg-ai/): where retail and FMCG departments disagree (buying, warehouse, sales, finance) and how Zonar OS and HALU prove it.
 - [AI for Digital and IT](https://www.neuralhorizonsai.com/digital-it-ai/): where IT, procurement and finance disagree (licences, usage, contracts, vendor invoices) and governed agentic AI.
-- [AI Weak-Link Diagnostic](https://www.neuralhorizonsai.com/services/weak-link-diagnostic/): fixed-fee 2-week diagnosis of where a business loses money between departments.
+- [AI Weak-Link Diagnostic](https://www.neuralhorizonsai.com/services/ai-weak-link-diagnostic/): fixed-fee 2-week diagnosis of where a business loses money between departments.
 - [Revenue Leak Calculator](https://www.neuralhorizonsai.com/revenue-leak-calculator/): free estimate.
 
 ## Learn

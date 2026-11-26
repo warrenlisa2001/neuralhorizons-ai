@@ -1,3 +1,6 @@
+/services/weak-link-diagnostic/ /services/ai-weak-link-diagnostic/ 301
+/services/weak-link-diagnostic /services/ai-weak-link-diagnostic/ 301
+/services/weak-link-diagnostic/* /services/ai-weak-link-diagnostic/ 301
 /ai-audit/ /contact/ 301
 /ai-audit/questionnaire/ /contact/ 301
 /ai-audit/questionnaire/* /contact/ 301
