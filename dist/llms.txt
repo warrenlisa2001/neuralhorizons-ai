@@ -7,6 +7,7 @@
 - [Zonar OS](https://www.neuralhorizonsai.com/zonar-os/): verification layer and Operations Gap Check, the first live module.
 - [HALU](https://www.neuralhorizonsai.com/halu/): cross-department intelligence agent, Lite, Pro and Enterprise tiers.
 - [AI revenue leakage detection](https://www.neuralhorizonsai.com/revenue-leakage-detection/): what revenue leakage is, the three-way match, and how to detect it.
+- [When orders, invoices and deliveries disagree](https://www.neuralhorizonsai.com/orders-invoices-deliveries-disagree/): why departments' records disagree in UAE retail, FMCG and IT, and how Zonar OS verifies first and a human decides.
 - [AI for Retail and FMCG](https://www.neuralhorizonsai.com/retail-fmcg-ai/): where retail and FMCG departments disagree (buying, warehouse, sales, finance) and how Zonar OS and HALU prove it.
 - [AI for Digital and IT](https://www.neuralhorizonsai.com/digital-it-ai/): where IT, procurement and finance disagree (licences, usage, contracts, vendor invoices) and governed agentic AI.
 - [AI Weak-Link Diagnostic](https://www.neuralhorizonsai.com/services/weak-link-diagnostic/): fixed-fee 2-week diagnosis of where a business loses money between departments.
