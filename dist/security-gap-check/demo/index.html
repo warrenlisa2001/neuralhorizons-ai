@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-583T68TS');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-369867907"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-369867907');</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Gap Check: live demo | Neural Horizons AI</title>
+<meta name="description" content="A live demo of the security gap check on invented records: Zonar OS compares staff, accounts and payments, and HALU briefs the owner of each gap. A person approves every action.">
+<link rel="canonical" href="https://www.neuralhorizonsai.com/security-gap-check/demo/">
+<meta property="og:title" content="Security Gap Check: live demo | Neural Horizons AI">
+<meta property="og:description" content="Invented records only. Zonar OS finds the gaps, HALU briefs the owner, a person approves.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.neuralhorizonsai.com/security-gap-check/demo/">
+<meta property="og:image" content="https://www.neuralhorizonsai.com/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0F;--card:#12172B;--line:#232c54;--g:#00FF88;--p:#8A2BE2;--c:#3de0ff;--a:#ffc766;--r:#ff6b7a;--t:#fff;--m:#a9b4cc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font:16px/1.55 Manrope,system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{border-bottom:1px solid var(--line);padding:14px 0}nav .wrap{display:flex;justify-content:space-between;align-items:center}
+.lg{font-weight:800;letter-spacing:.06em;color:#fff;text-decoration:none}.lg span{color:var(--g)}
+.tag{display:inline-block;color:var(--g);font-weight:800;letter-spacing:.08em;font-size:13px}
+.banner{background:#1a1633;border:1px solid #3a2f7a;border-radius:12px;padding:10px 14px;font-size:14px;color:#d9d2ff;margin-top:18px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:14px 0 10px}h1 em{font-style:normal;color:var(--g)}
+.lead{color:var(--m);max-width:720px;font-size:17px}
+section{padding:34px 0}
+h2{font-size:24px;margin-bottom:6px}.s{color:var(--m);margin-bottom:16px}
+.stage{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+.files{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.file{background:#0b1129;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:auto}
+.file h3{font-size:14px;margin-bottom:8px}.file h3 small{color:var(--m);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:12.5px}th{color:var(--m);text-align:left;font-weight:700;padding:4px 6px;border-bottom:1px solid var(--line)}td{padding:4px 6px;border-bottom:1px solid #151c3a;white-space:nowrap}
+tr.hit td{background:#2a1a26}tr.hit.warn td{background:#2a2516}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:18px}
+button,.btn{cursor:pointer;font:800 15px Manrope,system-ui,sans-serif;border-radius:12px;padding:13px 20px;border:0}
+.b1{background:linear-gradient(90deg,var(--g),var(--c));color:#04120b}.b1:disabled{opacity:.5;cursor:default}
+.sec{background:transparent;border:1px solid #3a4780;color:#cfd8ee;padding:11px 16px;font-size:14px}.sec:hover{border-color:var(--g)}
+label{color:var(--m);font-size:14px}select{background:#0b1129;color:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:700 14px Manrope,system-ui,sans-serif}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.sum div{background:#0b1129;border:1px solid var(--line);border-radius:14px;padding:12px 14px}.sum b{display:block;font-size:30px;line-height:1.1}.sum span{color:var(--m);font-size:13px}
+.f{background:#0b1129;border:1px solid var(--line);border-left:4px solid var(--r);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.f.warn{border-left-color:var(--a)}.f.done{border-left-color:var(--g);opacity:.8}
+.f h3{font-size:16px;margin-bottom:4px}.f .k{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--m)}
+.brief{background:#10183a;border:1px solid #28336a;border-radius:12px;padding:10px 12px;margin:10px 0;font-size:14px;color:#cfd8ee}
+.brief b{color:var(--g)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.status{font-size:13px;color:var(--m)}.status.ok{color:var(--g);font-weight:800}
+.log{font:13px/1.6 ui-monospace,monospace;color:var(--m);background:#0b1129;border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-height:56px}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.how div{border:1px dashed #3a4780;border-radius:14px;padding:12px;font-size:14px;color:var(--m)}.how b{display:block;color:#fff;margin-bottom:4px}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--m);font-size:13px;margin-top:20px}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+@media(max-width:820px){.files,.how{grid-template-columns:1fr}.sum{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.f{animation:in .35s ease both}@keyframes in{from{opacity:0;transform:translateY(8px)}}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="lg" href="#">NEURAL HORIZONS <span>AI</span></a><span class="tag">SECURITY GAP CHECK · DEMO</span></div></nav>
+<header class="wrap">
+<div class="banner" role="note"><b>Demo with invented records.</b> No real company, person or payment appears here. Nothing is stored or sent. The gap check is a pilot module on Zonar OS, with HALU writing the briefs.</div>
+<h1>Three files in. <em>Every gap found.</em> A person approves each fix.</h1>
+<p class="lead">This is a fictional company, Harbour Trading FZ-LLC. Press the button to see Zonar OS compare its staff list, user accounts and payments, and HALU brief the owner of each gap.</p>
+</header>
+
+<section><div class="wrap">
+<h2>1. The records the company exports</h2>
+<p class="s">Three ordinary files. Highlighted rows are the gaps, once the check has run.</p>
+<div class="stage">
+<div class="files">
+<div class="file"><h3>Staff list <small>HR export</small></h3><div id="t-staff"></div></div>
+<div class="file"><h3>User accounts <small>IT export</small></h3><div id="t-acc"></div></div>
+<div class="file"><h3>Payments <small>Finance export</small></h3><div id="t-pay"></div></div>
+</div>
+<div class="ctl">
+<button class="b1" id="run" type="button">&#9654; Run the security gap check</button>
+<label for="dorm">Dormant after <select id="dorm"><option value="60">60 days</option><option value="90" selected>90 days</option><option value="180">180 days</option></select> without sign-in</label>
+<button class="sec" id="reset" type="button">Start again</button>
+</div>
+</div></div></section>
+
+<section id="res" style="display:none"><div class="wrap">
+<h2>2. What Zonar OS found</h2>
+<p class="s">Compared against each other, the three files disagree in these places.</p>
+<div class="sum" aria-live="polite"><div><b id="n-all">0</b><span>gaps found</span></div><div><b id="n-ok">0</b><span>approved by a person</span></div><div><b id="n-open">0</b><span>still open</span></div></div>
+<div id="finds"></div>
+<h2 style="margin-top:26px">3. Audit trail</h2>
+<p class="s">Every approval is recorded. HALU follows up on anything still open.</p>
+<div class="log" id="log" aria-live="polite">No actions yet.</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>How it works</h2>
+<div class="how"><div><b>1. Share</b>The owner exports the files they choose. NDA first, read-only.</div><div><b>2. Compare</b>Zonar OS matches the files against each other.</div><div><b>3. Brief</b>HALU writes a short plain-language brief for each owner.</div><div><b>4. Decide and close</b>A named person approves. HALU follows up until closed.</div></div>
+<p class="s" style="margin-top:16px">It works from exported files, not live connections, and it is a check at a point in time, not round-the-clock monitoring. It does not replace a security audit.</p>
+<div class="ctl"><a class="btn b1" href="https://calendly.com/warrenlisa2001/30min?utm_source=website&utm_medium=demo&utm_campaign=gap-check-demo" target="_blank" rel="noopener">Book a free 30-minute call</a></div>
+</div></section>
+<footer><div class="wrap">Neural Horizons AI &middot; United Arab Emirates &middot; <a href="mailto:lisa@neuralhorizonsai.com" style="color:#cfd8ee">lisa@neuralhorizonsai.com</a> &middot; &copy; 2026</div></footer>
+
+<script>
+(function(){
+const AS_OF='2026-11-27';
+const STAFF=[['S01','Omar Haddad','Active',''],['S02','Priya Nair','Active',''],['S03','Daniel Cruz','Left','2026-08-14'],['S04','Layla Mansour','Active',''],['S05','Tomas Berg','Left','2026-10-02'],['S06','Hana Saleh','Active',''],['S07','Yusuf Karim','Active','']];
+const ACC=[['omar.h','S01','Accounts','2026-11-26'],['priya.n','S02','Accounts','2026-11-25'],['daniel.c','S03','Accounts','2026-11-20'],['layla.m','S04','Payments','2026-11-27'],['tomas.b','S05','Payments','2026-11-18'],['hana.s','S06','Accounts','2026-07-30'],['yusuf.k','S07','Payments','2026-11-24'],['svc-backup','','Servers','2026-11-27'],['temp-audit','','Accounts','2026-06-11']];
+const PAY=[['P-101','Gulf Freight','AED 18,400','Layla Mansour'],['P-102','Delta Packaging','AED 7,250','Omar Haddad'],['P-103','Nova Consulting','AED 42,000',''],['P-104','Marina Stationers','AED 1,980','Priya Nair'],['P-105','Al Noor Services','AED 25,600',''],['P-106','Skyline IT','AED 9,300','Omar Haddad']];
+const $=id=>document.getElementById(id);
+const days=d=>Math.round((Date.parse(AS_OF)-Date.parse(d))/864e5);
+const nm=id=>(STAFF.find(s=>s[0]===id)||[])[1];
+let F=[],ran=false,logn=0;
+function tbl(h,rows,hit,cls){return '<table><thead><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map((r,i)=>'<tr class="'+(hit[i]?'hit '+(cls[i]||''):'')+'">'+r.map(c=>'<td>'+(c===''?'&ndash;':c)+'</td>').join('')+'</tr>').join('')+'</tbody></table>'}
+function compute(){
+ const dm=+$('dorm').value;F=[];const hitA={},hitP={},clsA={};
+ ACC.forEach((a,i)=>{const st=STAFF.find(s=>s[0]===a[1]);
+  if(!a[1]||(st&&st[2]==='Left')){hitA[i]=1;F.push({id:'F'+(F.length+1),type:'Account for someone no longer on staff',sev:'',
+   title:a[0]+(a[1]?' belongs to '+nm(a[1])+', who left on '+st[3]:' has no owner in the staff list'),
+   brief:a[1]?'Hi, the account <b>'+a[0]+'</b> still has access to <b>'+a[2]+'</b>, but '+nm(a[1])+' left on '+st[3]+'. It was last used '+days(a[3])+' days ago. I suggest disabling it today and checking what it touched. Please approve.':'Hi, the account <b>'+a[0]+'</b> has no owner in the staff list and has access to <b>'+a[2]+'</b>. I suggest finding its owner or disabling it. Please approve.',
+   owner:'IT lead',act:'Disable the account'});}
+  else if(days(a[3])>dm){hitA[i]=1;clsA[i]='warn';F.push({id:'F'+(F.length+1),type:'Dormant account',sev:'warn',
+   title:a[0]+' has not signed in for '+days(a[3])+' days',
+   brief:'Hi, <b>'+a[0]+'</b> ('+nm(a[1])+') has not signed in for '+days(a[3])+' days but still holds access to <b>'+a[2]+'</b>. I suggest suspending it until '+nm(a[1])+' confirms they need it. Please approve.',
+   owner:'IT lead',act:'Suspend the account'});}});
+ PAY.forEach((p,i)=>{if(!p[3]){hitP[i]=1;F.push({id:'F'+(F.length+1),type:'Payment with no approval on record',sev:'',
+   title:p[0]+' to '+p[1]+' ('+p[2]+') has no approver',
+   brief:'Hi, payment <b>'+p[0]+'</b> of <b>'+p[2]+'</b> to '+p[1]+' has no approval on record. I suggest asking the budget holder to confirm it, and holding similar payments until they do. Please approve.',
+   owner:'Finance lead',act:'Request approval'});}});
+ return {hitA,hitP,clsA};
+}
+function draw(h){h=h||{hitA:{},hitP:{},clsA:{}};
+ $('t-staff').innerHTML=tbl(['ID','Name','Status','Left'],STAFF,{},{});
+ $('t-acc').innerHTML=tbl(['User','Owner','System','Last sign-in'],ACC.map(a=>[a[0],a[1],a[2],a[3]]),h.hitA,h.clsA);
+ $('t-pay').innerHTML=tbl(['Ref','Payee','Amount','Approver'],PAY,h.hitP,{});}
+function render(){const box=$('finds');box.innerHTML='';
+ F.forEach(f=>{const d=document.createElement('div');d.className='f'+(f.sev?' '+f.sev:'')+(f.done?' done':'');
+  d.innerHTML='<div class="k">'+f.type.toUpperCase()+'</div><h3>'+f.title+'</h3><div class="brief"><b>HALU to '+f.owner+':</b> '+f.brief+'</div><div class="row">'+(f.done?'<span class="status ok">&#10003; Approved. HALU will follow up until it is closed.</span>':'<button class="sec" data-id="'+f.id+'" type="button">Approve: '+f.act.toLowerCase()+'</button><span class="status">Waiting for a person. HALU takes no action on its own.</span>')+'</div>';box.appendChild(d)});
+ box.querySelectorAll('button[data-id]').forEach(b=>b.onclick=()=>{const f=F.find(x=>x.id===b.dataset.id);f.done=true;logn++;$('log').innerHTML=($('log').dataset.has?$('log').innerHTML+'<br>':'')+'#'+logn+' &middot; '+f.act+' approved by a named person: '+f.title;$('log').dataset.has=1;render();sum()});
+ sum()}
+function sum(){const ok=F.filter(f=>f.done).length;$('n-all').textContent=F.length;$('n-ok').textContent=ok;$('n-open').textContent=F.length-ok}
+$('run').onclick=()=>{const h=compute();draw(h);$('res').style.display='block';ran=true;$('log').innerHTML='No actions yet.';delete $('log').dataset.has;logn=0;render();$('res').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})};
+$('dorm').onchange=()=>{if(ran)$('run').onclick()};
+$('reset').onclick=()=>{ran=false;F=[];$('res').style.display='none';draw();window.scrollTo({top:0})};
+draw();
+})();
+</script>
+</body>
+</html>
